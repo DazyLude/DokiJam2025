@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://daikwosr13pnv"]
+[gd_scene load_steps=37 format=3 uid="uid://daikwosr13pnv"]
 
 [ext_resource type="Script" uid="uid://cpobfagrfa2vw" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://d1q3bla3tsoaf" path="res://assets/stages/farm/skybox_gradient.png" id="1_lnu2h"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://iui5xsr0lcv6" path="res://addons/rmsmartshape/shapes/point_array.gd" id="7_kvuet"]
 [ext_resource type="Script" uid="uid://cg2cweddrk5r5" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="8_trtic"]
 [ext_resource type="Script" uid="uid://d1qxh2axj257u" path="res://addons/rmsmartshape/materials/shape_material.gd" id="9_ir15t"]
+[ext_resource type="PackedScene" uid="uid://bb3q6mj02qh6c" path="res://scenes/UI/hud.tscn" id="11_kvpfn"]
 
 [sub_resource type="Resource" id="Resource_ca42v"]
 script = ExtResource("5_kvpfn")
@@ -195,7 +196,7 @@ fill_texture_angle_offset = 0.0
 fill_mesh_offset = 0.0
 render_offset = 0.0
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node"]
 script = ExtResource("1_lbhrr")
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
@@ -236,3 +237,8 @@ position = Vector2(-1108, -652)
 mass = 1.0
 inertia = 1000.0
 angular_velocity = 0.174533
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UILayer" instance=ExtResource("11_kvpfn")]
+z_index = 1
