@@ -234,7 +234,6 @@ polygon = PackedVector2Array(207.412, 177.691, 702.413, 87.691, 1164.41, 90.6911
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
 position = Vector2(-1108, -652)
-mass = 1.0
 inertia = 1000.0
 angular_velocity = 0.174533
 

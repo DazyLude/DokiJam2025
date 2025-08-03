@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato.png" id="2_gmlin"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dovo2"]
+friction = 0.8
 rough = true
 bounce = 0.25
 
@@ -12,10 +13,11 @@ radius = 450.0
 height = 1000.0
 
 [node name="Player" type="RigidBody2D"]
-mass = 0.05
 physics_material_override = SubResource("PhysicsMaterial_dovo2")
-inertia = 100.0
+inertia = 500.0
 continuous_cd = 2
+linear_damp_mode = 1
+angular_damp_mode = 1
 script = ExtResource("1_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

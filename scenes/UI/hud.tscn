@@ -34,6 +34,12 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 
+[node name="Rotation" type="Label" parent="DataContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+
 [node name="Stamina" type="Label" parent="DataContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)

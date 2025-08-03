@@ -1,21 +1,49 @@
 class_name Player extends RigidBody2D
 
 
-const ROT_ACCEL = 100.0; # in rad/s^2
-const FLY_ACCEL = 6.0; # in px/s^2
+const ROT_ACCEL = 10.0; # in rad/s^2
+const FLY_ACCEL = 1200.0; # in px/s^2, g (980px/s2) + bonus
 
-const TERMINAL_VELOCITY := 700; # in px/s
-const MAX_ROT_SPEED := 3.0 * PI; # in rad/s
+## speed at which the player is considered stationary
+const SPEED_LOWER_LIMIT = 0.01; # in px/s
 
 
 func _physics_process(delta: float) -> void:
 	var torque : float = 0.0;
 	if Input.is_action_pressed(&"roll_cw"):
-		torque = ROT_ACCEL * inertia;
+		try_rotate(ROT_ACCEL * inertia, delta);
 	elif Input.is_action_pressed(&"roll_ccw"):
-		torque = -ROT_ACCEL * inertia;
+		try_rotate(-ROT_ACCEL * inertia, delta);
 	
-	apply_torque(torque)
+	if Input.is_action_pressed(&"fly"):
+		try_propel_upward(delta);
+
+
+# tries to spend stamina
+# if stamina is less than delta, reduces applied force by a fraction
+func try_rotate(torque: float, delta: float) -> void:
+	if GameState.juice > delta:
+		apply_torque(torque);
+		GameState.juice -= delta;
+	else:
+		var torque_scaled = torque * GameState.juice / delta
+		apply_torque(torque_scaled);
+		GameState.juice = 0.0;
+
+
+func try_propel_upward(delta: float) -> void:
+	# why does this work when the unit vector is inverted? Am I an idiot?
+	var upward_unit_vector := Vector2(0, -1).rotated(self.rotation);
+	var upward_force := upward_unit_vector * FLY_ACCEL * mass;
 	
-	#if angular_velocity > MAX_ROT_SPEED:
-		#apply_torque_impulse((angular_velocity - MAX_ROT_SPEED) * inertia)
+	if GameState.juice > delta:
+		apply_central_force(upward_force);
+		GameState.juice -= delta;
+	else:
+		var upward_force_scaled = upward_force * GameState.juice / delta
+		apply_central_force(upward_force_scaled);
+		GameState.juice = 0.0;
+
+
+func is_stationary() -> bool:
+	return SPEED_LOWER_LIMIT > self.linear_velocity.length();
