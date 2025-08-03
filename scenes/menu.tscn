@@ -1,3 +1,43 @@
-[gd_scene format=3 uid="uid://cj3qmqrdmpetp"]
+[gd_scene load_steps=3 format=3 uid="uid://cj3qmqrdmpetp"]
 
-[node name="Main" type="Node2D"]
+[ext_resource type="Script" uid="uid://l12ejtkng3vn" path="res://scenes/menu.gd" id="1_vjb58"]
+[ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato.png" id="2_con2f"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vjb58")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 321.0
+offset_top = -61.0
+offset_right = 1345.0
+offset_bottom = 963.0
+texture = ExtResource("2_con2f")
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 654.0
+offset_top = 356.0
+offset_right = 894.0
+offset_bottom = 493.0
+text = "start game"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 625.0
+offset_top = 512.0
+offset_right = 928.0
+offset_bottom = 587.0
+text = "controls:
+q & e - rotation (counter and clockwise)
+space - propel upwards"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 233.0
+offset_right = 1013.0
+offset_bottom = 308.0
+text = "rotato potato the game"

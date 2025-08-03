@@ -1,8 +1,8 @@
 class_name Player extends RigidBody2D
 
 
-const ROT_ACCEL = 10.0; # in rad/s^2
-const FLY_ACCEL = 1200.0; # in px/s^2, g (980px/s2) + bonus
+const ROT_ACCEL = 20.0; # in rad/s^2
+const FLY_ACCEL = 1800.0; # in px/s^2, g (980px/s2) + bonus
 
 ## speed at which the player is considered stationary
 const SPEED_LOWER_LIMIT = 0.01; # in px/s
