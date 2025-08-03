@@ -1,11 +1,25 @@
 class_name Player extends RigidBody2D
 
 
+const CAMERA_GIVE := 5e-5;
+const CAMERA_OFFSET_LIMIT := 150.0;
+
+
 const ROT_ACCEL = 20.0; # in rad/s^2
 const FLY_ACCEL = 1800.0; # in px/s^2, g (980px/s2) + bonus
 
 ## speed at which the player is considered stationary
 const SPEED_LOWER_LIMIT = 0.01; # in px/s
+
+## players average velocity is calculated over VELOCITY_AVG_LIMIT amount of frames
+const VELOCITY_AVG_LIMIT := 120;
+var velocity_avg_array := PackedVector2Array();
+var velocity_avg := Vector2();
+var velocity_avg_idx : int = 0;
+
+
+func _ready() -> void:
+	velocity_avg_array.resize(VELOCITY_AVG_LIMIT);
 
 
 func _physics_process(delta: float) -> void:
@@ -16,6 +30,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed(&"fly"):
 		try_propel_upward(delta);
+
+
+func _process(delta: float) -> void:
+	calc_camera_offset(linear_velocity);
 
 
 # tries to spend stamina
@@ -48,3 +66,22 @@ func try_propel_upward(delta: float) -> void:
 
 func is_stationary() -> bool:
 	return SPEED_LOWER_LIMIT > self.linear_velocity.length();
+
+
+func calc_camera_offset(velocity: Vector2) -> void:
+	# update average velocity
+	if velocity_avg_idx == VELOCITY_AVG_LIMIT:
+		velocity_avg_idx = 0;
+	
+	velocity_avg += (velocity - velocity_avg_array[velocity_avg_idx]) / VELOCITY_AVG_LIMIT;
+	velocity_avg_array[velocity_avg_idx] = velocity;
+	velocity_avg_idx += 1;
+	
+	# calculate new camera offset
+	var vel_len := velocity_avg.length();
+	var vel_dir := velocity_avg.normalized().rotated(-rotation);
+	
+	var lsqg = CAMERA_OFFSET_LIMIT * CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
+	var lg = CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
+	
+	$Camera2D.position = vel_dir * vel_len * lsqg / (1 + vel_len * lg);
