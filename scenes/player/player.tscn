@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsygnq6v144q2"]
+
+[ext_resource type="Script" uid="uid://b4xgne00eu2bu" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato.png" id="2_gmlin"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dovo2"]
+rough = true
+bounce = 0.25
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lvxji"]
+radius = 450.0
+height = 1000.0
+
+[node name="Player" type="RigidBody2D"]
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_dovo2")
+inertia = 100.0
+continuous_cd = 2
+script = ExtResource("1_dovo2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_gmlin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+shape = SubResource("CapsuleShape2D_lvxji")
+
+[node name="Camera2D" type="Camera2D" parent="."]

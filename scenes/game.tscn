@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://daikwosr13pnv"]
+
+[ext_resource type="Texture2D" uid="uid://d1q3bla3tsoaf" path="res://assets/stages/farm/skybox_gradient.png" id="1_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://ca57mpnq70puo" path="res://assets/stages/farm/tomato_farm.png" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dsygnq6v144q2" path="res://scenes/player/player.tscn" id="2_lnu2h"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iywne"]
+size = Vector2(1000, 200)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lbhrr"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Parallax2D" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+scroll_ignore_camera_zoom = true
+
+[node name="Skybox" type="ParallaxLayer" parent="Parallax2D"]
+motion_scale = Vector2(-1, -1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D/Skybox"]
+texture = ExtResource("1_lnu2h")
+
+[node name="Backdrop" type="ParallaxLayer" parent="Parallax2D"]
+position = Vector2(0, -327)
+motion_scale = Vector2(0.75, 0.75)
+motion_mirroring = Vector2(2920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D/Backdrop"]
+texture = ExtResource("1_yqjtg")
+
+[node name="Terrain" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Terrain"]
+position = Vector2(0, 50)
+
+[node name="Sprite2D" type="Sprite2D" parent="Terrain/StaticBody2D"]
+position = Vector2(4, 96)
+texture = SubResource("PlaceholderTexture2D_iywne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_lbhrr")
+debug_color = Color(0.893084, 0.000226022, 0.785285, 0.42)
+
+[node name="Player" parent="." instance=ExtResource("2_lnu2h")]
+mass = 1.0
+inertia = 1000.0
+angular_velocity = 0.174533
