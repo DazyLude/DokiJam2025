@@ -1,15 +1,202 @@
-[gd_scene load_steps=6 format=3 uid="uid://daikwosr13pnv"]
+[gd_scene load_steps=36 format=3 uid="uid://daikwosr13pnv"]
 
+[ext_resource type="Script" uid="uid://cpobfagrfa2vw" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://d1q3bla3tsoaf" path="res://assets/stages/farm/skybox_gradient.png" id="1_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://ca57mpnq70puo" path="res://assets/stages/farm/tomato_farm.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dsygnq6v144q2" path="res://scenes/player/player.tscn" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://bxh60lo5clvos" path="res://addons/rmsmartshape/shapes/shape.gd" id="4_vtaks"]
+[ext_resource type="Script" uid="uid://dyi0gt0q26csa" path="res://addons/rmsmartshape/vertex_properties.gd" id="5_kvpfn"]
+[ext_resource type="Script" uid="uid://c3pfvvd84y3xr" path="res://addons/rmsmartshape/shapes/point.gd" id="6_dinhu"]
+[ext_resource type="Script" uid="uid://iui5xsr0lcv6" path="res://addons/rmsmartshape/shapes/point_array.gd" id="7_kvuet"]
+[ext_resource type="Script" uid="uid://cg2cweddrk5r5" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="8_trtic"]
+[ext_resource type="Script" uid="uid://d1qxh2axj257u" path="res://addons/rmsmartshape/materials/shape_material.gd" id="9_ir15t"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iywne"]
-size = Vector2(1000, 200)
+[sub_resource type="Resource" id="Resource_ca42v"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lbhrr"]
+[sub_resource type="Resource" id="Resource_rysoc"]
+script = ExtResource("6_dinhu")
+position = Vector2(207.412, 177.691)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_ca42v")
+
+[sub_resource type="Resource" id="Resource_ssvqc"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_264po"]
+script = ExtResource("6_dinhu")
+position = Vector2(702.413, 87.691)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_ssvqc")
+
+[sub_resource type="Resource" id="Resource_1kice"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_5newe"]
+script = ExtResource("6_dinhu")
+position = Vector2(1164.41, 90.6911)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_1kice")
+
+[sub_resource type="Resource" id="Resource_37s47"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_bt5mj"]
+script = ExtResource("6_dinhu")
+position = Vector2(1566.41, 270.691)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_37s47")
+
+[sub_resource type="Resource" id="Resource_e1j6l"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_pl11u"]
+script = ExtResource("6_dinhu")
+position = Vector2(1998.41, 132.691)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_e1j6l")
+
+[sub_resource type="Resource" id="Resource_bhx41"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_qnb83"]
+script = ExtResource("6_dinhu")
+position = Vector2(2004.41, 369.691)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_bhx41")
+
+[sub_resource type="Resource" id="Resource_sww3w"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_suyxu"]
+script = ExtResource("6_dinhu")
+position = Vector2(-1214.59, 387.691)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_sww3w")
+
+[sub_resource type="Resource" id="Resource_sgl2t"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_qouja"]
+script = ExtResource("6_dinhu")
+position = Vector2(-1199.88, -620.25)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_sgl2t")
+
+[sub_resource type="Resource" id="Resource_wljb1"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_v2yb1"]
+script = ExtResource("6_dinhu")
+position = Vector2(-728.589, -29.3091)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_wljb1")
+
+[sub_resource type="Resource" id="Resource_js0lu"]
+script = ExtResource("5_kvpfn")
+texture_idx = -2
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_gxtfn"]
+script = ExtResource("6_dinhu")
+position = Vector2(-95.5881, 132.691)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_js0lu")
+
+[sub_resource type="Resource" id="Resource_twgab"]
+script = ExtResource("5_kvpfn")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_02fa5"]
+script = ExtResource("6_dinhu")
+position = Vector2(207.412, 177.691)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_twgab")
+
+[sub_resource type="Resource" id="Resource_nepv3"]
+script = ExtResource("7_kvuet")
+_points = {
+0: SubResource("Resource_rysoc"),
+1: SubResource("Resource_264po"),
+2: SubResource("Resource_5newe"),
+3: SubResource("Resource_bt5mj"),
+4: SubResource("Resource_pl11u"),
+5: SubResource("Resource_qnb83"),
+6: SubResource("Resource_suyxu"),
+7: SubResource("Resource_qouja"),
+8: SubResource("Resource_v2yb1"),
+9: SubResource("Resource_gxtfn"),
+10: SubResource("Resource_02fa5")
+}
+_point_order = PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+_constraints = {
+Vector2i(0, 10): 15
+}
+_next_key = 11
+_material_overrides = {}
+tessellation_stages = 3
+tessellation_tolerance = 6.0
+curve_bake_interval = 20.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7025r"]
+
+[sub_resource type="Resource" id="Resource_m4url"]
+script = ExtResource("9_ir15t")
+_edge_meta_materials = Array[ExtResource("8_trtic")]([])
+fill_textures = Array[Texture2D]([SubResource("PlaceholderTexture2D_7025r")])
+fill_texture_z_index = -10
+fill_texture_show_behind_parent = false
+fill_texture_scale = 1.0
+fill_texture_absolute_position = false
+fill_texture_absolute_rotation = false
+fill_texture_offset = Vector2(0, 0)
+fill_texture_angle_offset = 0.0
+fill_mesh_offset = 0.0
+render_offset = 0.0
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_lbhrr")
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
 follow_viewport_enabled = true
@@ -22,8 +209,8 @@ motion_scale = Vector2(-1, -1)
 texture = ExtResource("1_lnu2h")
 
 [node name="Backdrop" type="ParallaxLayer" parent="Parallax2D"]
-position = Vector2(0, -327)
-motion_scale = Vector2(0.75, 0.75)
+motion_scale = Vector2(0.2, 0.2)
+motion_offset = Vector2(0, -200)
 motion_mirroring = Vector2(2920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D/Backdrop"]
@@ -31,18 +218,21 @@ texture = ExtResource("1_yqjtg")
 
 [node name="Terrain" type="Node" parent="."]
 
+[node name="SS2D_Shape" type="Node2D" parent="Terrain"]
+script = ExtResource("4_vtaks")
+_points = SubResource("Resource_nepv3")
+shape_material = SubResource("Resource_m4url")
+collision_update_mode = 2
+collision_polygon_node_path = NodePath("../StaticBody2D/CollisionShape2D")
+metadata/_custom_type_script = "uid://bxh60lo5clvos"
+
 [node name="StaticBody2D" type="StaticBody2D" parent="Terrain"]
-position = Vector2(0, 50)
 
-[node name="Sprite2D" type="Sprite2D" parent="Terrain/StaticBody2D"]
-position = Vector2(4, 96)
-texture = SubResource("PlaceholderTexture2D_iywne")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/StaticBody2D"]
-shape = SubResource("WorldBoundaryShape2D_lbhrr")
-debug_color = Color(0.893084, 0.000226022, 0.785285, 0.42)
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Terrain/StaticBody2D"]
+polygon = PackedVector2Array(207.412, 177.691, 702.413, 87.691, 1164.41, 90.6911, 1566.41, 270.691, 1998.41, 132.691, 2004.41, 369.691, -1214.59, 387.691, -1199.88, -620.25, -728.589, -29.3091, -95.5881, 132.691, 207.412, 177.691)
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
+position = Vector2(-1108, -652)
 mass = 1.0
 inertia = 1000.0
 angular_velocity = 0.174533
