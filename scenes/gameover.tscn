@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct1qkka6lngc5"]
+
+[ext_resource type="Script" uid="uid://cxkk1xsb2iq1q" path="res://scenes/gameover.gd" id="1_ncp31"]
+
+[node name="Gameover" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ncp31")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 783.0
+offset_top = 297.0
+offset_right = 865.0
+offset_bottom = 320.0
+text = "game over"
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 474.0
+offset_right = 681.0
+offset_bottom = 505.0
+text = "try agane"
+
+[node name="Upgrades" type="Button" parent="."]
+layout_mode = 0
+offset_left = 930.0
+offset_top = 474.0
+offset_right = 1044.0
+offset_bottom = 505.0
+text = "buy upgrades"

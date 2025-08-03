@@ -9,7 +9,6 @@ const SPEED_LOWER_LIMIT = 0.01; # in px/s
 
 
 func _physics_process(delta: float) -> void:
-	var torque : float = 0.0;
 	if Input.is_action_pressed(&"roll_cw"):
 		try_rotate(ROT_ACCEL * inertia, delta);
 	elif Input.is_action_pressed(&"roll_ccw"):
@@ -31,8 +30,10 @@ func try_rotate(torque: float, delta: float) -> void:
 		GameState.juice = 0.0;
 
 
+# tries to spend stamina
+# if stamina is less than delta, reduces applied force by a fraction
 func try_propel_upward(delta: float) -> void:
-	# why does this work when the unit vector is inverted? Am I an idiot?
+	#  Vector2(0, -1) is an upward looking unit vector. Because Y-Axis looks downwards.
 	var upward_unit_vector := Vector2(0, -1).rotated(self.rotation);
 	var upward_force := upward_unit_vector * FLY_ACCEL * mass;
 	
