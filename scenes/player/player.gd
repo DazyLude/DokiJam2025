@@ -1,8 +1,10 @@
 class_name Player extends RigidBody2D
 
 
-const CAMERA_GIVE := 5e-5;
+const CAMERA_GIVE := 1e-5;
 const CAMERA_OFFSET_LIMIT := 150.0;
+const CAMERA_LLG = CAMERA_OFFSET_LIMIT * CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
+const CAMERA_LG = CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
 
 
 const ROT_ACCEL = 20.0; # in rad/s^2
@@ -11,8 +13,8 @@ const FLY_ACCEL = 1800.0; # in px/s^2, g (980px/s2) + bonus
 ## speed at which the player is considered stationary
 const SPEED_LOWER_LIMIT = 0.01; # in px/s
 
-## players average velocity is calculated over VELOCITY_AVG_LIMIT amount of frames
-const VELOCITY_AVG_LIMIT := 120;
+## players running average velocity is calculated over VELOCITY_AVG_LIMIT amount of frames
+const VELOCITY_AVG_LIMIT := 240;
 var velocity_avg_array := PackedVector2Array();
 var velocity_avg := Vector2();
 var velocity_avg_idx : int = 0;
@@ -81,7 +83,4 @@ func calc_camera_offset(velocity: Vector2) -> void:
 	var vel_len := velocity_avg.length();
 	var vel_dir := velocity_avg.normalized().rotated(-rotation);
 	
-	var lsqg = CAMERA_OFFSET_LIMIT * CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
-	var lg = CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
-	
-	$Camera2D.position = vel_dir * vel_len * lsqg / (1 + vel_len * lg);
+	$Camera2D.position = vel_dir * vel_len * CAMERA_LLG / (1 + vel_len * CAMERA_LG);
