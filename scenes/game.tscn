@@ -444,22 +444,21 @@ render_offset = 0.0
 [node name="Game" type="Node"]
 script = ExtResource("1_lbhrr")
 
-[node name="Parallax2D" type="ParallaxBackground" parent="."]
-follow_viewport_enabled = true
-scroll_ignore_camera_zoom = true
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="Skybox" type="ParallaxLayer" parent="Parallax2D"]
-motion_scale = Vector2(-1, -1)
+[node name="SkyboxParallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D/Skybox"]
+[node name="SkyboxSprite" type="Sprite2D" parent="ParallaxBackground/SkyboxParallax"]
 texture = ExtResource("1_lnu2h")
 centered = false
 
-[node name="Backdrop" type="ParallaxLayer" parent="Parallax2D"]
-motion_scale = Vector2(-0.9, -0.9)
+[node name="BackdropParallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.9, 0.9)
 motion_mirroring = Vector2(2920, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D/Backdrop"]
+[node name="BackdropSprite" type="Sprite2D" parent="ParallaxBackground/BackdropParallax"]
+position = Vector2(0, -800)
 texture = ExtResource("1_yqjtg")
 centered = false
 

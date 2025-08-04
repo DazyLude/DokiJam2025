@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cj3qmqrdmpetp"]
 
 [ext_resource type="Script" uid="uid://l12ejtkng3vn" path="res://scenes/menu.gd" id="1_vjb58"]
-[ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato.png" id="2_con2f"]
+[ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato/tomato.png" id="2_con2f"]
 
 [node name="Main" type="Control"]
 layout_mode = 3

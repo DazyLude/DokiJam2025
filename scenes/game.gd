@@ -77,7 +77,8 @@ func place_player() -> void:
 	var generator = GameState.current_stage.generator;
 	
 	player.position = Vector2(0.0, generator.generator_function(0) - 200.0);
-	$Parallax2D/Backdrop.motion_offset = $Parallax2D/Backdrop/Sprite2D.texture.get_size() * Vector2(-0.5, -0.25);
+	# LMG Note: This causes a crash v
+	#$Parallax2D/Backdrop.motion_offset = $Parallax2D/Backdrop/Sprite2D.texture.get_size() * Vector2(-0.5, -0.25);
 
 
 # checkpoint is just a visual that is placed at the end of a level

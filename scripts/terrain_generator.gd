@@ -26,11 +26,17 @@ func prepare_coordinates(sample_count: int, offset: float) -> void:
 func generator_function(x: float) -> float:
 	var x_scaled = x * scale.x;
 	var result : float = 0;
+	var incremental_variation : float = 0
 	
-	if x_scaled < CHAIR_HEIGHT_CBRT:
+	# Previous iteration:
+	#if x_scaled < CHAIR_HEIGHT_CBRT:
+	if x_scaled < 1.7:
 		result += CHAIR_HEIGHT - pow(x_scaled, 3.0);
 	else:
-		result += noise_generator.get_noise_1d(x) + 1;
+		# Previous iteration:
+		#result += noise_generator.get_noise_1d(x) + 1;
+		incremental_variation = 1e-4 * x * (sin(x_scaled) + 1)
+		result += incremental_variation + noise_generator.get_noise_1d(x) + 1;
 	
 	return -result * scale.y;
 
