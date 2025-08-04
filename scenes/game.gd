@@ -9,6 +9,7 @@ extends Node
 @onready var ss2d_shape : SS2D_Shape = $Terrain/SS2D_Shape;
 @onready var back_decor := $DecorationsBack;
 @onready var front_decor := $DecorationsFront;
+@onready var collectibles := $Collectibles;
 
 
 var gameover_scene = preload("res://scenes/gameover.tscn");
@@ -42,8 +43,21 @@ func load_stage() -> void:
 	setup_terrain_visuals(stage);
 	generate_terrain();
 	spawn_checkpoint();
-	#spawn_collectibles();
+	spawn_collectibles();
 	place_player();
+
+
+func spawn_collectibles() -> void:
+	var stage := GameState.current_stage;
+	
+	var collectible := preload("res://scenes/gameplay_elements/pickup_item.tscn").instantiate();
+	collectible.data = PickupItemData.get_by_name("coin");
+	collectible.position = Vector2(
+		2000.0,
+		stage.generator.generator_function(2000.0) - 100.0
+	);
+	
+	collectibles.add_child(collectible);
 
 
 func place_player() -> void:
@@ -67,7 +81,7 @@ func spawn_checkpoint() -> void:
 	checkpoint.offset = Vector2(0.0, -checkpoint.texture.get_height() / 2.0)
 	# TODO rotation
 	
-	front_decor.add_child(checkpoint);
+	back_decor.add_child(checkpoint);
 
 
 func setup_terrain_visuals(stage: StageData) -> void:

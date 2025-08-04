@@ -22,3 +22,4 @@ func _process(delta: float) -> void:
 	
 	if GameState != null:
 		$DataContainer/Stamina.text = STAMINA_SPEED_TEMPLATE % GameState.juice;
+		$CoinCounter/Label.text = "%d" % GameState.dokicoins;

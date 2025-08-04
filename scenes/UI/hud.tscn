@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bb3q6mj02qh6c"]
+[gd_scene load_steps=3 format=3 uid="uid://bb3q6mj02qh6c"]
 
 [ext_resource type="Script" uid="uid://8xnrnrif5mb0" path="res://scenes/UI/hud.gd" id="1_c4vmg"]
+[ext_resource type="Texture2D" uid="uid://fqn2kgf1d1yu" path="res://assets/icons/dokicoin.png" id="2_rd3kb"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -41,6 +42,28 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 
 [node name="Stamina" type="Label" parent="DataContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+
+[node name="CoinCounter" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="CoinCounter"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("2_rd3kb")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CoinCounter"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
