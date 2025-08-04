@@ -8,6 +8,7 @@ extends Node
 # stamina
 const JUICE_DEFAULT_VALUE : float = 10.0; # in seconds of juice usage time
 var juice := JUICE_DEFAULT_VALUE;
+var juice_cap := JUICE_DEFAULT_VALUE;
 
 
 # currency
@@ -19,4 +20,4 @@ var current_stage := StageData.get_stage_data_by_name("tomato fields");
 
 
 func restart() -> void:
-	juice = JUICE_DEFAULT_VALUE;
+	juice = juice_cap;

@@ -1,6 +1,8 @@
 extends Node
 
 
+const COLLECTIBLE_HOVER_OFFSET := Vector2(0.0, -100.0);
+
 # this script should handle background switcheroos and terrain generation based on the players coordinate
 # for terrain generation, I think about doing it in chunks using a smooth-ish height(x) function and a samplerate
 @onready var ui_layer = $UILayer;
@@ -47,17 +49,28 @@ func load_stage() -> void:
 	place_player();
 
 
+func place_collectible_at(x: float, collectible_data: PickupItemData) -> PickupItem:
+	var collectible := preload("res://scenes/gameplay_elements/pickup_item.tscn").instantiate();
+	collectible.position = Vector2(
+		x,
+		GameState.current_stage.generator.generator_function(x)
+	) + COLLECTIBLE_HOVER_OFFSET;
+	collectible.data = collectible_data;
+	
+	collectibles.add_child(collectible);
+	return collectible;
+
+
 func spawn_collectibles() -> void:
 	var stage := GameState.current_stage;
 	
-	var collectible := preload("res://scenes/gameplay_elements/pickup_item.tscn").instantiate();
-	collectible.data = PickupItemData.get_by_name("coin");
-	collectible.position = Vector2(
-		2000.0,
-		stage.generator.generator_function(2000.0) - 100.0
-	);
+	for i in range(1, 10):
+		var x = stage.stage_length * i / 11.0;
+		place_collectible_at(x, PickupItemData.get_by_name("ketchup"));
 	
-	collectibles.add_child(collectible);
+	for i in range(1, 6):
+		var x = stage.stage_length * i / 7.0;
+		place_collectible_at(x, PickupItemData.get_by_name("coin"));
 
 
 func place_player() -> void:
