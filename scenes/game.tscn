@@ -420,7 +420,7 @@ script = ExtResource("8_trtic")
 edge_material = SubResource("Resource_7025r")
 normal_range = SubResource("Resource_8ool0")
 weld = true
-taper_sharp_corners = true
+taper_sharp_corners = false
 render = true
 z_index = 0
 z_as_relative = true
@@ -496,7 +496,3 @@ angular_velocity = 0.174533
 
 [node name="HUD" parent="UILayer" instance=ExtResource("11_kvpfn")]
 z_index = 1
-offset_left = -5.0
-offset_top = 30.0
-offset_right = -5.0
-offset_bottom = 30.0

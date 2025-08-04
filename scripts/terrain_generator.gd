@@ -9,6 +9,12 @@ const CHAIR_HEIGHT_CBRT := pow(CHAIR_HEIGHT, 1.0/3.0);
 var generator_params: PackedVector2Array;
 var coordinates: PackedFloat32Array;
 var scale : Vector2;
+var noise_generator : FastNoiseLite;
+
+
+func _init() -> void:
+	noise_generator = FastNoiseLite.new();
+	noise_generator.noise_type = FastNoiseLite.TYPE_VALUE_CUBIC;
 
 
 func prepare_coordinates(sample_count: int, offset: float) -> void:
@@ -23,6 +29,8 @@ func generator_function(x: float) -> float:
 	
 	if x_scaled < CHAIR_HEIGHT_CBRT:
 		result += CHAIR_HEIGHT - pow(x_scaled, 3.0);
+	else:
+		result += noise_generator.get_noise_1d(x) + 1;
 	
 	return -result * scale.y;
 
