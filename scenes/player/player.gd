@@ -11,7 +11,7 @@ const ROT_ACCEL = 20.0; # in rad/s^2
 const FLY_ACCEL = 1800.0; # in px/s^2, g (980px/s2) + bonus
 
 ## speed at which the player is considered stationary
-const SPEED_LOWER_LIMIT = 0.01; # in px/s
+const SPEED_LOWER_LIMIT = 0.5; # in px/s
 
 ## players running average velocity is calculated over VELOCITY_AVG_LIMIT amount of frames
 const VELOCITY_AVG_LIMIT := 240;
@@ -32,6 +32,9 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed(&"fly"):
 		try_propel_upward(delta);
+	
+	# TODO rolling friction
+	# TODO air friction
 
 
 func _process(delta: float) -> void:
@@ -81,6 +84,4 @@ func calc_camera_offset(velocity: Vector2) -> void:
 	
 	# calculate new camera offset
 	var vel_len := velocity_avg.length();
-	var vel_dir := velocity_avg.normalized().rotated(-rotation);
-	
-	$Camera2D.position = vel_dir * vel_len * CAMERA_LLG / (1 + vel_len * CAMERA_LG);
+	$Camera2D.position = velocity_avg.rotated(-rotation) * CAMERA_LLG / (1 + vel_len * CAMERA_LG);

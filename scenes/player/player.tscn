@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsygnq6v144q2"]
 
 [ext_resource type="Script" uid="uid://b4xgne00eu2bu" path="res://scenes/player/player.gd" id="1_dovo2"]
-[ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato/tomato.png" id="2_gmlin"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dovo2"]
-friction = 0.8
+friction = 0.75
 rough = true
-bounce = 0.25
+bounce = 0.1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lvxji"]
 radius = 450.0
