@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsygnq6v144q2"]
+[gd_scene load_steps=9 format=3 uid="uid://dsygnq6v144q2"]
 
 [ext_resource type="Script" uid="uid://b4xgne00eu2bu" path="res://scenes/player/player.gd" id="1_dovo2"]
-[ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato/tomato.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://c8oyl5lcdqy6u" path="res://assets/skinsuits/tomato/tomato_base.png" id="2_75vfm"]
+[ext_resource type="Script" uid="uid://b40woge2o40ty" path="res://scripts/emotional_sprite.gd" id="3_0owmy"]
+[ext_resource type="Texture2D" uid="uid://qxvuabq74aq1" path="res://assets/skinsuits/tomato/tomato_neutral.png" id="4_qek5x"]
+[ext_resource type="Texture2D" uid="uid://bc1dac8a16sej" path="res://assets/skinsuits/tomato/tomato_hurt.png" id="5_5gtgg"]
+[ext_resource type="Texture2D" uid="uid://cqsv4e168n3ls" path="res://assets/skinsuits/tomato/tomato_tired.png" id="6_h17s1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dovo2"]
 friction = 0.75
@@ -24,7 +28,10 @@ script = ExtResource("1_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_gmlin")
+texture = ExtResource("2_75vfm")
+script = ExtResource("3_0owmy")
+emotions = Array[Texture2D]([ExtResource("4_qek5x"), ExtResource("5_5gtgg"), ExtResource("6_h17s1")])
+metadata/_custom_type_script = "uid://b40woge2o40ty"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

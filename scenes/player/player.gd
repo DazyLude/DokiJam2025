@@ -6,6 +6,9 @@ const CAMERA_OFFSET_LIMIT := 150.0;
 const CAMERA_LLG = CAMERA_OFFSET_LIMIT * CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
 const CAMERA_LG = CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
 
+const DEFAULT_CAMERA_OFFSET := Vector2(0.0, -200.0);
+const DEFAULT_CAMERA_OFFSET_SCALED := DEFAULT_CAMERA_OFFSET / CAMERA_LLG
+
 
 const ROT_ACCEL = 20.0; # in rad/s^2
 const FLY_ACCEL = 1800.0; # in px/s^2, g (980px/s2) + bonus
@@ -18,6 +21,9 @@ const VELOCITY_AVG_LIMIT := 240;
 var velocity_avg_array := PackedVector2Array();
 var velocity_avg := Vector2();
 var velocity_avg_idx : int = 0;
+
+
+@onready var camera  = $Camera2D;
 
 
 func _ready() -> void:
@@ -39,6 +45,9 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	calc_camera_offset(linear_velocity);
+	
+	if GameState.juice <= 0:
+		$Sprite2D.display_emotion(2);
 
 
 # tries to spend stamina
@@ -84,4 +93,4 @@ func calc_camera_offset(velocity: Vector2) -> void:
 	
 	# calculate new camera offset
 	var vel_len := velocity_avg.length();
-	$Camera2D.position = velocity_avg.rotated(-rotation) * CAMERA_LLG / (1 + vel_len * CAMERA_LG);
+	camera.position = (DEFAULT_CAMERA_OFFSET_SCALED + velocity_avg).rotated(-rotation) * CAMERA_LLG / (1 + vel_len * CAMERA_LG);

@@ -463,11 +463,12 @@ motion_mirroring = Vector2(2920, 0)
 texture = ExtResource("1_yqjtg")
 centered = false
 
+[node name="DecorationsBack" type="Node" parent="."]
+
 [node name="Terrain" type="Node" parent="."]
 
 [node name="SS2D_Shape" type="Node2D" parent="Terrain"]
 texture_repeat = 2
-position = Vector2(1523, 1212)
 script = ExtResource("4_vtaks")
 _points = SubResource("Resource_753oq")
 shape_material = SubResource("Resource_m4url")
@@ -480,10 +481,12 @@ metadata/_custom_type_script = "uid://bxh60lo5clvos"
 [node name="StaticBody2D" type="StaticBody2D" parent="Terrain"]
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Terrain/StaticBody2D"]
-polygon = PackedVector2Array(1708.03, 1368.39, 1812.51, 1379.63, 1977.43, 1283.56, 2225.41, 1299.69, 2451.15, 1259.11, 2687.41, 1302.69, 3001.75, 1411.18, 3243.62, 1387.26, 3452.24, 1277.97, 5366.92, 1157.07, 7102.48, 1341.68, 7382.89, 1775.16, 4115.18, 1741.5, 1893.76, 1751.84, 64.2559, 1796.22, 279.031, 944.962, 487.038, 595.344, 899.157, 601.147, 924.433, 1136.91, 1266.63, 1252.61, 1355.03, 1355.04, 1439.72, 1417.97, 1532.97, 1403.8, 1558.99, 1342.95, 1615.18, 1328.03)
+build_mode = 1
+polygon = PackedVector2Array(185.028, 156.39, 289.51, 167.626, 454.433, 71.5554, 702.413, 87.6873, 928.145, 47.1126, 1164.41, 90.6898, 1478.75, 199.179, 1720.62, 175.255, 1929.24, 65.9737, 3843.92, -54.9296, 5579.48, 129.675, 5859.89, 563.156, 2592.18, 529.499, 370.758, 539.838, -1458.74, 584.22, -1243.97, -267.038, -1035.96, -616.656, -623.843, -610.853, -598.567, -75.0946, -256.372, 40.6078, -167.965, 143.042, -83.2765, 205.97, 9.96658, 191.801, 35.9868, 130.949, 92.1774, 116.033)
+
+[node name="DecorationsFront" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
-position = Vector2(800, 450)
 inertia = 1000.0
 angular_velocity = 0.174533
 
