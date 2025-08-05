@@ -48,6 +48,9 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed(&"roll_ccw"):
 		try_rotate(-ROT_ACCEL * inertia, delta);
 	
+	if Input.is_action_pressed(&"fly"):
+		try_propel_upward(delta);
+	
 	# jump logic
 	if get_contact_count() > 0 and (Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0):
 		try_jump();
@@ -71,7 +74,7 @@ func _process(delta: float) -> void:
 	calc_camera_offset(linear_velocity);
 	
 	if hng_for > 0:
-		if GameState.juice < JUMP_COST:
+		if GameState.juice > JUMP_COST:
 			$Sprite2D.display_emotion(2);
 		else:
 			$Sprite2D.display_emotion(1);
