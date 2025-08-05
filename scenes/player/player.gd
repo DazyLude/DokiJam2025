@@ -9,13 +9,6 @@ const CAMERA_LG = CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
 const DEFAULT_CAMERA_OFFSET := Vector2(0.0, -200.0);
 const DEFAULT_CAMERA_OFFSET_SCALED := DEFAULT_CAMERA_OFFSET / CAMERA_LLG
 
-
-const ROT_ACCEL = 20.0; # in rad/s^2
-const FLY_ACCEL = 1800.0; # in px/s^2, g (980px/s2) + bonus
-const JUMP_FLY_ACCEL_SCALE = 0.3; # in s
-const JUMP_COST = 2.0;
-const JUMP_BUFFER_TIME = 0.1;
-
 ## speed at which the player is considered stationary
 const SPEED_LOWER_LIMIT = 0.5; # in px/s
 
@@ -25,11 +18,27 @@ var velocity_avg_array := PackedVector2Array();
 var velocity_avg := Vector2();
 var velocity_avg_idx : int = 0;
 
-var hardness : float = 10.0; # reduces rolling friction
-var aeroshape : float = 10.0; # reduces air friction
+#region stats
+# torque applied, usually multiplied by inertia
+var player_torque := 20.0; # in rad/s^2
+# fly strength applied, usually multiplied by mass
+var player_fly_strength := 1800.0; # in px/s^2, g (980px/s2) + bonus
+# when jumping, the impulse is defined as an impulse acquired by applying fly strength for this amount of seconds
+var jump_fly_scale := 0.3; # in s
+# stamina cost of jumps
+var jump_cost := 2.0;
+# rolling friction is reversely proportional to hardness
+var hardness := 10.0;
+# air friction is reversely proportional to hardness
+var aeroshape := 10.0;
+#endregion
 
-var jump_buffer : float = 0.0;
+# when "airborne" (this can happen a lot more often than expected in a physics simulation like ours)
+# pressing "jump" action will activate buffer and jump will be executed when the player touches the ground
+const JUMP_BUFFER_TIME = 0.1; 
+var jump_buffer : float = 0.0; # in seconds
 
+# affects player's emotion
 var hng_for : float = 0.0; # in seconds
 
 
@@ -44,9 +53,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed(&"roll_cw"):
-		try_rotate(ROT_ACCEL * inertia, delta);
+		try_rotate(player_torque * inertia, delta);
 	elif Input.is_action_pressed(&"roll_ccw"):
-		try_rotate(-ROT_ACCEL * inertia, delta);
+		try_rotate(-player_torque * inertia, delta);
 	
 	if Input.is_action_pressed(&"fly"):
 		try_propel_upward(delta);
@@ -74,7 +83,7 @@ func _process(delta: float) -> void:
 	calc_camera_offset(linear_velocity);
 	
 	if hng_for > 0:
-		if GameState.juice > JUMP_COST:
+		if GameState.juice > jump_cost:
 			$Sprite2D.display_emotion(2);
 		else:
 			$Sprite2D.display_emotion(1);
@@ -102,7 +111,7 @@ func try_rotate(torque: float, delta: float) -> void:
 func try_propel_upward(delta: float) -> void:
 	#  Vector2(0, -1) is an upward looking unit vector. Because Y-Axis looks downwards.
 	var upward_unit_vector := Vector2(0, -1).rotated(self.rotation);
-	var upward_force := upward_unit_vector * FLY_ACCEL * mass;
+	var upward_force := upward_unit_vector * player_fly_strength * mass;
 	
 	if GameState.juice > delta:
 		apply_central_force(upward_force);
@@ -115,14 +124,14 @@ func try_propel_upward(delta: float) -> void:
 
 func try_jump() -> void:
 	var upward_unit_vector := Vector2(0, -1).rotated(self.rotation);
-	var upward_impulse := upward_unit_vector * FLY_ACCEL * mass * JUMP_FLY_ACCEL_SCALE;
+	var upward_impulse := upward_unit_vector * player_fly_strength * mass * jump_fly_scale;
 	
 	hng_for = 0.2;
 	$Sprite2D.display_emotion(1);
 	
-	if GameState.juice > JUMP_COST:
+	if GameState.juice > jump_cost:
 		apply_central_impulse(upward_impulse);
-		GameState.juice -= JUMP_COST;
+		GameState.juice -= jump_cost;
 
 
 func is_stationary() -> bool:
