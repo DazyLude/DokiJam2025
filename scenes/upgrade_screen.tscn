@@ -1,0 +1,386 @@
+[gd_scene load_steps=11 format=3 uid="uid://copxjn2tb15ob"]
+
+[ext_resource type="Script" uid="uid://bq48lg7fnvhv6" path="res://scenes/upgrade_screen.gd" id="1_pfdwi"]
+[ext_resource type="Texture2D" uid="uid://0gwsj3aa3h00" path="res://assets/icons/stamina.png" id="2_8myhc"]
+[ext_resource type="StyleBox" uid="uid://wjyvsn8hvqxm" path="res://styles/Upgrade_Button_Hover.tres" id="3_40tcc"]
+[ext_resource type="StyleBox" uid="uid://cmxbto1frk6e1" path="res://styles/Upgrade_Button_Pressed.tres" id="4_hl0un"]
+[ext_resource type="StyleBox" uid="uid://cwiwcgjjs8wpe" path="res://styles/Upgrade_Button_Normal.tres" id="5_7hdmu"]
+[ext_resource type="Texture2D" uid="uid://fqn2kgf1d1yu" path="res://assets/icons/dokicoin.png" id="6_f545e"]
+[ext_resource type="Texture2D" uid="uid://b02ppq17pdw4e" path="res://assets/icons/armor_shield.png" id="7_knbow"]
+[ext_resource type="Texture2D" uid="uid://uqtvsbtsb13q" path="res://assets/icons/stamina_ketchup.png" id="8_n4dbv"]
+[ext_resource type="Texture2D" uid="uid://0cgyp85a1bdm" path="res://assets/icons/loudness.png" id="9_nr0xp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_farj6"]
+bg_color = Color(0.43134, 0.43134, 0.43134, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="UpgradeScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pfdwi")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -400.0
+offset_right = 500.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_farj6")
+
+[node name="ShopLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -370.0
+offset_right = 183.0
+offset_bottom = -303.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "UPGRADE SHOP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 160.0
+offset_right = 760.0
+offset_bottom = 220.0
+theme_override_constants/separation = 10
+
+[node name="UpgradeIcon" type="TextureRect" parent="SpeedContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("2_8myhc")
+expand_mode = 1
+
+[node name="UpgradeLabel" type="Label" parent="SpeedContainer"]
+custom_minimum_size = Vector2(136, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Speed:"
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="SpeedContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "BUY"
+
+[node name="CoinIcon" type="TextureRect" parent="SpeedContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_f545e")
+expand_mode = 1
+
+[node name="UpgradeCost" type="Label" parent="SpeedContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "x200"
+vertical_alignment = 1
+
+[node name="ArmorContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 160.0
+offset_right = 1270.0
+offset_bottom = 220.0
+theme_override_constants/separation = 10
+
+[node name="UpgradeIcon" type="TextureRect" parent="ArmorContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("7_knbow")
+expand_mode = 1
+
+[node name="UpgradeLabel" type="Label" parent="ArmorContainer"]
+custom_minimum_size = Vector2(136, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Armor:"
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="ArmorContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "BUY"
+
+[node name="CoinIcon" type="TextureRect" parent="ArmorContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_f545e")
+expand_mode = 1
+
+[node name="UpgradeCost" type="Label" parent="ArmorContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "x200"
+vertical_alignment = 1
+
+[node name="StaminaContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 240.0
+offset_right = 760.0
+offset_bottom = 300.0
+theme_override_constants/separation = 10
+
+[node name="UpgradeIcon" type="TextureRect" parent="StaminaContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("8_n4dbv")
+expand_mode = 1
+
+[node name="UpgradeLabel" type="Label" parent="StaminaContainer"]
+custom_minimum_size = Vector2(136, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Stamina:"
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="StaminaContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "BUY"
+
+[node name="CoinIcon" type="TextureRect" parent="StaminaContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_f545e")
+expand_mode = 1
+
+[node name="UpgradeCost" type="Label" parent="StaminaContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "x200"
+vertical_alignment = 1
+
+[node name="LoudnessContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 240.0
+offset_right = 1270.0
+offset_bottom = 300.0
+theme_override_constants/separation = 10
+
+[node name="UpgradeIcon" type="TextureRect" parent="LoudnessContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("9_nr0xp")
+expand_mode = 1
+
+[node name="UpgradeLabel" type="Label" parent="LoudnessContainer"]
+custom_minimum_size = Vector2(136, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Noise:"
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="LoudnessContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "BUY"
+
+[node name="CoinIcon" type="TextureRect" parent="LoudnessContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_f545e")
+expand_mode = 1
+
+[node name="UpgradeCost" type="Label" parent="LoudnessContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "x200"
+vertical_alignment = 1
+
+[node name="BounceContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -130.0
+offset_right = 215.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="UpgradeIcon" type="TextureRect" parent="BounceContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("2_8myhc")
+expand_mode = 1
+
+[node name="UpgradeLabel" type="Label" parent="BounceContainer"]
+custom_minimum_size = Vector2(136, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Bounce:"
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="BounceContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "BUY"
+
+[node name="CoinIcon" type="TextureRect" parent="BounceContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_f545e")
+expand_mode = 1
+
+[node name="UpgradeCost" type="Label" parent="BounceContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "x200"
+vertical_alignment = 1
+
+[node name="SkinsuitLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -30.0
+offset_right = 183.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "SKINSUITS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkinsuitContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = 50.0
+offset_right = 345.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="SkinsuitButton1" type="Button" parent="SkinsuitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "Skinsuit 1"
+
+[node name="SkinsuitButton2" type="Button" parent="SkinsuitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "Skinsuit 2"
+
+[node name="SkinsuitButton3" type="Button" parent="SkinsuitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "Skinsuit 3"
+
+[node name="SkinsuitButton4" type="Button" parent="SkinsuitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "Skinsuit 4"
+
+[node name="ContinueButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = 303.0
+offset_right = 90.0
+offset_bottom = 363.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = ExtResource("3_40tcc")
+theme_override_styles/pressed = ExtResource("4_hl0un")
+theme_override_styles/normal = ExtResource("5_7hdmu")
+text = "CONTINUE"

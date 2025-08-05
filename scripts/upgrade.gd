@@ -14,6 +14,7 @@ enum {
 	KETCHUP_TANK,
 	ARMOR,
 	VOCAL,
+	BOUNCE,
 	
 	SKINSUIT_TOMATO,
 	SKINSUIT_CROWKI,
@@ -22,6 +23,50 @@ enum {
 # once again, pretty JSONable way to hold data
 static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	COFFEE: {
+		"type": TYPE_INCREMENTAL,
+		# int
+		"max level": 4,
+		# array with float values
+		"cost": [10.0, 20.0, 30.0, 40.0],
+		# String (name of a stage, "" or skip for never)
+		"autounlock": "",
+		# String (name of a stage, "" or skip for always)
+		"shop_unlock": "",
+	},
+	ARMOR: {
+		"type": TYPE_INCREMENTAL,
+		# int
+		"max level": 4,
+		# array with float values
+		"cost": [10.0, 20.0, 30.0, 40.0],
+		# String (name of a stage, "" or skip for never)
+		"autounlock": "",
+		# String (name of a stage, "" or skip for always)
+		"shop_unlock": "",
+	},
+	KETCHUP_TANK: {
+		"type": TYPE_INCREMENTAL,
+		# int
+		"max level": 4,
+		# array with float values
+		"cost": [10.0, 20.0, 30.0, 40.0],
+		# String (name of a stage, "" or skip for never)
+		"autounlock": "",
+		# String (name of a stage, "" or skip for always)
+		"shop_unlock": "",
+	},
+	VOCAL: {
+		"type": TYPE_INCREMENTAL,
+		# int
+		"max level": 4,
+		# array with float values
+		"cost": [10.0, 20.0, 30.0, 40.0],
+		# String (name of a stage, "" or skip for never)
+		"autounlock": "",
+		# String (name of a stage, "" or skip for always)
+		"shop_unlock": "",
+	},
+	BOUNCE: {
 		"type": TYPE_INCREMENTAL,
 		# int
 		"max level": 4,
@@ -68,6 +113,15 @@ func get_unlocked() -> Array[int]:
 	
 	return result; 
 
+
+## returns the cost of the current level of an upgrade
+#func get_upgrade_price(upgrade_id: int, upgrade_level: int=get_upgrade_level(upgrade_id)) -> float:
+func get_upgrade_price(upgrade_id: int, upgrade_level: int=0) -> float:
+	#var upgrade_level: int = upgrade_metadata.get("")
+	var upgrade_data: Dictionary = upgrade_metadata.get(upgrade_id, 0)
+	var cost: Array = upgrade_data.get("cost", [-1])
+	return cost[upgrade_level]
+	
 
 ## increases the level of the provided upgrade by one
 func increase_level(upgrade_id: int) -> void:
