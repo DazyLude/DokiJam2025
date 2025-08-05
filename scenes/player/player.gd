@@ -22,6 +22,9 @@ var velocity_avg_array := PackedVector2Array();
 var velocity_avg := Vector2();
 var velocity_avg_idx : int = 0;
 
+var hardness : float = 10.0; # reduces rolling friction
+var aeroshape : float = 10.0; # reduces air friction
+
 
 @onready var camera  = $Camera2D;
 
@@ -39,8 +42,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed(&"fly"):
 		try_propel_upward(delta);
 	
-	# TODO rolling friction
-	# TODO air friction
+	# rolling friction
+	if get_contact_count() > 0:
+		apply_torque(-angular_velocity * inertia / hardness);
+	
+	# air friction
+	apply_central_force(-linear_velocity * mass / aeroshape)
 
 
 func _process(delta: float) -> void:
@@ -48,6 +55,8 @@ func _process(delta: float) -> void:
 	
 	if GameState.juice <= 0:
 		$Sprite2D.display_emotion(2);
+	else:
+		$Sprite2D.display_emotion(0);
 
 
 # tries to spend stamina
