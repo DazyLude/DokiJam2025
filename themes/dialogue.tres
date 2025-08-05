@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://btke7arcvyxss"]
+
+[ext_resource type="FontFile" uid="uid://ctpda6706sqen" path="res://assets/fonts/Jua/Jua-Regular.ttf" id="1_2kqna"]
+
+[resource]
+Label/colors/font_color = Color(0.176471, 0.14902, 0.490196, 1)
+Label/font_sizes/font_size = 30
+Label/fonts/font = ExtResource("1_2kqna")

@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://c3t0ga6at7px1"]
+
+[ext_resource type="Script" uid="uid://b165rsamniss7" path="res://scenes/intermission_player.gd" id="1_dnknu"]
+[ext_resource type="Theme" uid="uid://btke7arcvyxss" path="res://themes/dialogue.tres" id="1_nfl2d"]
+[ext_resource type="Texture2D" uid="uid://ca57mpnq70puo" path="res://assets/stages/farm/tomato_farm.png" id="3_ck27o"]
+[ext_resource type="Texture2D" uid="uid://c8oyl5lcdqy6u" path="res://assets/skinsuits/tomato/tomato_base.png" id="4_5pqa6"]
+[ext_resource type="Script" uid="uid://3d7xwd4mputh" path="res://scenes/dialogue_player.gd" id="4_ck27o"]
+[ext_resource type="Script" uid="uid://b40woge2o40ty" path="res://scripts/emotional_sprite.gd" id="5_0uwa6"]
+[ext_resource type="Texture2D" uid="uid://qxvuabq74aq1" path="res://assets/skinsuits/tomato/tomato_neutral.png" id="6_xemt1"]
+[ext_resource type="Texture2D" uid="uid://cdhghlishqufk" path="res://assets/skinsuits/crowki/crowki_base.png" id="7_1uuqx"]
+[ext_resource type="Texture2D" uid="uid://cnw4001rrwjxi" path="res://assets/skinsuits/crowki/crowki_neutral.png" id="8_hxfrj"]
+[ext_resource type="Texture2D" uid="uid://dfaseecmxw4mx" path="res://assets/buttons/button.png" id="9_2y2nw"]
+[ext_resource type="Script" uid="uid://wlpl40wf8kka" path="res://scenes/comic_player.gd" id="11_5pqa6"]
+
+[node name="IntermissionPlayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_nfl2d")
+script = ExtResource("1_dnknu")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ck27o")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="DialogueBase" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_ck27o")
+
+[node name="CharacterLeft" type="Sprite2D" parent="DialogueBase"]
+position = Vector2(400, 450)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_5pqa6")
+script = ExtResource("5_0uwa6")
+emotions = Array[Texture2D]([ExtResource("6_xemt1")])
+metadata/_custom_type_script = "uid://b40woge2o40ty"
+
+[node name="CharacterRight" type="Sprite2D" parent="DialogueBase"]
+position = Vector2(1201, 450)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("7_1uuqx")
+script = ExtResource("5_0uwa6")
+emotions = Array[Texture2D]([ExtResource("8_hxfrj")])
+metadata/_custom_type_script = "uid://b40woge2o40ty"
+
+[node name="TextBox" type="NinePatchRect" parent="DialogueBase"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -425.0
+offset_top = -305.0
+offset_right = 465.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("9_2y2nw")
+region_rect = Rect2(59.9574, 60.9053, 1119.63, 630.676)
+patch_margin_left = 123
+patch_margin_top = 125
+patch_margin_right = 130
+patch_margin_bottom = 111
+
+[node name="Text" type="Label" parent="DialogueBase/TextBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 79.0
+offset_top = 81.0
+offset_right = -75.0
+offset_bottom = 248.0
+grow_horizontal = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim, tortor ut bibendum cursus, nunc sapien viverra ex, a eleifend sem massa eget sapien. Aenean convallis interdum tortor id pharetra. Mauris facilisis augue ut nibh semper condimentum. Vivamus nec enim tincidunt, condimentum lacus sit amet, facilisis nibh. Pellentesque habitant morbi. "
+autowrap_mode = 3
+text_overrun_behavior = 3
+
+[node name="Speaker" type="Label" parent="DialogueBase/TextBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 60.0
+offset_top = 41.0
+offset_right = -99.0
+offset_bottom = 74.0
+grow_horizontal = 2
+text = "The Yapper"
+autowrap_mode = 3
+text_overrun_behavior = 3
+
+[node name="ComicBase" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("11_5pqa6")

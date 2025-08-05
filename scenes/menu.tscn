@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj3qmqrdmpetp"]
+[gd_scene load_steps=4 format=3 uid="uid://cj3qmqrdmpetp"]
 
+[ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_con2f"]
 [ext_resource type="Script" uid="uid://l12ejtkng3vn" path="res://scenes/menu.gd" id="1_vjb58"]
 [ext_resource type="Texture2D" uid="uid://dd0gbky8jy8uv" path="res://assets/skinsuits/tomato/tomato.png" id="2_con2f"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_con2f")
 script = ExtResource("1_vjb58")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -41,3 +47,11 @@ offset_top = 233.0
 offset_right = 1013.0
 offset_bottom = 308.0
 text = "rotato potato the game"
+
+[node name="DiaTestButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 794.0
+offset_right = 270.0
+offset_bottom = 894.0
+text = "test dialogue"
