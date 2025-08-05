@@ -15,6 +15,11 @@ var juice_cap := JUICE_DEFAULT_VALUE;
 var dokicoins : float = 0.0;
 
 
+# upgrades
+var upgrades := Upgrade.new();
+var selected_skinsuit : int = Upgrade.SKINSUIT_TOMATO;
+
+
 # stage management
 var current_stage := StageData.get_stage_data_by_name("tomato fields");
 
