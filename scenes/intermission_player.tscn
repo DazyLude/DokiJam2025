@@ -21,6 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme = ExtResource("1_nfl2d")
 script = ExtResource("1_dnknu")
 
@@ -42,6 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("4_ck27o")
 
 [node name="CharacterLeft" type="Sprite2D" parent="DialogueBase"]
@@ -107,4 +109,29 @@ text_overrun_behavior = 3
 
 [node name="ComicBase" type="Control" parent="."]
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("11_5pqa6")
+
+[node name="TextureRect" type="TextureRect" parent="ComicBase"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect2" type="TextureRect" parent="ComicBase"]
+layout_mode = 0
+offset_left = 800.0
+offset_right = 840.0
+offset_bottom = 40.0
+
+[node name="TextureRect3" type="TextureRect" parent="ComicBase"]
+layout_mode = 0
+offset_top = 450.0
+offset_right = 40.0
+offset_bottom = 490.0
+
+[node name="TextureRect4" type="TextureRect" parent="ComicBase"]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 450.0
+offset_right = 840.0
+offset_bottom = 490.0

@@ -16,6 +16,12 @@ var dialogue_array := [];
 var current_line := -1;
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"intermission_next"):
+		next();
+
+
+
 func play_dialogue(data: Dictionary) -> void:
 	setup_characters(data["characters"]);
 	dialogue_array = data["dialogue"];

@@ -5,8 +5,9 @@ extends Control
 
 
 func _ready() -> void:
-	start_btn.pressed.connect(start_game)
-	$DiaTestButton.pressed.connect(test_dialogue)
+	start_btn.pressed.connect(start_game);
+	$DiaTestButton.pressed.connect(test_dialogue);
+	$ComicTestButton.pressed.connect(test_intro);
 
 
 func _process(delta: float) -> void:
@@ -20,6 +21,23 @@ func _process(delta: float) -> void:
 
 func start_game() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn");
+
+
+func test_intro() -> void:
+	get_viewport().gui_release_focus();
+	
+	# setup
+	var intermission_player = load("res://scenes/intermission_player.tscn").instantiate();
+	intermission_player.set_intermission("intro");
+	
+	# action
+	add_child(intermission_player);
+	intermission_player.play();
+	await intermission_player.finished;
+	
+	# cleanup
+	remove_child(intermission_player);
+	intermission_player.queue_free();
 
 
 func test_dialogue() -> void:

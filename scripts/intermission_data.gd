@@ -52,7 +52,6 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 			"res://assets/intermissions/intro/loss_f4.tres"
 		],
 		"background": "res://assets/stages/farm/tomato_farm.png",
-		"next stage": "tomato fields",
 	},
 	"tomato field massacre": {
 		"type": TYPE_DIALOGUE,
@@ -62,6 +61,5 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 			[CHARACTER_TOMATO, EMOTE_NORMAL, "hey"],
 			[CHARACTER_CROWKI, EMOTE_NORMAL, "caw!"],
 		],
-		"next scene": "res://scenes/menu.tscn",
 	}
 }
