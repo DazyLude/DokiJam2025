@@ -480,7 +480,6 @@ metadata/_custom_type_script = "uid://bxh60lo5clvos"
 [node name="StaticBody2D" type="StaticBody2D" parent="Terrain"]
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Terrain/StaticBody2D"]
-build_mode = 1
 polygon = PackedVector2Array(185.028, 156.389, 289.51, 167.627, 454.433, 71.5553, 702.413, 87.6873, 928.145, 47.1126, 1164.41, 90.6898, 1478.75, 199.179, 1720.62, 175.255, 1929.24, 65.9737, 3843.92, -54.9297, 5579.48, 129.675, 5859.89, 563.156, 2592.18, 529.499, 370.758, 539.838, -1458.74, 584.22, -1243.96, -267.038, -1035.96, -616.657, -623.843, -610.853, -598.567, -75.0946, -256.372, 40.6078, -167.965, 143.042, -83.2765, 205.971, 9.96653, 191.801, 35.9868, 130.949, 92.1774, 116.032)
 
 [node name="Collectibles" type="Node" parent="."]

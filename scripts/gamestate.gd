@@ -17,7 +17,7 @@ var dokicoins : float = 0.0;
 
 # upgrades
 var upgrades := Upgrade.new();
-var selected_skinsuit : int = Upgrade.SKINSUIT_TOMATO;
+var selected_skinsuit : int = IntermissionData.CHARACTER_TOMATO;
 
 
 # stage management

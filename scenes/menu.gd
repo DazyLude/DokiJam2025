@@ -8,6 +8,24 @@ func _ready() -> void:
 	start_btn.pressed.connect(start_game);
 	$DiaTestButton.pressed.connect(test_dialogue);
 	$ComicTestButton.pressed.connect(test_intro);
+	
+	$TomatoSelect.pressed.connect(
+		func():
+			GameState.selected_skinsuit = IntermissionData.CHARACTER_TOMATO;
+			update_skinsuit();
+	);
+	$CrowkiSelect.pressed.connect(
+		func():
+			GameState.selected_skinsuit = IntermissionData.CHARACTER_CROWKI;
+			update_skinsuit();
+	);
+	
+	update_skinsuit();
+
+
+func update_skinsuit() -> void:
+	$TextureRect.prepare_sprite(GameState.selected_skinsuit);
+	$TextureRect.display_emotion(0);
 
 
 func _process(delta: float) -> void:
