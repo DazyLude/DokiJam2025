@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj3qmqrdmpetp"]
+[gd_scene load_steps=5 format=3 uid="uid://cj3qmqrdmpetp"]
 
 [ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_con2f"]
 [ext_resource type="Script" uid="uid://l12ejtkng3vn" path="res://scenes/menu.gd" id="1_vjb58"]
 [ext_resource type="Script" uid="uid://b40woge2o40ty" path="res://scripts/emotional_sprite.gd" id="3_con2f"]
+[ext_resource type="PackedScene" uid="uid://cywgm8te3676u" path="res://scenes/UI/mute_button.tscn" id="3_mhnvy"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -14,6 +15,13 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_con2f")
 script = ExtResource("1_vjb58")
+
+[node name="MuteButton" parent="." instance=ExtResource("3_mhnvy")]
+layout_mode = 0
+offset_left = 1489.0
+offset_top = 38.0
+offset_right = 1566.0
+offset_bottom = 115.0
 
 [node name="TextureRect" type="Sprite2D" parent="."]
 position = Vector2(816, 456)
