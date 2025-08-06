@@ -88,7 +88,17 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 # key is the upgrade id (from enum above)
 # the value is a level the upgrade is at
 var passed_stages : Array[String] = [];
-var current_upgrades : Dictionary[int, int] = {};
+var current_upgrades : Dictionary[int, int] = {}
+
+## initializes the values of the current upgrades
+func _init() -> void:
+	current_upgrades = {
+		COFFEE: 0,
+		ARMOR: 0,
+		KETCHUP_TANK: 0,
+		VOCAL: 0,
+		BOUNCE: 0,
+	};
 
 
 ## checks whether upgrade has been acquired
@@ -115,17 +125,27 @@ func get_unlocked() -> Array[int]:
 
 
 ## returns the cost of the current level of an upgrade
-#func get_upgrade_price(upgrade_id: int, upgrade_level: int=get_upgrade_level(upgrade_id)) -> float:
-func get_upgrade_price(upgrade_id: int, upgrade_level: int=0) -> float:
-	#var upgrade_level: int = upgrade_metadata.get("")
+func get_upgrade_price(upgrade_id: int, upgrade_level: int=get_upgrade_level(upgrade_id)) -> float:
 	var upgrade_data: Dictionary = upgrade_metadata.get(upgrade_id, 0)
 	var cost: Array = upgrade_data.get("cost", [-1])
 	return cost[upgrade_level]
-	
+
 
 ## increases the level of the provided upgrade by one
 func increase_level(upgrade_id: int) -> void:
 	current_upgrades[upgrade_id] = current_upgrades.get(upgrade_id, 0) + 1;
+
+
+## returns if an upgrade can be purchased
+func check_upgrade_affordable(upgrade_id: int) -> bool:
+	return get_upgrade_price(upgrade_id) <= GameState.dokicoins
+
+
+func purchase_upgrade(upgrade_id: int) -> void:
+	#LMG Note: Re-add cost once upgrade_data is fixed
+	var cost = get_upgrade_price(upgrade_id)
+	increase_level(upgrade_id)
+	GameState.dokicoins -= cost
 
 
 ## unlocks upgrades that should be unlocked when reaching the argument stage.

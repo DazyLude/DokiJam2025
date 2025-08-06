@@ -14,6 +14,7 @@ const COLLECTIBLE_HOVER_OFFSET := Vector2(0.0, -100.0);
 @onready var collectibles := $Collectibles;
 
 
+#var upgrade_scene = preload("res://scenes/upgrade_screen.tscn");
 var gameover_scene = preload("res://scenes/gameover.tscn");
 var is_gameover : bool = false;
 

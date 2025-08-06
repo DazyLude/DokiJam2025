@@ -16,4 +16,7 @@ func on_restart() -> void:
 
 
 func on_enter_shop() -> void:
-	$Upgrades.text = "404 shop not found"
+	get_tree().paused = false;
+	
+	#$Upgrades.text = "404 shop not found"
+	get_tree().change_scene_to_file("res://scenes/upgrade_screen.tscn");
