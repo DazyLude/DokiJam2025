@@ -98,7 +98,7 @@ theme_override_constants/separation = 10
 [node name="UpgradeIcon" type="TextureRect" parent="SpeedContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("2_a57ks")
 expand_mode = 1
@@ -106,6 +106,7 @@ expand_mode = 1
 [node name="UpgradeLabel" type="Label" parent="SpeedContainer"]
 custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "Speed:"
 vertical_alignment = 1
@@ -113,24 +114,26 @@ vertical_alignment = 1
 [node name="UpgradeButton" type="TextureButton" parent="SpeedContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 0
 size_flags_vertical = 4
 texture_normal = ExtResource("3_rnmk4")
 texture_pressed = ExtResource("4_waouo")
 texture_hover = ExtResource("5_6005o")
+texture_disabled = ExtResource("25_qd7s1")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="CoinIcon" type="TextureRect" parent="SpeedContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("6_f545e")
 expand_mode = 1
 
 [node name="UpgradeCost" type="Label" parent="SpeedContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "x200"
 vertical_alignment = 1
@@ -146,7 +149,7 @@ theme_override_constants/separation = 10
 [node name="UpgradeIcon" type="TextureRect" parent="ArmorContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("7_knbow")
 expand_mode = 1
@@ -154,6 +157,7 @@ expand_mode = 1
 [node name="UpgradeLabel" type="Label" parent="ArmorContainer"]
 custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "Armor:"
 vertical_alignment = 1
@@ -161,24 +165,26 @@ vertical_alignment = 1
 [node name="UpgradeButton" type="TextureButton" parent="ArmorContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture_normal = ExtResource("3_rnmk4")
 texture_pressed = ExtResource("4_waouo")
 texture_hover = ExtResource("5_6005o")
+texture_disabled = ExtResource("25_qd7s1")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="CoinIcon" type="TextureRect" parent="ArmorContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("6_f545e")
 expand_mode = 1
 
 [node name="UpgradeCost" type="Label" parent="ArmorContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "x200"
 vertical_alignment = 1
@@ -194,7 +200,7 @@ theme_override_constants/separation = 10
 [node name="UpgradeIcon" type="TextureRect" parent="StaminaContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("8_n4dbv")
 expand_mode = 1
@@ -202,6 +208,7 @@ expand_mode = 1
 [node name="UpgradeLabel" type="Label" parent="StaminaContainer"]
 custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "Stamina:"
 vertical_alignment = 1
@@ -209,24 +216,26 @@ vertical_alignment = 1
 [node name="UpgradeButton" type="TextureButton" parent="StaminaContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture_normal = ExtResource("3_rnmk4")
 texture_pressed = ExtResource("4_waouo")
 texture_hover = ExtResource("5_6005o")
+texture_disabled = ExtResource("25_qd7s1")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="CoinIcon" type="TextureRect" parent="StaminaContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("6_f545e")
 expand_mode = 1
 
 [node name="UpgradeCost" type="Label" parent="StaminaContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "x200"
 vertical_alignment = 1
@@ -242,7 +251,7 @@ theme_override_constants/separation = 10
 [node name="UpgradeIcon" type="TextureRect" parent="LoudnessContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("9_nr0xp")
 expand_mode = 1
@@ -250,6 +259,7 @@ expand_mode = 1
 [node name="UpgradeLabel" type="Label" parent="LoudnessContainer"]
 custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "Noise:"
 vertical_alignment = 1
@@ -257,24 +267,26 @@ vertical_alignment = 1
 [node name="UpgradeButton" type="TextureButton" parent="LoudnessContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture_normal = ExtResource("3_rnmk4")
 texture_pressed = ExtResource("4_waouo")
 texture_hover = ExtResource("5_6005o")
+texture_disabled = ExtResource("25_qd7s1")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="CoinIcon" type="TextureRect" parent="LoudnessContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("6_f545e")
 expand_mode = 1
 
 [node name="UpgradeCost" type="Label" parent="LoudnessContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "x200"
 vertical_alignment = 1
@@ -286,9 +298,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -215.0
+offset_left = -470.0
 offset_top = -130.0
-offset_right = 215.0
+offset_right = -40.0
 offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -297,7 +309,7 @@ theme_override_constants/separation = 10
 [node name="UpgradeIcon" type="TextureRect" parent="BounceContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("2_8myhc")
 expand_mode = 1
@@ -305,6 +317,7 @@ expand_mode = 1
 [node name="UpgradeLabel" type="Label" parent="BounceContainer"]
 custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "Bounce:"
 vertical_alignment = 1
@@ -312,26 +325,50 @@ vertical_alignment = 1
 [node name="UpgradeButton" type="TextureButton" parent="BounceContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture_normal = ExtResource("3_rnmk4")
 texture_pressed = ExtResource("4_waouo")
 texture_hover = ExtResource("5_6005o")
+texture_disabled = ExtResource("25_qd7s1")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="CoinIcon" type="TextureRect" parent="BounceContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = ExtResource("6_f545e")
 expand_mode = 1
 
 [node name="UpgradeCost" type="Label" parent="BounceContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "x200"
+vertical_alignment = 1
+
+[node name="CoinContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1040.0
+offset_top = 85.0
+offset_right = 1190.0
+offset_bottom = 145.0
+
+[node name="CoinIcon" type="TextureRect" parent="CoinContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = ExtResource("6_f545e")
+expand_mode = 1
+
+[node name="CoinCount" type="Label" parent="CoinContainer"]
+custom_minimum_size = Vector2(80, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "x000"
 vertical_alignment = 1
 
 [node name="SkinsuitLabel" type="Label" parent="."]
@@ -367,7 +404,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
 
-[node name="SkinsuitButton1" type="TextureButton" parent="SkinsuitContainer"]
+[node name="SkinsuitTomato" type="TextureButton" parent="SkinsuitContainer"]
 custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -375,10 +412,11 @@ size_flags_vertical = 4
 texture_normal = ExtResource("11_pps40")
 texture_pressed = ExtResource("12_l0m8u")
 texture_hover = ExtResource("13_snxbx")
+texture_disabled = ExtResource("12_l0m8u")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SkinsuitButton2" type="TextureButton" parent="SkinsuitContainer"]
+[node name="SkinsuitCrowki" type="TextureButton" parent="SkinsuitContainer"]
 custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -386,10 +424,11 @@ size_flags_vertical = 4
 texture_normal = ExtResource("14_3jasj")
 texture_pressed = ExtResource("15_c7ko0")
 texture_hover = ExtResource("16_u8xbe")
+texture_disabled = ExtResource("15_c7ko0")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SkinsuitButton3" type="TextureButton" parent="SkinsuitContainer"]
+[node name="SkinsuitRetro" type="TextureButton" parent="SkinsuitContainer"]
 custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -397,10 +436,11 @@ size_flags_vertical = 4
 texture_normal = ExtResource("17_kxbdn")
 texture_pressed = ExtResource("18_rinqk")
 texture_hover = ExtResource("19_vujdr")
+texture_disabled = ExtResource("18_rinqk")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SkinsuitButton4" type="TextureButton" parent="SkinsuitContainer"]
+[node name="SkinsuitBounty" type="TextureButton" parent="SkinsuitContainer"]
 custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -408,6 +448,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("20_nljfx")
 texture_pressed = ExtResource("21_2dljn")
 texture_hover = ExtResource("22_s005r")
+texture_disabled = ExtResource("21_2dljn")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -452,4 +493,8 @@ text = "CONTINUE"
 [connection signal="pressed" from="StaminaContainer/UpgradeButton" to="." method="_on_stamina_pressed"]
 [connection signal="pressed" from="LoudnessContainer/UpgradeButton" to="." method="_on_loudness_pressed"]
 [connection signal="pressed" from="BounceContainer/UpgradeButton" to="." method="_on_bounce_pressed"]
+[connection signal="pressed" from="SkinsuitContainer/SkinsuitTomato" to="." method="_on_skin_tomato_pressed"]
+[connection signal="pressed" from="SkinsuitContainer/SkinsuitCrowki" to="." method="_on_skin_crowki_pressed"]
+[connection signal="pressed" from="SkinsuitContainer/SkinsuitRetro" to="." method="_on_skin_retro_pressed"]
+[connection signal="pressed" from="SkinsuitContainer/SkinsuitBounty" to="." method="_on_skin_bounty_pressed"]
 [connection signal="pressed" from="ContinueButton" to="." method="_on_continue_pressed"]

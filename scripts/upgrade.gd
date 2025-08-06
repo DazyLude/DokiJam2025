@@ -18,6 +18,8 @@ enum {
 	
 	SKINSUIT_TOMATO,
 	SKINSUIT_CROWKI,
+	SKINSUIT_RETRO,
+	SKINSUIT_BOUNTY,
 }
 
 # once again, pretty JSONable way to hold data
@@ -80,6 +82,18 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	SKINSUIT_TOMATO: {
 		"type": TYPE_ONE_OFF,
 		"autounlock": "tomato fields", # String (stage name)
+	},
+	SKINSUIT_CROWKI: {
+		"type": TYPE_ONE_OFF,
+		"autounlock": "tomato fields", # String (stage name)
+	},
+	SKINSUIT_RETRO: {
+		"type": TYPE_ONE_OFF,
+		"autounlock": "tomato fields", # String (stage name)
+	},
+	SKINSUIT_BOUNTY: {
+		"type": TYPE_ONE_OFF,
+		"autounlock": "tomato fields", # String (stage name)
 	}
 }
 
@@ -106,6 +120,12 @@ func check_upgrade(upgrade_id: int) -> bool:
 	return current_upgrades.has(upgrade_id) and current_upgrades[upgrade_id] != 0;
 
 
+## returns a specific value from the upgrade metadata dictionary
+func get_upgrade_data(upgrade_id, data_key, default=-1):
+	var upgrade_data: Dictionary = upgrade_metadata.get(upgrade_id, 0)
+	return upgrade_data.get(data_key, default)
+
+
 ## returns the upgrade's current level
 func get_upgrade_level(upgrade_id: int) -> int:
 	return current_upgrades.get(upgrade_id, -1);
@@ -126,14 +146,22 @@ func get_unlocked() -> Array[int]:
 
 ## returns the cost of the current level of an upgrade
 func get_upgrade_price(upgrade_id: int, upgrade_level: int=get_upgrade_level(upgrade_id)) -> float:
-	var upgrade_data: Dictionary = upgrade_metadata.get(upgrade_id, 0)
-	var cost: Array = upgrade_data.get("cost", [-1])
-	return cost[upgrade_level]
+	var cost: Array = get_upgrade_data(upgrade_id, "cost", [-1])
+	if check_upgrade_maxed(upgrade_id):
+		return -1
+	else:
+		return cost[upgrade_level]
 
 
 ## increases the level of the provided upgrade by one
 func increase_level(upgrade_id: int) -> void:
 	current_upgrades[upgrade_id] = current_upgrades.get(upgrade_id, 0) + 1;
+
+
+## returns if an upgrade is max level
+func check_upgrade_maxed(upgrade_id: int) -> bool:
+	var max_level = get_upgrade_data(upgrade_id, "max level")
+	return get_upgrade_level(upgrade_id) >= max_level
 
 
 ## returns if an upgrade can be purchased

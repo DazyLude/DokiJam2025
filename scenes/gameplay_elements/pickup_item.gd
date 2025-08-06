@@ -22,3 +22,4 @@ func render_new_data(new_data: PickupItemData) -> void:
 func on_contact(_body: Node2D) -> void:
 	hide();
 	data.effect.call();
+	queue_free()

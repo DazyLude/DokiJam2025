@@ -22,6 +22,15 @@ func _ready() -> void:
 	update_upgrade_cost("stamina", upgrades.KETCHUP_TANK)
 	update_upgrade_cost("loudness", upgrades.VOCAL)
 	update_upgrade_cost("bounce", upgrades.BOUNCE)
+	update_doki_coins()
+	
+	# Check Skinsuit status
+	if not upgrades.check_upgrade(upgrades.SKINSUIT_CROWKI):
+		$SkinsuitContainer/SkinsuitCrowki.disabled = true
+	if not upgrades.check_upgrade(upgrades.SKINSUIT_RETRO):
+		$SkinsuitContainer/SkinsuitRetro.disabled = true
+	if not upgrades.check_upgrade(upgrades.SKINSUIT_BOUNTY):
+		$SkinsuitContainer/SkinsuitBounty.disabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame
 func _process(delta) -> void:
@@ -30,15 +39,24 @@ func _process(delta) -> void:
 ## update the cost label of a specific upgrade.
 func update_upgrade_cost(container_name: String, upgrade_id: int) -> void:
 	var container = get_node(containers[container_name] + "/UpgradeCost")
-	container.text = "x%d" % upgrades.get_upgrade_price(upgrade_id)
+	if upgrades.check_upgrade_maxed(upgrade_id):
+		get_node(containers[container_name] + "/UpgradeButton").disabled = true
+		container.text = "MAX"
+	else:
+		container.text = "x%d" % upgrades.get_upgrade_price(upgrade_id)
+
+func update_doki_coins() -> void:
+	#get_node("CoinContainer/CoinCount").text = "x%03d" % GameState.dokicoins
+	get_node("CoinContainer/CoinCount").text = "x%d" % GameState.dokicoins
 
 ## tries to buy an upgrade
 func button_buy_upgrade(container_name: String, upgrade_id: int) -> void:
-	#if upgrades.check_upgrade_affordable(upgrades.COFFEE):
 	#LMG Note: Placeholder test v
-	if upgrades.check_upgrade_affordable(upgrade_id) or true:
+	#if upgrades.check_upgrade_affordable(upgrades.COFFEE) or true:
+	if upgrades.check_upgrade_affordable(upgrade_id):
 		upgrades.purchase_upgrade(upgrade_id)
-		update_upgrade_cost(containers[container_name], upgrade_id)
+		update_upgrade_cost(container_name, upgrade_id)
+		update_doki_coins()
 
 
 ## resume the game
@@ -46,8 +64,6 @@ func _on_continue_pressed() -> void:
 	print("Continue Pressed") #Debug, remove later
 	GameState.restart();
 	get_tree().change_scene_to_file("res://scenes/game.tscn");
-	#get_tree().change_scene_to_packed(GameState.current_stage);
-	#pass # Replace with function body.
 
 
 ## upgrade character speed
@@ -69,3 +85,23 @@ func _on_loudness_pressed() -> void:
 ## upgrade character bounce
 func _on_bounce_pressed() -> void:
 	button_buy_upgrade("bounce", upgrades.BOUNCE)
+
+## select tomato skinsuit
+func _on_skin_tomato_pressed() -> void:
+	print("Select Tomato Skinsuit")
+	#GameState.selected_skinsuit = upgrades.SKINSUIT_TOMATO
+
+## select crowki skinsuit
+func _on_skin_crowki_pressed() -> void:
+	print("Select Crowki Skinsuit")
+	#GameState.selected_skinsuit = upgrades.SKINSUIT_CROWKI
+
+## select retro skinsuit
+func _on_skin_retro_pressed() -> void:
+	print("Select Retro Skinsuit")
+	#GameState.selected_skinsuit = upgrades.SKINSUIT_RETRO
+
+## select bounty skinsuit
+func _on_skin_bounty_pressed() -> void:
+	print("Select Bounty Skinsuit")
+	#GameState.selected_skinsuit = upgrades.SKINSUIT_BOUNTY
