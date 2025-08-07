@@ -29,7 +29,7 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 		# int
 		"max level": 4,
 		# array with float values
-		"cost": [10.0, 20.0, 30.0, 40.0],
+		"cost": [1.0, 4.0, 15.0, 40.0],
 		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
 		# String (name of a stage, "" or skip for always)
@@ -40,7 +40,7 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 		# int
 		"max level": 4,
 		# array with float values
-		"cost": [10.0, 20.0, 30.0, 40.0],
+		"cost": [1.0, 4.0, 15.0, 40.0],
 		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
 		# String (name of a stage, "" or skip for always)
@@ -51,7 +51,7 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 		# int
 		"max level": 4,
 		# array with float values
-		"cost": [10.0, 20.0, 30.0, 40.0],
+		"cost": [1.0, 4.0, 15.0, 40.0],
 		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
 		# String (name of a stage, "" or skip for always)
@@ -62,7 +62,7 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 		# int
 		"max level": 4,
 		# array with float values
-		"cost": [10.0, 20.0, 30.0, 40.0],
+		"cost": [1.0, 4.0, 15.0, 40.0],
 		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
 		# String (name of a stage, "" or skip for always)
@@ -73,7 +73,7 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 		# int
 		"max level": 4,
 		# array with float values
-		"cost": [10.0, 20.0, 30.0, 40.0],
+		"cost": [1.0, 4.0, 15.0, 40.0],
 		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
 		# String (name of a stage, "" or skip for always)
@@ -85,8 +85,8 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 		"base": "res://assets/skinsuits/tomato/tomato_base.png",
 		"emotions": [
 			"res://assets/skinsuits/tomato/tomato_neutral.png",
-			"res://assets/skinsuits/tomato/tomato_tired.png",
 			"res://assets/skinsuits/tomato/tomato_hurt.png",
+			"res://assets/skinsuits/tomato/tomato_tired.png",
 		],
 	},
 	SKINSUIT_CROWKI: {
@@ -95,8 +95,8 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 		"base": "res://assets/skinsuits/crowki/crowki_base.png",
 		"emotions": [
 			"res://assets/skinsuits/crowki/crowki_neutral.png",
-			"res://assets/skinsuits/crowki/crowki_tired.png",
 			"res://assets/skinsuits/crowki/crowki_hurt.png",
+			"res://assets/skinsuits/crowki/crowki_tired.png",
 		],
 	},
 	SKINSUIT_RETRO: {
@@ -152,7 +152,7 @@ func get_upgrade_data(upgrade_id, data_key, default=-1):
 
 ## returns the upgrade's current level
 func get_upgrade_level(upgrade_id: int) -> int:
-	return current_upgrades.get(upgrade_id, -1);
+	return current_upgrades.get(upgrade_id, 0);
 
 
 ## returns ids of all upgrades that should be available in the shop

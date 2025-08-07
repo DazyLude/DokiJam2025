@@ -23,6 +23,7 @@ func _ready() -> void:
 	# since hud displays player properties, such as speed and position, we need to pass a reference
 	hud.player = player;
 	load_stage();
+	player.apply_player_stats(PlayerStats.get_latest());
 
 
 func _process(delta: float) -> void:
@@ -68,9 +69,9 @@ func place_collectible_at(x: float, collectible_data: PickupItemData) -> PickupI
 
 
 func spawn_obstacles() -> void:
-	for i in range(10, 1000):
+	for i in range(3, 10):
 		var obstacle = GameState.current_stage.obstacles.get_random_obstacle();
-		var x = GameState.current_stage.stage_length * i / 1001;
+		var x = GameState.current_stage.stage_length * i / 13;
 		place_node_at(obstacle, x);
 		$DecorationsBack.add_child(obstacle);
 

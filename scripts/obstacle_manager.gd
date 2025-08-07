@@ -21,7 +21,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"weight": 100.0,
 		"natural habitat": ["tomato fields"],
 		"positions": [
-			PositionPreset.fixed_offset(Vector2(-10.0, 10.0), -400.0),
+			PositionPreset.fixed_offset(Vector2(-10.0, 10.0), -250.0),
 		],
 		"flippable": true,
 	},
@@ -31,7 +31,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"weight": 100.0,
 		"natural habitat": ["tomato fields"],
 		"positions": [
-			PositionPreset.fixed_angle(0.0, Vector2(-250.0, -270.0)),
+			PositionPreset.fixed(0.0, -270.0),
 		],
 	}
 }

@@ -20,11 +20,11 @@ var velocity_avg_idx : int = 0;
 
 #region stats
 # torque applied, usually multiplied by inertia
-var player_torque := 20.0; # in rad/s^2
+var player_torque := 30.0; # in rad/s^2
 # fly strength applied, usually multiplied by mass
 var player_fly_strength := 1800.0; # in px/s^2, g (980px/s2) + bonus
 # when jumping, the impulse is defined as an impulse acquired by applying fly strength for this amount of seconds
-var jump_fly_scale := 0.3; # in s
+var jump_fly_scale := 0.35; # in s
 # stamina cost of jumps
 var jump_cost := 2.0;
 # rolling friction is reversely proportional to hardness
@@ -49,6 +49,24 @@ func _ready() -> void:
 	velocity_avg_array.resize(VELOCITY_AVG_LIMIT);
 	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
 	
+	if GameState.player != null and GameState.player != self:
+		print("unlinking old Player instance from game state");
+	GameState.player = self;
+
+
+func apply_player_stats(stats: PlayerStats) -> void:
+	player_torque = stats.player_torque;
+	player_fly_strength = stats.player_fly_strength;
+	jump_fly_scale = stats.jump_fly_scale;
+	jump_cost = stats.jump_cost;
+	hardness = stats.hardness;
+	aeroshape = stats.aeroshape;
+	physics_material_override.bounce = stats.bounce;
+	physics_material_override.friction = stats.friction;
+	mass = stats.mass;
+	inertia = 0.5 * stats.mass * 1000.0;
+	linear_damp = stats.linear_damp;
+	angular_damp = stats.angular_damp;
 
 
 func _physics_process(delta: float) -> void:
@@ -87,9 +105,9 @@ func _process(delta: float) -> void:
 	
 	if hng_for > 0:
 		if GameState.juice > jump_cost:
-			$Sprite2D.display_emotion(2);
-		else:
 			$Sprite2D.display_emotion(1);
+		else:
+			$Sprite2D.display_emotion(2);
 		hng_for -= delta;
 	elif GameState.juice <= 0:
 		$Sprite2D.display_emotion(2);
@@ -130,7 +148,6 @@ func try_jump() -> void:
 	var upward_impulse := upward_unit_vector * player_fly_strength * mass * jump_fly_scale;
 	
 	hng_for = 0.2;
-	$Sprite2D.display_emotion(1);
 	
 	if GameState.juice > jump_cost:
 		apply_central_impulse(upward_impulse);

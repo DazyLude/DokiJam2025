@@ -24,11 +24,13 @@ var upgrades := Upgrade.new();
 var selected_skinsuit : int = Upgrade.SKINSUIT_TOMATO;
 
 
+# player
+var player : Player;
+
+
 # stage management
 var current_stage := StageData.get_stage_data_by_name("tomato fields");
 
 
-
-
 func restart() -> void:
-	juice = juice_cap;
+	juice = juice_cap + 10.0 * upgrades.get_upgrade_level(Upgrade.KETCHUP_TANK);

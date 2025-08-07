@@ -18,7 +18,6 @@ radius = 450.0
 [node name="Player" type="RigidBody2D"]
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_dovo2")
-inertia = 500.0
 continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 1
