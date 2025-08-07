@@ -11,16 +11,16 @@ var sound_resources : Dictionary[ID, String] = {
 }
 
 
-const TRANSITION_TIME : float = 2.0;
-
-
 var current_track : ID = -1;
-var remember_position : bool = true;
-var play_from : float = 0.0;
+
+
+func _init() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS;
+	bus = &"music";
 
 
 func get_stream_by_id(id: ID) -> AudioStream:
-	return null;
+	return sound_resources.get(id, null);
 
 
 func play_looped(new_track: ID) -> void:
