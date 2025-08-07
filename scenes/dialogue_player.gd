@@ -7,13 +7,16 @@ signal dialogue_finished;
 @onready var character_sprites : Array[SpriteEmotional] = [$CharacterLeft, $CharacterRight];
 @onready var dialogue_text = $TextBox/Text;
 @onready var speaker = $TextBox/Speaker;
+@onready var audio_player = $AudioStreamPlayer;
 
 var text_animation : Tween;
 var character_tweens : Array[Tween] = [];
 var normal_positions : Array[Vector2] = [];
 
 var node_per_character := {};
+var idx_per_character := {};
 var emote_idxs_per_character := {};
+var voices_per_character := {};
 var name_per_character := {};
 
 var dialogue_array := [];
@@ -31,7 +34,6 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"intermission_next"):
 		next();
-
 
 
 func play_dialogue(data: Dictionary) -> void:
@@ -52,6 +54,8 @@ func setup_characters(characters: Array) -> void:
 		name_per_character[character_id] = character_data["name"];
 		character_sprites[i].texture = load(character_data["base"]);
 		character_sprites[i].emotions.clear();
+		idx_per_character[character_id] = i;
+		voices_per_character[character_id] = character_data.get("speech", null);
 		
 		for emotion_id in character_data["emotions"]:
 			var emotion_path = character_data["emotions"][emotion_id];
@@ -77,7 +81,19 @@ func next() -> void:
 	speaker.text = name_per_character[cur_char];
 	dialogue_text.text = dialogue_line[2];
 	
-	nudge_character(cur_char);
+	var stream : AudioStream;
+	match typeof(voices_per_character[cur_char]):
+		TYPE_ARRAY:
+			stream = Sounds.get_stream_by_id(voices_per_character[cur_char].pick_random())
+		TYPE_INT:
+			stream = Sounds.get_stream_by_id(voices_per_character[cur_char])
+		_:
+			stream = null;
+	
+	audio_player.stream = stream;
+	audio_player.play();
+	
+	nudge_character(idx_per_character[cur_char]);
 	play_text_animation();
 
 

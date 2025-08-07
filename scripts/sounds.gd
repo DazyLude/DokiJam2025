@@ -3,11 +3,28 @@ extends AudioStreamPlayer
 
 enum ID {
 	NONE = -1,
+	
+	MUSIC_ESCAPE_FROM_TARKOV,
+	
+	
+	SFX_FUCK,
+	SFX_AAGH,
+	SFX_AGGH,
+	SFX_AGHH,
+	SFX_ARGH,
+	SFX_UUGH,
 }
 
 
 var sound_resources : Dictionary[ID, String] = {
+	ID.MUSIC_ESCAPE_FROM_TARKOV: "res://assets/music/Escaping the Tomato Farm pt1.ogg",
 	
+	ID.SFX_FUCK: "res://assets/sfx/fuck.wav",
+	ID.SFX_AAGH: "res://assets/sfx/Scream 1.wav",
+	ID.SFX_AGGH: "res://assets/sfx/Scream 2.wav",
+	ID.SFX_AGHH: "res://assets/sfx/Scream 3.wav",
+	ID.SFX_ARGH: "res://assets/sfx/Scream 4.wav",
+	ID.SFX_UUGH: "res://assets/sfx/grunt 1.wav",
 }
 
 
@@ -20,7 +37,7 @@ func _init() -> void:
 
 
 func get_stream_by_id(id: ID) -> AudioStream:
-	return sound_resources.get(id, null);
+	return load(sound_resources.get(id, null));
 
 
 func play_looped(new_track: ID) -> void:

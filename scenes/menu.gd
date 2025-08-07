@@ -5,6 +5,8 @@ extends Control
 
 
 func _ready() -> void:
+	Sounds.play_looped(Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
+	
 	start_btn.pressed.connect(start_game);
 	$DiaTestButton.pressed.connect(test_dialogue);
 	$ComicTestButton.pressed.connect(test_intro);

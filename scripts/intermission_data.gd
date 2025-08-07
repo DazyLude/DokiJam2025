@@ -27,7 +27,7 @@ static var character_data : Dictionary[int, Dictionary] = {
 			EMOTE_TIRED: "res://assets/skinsuits/tomato/tomato_tired.png",
 			EMOTE_HURT: "res://assets/skinsuits/tomato/tomato_hurt.png",
 		},
-		"speech": null,
+		"speech": Sounds.ID.SFX_FUCK,
 	},
 	CHARACTER_CROWKI: {
 		"base": "res://assets/skinsuits/crowki/crowki_base.png",
@@ -37,7 +37,7 @@ static var character_data : Dictionary[int, Dictionary] = {
 			EMOTE_TIRED: "res://assets/skinsuits/crowki/crowki_tired.png",
 			EMOTE_HURT: "res://assets/skinsuits/crowki/crowki_hurt.png",
 		},
-		"speech": null,
+		"speech": [Sounds.ID.SFX_AAGH, Sounds.ID.SFX_AGGH, Sounds.ID.SFX_AGHH, Sounds.ID.SFX_ARGH, Sounds.ID.SFX_UUGH],
 	}
 }
 

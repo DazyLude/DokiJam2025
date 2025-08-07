@@ -46,6 +46,9 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("4_ck27o")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogueBase"]
+bus = &"sfx"
+
 [node name="CharacterLeft" type="Sprite2D" parent="DialogueBase"]
 position = Vector2(400, 450)
 scale = Vector2(0.4, 0.4)
@@ -111,6 +114,9 @@ text_overrun_behavior = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("11_5pqa6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ComicBase"]
+bus = &"sfx"
 
 [node name="TextureRect" type="TextureRect" parent="ComicBase"]
 layout_mode = 0

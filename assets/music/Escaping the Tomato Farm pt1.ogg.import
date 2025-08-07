@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ceiwm2yeryer7"
+path="res://.godot/imported/Escaping the Tomato Farm pt1.ogg-ebb5044f335817aa5dac1258e1e124fb.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Escaping the Tomato Farm pt1.ogg"
+dest_files=["res://.godot/imported/Escaping the Tomato Farm pt1.ogg-ebb5044f335817aa5dac1258e1e124fb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
