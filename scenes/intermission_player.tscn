@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3t0ga6at7px1"]
+[gd_scene load_steps=21 format=3 uid="uid://c3t0ga6at7px1"]
 
 [ext_resource type="Script" uid="uid://b165rsamniss7" path="res://scenes/intermission_player.gd" id="1_dnknu"]
 [ext_resource type="Theme" uid="uid://btke7arcvyxss" path="res://themes/dialogue.tres" id="1_nfl2d"]
@@ -11,6 +11,31 @@
 [ext_resource type="Texture2D" uid="uid://cnw4001rrwjxi" path="res://assets/skinsuits/crowki/crowki_neutral.png" id="8_hxfrj"]
 [ext_resource type="Texture2D" uid="uid://dfaseecmxw4mx" path="res://assets/buttons/button.png" id="9_2y2nw"]
 [ext_resource type="Script" uid="uid://wlpl40wf8kka" path="res://scenes/comic_player.gd" id="11_5pqa6"]
+[ext_resource type="Shader" uid="uid://m507xcsv25n" path="res://shaders/comic_panel.gdshader" id="12_2y2nw"]
+[ext_resource type="Texture2D" uid="uid://c5p67ghv8ex4n" path="res://assets/intermissions/intro/loss_f1.tres" id="12_hxfrj"]
+[ext_resource type="Texture2D" uid="uid://c85p7ise1hpgd" path="res://assets/intermissions/intro/loss_f2.tres" id="13_2y2nw"]
+[ext_resource type="Texture2D" uid="uid://bhm4vigbqqg7r" path="res://assets/intermissions/intro/loss_f3.tres" id="14_7od07"]
+[ext_resource type="Texture2D" uid="uid://usb2qnrc403c" path="res://assets/intermissions/intro/loss_f4.tres" id="15_wy0l3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7od07"]
+resource_local_to_scene = true
+shader = ExtResource("12_2y2nw")
+shader_parameter/color_filter = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2y2nw"]
+resource_local_to_scene = true
+shader = ExtResource("12_2y2nw")
+shader_parameter/color_filter = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wy0l3"]
+resource_local_to_scene = true
+shader = ExtResource("12_2y2nw")
+shader_parameter/color_filter = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_43w8c"]
+resource_local_to_scene = true
+shader = ExtResource("12_2y2nw")
+shader_parameter/color_filter = Vector4(1, 1, 1, 1)
 
 [node name="IntermissionPlayer" type="Control"]
 layout_mode = 3
@@ -118,26 +143,25 @@ script = ExtResource("11_5pqa6")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ComicBase"]
 bus = &"sfx"
 
-[node name="TextureRect" type="TextureRect" parent="ComicBase"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TextureRect" type="Sprite2D" parent="ComicBase"]
+material = SubResource("ShaderMaterial_7od07")
+texture = ExtResource("12_hxfrj")
+centered = false
 
-[node name="TextureRect2" type="TextureRect" parent="ComicBase"]
-layout_mode = 0
-offset_left = 800.0
-offset_right = 840.0
-offset_bottom = 40.0
+[node name="TextureRect2" type="Sprite2D" parent="ComicBase"]
+material = SubResource("ShaderMaterial_2y2nw")
+position = Vector2(800, 0)
+texture = ExtResource("13_2y2nw")
+centered = false
 
-[node name="TextureRect3" type="TextureRect" parent="ComicBase"]
-layout_mode = 0
-offset_top = 450.0
-offset_right = 40.0
-offset_bottom = 490.0
+[node name="TextureRect3" type="Sprite2D" parent="ComicBase"]
+material = SubResource("ShaderMaterial_wy0l3")
+position = Vector2(0, 450)
+texture = ExtResource("14_7od07")
+centered = false
 
-[node name="TextureRect4" type="TextureRect" parent="ComicBase"]
-layout_mode = 0
-offset_left = 800.0
-offset_top = 450.0
-offset_right = 840.0
-offset_bottom = 490.0
+[node name="TextureRect4" type="Sprite2D" parent="ComicBase"]
+material = SubResource("ShaderMaterial_43w8c")
+position = Vector2(800, 450)
+texture = ExtResource("15_wy0l3")
+centered = false
