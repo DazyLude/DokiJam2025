@@ -12,9 +12,8 @@ friction = 0.75
 rough = true
 bounce = 0.1
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lvxji"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_75vfm"]
 radius = 450.0
-height = 1000.0
 
 [node name="Player" type="RigidBody2D"]
 collision_layer = 3
@@ -28,6 +27,7 @@ angular_damp_mode = 1
 script = ExtResource("1_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -4)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_75vfm")
 script = ExtResource("3_0owmy")
@@ -37,6 +37,6 @@ metadata/_custom_type_script = "uid://b40woge2o40ty"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.1, 0.1)
-shape = SubResource("CapsuleShape2D_lvxji")
+shape = SubResource("CircleShape2D_75vfm")
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -80,7 +80,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
-	calc_camera_offset(linear_velocity);
+	if Input.is_action_pressed(&'nudge_camera_down'):
+		calc_camera_offset(linear_velocity + Vector2(0.0, 400.0));
+	else:
+		calc_camera_offset(linear_velocity);
 	
 	if hng_for > 0:
 		if GameState.juice > jump_cost:

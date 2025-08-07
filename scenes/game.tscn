@@ -394,7 +394,7 @@ tessellation_stages = 3
 tessellation_tolerance = 6.0
 curve_bake_interval = 20.0
 
-[sub_resource type="Resource" id="Resource_7025r"]
+[sub_resource type="Resource" id="Resource_0rmfi"]
 script = ExtResource("9_ca42v")
 textures = Array[Texture2D]([ExtResource("10_ir15t")])
 textures_corner_outer = Array[Texture2D]([])
@@ -409,37 +409,37 @@ use_taper_texture = false
 fit_mode = 0
 metadata/_custom_type_script = "uid://dscgsc3i8npqr"
 
-[sub_resource type="Resource" id="Resource_8ool0"]
+[sub_resource type="Resource" id="Resource_3x28f"]
 script = ExtResource("11_ssvqc")
 begin = 275.0
 distance = 350.0
 edgeRendering = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_pr1ej"]
+[sub_resource type="Resource" id="Resource_uxocx"]
 script = ExtResource("8_trtic")
-edge_material = SubResource("Resource_7025r")
-normal_range = SubResource("Resource_8ool0")
+edge_material = SubResource("Resource_0rmfi")
+normal_range = SubResource("Resource_3x28f")
 weld = true
 taper_sharp_corners = false
 render = true
 z_index = 0
 z_as_relative = true
-offset = 0.0
+offset = -0.2
 metadata/_custom_type_script = "uid://cg2cweddrk5r5"
 
 [sub_resource type="Resource" id="Resource_m4url"]
 script = ExtResource("9_ir15t")
-_edge_meta_materials = Array[ExtResource("8_trtic")]([SubResource("Resource_pr1ej")])
+_edge_meta_materials = Array[ExtResource("8_trtic")]([SubResource("Resource_uxocx")])
 fill_textures = Array[Texture2D]([ExtResource("12_ca42v")])
-fill_texture_z_index = -10
-fill_texture_show_behind_parent = false
+fill_texture_z_index = 0
+fill_texture_show_behind_parent = true
 fill_texture_scale = 0.6
 fill_texture_absolute_position = false
 fill_texture_absolute_rotation = false
 fill_texture_offset = Vector2(0, 0)
 fill_texture_angle_offset = 0.0
 fill_mesh_offset = 0.0
-render_offset = 0.0
+render_offset = -0.7
 
 [node name="Game" type="Node"]
 script = ExtResource("1_lbhrr")
@@ -464,6 +464,10 @@ centered = false
 
 [node name="DecorationsBack" type="Node" parent="."]
 
+[node name="Player" parent="." instance=ExtResource("2_lnu2h")]
+inertia = 1000.0
+angular_velocity = 0.174533
+
 [node name="Terrain" type="Node" parent="."]
 
 [node name="SS2D_Shape" type="Node2D" parent="Terrain"]
@@ -485,10 +489,6 @@ polygon = PackedVector2Array(185.028, 156.389, 289.51, 167.627, 454.433, 71.5553
 [node name="Collectibles" type="Node" parent="."]
 
 [node name="DecorationsFront" type="Node" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("2_lnu2h")]
-inertia = 1000.0
-angular_velocity = 0.174533
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 

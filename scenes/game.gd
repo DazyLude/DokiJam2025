@@ -1,7 +1,7 @@
 extends Node
 
 
-const COLLECTIBLE_HOVER_OFFSET := Vector2(0.0, -100.0);
+const COLLECTIBLE_HOVER_OFFSET := -100.0;
 
 # this script should handle background switcheroos and terrain generation based on the players coordinate
 # for terrain generation, I think about doing it in chunks using a smooth-ish height(x) function and a samplerate
@@ -47,19 +47,32 @@ func load_stage() -> void:
 	generate_terrain();
 	spawn_checkpoint();
 	spawn_collectibles();
+	spawn_obstacles();
 	place_player();
+
+
+func place_node_at(node: Node2D, x: float, y_offset: float = 0.0) -> void:
+	node.position = Vector2(
+		x,
+		GameState.current_stage.generator.generator_function(x) + y_offset
+	);
 
 
 func place_collectible_at(x: float, collectible_data: PickupItemData) -> PickupItem:
 	var collectible := preload("res://scenes/gameplay_elements/pickup_item.tscn").instantiate();
-	collectible.position = Vector2(
-		x,
-		GameState.current_stage.generator.generator_function(x)
-	) + COLLECTIBLE_HOVER_OFFSET;
+	place_node_at(collectible, x, COLLECTIBLE_HOVER_OFFSET);
 	collectible.data = collectible_data;
 	
 	collectibles.add_child(collectible);
 	return collectible;
+
+
+func spawn_obstacles() -> void:
+	for i in range(10, 1000):
+		var obstacle = GameState.current_stage.obstacles.get_random_obstacle();
+		var x = GameState.current_stage.stage_length * i / 1001;
+		place_node_at(obstacle, x);
+		$DecorationsBack.add_child(obstacle);
 
 
 func spawn_collectibles() -> void:

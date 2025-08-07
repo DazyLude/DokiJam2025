@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://hgdygbbtm7ba"]
+
+[ext_resource type="Texture2D" uid="uid://ce6jvp7a1oglp" path="res://assets/obstacles/pitchfork.png" id="1_fot0t"]
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_wroxs"]
+
+[node name="Pitchfork" type="Node2D"]
+script = ExtResource("1_wroxs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fot0t")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-136, 565, -106, 565, -78, 529, -34, 569, 0, 526, 30, 567, 75, 521, 114, 565, 134, 555, 138, 332, 32, 276, 26, -560, -3, -581, -32, -552, -24, 284, -140, 327)

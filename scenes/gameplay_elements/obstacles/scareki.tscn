@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8egljghu15x1"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_l2b2t"]
+[ext_resource type="Texture2D" uid="uid://2s0a73hhy3m" path="res://assets/obstacles/scarecrow.png" id="2_4t1fi"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_l2b2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4t1fi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-451, -82, -422, -130, -249, -209, -325, -290, -282, -340, -340, -383, -332, -461, -295, -448, -208, -469, -111, -578, -16, -544, 152, -567, 158, -435, 189, -438, 144, -319, 355, -312, 358, -277, 433, -214, 411, -127, 346, -130, 327, -187, 137, -217, 234, 89, 29, 188, 58, 575, 3, 575, -29, 174, -129, 185, -209, 161, -209, 114, -272, 87, -298, 3, -388, 69, -444, 50)

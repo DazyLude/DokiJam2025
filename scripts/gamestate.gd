@@ -5,6 +5,10 @@ extends Node
 # it holds data related to the current game session
 
 
+# RNG
+var rng := RandomNumberGenerator.new();
+
+
 # stamina
 const JUICE_DEFAULT_VALUE : float = 10.0; # in seconds of juice usage time
 var juice := JUICE_DEFAULT_VALUE;
@@ -22,6 +26,8 @@ var selected_skinsuit : int = Upgrade.SKINSUIT_TOMATO;
 
 # stage management
 var current_stage := StageData.get_stage_data_by_name("tomato fields");
+
+
 
 
 func restart() -> void:

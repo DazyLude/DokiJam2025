@@ -1,6 +1,12 @@
 extends RefCounted
 class_name StageData
 
+
+var stage_name : String;
+var rng : RandomNumberGenerator;
+var fresh_state : int;
+
+
 # visuals
 var terrain_fill : Texture2D;
 var terrain_edge : Texture2D;
@@ -10,8 +16,9 @@ var checkpoint : Texture2D;
 # sounds
 # TODO
 
-# associated generators / controllers
+# associated generators / controllers / managers
 var generator : TerrainGenerator;
+var obstacles : ObstacleManager;
 
 # intermission
 # TODO
@@ -27,6 +34,8 @@ static func get_stage_data_by_name(name: String) -> StageData:
 
 static func from_dict(params: Dictionary) -> StageData:
 	var data := StageData.new();
+	data.stage_name = params.get("name", "") as String;
+	data.rng = RandomNumberGenerator.new();
 	
 	# visuals setup
 	data.terrain_fill = load(params.get("terrain fill", "uid://dftdfph41cnpv"));
@@ -36,17 +45,30 @@ static func from_dict(params: Dictionary) -> StageData:
 	# terrain generator setup
 	data.generator = TerrainGenerator.new();
 	data.generator.scale = params.get("terrain scale", Vector2(1.0, 1.0));
+	data.generator.noise_generator.seed = data.rng.randi();
+	
+	# obstacle manager setup
+	data.obstacles = ObstacleManager.from_array(
+		ObstacleManager.get_obstacles(data.stage_name)
+	);
+	data.obstacles.rng = data.rng;
 	
 	# other parameters
 	data.stage_length = params.get("stage length", 3e4);
 	data.intermission = load(params.get("intermission", "res://assets/stages/farm/checkpoint_juicestand.png"));
 	
+	data.fresh_state = data.rng.state;
 	return data;
+
+
+func restore_state() -> void:
+	rng.state = fresh_state;
 
 
 # it is possible to setup stages in JSON format this way
 static var stage_variants: Dictionary[String, Dictionary] = {
 	"tomato fields": {
+		"name": "tomato fields",
 		"terrain fill": "uid://dftdfph41cnpv", # can be a relative path to the texture, but a string nevertheless
 		"terrain edge": "uid://bad5ey7wkh63x", # same as "terrain fill"
 		"checkpoint": "res://assets/stages/farm/checkpoint_juicestand.png", # same as "terrain fill"
