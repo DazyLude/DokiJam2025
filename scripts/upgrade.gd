@@ -82,18 +82,42 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	SKINSUIT_TOMATO: {
 		"type": TYPE_ONE_OFF,
 		"autounlock": "tomato fields", # String (stage name)
+		"base": "res://assets/skinsuits/tomato/tomato_base.png",
+		"emotions": [
+			"res://assets/skinsuits/tomato/tomato_neutral.png",
+			"res://assets/skinsuits/tomato/tomato_tired.png",
+			"res://assets/skinsuits/tomato/tomato_hurt.png",
+		],
 	},
 	SKINSUIT_CROWKI: {
 		"type": TYPE_ONE_OFF,
 		"autounlock": "tomato fields", # String (stage name)
+		"base": "res://assets/skinsuits/crowki/crowki_base.png",
+		"emotions": [
+			"res://assets/skinsuits/crowki/crowki_neutral.png",
+			"res://assets/skinsuits/crowki/crowki_tired.png",
+			"res://assets/skinsuits/crowki/crowki_hurt.png",
+		],
 	},
 	SKINSUIT_RETRO: {
 		"type": TYPE_ONE_OFF,
 		"autounlock": "tomato fields", # String (stage name)
+		"base": "res://assets/skinsuits/tomato/tomato_base.png",
+		"emotions": [
+			"res://assets/skinsuits/tomato/tomato_neutral.png",
+			"res://assets/skinsuits/tomato/tomato_tired.png",
+			"res://assets/skinsuits/tomato/tomato_hurt.png",
+		],
 	},
 	SKINSUIT_BOUNTY: {
 		"type": TYPE_ONE_OFF,
 		"autounlock": "tomato fields", # String (stage name)
+		"base": "res://assets/skinsuits/tomato/tomato_base.png",
+		"emotions": [
+			"res://assets/skinsuits/tomato/tomato_neutral.png",
+			"res://assets/skinsuits/tomato/tomato_tired.png",
+			"res://assets/skinsuits/tomato/tomato_hurt.png",
+		],
 	}
 }
 

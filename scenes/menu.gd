@@ -11,12 +11,12 @@ func _ready() -> void:
 	
 	$TomatoSelect.pressed.connect(
 		func():
-			GameState.selected_skinsuit = IntermissionData.CHARACTER_TOMATO;
+			GameState.selected_skinsuit = Upgrade.SKINSUIT_TOMATO;
 			update_skinsuit();
 	);
 	$CrowkiSelect.pressed.connect(
 		func():
-			GameState.selected_skinsuit = IntermissionData.CHARACTER_CROWKI;
+			GameState.selected_skinsuit = Upgrade.SKINSUIT_CROWKI;
 			update_skinsuit();
 	);
 	
