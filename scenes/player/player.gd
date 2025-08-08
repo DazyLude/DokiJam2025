@@ -96,7 +96,8 @@ func _physics_process(delta: float) -> void:
 		no_contact_time += delta;
 	else:
 		if is_flying and linear_velocity.length() > SAFE_SPEED_LIMIT:
-			take_impact_damage()
+			#take_impact_damage()
+			pass;
 		
 		no_contact_time = 0.0;
 	
