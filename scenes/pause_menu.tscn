@@ -1,0 +1,281 @@
+[gd_scene load_steps=14 format=3 uid="uid://bgjo1po0h36q2"]
+
+[ext_resource type="Script" uid="uid://wgacgqeny5sv" path="res://scenes/pause_menu.gd" id="1_myx47"]
+[ext_resource type="StyleBox" uid="uid://y37slv7s5r4k" path="res://styles/Menu_Background.tres" id="2_kukqi"]
+[ext_resource type="PackedScene" uid="uid://cywgm8te3676u" path="res://scenes/UI/mute_button.tscn" id="3_88e76"]
+[ext_resource type="Texture2D" uid="uid://dvv8faobs6bvp" path="res://assets/buttons/button_scaled.png" id="3_v4r4p"]
+[ext_resource type="Texture2D" uid="uid://0jejnaco75ut" path="res://assets/buttons/button_clicked_scaled.png" id="4_1s2dm"]
+[ext_resource type="Texture2D" uid="uid://cxi8iv31o2k57" path="res://assets/buttons/button_hover_scaled.png" id="5_88e76"]
+[ext_resource type="Script" uid="uid://duho7t435uxyj" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="5_knqa7"]
+[ext_resource type="Texture2D" uid="uid://fqn2kgf1d1yu" path="res://assets/icons/dokicoin.png" id="6_knqa7"]
+[ext_resource type="Texture2D" uid="uid://ql4ksu2c1ebu" path="res://assets/icons/UI_ketchup_empty.png" id="9_71k7c"]
+[ext_resource type="Texture2D" uid="uid://cf8uudqbdo34r" path="res://assets/icons/UI_ketchup_full.png" id="10_cmnsq"]
+
+[sub_resource type="Texture2D" id="Texture2D_71k7c"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_knqa7")
+path = "roll_ccw"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[sub_resource type="Texture2D" id="Texture2D_cmnsq"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_knqa7")
+path = "roll_cw"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[sub_resource type="Texture2D" id="Texture2D_ofnjo"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_knqa7")
+path = "jump"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_myx47")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -400.0
+offset_right = 400.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_kukqi")
+
+[node name="MuteButton" parent="." instance=ExtResource("3_88e76")]
+layout_mode = 0
+offset_left = 645.0
+offset_top = -411.0
+offset_right = 722.0
+offset_bottom = -334.0
+
+[node name="CoinContainer" type="HBoxContainer" parent="."]
+offset_left = -774.0
+offset_top = -418.0
+offset_right = -624.0
+offset_bottom = -358.0
+
+[node name="CoinIcon" type="TextureRect" parent="CoinContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = ExtResource("6_knqa7")
+expand_mode = 1
+
+[node name="CoinCount" type="Label" parent="CoinContainer"]
+custom_minimum_size = Vector2(80, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "x000"
+vertical_alignment = 1
+
+[node name="MusicContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -360.0
+offset_right = 360.0
+offset_bottom = -280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MusicLabel" type="Label" parent="MusicContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Music:"
+
+[node name="MusicSlider" type="HSlider" parent="MusicContainer"]
+layout_mode = 2
+scrollable = false
+tick_count = 5
+
+[node name="SFXContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -240.0
+offset_right = 360.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SFXLabel" type="Label" parent="SFXContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "SFX:"
+
+[node name="SFXSlider" type="HSlider" parent="SFXContainer"]
+layout_mode = 2
+scrollable = false
+tick_count = 5
+
+[node name="ControlLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -355.0
+offset_top = -120.0
+offset_right = -80.0
+offset_bottom = -75.0
+theme_override_font_sizes/font_size = 32
+text = "Controls:"
+
+[node name="ControlsContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -80.0
+offset_right = -2.0
+offset_bottom = 173.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RollContainer" type="HBoxContainer" parent="ControlsContainer"]
+layout_mode = 2
+
+[node name="RollLabel" type="Label" parent="ControlsContainer/RollContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Roll:"
+vertical_alignment = 1
+
+[node name="RollRightControl" type="TextureRect" parent="ControlsContainer/RollContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_71k7c")
+
+[node name="RollLeftControl" type="TextureRect" parent="ControlsContainer/RollContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_cmnsq")
+
+[node name="JumpContainer" type="HBoxContainer" parent="ControlsContainer"]
+layout_mode = 2
+
+[node name="JumpLabel" type="Label" parent="ControlsContainer/JumpContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Jump:"
+vertical_alignment = 1
+
+[node name="JumpControl" type="TextureRect" parent="ControlsContainer/JumpContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_ofnjo")
+
+[node name="ResumeButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 124.0
+offset_right = 100.0
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_v4r4p")
+texture_pressed = ExtResource("4_1s2dm")
+texture_hover = ExtResource("5_88e76")
+
+[node name="ButtonLabel" type="Label" parent="ResumeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -11.5
+offset_right = 31.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "RESUME"
+vertical_alignment = 1
+
+[node name="MenuButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 254.0
+offset_right = 100.0
+offset_bottom = 373.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_v4r4p")
+texture_pressed = ExtResource("4_1s2dm")
+texture_hover = ExtResource("5_88e76")
+
+[node name="ButtonLabel" type="Label" parent="MenuButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KetchupMeter" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = -721.0
+offset_top = -89.0
+offset_right = -345.0
+offset_bottom = 702.0
+scale = Vector2(0.6, 0.6)
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("9_71k7c")
+texture_progress = ExtResource("10_cmnsq")
