@@ -11,6 +11,7 @@ var fresh_state : int;
 var terrain_fill : Texture2D;
 var terrain_edge : Texture2D;
 var checkpoint : Texture2D;
+var background : Texture2D;
 
 
 # sounds
@@ -41,6 +42,7 @@ static func from_dict(params: Dictionary) -> StageData:
 	data.terrain_fill = load(params.get("terrain fill", "uid://dftdfph41cnpv"));
 	data.terrain_edge = load(params.get("terrain edge", "uid://bad5ey7wkh63x"));
 	data.checkpoint = load(params.get("checkpoint", "uid://d28lqabm420p3"));
+	data.background = load(params.get("background", "res://assets/stages/farm/tomato_farm.png"));
 	
 	# terrain generator setup
 	data.generator = TerrainGenerator.new();
@@ -72,8 +74,18 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain fill": "uid://dftdfph41cnpv", # can be a relative path to the texture, but a string nevertheless
 		"terrain edge": "uid://bad5ey7wkh63x", # same as "terrain fill"
 		"checkpoint": "res://assets/stages/farm/checkpoint_juicestand.png", # same as "terrain fill"
+		#"background": "res://assets/stages/city/shopping_street.png",
+		"background": "res://assets/stages/farm/tomato_farm_clouds.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission": "uid://ct1qkka6lngc5", # can be a relative path to the scene, but a string nevertheless
+	},
+	"streets of coffee": {
+		"name": "city",
+		"terrain fill": "res://assets/stages/city/conrete_tile.png",
+		"terrain edge": "res://assets/stages/city/concrete_edge.png",
+		"background": "res://assets/stages/city/shopping_street.png",
+		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
+		"stage length": 3e4, # should be a float
 	}
 }

@@ -7,6 +7,8 @@ const COORDS_TEMPLATE := "position: (%10.3f, %10.3f)";
 const ROTATION_TEMPLATE := "upward vector: (%10.3f, %10.3f)";
 const STAMINA_SPEED_TEMPLATE := "tomato juice: %10.3f";
 const CONTACT_COUNTER_TEMPLATE := "contacts: %d";
+const FPS_TEMPLATE := "last frame delta: %1.2f (~%d FPS)"
+const PHYSICS_FPS_TEMPLATE := "last physics delta: %1.2f (~%d FPS)"
 
 
 var player : Player;
@@ -20,6 +22,8 @@ func _process(delta: float) -> void:
 		var upward = Vector2(0, -1).rotated(player.rotation);
 		$DataContainer/Rotation.text = ROTATION_TEMPLATE % [upward.x, upward.y];
 		$DataContainer/ContactCounter.text = CONTACT_COUNTER_TEMPLATE % player.get_contact_count();
+		$DataContainer/FPSCounter.text = FPS_TEMPLATE % [player.last_frame_delta, 1.0 / player.last_frame_delta];
+		$DataContainer/PhysicsFPSCounter.text = PHYSICS_FPS_TEMPLATE % [player.last_frame_delta_physics, 1.0 / player.last_frame_delta_physics];
 		
 	
 	if GameState != null:

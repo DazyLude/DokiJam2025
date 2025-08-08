@@ -10,13 +10,19 @@ const DEFAULT_CAMERA_OFFSET := Vector2(0.0, -200.0);
 const DEFAULT_CAMERA_OFFSET_SCALED := DEFAULT_CAMERA_OFFSET / CAMERA_LLG
 
 ## speed at which the player is considered stationary
-const SPEED_LOWER_LIMIT = 0.5; # in px/s
+const SPEED_LOWER_LIMIT := 0.5; # in px/s
+const SAFE_SPEED_LIMIT := 400.0;
 
 ## players running average velocity is calculated over VELOCITY_AVG_LIMIT amount of frames
-const VELOCITY_AVG_LIMIT := 240;
+const VELOCITY_AVG_LIMIT := 120;
 var velocity_avg_array := PackedVector2Array();
 var velocity_avg := Vector2();
 var velocity_avg_idx : int = 0;
+
+# debug info
+var last_frame_delta : float = 0.0;
+var last_frame_delta_physics : float = 0.0;
+
 
 #region stats
 # torque applied, usually multiplied by inertia
@@ -37,6 +43,13 @@ var aeroshape := 10.0;
 # pressing "jump" action will activate buffer and jump will be executed when the player touches the ground
 const JUMP_BUFFER_TIME = 0.1; 
 var jump_buffer : float = 0.0; # in seconds
+
+# body needs to not have contacts with ground for this amount of seconds to be considered flying
+const FLIGHT_TIME_REQUIREMENT = 0.2;
+var no_contact_time : float = 0.0;
+var is_flying : bool :
+	get:
+		return no_contact_time >= FLIGHT_TIME_REQUIREMENT;
 
 # affects player's emotion
 var hng_for : float = 0.0; # in seconds
@@ -64,7 +77,7 @@ func apply_player_stats(stats: PlayerStats) -> void:
 	physics_material_override.bounce = stats.bounce;
 	physics_material_override.friction = stats.friction;
 	mass = stats.mass;
-	inertia = 0.5 * stats.mass * 1000.0;
+	inertia = stats.mass * 1500.0;
 	linear_damp = stats.linear_damp;
 	angular_damp = stats.angular_damp;
 
@@ -78,23 +91,34 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed(&"fly"):
 		try_propel_upward(delta);
 	
+	var contact_count = get_contact_count();
+	if contact_count == 0:
+		no_contact_time += delta;
+	else:
+		if is_flying and linear_velocity.length() > SAFE_SPEED_LIMIT:
+			take_impact_damage()
+		
+		no_contact_time = 0.0;
+	
 	# jump logic
-	if get_contact_count() > 0 and (Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0):
+	if contact_count > 0 and (Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0):
 		try_jump();
 		jump_buffer = 0.0;
 	
-	if get_contact_count() == 0 and Input.is_action_just_pressed(&"jump"):
+	if contact_count == 0 and Input.is_action_just_pressed(&"jump"):
 		jump_buffer = JUMP_BUFFER_TIME;
 	
 	if jump_buffer > 0.0:
 		jump_buffer -= delta;
 	
 	# rolling friction
-	if get_contact_count() > 0:
+	if contact_count > 0:
 		apply_torque(-angular_velocity * inertia / hardness);
 	
 	# air friction
-	apply_central_force(-linear_velocity * mass / aeroshape)
+	apply_central_force(-linear_velocity * mass / aeroshape);
+	
+	last_frame_delta_physics = delta;
 
 
 func _process(delta: float) -> void:
@@ -113,6 +137,8 @@ func _process(delta: float) -> void:
 		$Sprite2D.display_emotion(2);
 	else:
 		$Sprite2D.display_emotion(0);
+	
+	last_frame_delta = delta;
 
 
 # tries to spend stamina

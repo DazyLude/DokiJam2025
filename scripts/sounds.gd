@@ -5,6 +5,8 @@ enum ID {
 	NONE = -1,
 	
 	MUSIC_ESCAPE_FROM_TARKOV,
+	MUSIC_UPGRADE_SHOP_THEME,
+	MUSIC_UPGRADE_SHOP_THEME_COOL,
 	
 	
 	SFX_FUCK,
@@ -18,6 +20,8 @@ enum ID {
 
 var sound_resources : Dictionary[ID, String] = {
 	ID.MUSIC_ESCAPE_FROM_TARKOV: "res://assets/music/Escaping the Tomato Farm pt1.ogg",
+	ID.MUSIC_UPGRADE_SHOP_THEME: "res://assets/music/Last cup of coffee - lofi bossa.ogg",
+	ID.MUSIC_UPGRADE_SHOP_THEME_COOL: "res://assets/music/Last cup of coffee - lofi bossa with quotes.ogg",
 	
 	ID.SFX_FUCK: "res://assets/sfx/fuck.wav",
 	ID.SFX_AAGH: "res://assets/sfx/Scream 1.wav",

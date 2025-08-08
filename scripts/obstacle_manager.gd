@@ -31,7 +31,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"weight": 100.0,
 		"natural habitat": ["tomato fields"],
 		"positions": [
-			PositionPreset.fixed(0.0, -270.0),
+			PositionPreset.fixed(0.0, -250.0),
 		],
 	}
 }

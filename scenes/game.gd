@@ -116,6 +116,7 @@ func spawn_checkpoint() -> void:
 func setup_terrain_visuals(stage: StageData) -> void:
 	ss2d_shape.shape_material.fill_textures[0] = stage.terrain_fill;
 	ss2d_shape.shape_material.get_all_edge_materials()[0].textures[0] = stage.terrain_edge;
+	$ParallaxBackground/BackdropParallax/BackdropSprite.texture = stage.background;
 
 
 # this method should generate initital terrain

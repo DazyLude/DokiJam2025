@@ -1,8 +1,8 @@
 [gd_scene load_steps=73 format=3 uid="uid://daikwosr13pnv"]
 
 [ext_resource type="Script" uid="uid://cpobfagrfa2vw" path="res://scenes/game.gd" id="1_lbhrr"]
-[ext_resource type="Texture2D" uid="uid://d1q3bla3tsoaf" path="res://assets/stages/farm/skybox_gradient.png" id="1_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://ca57mpnq70puo" path="res://assets/stages/farm/tomato_farm.png" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://digpfibcn5t4o" path="res://assets/stages/farm/skybox_dark.png" id="2_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dsygnq6v144q2" path="res://scenes/player/player.tscn" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://bxh60lo5clvos" path="res://addons/rmsmartshape/shapes/shape.gd" id="4_vtaks"]
 [ext_resource type="Script" uid="uid://dyi0gt0q26csa" path="res://addons/rmsmartshape/vertex_properties.gd" id="5_kvpfn"]
@@ -450,7 +450,7 @@ script = ExtResource("1_lbhrr")
 motion_scale = Vector2(0, 0)
 
 [node name="SkyboxSprite" type="Sprite2D" parent="ParallaxBackground/SkyboxParallax"]
-texture = ExtResource("1_lnu2h")
+texture = ExtResource("2_ir15t")
 centered = false
 
 [node name="BackdropParallax" type="ParallaxLayer" parent="ParallaxBackground"]

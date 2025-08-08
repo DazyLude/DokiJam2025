@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c36to5m4au5h6"
+path="res://.godot/imported/Last cup of coffee - lofi bossa with quotes.ogg-2b07985b263a8d5da93b46e31ede1d48.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Last cup of coffee - lofi bossa with quotes.ogg"
+dest_files=["res://.godot/imported/Last cup of coffee - lofi bossa with quotes.ogg-2b07985b263a8d5da93b46e31ede1d48.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
