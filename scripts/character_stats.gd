@@ -37,7 +37,7 @@ func add_dict(dict: Dictionary) -> void:
 
 static func get_latest() -> PlayerStats:
 	var stats = PlayerStats.new();
-	stats.add_dict(stat_dicts["default"]);
+	stats.reset_to_dict(stat_dicts["default"]);
 	
 	for upgrade in upgrade_stats:
 		var upgrade_level = GameState.upgrades.get_upgrade_level(upgrade);
