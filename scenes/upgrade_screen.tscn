@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://copxjn2tb15ob"]
+[gd_scene load_steps=32 format=3 uid="uid://copxjn2tb15ob"]
 
 [ext_resource type="Script" uid="uid://bq48lg7fnvhv6" path="res://scenes/upgrade_screen.gd" id="1_pfdwi"]
 [ext_resource type="Texture2D" uid="uid://0gwsj3aa3h00" path="res://assets/icons/stamina.png" id="2_8myhc"]
@@ -16,16 +16,20 @@
 [ext_resource type="Texture2D" uid="uid://cdmaq3vaklm75" path="res://assets/buttons/skinsuit_tomato_hover.png" id="13_snxbx"]
 [ext_resource type="Texture2D" uid="uid://eaqk22m7k5hd" path="res://assets/buttons/skinsuit_crowki.png" id="14_3jasj"]
 [ext_resource type="Texture2D" uid="uid://la35o0u3qy5c" path="res://assets/buttons/skinsuit_crowki_click.png" id="15_c7ko0"]
+[ext_resource type="Texture2D" uid="uid://cm0am36o42upb" path="res://assets/buttons/skinsuit_tomato_disabled.png" id="16_l0m8u"]
 [ext_resource type="Texture2D" uid="uid://70n04161tk8r" path="res://assets/buttons/skinsuit_crowki_hover.png" id="16_u8xbe"]
 [ext_resource type="Texture2D" uid="uid://b7an3ssnu04fm" path="res://assets/buttons/skinsuit_retro.png" id="17_kxbdn"]
 [ext_resource type="Texture2D" uid="uid://cxkp8box7g2u7" path="res://assets/buttons/skinsuit_retro_click.png" id="18_rinqk"]
 [ext_resource type="Texture2D" uid="uid://r2c3jlu2r2ln" path="res://assets/buttons/skinsuit_retro_hover.png" id="19_vujdr"]
 [ext_resource type="Texture2D" uid="uid://bcon5q0rn32rk" path="res://assets/buttons/skinsuit_bounty.png" id="20_nljfx"]
+[ext_resource type="Texture2D" uid="uid://byo3s5d4hskj5" path="res://assets/buttons/skinsuit_crowki_disabled.png" id="20_snxbx"]
 [ext_resource type="Texture2D" uid="uid://doapdyunu24tl" path="res://assets/buttons/skinsuit_bounty_click.png" id="21_2dljn"]
 [ext_resource type="Texture2D" uid="uid://qja76868nv1m" path="res://assets/buttons/skinsuit_bounty_hover.png" id="22_s005r"]
 [ext_resource type="Texture2D" uid="uid://dvv8faobs6bvp" path="res://assets/buttons/button_scaled.png" id="23_g2il6"]
+[ext_resource type="Texture2D" uid="uid://dimo12ynmks70" path="res://assets/buttons/skinsuit_retro_disabled.png" id="24_3jasj"]
 [ext_resource type="Texture2D" uid="uid://0jejnaco75ut" path="res://assets/buttons/button_clicked_scaled.png" id="24_j07sc"]
 [ext_resource type="Texture2D" uid="uid://cxi8iv31o2k57" path="res://assets/buttons/button_hover_scaled.png" id="25_qd7s1"]
+[ext_resource type="Texture2D" uid="uid://dgs2yss0g62yf" path="res://assets/buttons/skinsuit_bounty_disabled.png" id="28_c7ko0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_farj6"]
 bg_color = Color(0.43134, 0.43134, 0.43134, 0.8)
@@ -412,7 +416,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("11_pps40")
 texture_pressed = ExtResource("12_l0m8u")
 texture_hover = ExtResource("13_snxbx")
-texture_disabled = ExtResource("12_l0m8u")
+texture_disabled = ExtResource("16_l0m8u")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -424,7 +428,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("14_3jasj")
 texture_pressed = ExtResource("15_c7ko0")
 texture_hover = ExtResource("16_u8xbe")
-texture_disabled = ExtResource("15_c7ko0")
+texture_disabled = ExtResource("20_snxbx")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -436,7 +440,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("17_kxbdn")
 texture_pressed = ExtResource("18_rinqk")
 texture_hover = ExtResource("19_vujdr")
-texture_disabled = ExtResource("18_rinqk")
+texture_disabled = ExtResource("24_3jasj")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -448,7 +452,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("20_nljfx")
 texture_pressed = ExtResource("21_2dljn")
 texture_hover = ExtResource("22_s005r")
-texture_disabled = ExtResource("21_2dljn")
+texture_disabled = ExtResource("28_c7ko0")
 ignore_texture_size = true
 stretch_mode = 0
 
