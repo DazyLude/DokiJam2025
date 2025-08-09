@@ -15,18 +15,18 @@ var background : Texture2D;
 
 
 # sounds
-# TODO
+var music : Sounds.ID;
 
 # associated generators / controllers / managers
 var generator : TerrainGenerator;
 var obstacles : ObstacleManager;
 
-# intermission
-# TODO
+# intermission & next stage
+var intermission_name : String;
+var next_stage_name : String;
 
 # gameplay data
 var stage_length : float;
-var intermission : PackedScene;
 
 
 static func get_stage_data_by_name(name: String) -> StageData:
@@ -57,7 +57,11 @@ static func from_dict(params: Dictionary) -> StageData:
 	
 	# other parameters
 	data.stage_length = params.get("stage length", 3e4);
-	data.intermission = load(params.get("intermission", "res://assets/stages/farm/checkpoint_juicestand.png"));
+	data.next_stage_name = params.get("next stage", "tomato fields");
+	data.intermission_name = params.get("intermission name", "tomato fields massacre");
+	
+	# sounds setup
+	data.music = params.get("music", Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
 	
 	data.fresh_state = data.rng.state;
 	return data;
@@ -77,7 +81,9 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"background": "res://assets/stages/farm/tomato_farm_clouds.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
-		"intermission": "uid://ct1qkka6lngc5", # can be a relative path to the scene, but a string nevertheless
+		"intermission name": "tomato field massacre",
+		"next stage": "city",
+		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
 	},
 	"city": {
 		"name": "city",
@@ -86,6 +92,9 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"background": "res://assets/stages/city/shopping_street.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
+		"intermission name": "tomato field massacre",
+		"next stage": "city2",
+		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
 	},
 	"city in ruins": {
 		"name": "city2",
@@ -94,5 +103,8 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"background": "res://assets/stages/city/city_street.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
+		"intermission name": "tomato field massacre",
+		"next stage": "tomato fields",
+		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
 	},
 }

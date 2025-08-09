@@ -22,6 +22,7 @@ var is_gameover : bool = false;
 
 func _ready() -> void:
 	# since hud displays player properties, such as speed and position, we need to pass a reference
+	Sounds.play_looped(GameState.current_stage.music);
 	hud.player = player;
 	load_stage();
 	player.apply_player_stats(PlayerStats.get_latest());
@@ -46,7 +47,8 @@ func _process(delta: float) -> void:
 		is_gameover = true;
 		# TODO stop the player, drop them to the ground and make them enjoy tomato juice
 		# TODO stage cleared screen -> intermission scene -> new stage
-		get_tree().change_scene_to_packed(GameState.current_stage.intermission);
+		await play_intermission(GameState.current_stage.intermission_name);
+		GameState.load_stage(GameState.current_stage.next_stage_name);
 
 
 func load_stage() -> void:
@@ -155,3 +157,16 @@ func generate_terrain() -> void:
 	ss2d_shape.close_shape(points.size() - 1);
 	
 	ss2d_shape.get_point_array().begin_update();
+
+
+func play_intermission(intermission: String) -> void:
+	var intermission_player = load("res://scenes/intermission_player.tscn").instantiate();
+	intermission_player.set_intermission(intermission);
+	
+	# action
+	$UILayer.add_child(intermission_player);
+	intermission_player.play();
+	await intermission_player.finished;
+	
+	# cleanup
+	intermission_player.queue_free();

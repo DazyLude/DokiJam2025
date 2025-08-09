@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 
 
 func start_game() -> void:
-	get_tree().change_scene_to_file("res://scenes/game.tscn");
+	GameState.load_stage("tomato fields");
 
 
 func test_intro() -> void:
@@ -56,7 +56,6 @@ func test_intro() -> void:
 	await intermission_player.finished;
 	
 	# cleanup
-	remove_child(intermission_player);
 	intermission_player.queue_free();
 
 
@@ -73,5 +72,4 @@ func test_dialogue() -> void:
 	await intermission_player.finished;
 	
 	# cleanup
-	remove_child(intermission_player);
 	intermission_player.queue_free();

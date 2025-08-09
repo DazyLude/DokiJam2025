@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://betd8yxa7tboj"
+path="res://.godot/imported/Tomato Farm.ogg-266a68ff457d635948fa425c08233143.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Tomato Farm.ogg"
+dest_files=["res://.godot/imported/Tomato Farm.ogg-266a68ff457d635948fa425c08233143.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

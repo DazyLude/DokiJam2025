@@ -34,3 +34,10 @@ var current_stage := StageData.get_stage_data_by_name("tomato fields");
 
 func restart() -> void:
 	juice = juice_cap + 10.0 * upgrades.get_upgrade_level(Upgrade.KETCHUP_TANK);
+
+
+func load_stage(stage: String) -> void:
+	restart();
+	upgrades.check_for_unlocks(stage);
+	current_stage = StageData.get_stage_data_by_name(stage);
+	get_tree().change_scene_to_file("res://scenes/game.tscn");

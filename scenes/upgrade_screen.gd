@@ -16,6 +16,11 @@ var upgrades = GameState.upgrades
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if randf() > 0.33: # play the track with quotes only once in a while to spook players with sudden doki
+		Sounds.play_looped(Sounds.ID.MUSIC_UPGRADE_SHOP_THEME);
+	else:
+		Sounds.play_looped(Sounds.ID.MUSIC_UPGRADE_SHOP_THEME_COOL);
+	
 	# Update all upgrade cost values
 	update_upgrade_cost("speed", upgrades.COFFEE)
 	update_upgrade_cost("armor", upgrades.ARMOR)
