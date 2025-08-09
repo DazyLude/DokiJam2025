@@ -74,6 +74,7 @@ offset_right = 722.0
 offset_bottom = -334.0
 
 [node name="CoinContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_left = -774.0
 offset_top = -418.0
 offset_right = -624.0
