@@ -1,9 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj3qmqrdmpetp"]
+[gd_scene load_steps=9 format=3 uid="uid://cj3qmqrdmpetp"]
 
 [ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_con2f"]
 [ext_resource type="Script" uid="uid://l12ejtkng3vn" path="res://scenes/menu.gd" id="1_vjb58"]
 [ext_resource type="Script" uid="uid://b40woge2o40ty" path="res://scripts/emotional_sprite.gd" id="3_con2f"]
 [ext_resource type="PackedScene" uid="uid://cywgm8te3676u" path="res://scenes/UI/mute_button.tscn" id="3_mhnvy"]
+[ext_resource type="Script" uid="uid://duho7t435uxyj" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="5_4ytvr"]
+
+[sub_resource type="Texture2D" id="Texture2D_g3eks"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_4ytvr")
+path = "roll_ccw"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[sub_resource type="Texture2D" id="Texture2D_v86rl"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_4ytvr")
+path = "roll_cw"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[sub_resource type="Texture2D" id="Texture2D_13sgg"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_4ytvr")
+path = "jump"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -37,6 +65,7 @@ offset_bottom = 493.0
 text = "start game"
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 625.0
 offset_top = 512.0
@@ -87,3 +116,54 @@ offset_top = 790.0
 offset_right = 536.0
 offset_bottom = 890.0
 text = "play as crowki"
+
+[node name="RollLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = 56.0
+offset_right = 24.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Roll:"
+vertical_alignment = 1
+
+[node name="RollRightControl" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 684.0
+offset_top = 566.0
+offset_right = 784.0
+offset_bottom = 666.0
+texture = SubResource("Texture2D_g3eks")
+
+[node name="RollLeftControl" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 784.0
+offset_top = 566.0
+offset_right = 884.0
+offset_bottom = 666.0
+texture = SubResource("Texture2D_v86rl")
+
+[node name="JumpLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 684.0
+offset_top = 696.0
+offset_right = 824.0
+offset_bottom = 746.0
+theme_override_font_sizes/font_size = 32
+text = "Jump:"
+vertical_alignment = 1
+
+[node name="JumpControl" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 684.0
+offset_top = 756.0
+offset_right = 784.0
+offset_bottom = 856.0
+texture = SubResource("Texture2D_13sgg")

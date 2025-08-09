@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dyc1cw7e07t0f" path="res://assets/icons/coffee_upgrade.png" id="2_a57ks"]
 [ext_resource type="Texture2D" uid="uid://digpfibcn5t4o" path="res://assets/stages/farm/skybox_dark.png" id="2_rnmk4"]
 [ext_resource type="Texture2D" uid="uid://cul2xptu0fki8" path="res://assets/buttons/upgrade.png" id="3_rnmk4"]
+[ext_resource type="StyleBox" uid="uid://y37slv7s5r4k" path="res://styles/Menu_Background.tres" id="3_snxbx"]
 [ext_resource type="Texture2D" uid="uid://dq4qoabawpvwl" path="res://assets/buttons/upgrade_clicked.png" id="4_waouo"]
 [ext_resource type="Texture2D" uid="uid://da10h0aq658k8" path="res://assets/buttons/upgrade_hover.png" id="5_6005o"]
 [ext_resource type="Texture2D" uid="uid://fqn2kgf1d1yu" path="res://assets/icons/dokicoin.png" id="6_f545e"]
@@ -30,18 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://0jejnaco75ut" path="res://assets/buttons/button_clicked_scaled.png" id="24_j07sc"]
 [ext_resource type="Texture2D" uid="uid://cxi8iv31o2k57" path="res://assets/buttons/button_hover_scaled.png" id="25_qd7s1"]
 [ext_resource type="Texture2D" uid="uid://dgs2yss0g62yf" path="res://assets/buttons/skinsuit_bounty_disabled.png" id="28_c7ko0"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_farj6"]
-bg_color = Color(0.43134, 0.43134, 0.43134, 0.8)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [node name="UpgradeScreen" type="Control"]
 layout_mode = 3
@@ -71,7 +60,7 @@ offset_right = 500.0
 offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_farj6")
+theme_override_styles/panel = ExtResource("3_snxbx")
 
 [node name="ShopLabel" type="Label" parent="."]
 layout_mode = 1
