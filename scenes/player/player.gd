@@ -11,7 +11,7 @@ const DEFAULT_CAMERA_OFFSET_SCALED := DEFAULT_CAMERA_OFFSET / CAMERA_LLG
 
 ## speed at which the player is considered stationary
 const SPEED_LOWER_LIMIT := 0.5; # in px/s
-const SAFE_SPEED_LIMIT := 400.0;
+const SAFE_SPEED_LIMIT := 750.0;
 
 ## players running average velocity is calculated over VELOCITY_AVG_LIMIT amount of frames
 const VELOCITY_AVG_LIMIT := 120;
@@ -55,7 +55,8 @@ var is_flying : bool :
 var hng_for : float = 0.0; # in seconds
 
 
-@onready var camera  = $Camera2D;
+@onready var camera = $Camera2D;
+@onready var sound_player = $AudioStreamPlayer2D;
 
 
 func _ready() -> void:
@@ -92,14 +93,17 @@ func _physics_process(delta: float) -> void:
 		try_propel_upward(delta);
 	
 	var contact_count = get_contact_count();
+	
+	if is_flying and abs(linear_velocity.y) > SAFE_SPEED_LIMIT and contact_count > 0:
+		take_impact_damage();
+	
 	if contact_count == 0:
 		no_contact_time += delta;
 	else:
-		if is_flying and linear_velocity.length() > SAFE_SPEED_LIMIT:
-			#take_impact_damage()
-			pass;
-		
 		no_contact_time = 0.0;
+	
+	if is_flying and (abs(linear_velocity.y) > SAFE_SPEED_LIMIT or abs(linear_velocity.x) > SAFE_SPEED_LIMIT ** 2):
+		play_sound(Sounds.ID.SFX_AAGH);
 	
 	# jump logic
 	if contact_count > 0 and (Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0):
@@ -198,3 +202,17 @@ func calc_camera_offset(velocity: Vector2) -> void:
 	# calculate new camera offset
 	var vel_len := velocity_avg.length();
 	camera.position = (DEFAULT_CAMERA_OFFSET_SCALED + velocity_avg).rotated(-rotation) * CAMERA_LLG / (1 + vel_len * CAMERA_LG);
+
+
+func take_impact_damage() -> void:
+	var speed_diff = abs(linear_velocity.y) - SAFE_SPEED_LIMIT;
+	var damage = 0.1 * sqrt(speed_diff);
+	GameState.juice = move_toward(GameState.juice, 0.0, damage);
+	if damage > 0.1:
+		play_sound(Sounds.ID.SFX_AAGH, true);
+
+
+func play_sound(id: Sounds.ID, force: bool = false) -> void:
+	if not sound_player.playing or force:
+		sound_player.stream = Sounds.get_stream_by_id(id);
+		sound_player.play();

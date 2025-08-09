@@ -74,18 +74,25 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain fill": "uid://dftdfph41cnpv", # can be a relative path to the texture, but a string nevertheless
 		"terrain edge": "uid://bad5ey7wkh63x", # same as "terrain fill"
 		"checkpoint": "res://assets/stages/farm/checkpoint_juicestand.png", # same as "terrain fill"
-		#"background": "res://assets/stages/city/shopping_street.png",
 		"background": "res://assets/stages/farm/tomato_farm_clouds.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission": "uid://ct1qkka6lngc5", # can be a relative path to the scene, but a string nevertheless
 	},
-	"streets of coffee": {
+	"city": {
 		"name": "city",
 		"terrain fill": "res://assets/stages/city/conrete_tile.png",
 		"terrain edge": "res://assets/stages/city/concrete_edge.png",
 		"background": "res://assets/stages/city/shopping_street.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
-	}
+	},
+	"city in ruins": {
+		"name": "city2",
+		"terrain fill": "res://assets/stages/city/conrete_tile.png",
+		"terrain edge": "res://assets/stages/city/concrete_edge.png",
+		"background": "res://assets/stages/city/city_street.png",
+		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
+		"stage length": 3e4, # should be a float
+	},
 }

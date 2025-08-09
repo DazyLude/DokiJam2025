@@ -2,6 +2,7 @@ extends Node
 
 
 const COLLECTIBLE_HOVER_OFFSET := -100.0;
+const LEFT_APPENDIX := -1000.0;
 
 # this script should handle background switcheroos and terrain generation based on the players coordinate
 # for terrain generation, I think about doing it in chunks using a smooth-ish height(x) function and a samplerate
@@ -24,6 +25,13 @@ func _ready() -> void:
 	hud.player = player;
 	load_stage();
 	player.apply_player_stats(PlayerStats.get_latest());
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"pause"):
+		var pause_screen := preload("res://scenes/pause_menu.tscn").instantiate();
+		$UILayer.add_child(pause_screen);
+		get_viewport().set_input_as_handled();
 
 
 func _process(delta: float) -> void:
@@ -63,12 +71,15 @@ func place_collectible_at(x: float, collectible_data: PickupItemData) -> PickupI
 	var collectible := preload("res://scenes/gameplay_elements/pickup_item.tscn").instantiate();
 	place_node_at(collectible, x, COLLECTIBLE_HOVER_OFFSET);
 	collectible.data = collectible_data;
-	
 	collectibles.add_child(collectible);
 	return collectible;
 
 
 func spawn_obstacles() -> void:
+	var sign = GameState.current_stage.obstacles.get_specific_obstacle("sign");
+	place_node_at(sign, LEFT_APPENDIX);
+	$DecorationsBack.add_child(sign);
+	
 	for i in range(3, 10):
 		var obstacle = GameState.current_stage.obstacles.get_random_obstacle();
 		var x = GameState.current_stage.stage_length * i / 13;
@@ -124,14 +135,13 @@ func generate_terrain() -> void:
 	var stage := GameState.current_stage;
 	var generator = GameState.current_stage.generator;
 	
-	var left_appendix := -1000.0;
-	var appendix_sample_count := -roundi(left_appendix / TerrainGenerator.SAMPLE_DELTA);
+	var appendix_sample_count := -roundi(LEFT_APPENDIX / TerrainGenerator.SAMPLE_DELTA);
 	
 	var right_appendix := 1000.0;
 	appendix_sample_count += roundi(right_appendix / TerrainGenerator.SAMPLE_DELTA);
 	
 	var sample_count = roundi(stage.stage_length / TerrainGenerator.SAMPLE_DELTA);
-	generator.prepare_coordinates(sample_count + appendix_sample_count, left_appendix);
+	generator.prepare_coordinates(sample_count + appendix_sample_count, LEFT_APPENDIX);
 	var points := generator.sample();
 	
 	ss2d_shape.clear_points();
