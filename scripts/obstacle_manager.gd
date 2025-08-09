@@ -25,7 +25,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		],
 		"flippable": true,
 	},
-	"toemaytoes": {
+	"tomato box": {
 		"scene": "res://scenes/gameplay_elements/obstacles/tomato_box.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
@@ -33,12 +33,89 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, -250.0),
 		],
-	}
+	},
+	"cone": {
+		"scene": "res://scenes/gameplay_elements/obstacles/cone.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -150.0),
+		],
+	},
+	"dumpster": {
+		"scene": "res://scenes/gameplay_elements/obstacles/dumpster.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -350.0),
+		],
+	},
+	"garbage": {
+		"scene": "res://scenes/gameplay_elements/obstacles/garbage.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -150.0),
+		],
+	},
+	"lamp": {
+		"scene": "res://scenes/gameplay_elements/obstacles/lamp.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city", "city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -500.0),
+		],
+	},
+	"news stand": {
+		"scene": "res://scenes/gameplay_elements/obstacles/news_stand.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city"],
+		"positions": [
+			PositionPreset.fixed(0.0, -350.0),
+		],
+	},
+	"sign": {
+		"scene": "res://scenes/gameplay_elements/obstacles/sign.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -275.0),
+		],
+	},
+	"table": {
+		"scene": "res://scenes/gameplay_elements/obstacles/table.tscn",
+		"scale": Vector2(0.4, 0.4),
+		"weight": 100.0,
+		"natural habitat": ["city"],
+		"positions": [
+			PositionPreset.fixed(0.0, -200.0),
+		],
+	},
+	"trash can": {
+		"scene": "res://scenes/gameplay_elements/obstacles/trash_can.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city", "city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -175.0),
+		],
+	},
 }
+
 
 var rng : RandomNumberGenerator;
 var _obstacles : PackedStringArray;
 var _weights : PackedFloat32Array;
+
+
+static func for_stage(stage: String) -> ObstacleManager:
+	return from_array(get_obstacles(stage));
 
 
 # returns a list of obstacles encountered at stage
@@ -66,9 +143,8 @@ static func from_array(obstacles: PackedStringArray) -> ObstacleManager:
 	return mane;
 
 
-func get_random_obstacle() -> Node2D:
-	var obs_idx := rng.rand_weighted(_weights);
-	var obstacle_name :=_obstacles[obs_idx];
+# can access obstacles not native to the current stage
+func get_specific_obstacle(obstacle_name: String) -> Node2D:
 	var obstacle_data := obstacle_metadata[obstacle_name];
 	var obstacle_path := obstacle_data["scene"] as String;
 	var obstacle_scene := load(obstacle_path).instantiate() as GenericObstacle;
@@ -96,3 +172,9 @@ func get_random_obstacle() -> Node2D:
 		obstacle_scene.flip()
 	
 	return obstacle_scene;
+
+
+func get_random_obstacle() -> Node2D:
+	var obs_idx := rng.rand_weighted(_weights);
+	var obstacle_name :=_obstacles[obs_idx];
+	return get_specific_obstacle(obstacle_name);

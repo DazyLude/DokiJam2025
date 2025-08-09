@@ -88,7 +88,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"stage length": 3e4, # should be a float
 	},
 	"city in ruins": {
-		"name": "city:re",
+		"name": "city2",
 		"terrain fill": "res://assets/stages/city/conrete_tile.png",
 		"terrain edge": "res://assets/stages/city/concrete_edge.png",
 		"background": "res://assets/stages/city/city_street.png",
