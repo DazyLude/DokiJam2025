@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://behqg33ehrrid"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_ftbws"]
+[ext_resource type="Texture2D" uid="uid://cv7cgavkm4vge" path="res://assets/obstacles/table.png" id="2_ftbws"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ftbws")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ftbws")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-310, 184, -273, 35, -313, 28, -330, -140, -302, -140, -281, -3, -146, -5, -117, -143, 315, -145, 326, -109, 248, -103, 186, 87, 291, 82, 325, 112, 327, 197)

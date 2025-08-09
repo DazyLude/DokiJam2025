@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://xgkr3jv5tgqh"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_s4svf"]
+[ext_resource type="Texture2D" uid="uid://dynybetaq1st1" path="res://assets/obstacles/cone.png" id="2_s4svf"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_s4svf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_s4svf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-231, 151, -230, 130, -135, 129, -36, -173, 53, -170, 130, 129, 210, 134, 212, 163)
