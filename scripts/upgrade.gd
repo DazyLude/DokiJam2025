@@ -79,6 +79,28 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 		# String (name of a stage, "" or skip for always)
 		"shop_unlock": "",
 	},
+	WINGS: {
+		"type": TYPE_INCREMENTAL,
+		# int
+		"max level": 4,
+		# array with float values
+		"cost": [1.0, 4.0, 15.0, 40.0],
+		# String (name of a stage, "" or skip for never)
+		"autounlock": "city",
+		# String (name of a stage, "" or skip for always)
+		"shop_unlock": "",
+	},
+	SUPPS: {
+		"type": TYPE_INCREMENTAL,
+		# int
+		"max level": 4,
+		# array with float values
+		"cost": [1.0, 4.0, 15.0, 40.0],
+		# String (name of a stage, "" or skip for never)
+		"autounlock": "",
+		# String (name of a stage, "" or skip for always)
+		"shop_unlock": "",
+	},
 	SKINSUIT_TOMATO: {
 		"type": TYPE_ONE_OFF,
 		"autounlock": "tomato fields", # String (stage name)

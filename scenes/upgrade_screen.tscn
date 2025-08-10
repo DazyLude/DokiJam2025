@@ -101,7 +101,7 @@ custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
-text = "Speed:"
+text = "Coffee:"
 vertical_alignment = 1
 
 [node name="UpgradeButton" type="TextureButton" parent="SpeedContainer"]
@@ -203,7 +203,7 @@ custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
-text = "Stamina:"
+text = "Ketchup:"
 vertical_alignment = 1
 
 [node name="UpgradeButton" type="TextureButton" parent="StaminaContainer"]
@@ -254,7 +254,7 @@ custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
-text = "Noise:"
+text = "Voice:"
 vertical_alignment = 1
 
 [node name="UpgradeButton" type="TextureButton" parent="LoudnessContainer"]
@@ -312,7 +312,7 @@ custom_minimum_size = Vector2(136, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
-text = "Bounce:"
+text = "Wings:"
 vertical_alignment = 1
 
 [node name="UpgradeButton" type="TextureButton" parent="BounceContainer"]
@@ -336,6 +336,64 @@ texture = ExtResource("6_f545e")
 expand_mode = 1
 
 [node name="UpgradeCost" type="Label" parent="BounceContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "x200"
+vertical_alignment = 1
+
+[node name="SuppsContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -130.0
+offset_right = 470.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="UpgradeIcon" type="TextureRect" parent="SuppsContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = ExtResource("2_8myhc")
+expand_mode = 1
+
+[node name="UpgradeLabel" type="Label" parent="SuppsContainer"]
+custom_minimum_size = Vector2(136, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Supps:"
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="TextureButton" parent="SuppsContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("3_rnmk4")
+texture_pressed = ExtResource("4_waouo")
+texture_hover = ExtResource("5_6005o")
+texture_disabled = ExtResource("25_qd7s1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="SuppsContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = ExtResource("6_f545e")
+expand_mode = 1
+
+[node name="UpgradeCost" type="Label" parent="SuppsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 32
@@ -486,6 +544,7 @@ text = "CONTINUE"
 [connection signal="pressed" from="StaminaContainer/UpgradeButton" to="." method="_on_stamina_pressed"]
 [connection signal="pressed" from="LoudnessContainer/UpgradeButton" to="." method="_on_loudness_pressed"]
 [connection signal="pressed" from="BounceContainer/UpgradeButton" to="." method="_on_bounce_pressed"]
+[connection signal="pressed" from="SuppsContainer/UpgradeButton" to="." method="_on_supps_pressed"]
 [connection signal="pressed" from="SkinsuitContainer/SkinsuitTomato" to="." method="_on_skin_tomato_pressed"]
 [connection signal="pressed" from="SkinsuitContainer/SkinsuitCrowki" to="." method="_on_skin_crowki_pressed"]
 [connection signal="pressed" from="SkinsuitContainer/SkinsuitRetro" to="." method="_on_skin_retro_pressed"]

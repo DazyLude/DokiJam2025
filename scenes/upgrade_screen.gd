@@ -7,6 +7,7 @@ static var containers: Dictionary = {
 	"stamina": "StaminaContainer",
 	"loudness": "LoudnessContainer",
 	"bounce": "BounceContainer",
+	"supps": "SuppsContainer",
 }
 
 # Instantiate the upgrade class to access upgrade data
@@ -26,7 +27,8 @@ func _ready() -> void:
 	update_upgrade_cost("armor", upgrades.ARMOR)
 	update_upgrade_cost("stamina", upgrades.KETCHUP_TANK)
 	update_upgrade_cost("loudness", upgrades.VOCAL)
-	update_upgrade_cost("bounce", upgrades.BOUNCE)
+	update_upgrade_cost("bounce", upgrades.WINGS)
+	update_upgrade_cost("supps", upgrades.SUPPS)
 	update_doki_coins()
 	
 	# Check Skinsuit status
@@ -89,17 +91,22 @@ func _on_loudness_pressed() -> void:
 
 ## upgrade character bounce
 func _on_bounce_pressed() -> void:
-	button_buy_upgrade("bounce", upgrades.BOUNCE)
+	button_buy_upgrade("bounce", upgrades.WINGS)
+
+
+func _on_supps_pressed() -> void:
+	button_buy_upgrade("supps", upgrades.SUPPS)
+
 
 ## select tomato skinsuit
 func _on_skin_tomato_pressed() -> void:
 	print("Select Tomato Skinsuit")
-	#GameState.selected_skinsuit = upgrades.SKINSUIT_TOMATO
+	GameState.selected_skinsuit = upgrades.SKINSUIT_TOMATO
 
 ## select crowki skinsuit
 func _on_skin_crowki_pressed() -> void:
 	print("Select Crowki Skinsuit")
-	#GameState.selected_skinsuit = upgrades.SKINSUIT_CROWKI
+	GameState.selected_skinsuit = upgrades.SKINSUIT_CROWKI
 
 ## select retro skinsuit
 func _on_skin_retro_pressed() -> void:

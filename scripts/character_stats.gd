@@ -30,7 +30,14 @@ func add_dict(dict: Dictionary) -> void:
 		var bonus_value = dict[property];
 		match property:
 			"friction":
-				friction += bonus_value - bonus_value * friction # multiplicative stacking
+				friction += bonus_value - bonus_value * friction; # multiplicative stacking
+				friction = clampf(friction, 0.0, 1.0);
+			"bounce":
+				bounce += bonus_value - bonus_value * bounce; # multiplicative stacking
+				bounce = clampf(bounce, 0.0, 1.0);
+			"jump_cost":
+				jump_cost += bonus_value - bonus_value * jump_cost; # multiplicative stacking
+				jump_cost = maxf(jump_cost, 0.5);
 			_ when property in self:
 				self.set(property, self.get(property) + bonus_value);
 
@@ -57,17 +64,51 @@ static func get_latest() -> PlayerStats:
 
 
 static var upgrade_stats : Dictionary[int, Variant] = {
-	Upgrade.COFFEE : [
-		{"player_torque": 10.0}, {"player_torque": 20.0}, {"player_torque": 40.0}, {"player_torque": 80.0}
-	],
-	Upgrade.SUPPS : func(level: int): return {"friction": 0.05 * level},
-	Upgrade.WINGS : null,
-	Upgrade.KETCHUP_TANK : null,
-	Upgrade.ARMOR : null,
+	Upgrade.COFFEE : coffee_buff,
+	Upgrade.SUPPS : supps_buff,
+	Upgrade.WINGS : wings_buff,
+	Upgrade.KETCHUP_TANK : null, # managed separately
+	Upgrade.ARMOR : armor_buff,
 	Upgrade.VOCAL : null,
 	Upgrade.BOUNCE : null,
 }
 
+
+static func coffee_buff(lvl: int) -> Dictionary:
+	return {
+		"player_torque": 10.0 * pow(2, lvl),
+	}
+
+
+static func supps_buff(lvl: int) -> Dictionary:
+	return {
+		"friction": 0.05 * lvl,
+		"jump_fly_scale": 0.02 * lvl,
+		"player_torque": 1.0 * lvl,
+		"mass": 0.2 * lvl, 
+	};
+
+
+static func wings_buff(lvl: int) -> Dictionary:
+	return {
+		"aeroshape": 2.0 * lvl,
+		"player_fly_strength": 50.0 * lvl,
+		"jump_cost" : -0.1 * lvl,
+	}
+
+
+static func armor_buff(lvl: int) -> Dictionary:
+	return {
+		"hardness": 2.0 * lvl,
+		"aeroshape": 1.0 * lvl,
+		"bounce": 0.05 * lvl,
+	}
+
+
+static func vocal_buff(lvl: int) -> Dictionary:
+	return {
+		"bounce": 0.15 * lvl,
+	} 
 
 
 const stat_dicts : Dictionary[String, Dictionary] = {
@@ -76,12 +117,11 @@ const stat_dicts : Dictionary[String, Dictionary] = {
 		"player_fly_strength" : 1800.0,
 		"jump_fly_scale" : 0.35,
 		"jump_cost" : 2.0,
-		"hardness" : 10.0,
-		"aeroshape" : 10.0,
+		"hardness" : 5.0,
+		"aeroshape" : 5.0,
 		"friction" : 0.75,
 		"bounce" : 0.1,
 		"mass" : 10.0,
-		#"inertia" : 500.0,
 		"linear_damp" : 0.0,
 		"angular_damp" : 0.0,
 	},
