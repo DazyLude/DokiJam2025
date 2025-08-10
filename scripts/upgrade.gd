@@ -26,80 +26,52 @@ enum {
 static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	COFFEE: {
 		"type": TYPE_INCREMENTAL,
-		# int
 		"max level": 4,
-		# array with float values
 		"cost": [1.0, 4.0, 15.0, 40.0],
-		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
-		# String (name of a stage, "" or skip for always)
 		"shop_unlock": "",
 	},
 	ARMOR: {
 		"type": TYPE_INCREMENTAL,
-		# int
 		"max level": 4,
-		# array with float values
 		"cost": [1.0, 4.0, 15.0, 40.0],
-		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
-		# String (name of a stage, "" or skip for always)
 		"shop_unlock": "",
 	},
 	KETCHUP_TANK: {
 		"type": TYPE_INCREMENTAL,
-		# int
 		"max level": 4,
-		# array with float values
 		"cost": [1.0, 4.0, 15.0, 40.0],
-		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
-		# String (name of a stage, "" or skip for always)
 		"shop_unlock": "",
 	},
 	VOCAL: {
 		"type": TYPE_INCREMENTAL,
-		# int
 		"max level": 4,
-		# array with float values
 		"cost": [1.0, 4.0, 15.0, 40.0],
-		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
-		# String (name of a stage, "" or skip for always)
 		"shop_unlock": "",
 	},
 	BOUNCE: {
 		"type": TYPE_INCREMENTAL,
-		# int
 		"max level": 4,
-		# array with float values
 		"cost": [1.0, 4.0, 15.0, 40.0],
-		# String (name of a stage, "" or skip for never)
 		"autounlock": "",
-		# String (name of a stage, "" or skip for always)
 		"shop_unlock": "",
 	},
 	WINGS: {
 		"type": TYPE_INCREMENTAL,
-		# int
 		"max level": 4,
-		# array with float values
 		"cost": [1.0, 4.0, 15.0, 40.0],
-		# String (name of a stage, "" or skip for never)
 		"autounlock": "city",
-		# String (name of a stage, "" or skip for always)
-		"shop_unlock": "",
+		"shop_unlock": "city",
 	},
 	SUPPS: {
 		"type": TYPE_INCREMENTAL,
-		# int
 		"max level": 4,
-		# array with float values
 		"cost": [1.0, 4.0, 15.0, 40.0],
-		# String (name of a stage, "" or skip for never)
-		"autounlock": "",
-		# String (name of a stage, "" or skip for always)
-		"shop_unlock": "",
+		"autounlock": "city2",
+		"shop_unlock": "city2",
 	},
 	SKINSUIT_TOMATO: {
 		"type": TYPE_ONE_OFF,
