@@ -4,6 +4,7 @@ class_name TerrainGenerator extends RefCounted
 const SAMPLE_DELTA := 100.0;
 const CHAIR_HEIGHT := 10.0;
 const CHAIR_HEIGHT_CBRT := pow(CHAIR_HEIGHT, 1.0/3.0);
+const CHAIR_SMOOTH_END := 0.6;
 
 
 var generator_params: PackedVector2Array;
@@ -38,9 +39,14 @@ func generator_function(x: float) -> float:
 	var incremental_variation : float = 0
 	
 	# Previous iteration:
-	#if x_scaled < CHAIR_HEIGHT_CBRT:
-	if x_scaled < 1.7:
+	if x_scaled < CHAIR_HEIGHT_CBRT * CHAIR_SMOOTH_END:
 		result += CHAIR_HEIGHT - pow(x_scaled, 3.0);
+	elif x_scaled < CHAIR_HEIGHT_CBRT:
+		var smoothing = (1.0 - x_scaled / CHAIR_HEIGHT_CBRT) / (1.0 - CHAIR_SMOOTH_END);
+		result += (CHAIR_HEIGHT - pow(x_scaled, 3.0)) * smoothing;
+		
+		incremental_variation = 1e-4 * x * (sin(x_scaled) + 1)
+		result += (incremental_variation + noise_generator.get_noise_1d(x) + 1) * (1 - smoothing);
 	else:
 		# Previous iteration:
 		#result += noise_generator.get_noise_1d(x) + 1;
