@@ -13,6 +13,8 @@ const PHYSICS_FPS_TEMPLATE := "last physics delta: %1.2f (~%d FPS)"
 
 var player : Player;
 
+var noise_gen_cache : Noise;
+
 
 func _process(delta: float) -> void:
 	if player != null:
@@ -29,3 +31,7 @@ func _process(delta: float) -> void:
 	if GameState != null:
 		$DataContainer/Stamina.text = STAMINA_SPEED_TEMPLATE % GameState.juice;
 		$CoinCounter/Label.text = "%d" % GameState.dokicoins;
+	
+	if noise_gen_cache != GameState.current_stage.generator.noise_generator:
+		noise_gen_cache = GameState.current_stage.generator.noise_generator;
+		$DataContainer/Noise.texture = ImageTexture.create_from_image(noise_gen_cache.get_image(1000, 1000));

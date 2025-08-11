@@ -7,6 +7,11 @@ const CHAIR_HEIGHT_CBRT := pow(CHAIR_HEIGHT, 1.0/3.0);
 const CHAIR_SMOOTH_END := 0.6;
 
 
+const OBSTACLE_DENSITY = 0.05;
+const OBSTACLE_SAMPLE_RATE = 50.0;
+const OBSTACLE_NOISE_Y = 1000.0;
+
+
 var generator_params: PackedVector2Array;
 var coordinates: PackedFloat32Array;
 var scale : Vector2;
@@ -64,5 +69,34 @@ func sample() -> PackedVector2Array:
 	for i in size:
 		var x = coordinates[i];
 		result[i] = Vector2(x, generator_function(x));
+	
+	return result;
+
+
+func get_obstacle_coords(from: float, to: float) -> PackedFloat32Array:
+	var count = floori(abs(to - from) / OBSTACLE_SAMPLE_RATE);
+	
+	var result = PackedFloat32Array();
+	var samples = PackedFloat32Array();
+	var sample_coords = PackedFloat32Array();
+	var samples_sorted = PackedFloat32Array();
+	
+	samples.resize(count);
+	sample_coords.resize(count);
+	samples_sorted.resize(count);
+	
+	for i in count:
+		var coord = from + OBSTACLE_SAMPLE_RATE * i;
+		var sample = noise_generator.get_noise_2d(coord, OBSTACLE_NOISE_Y);
+		samples[i] = sample;
+		samples_sorted[i] = sample;
+		sample_coords[i] = coord;
+	
+	samples_sorted.sort()
+	var threshold_value = samples_sorted[floori(count * (1.0 - OBSTACLE_DENSITY))];
+	
+	for i in count:
+		if samples[i] > threshold_value:
+			result.push_back(sample_coords[i]);
 	
 	return result;

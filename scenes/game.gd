@@ -82,9 +82,11 @@ func spawn_obstacles() -> void:
 	place_node_at(sign, LEFT_APPENDIX);
 	$DecorationsBack.add_child(sign);
 	
-	for i in range(3, 10):
+	var obstacle_start = 2000.0;
+	var obstacle_end = GameState.current_stage.stage_length;
+	
+	for x in GameState.current_stage.generator.get_obstacle_coords(obstacle_start, obstacle_end):
 		var obstacle = GameState.current_stage.obstacles.get_random_obstacle();
-		var x = GameState.current_stage.stage_length * i / 13;
 		place_node_at(obstacle, x);
 		$DecorationsBack.add_child(obstacle);
 

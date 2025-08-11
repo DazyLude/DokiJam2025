@@ -17,6 +17,13 @@ layout_mode = 1
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Noise" type="TextureRect" parent="DataContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand_mode = 1
+
 [node name="Speed" type="Label" parent="DataContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
