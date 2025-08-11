@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dsygnq6v144q2"]
+[gd_scene load_steps=12 format=3 uid="uid://dsygnq6v144q2"]
 
 [ext_resource type="Script" uid="uid://b4xgne00eu2bu" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://c8oyl5lcdqy6u" path="res://assets/skinsuits/tomato/tomato_base.png" id="2_75vfm"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cqsv4e168n3ls" path="res://assets/skinsuits/tomato/tomato_tired.png" id="6_h17s1"]
 [ext_resource type="Script" uid="uid://vxqeovyjrlad" path="res://scenes/player/player_camera.gd" id="7_0owmy"]
 [ext_resource type="Script" uid="uid://dt2ixcd0rkqdg" path="res://scenes/player/sound_controller.gd" id="8_qek5x"]
+[ext_resource type="Script" uid="uid://is8g47s77xuw" path="res://scenes/player/wings_manager.gd" id="9_5gtgg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dovo2"]
 friction = 0.75
@@ -26,6 +27,9 @@ max_contacts_reported = 1
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_dovo2")
+
+[node name="Wings" type="Node2D" parent="."]
+script = ExtResource("9_5gtgg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -4)

@@ -46,10 +46,12 @@ var speedometer := Speedometer.new();
 # camera tracks average player speed for camera offset
 @onready var camera = $Camera2D;
 @onready var sound_controller = $AudioStreamPlayer2D;
+@onready var wings = $Wings;
 
 
 func _ready() -> void:
 	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
+	wings.update_wings_count(GameState.upgrades.get_upgrade_level(Upgrade.WINGS));
 	
 	if GameState.player != null and GameState.player != self:
 		print("unlinking old Player instance from game state");
@@ -98,6 +100,7 @@ func _physics_process(delta: float) -> void:
 		jump_buffer = 0.0;
 	
 	if contact_count == 0 and Input.is_action_just_pressed(&"jump"):
+		try_flap();
 		jump_buffer = JUMP_BUFFER_TIME;
 	
 	if jump_buffer > 0.0:
@@ -172,6 +175,21 @@ func try_jump() -> void:
 		GameState.juice -= jump_cost;
 
 
+func try_flap() -> void:
+	if GameState.upgrades.get_upgrade_level(Upgrade.WINGS) < 1:
+		return;
+	
+	var upward_unit_vector := Vector2(0, -1);
+	var upward_impulse := upward_unit_vector * player_fly_strength * mass * jump_fly_scale;
+	
+	hng_for = 0.2;
+	
+	if GameState.juice > jump_cost:
+		apply_central_impulse(upward_impulse);
+		GameState.juice -= jump_cost;
+		wings.flap();
+
+
 func is_stationary() -> bool:
 	return SPEED_LOWER_LIMIT > self.linear_velocity.length();
 
@@ -182,9 +200,8 @@ func take_impact_damage() -> void:
 	
 	if damage > 0.0:
 		GameState.juice = move_toward(GameState.juice, 0.0, damage);
-		print("taken %s damage", damage);
+		print("taken %s damage" % damage);
 		sound_controller.record_taken_damage(damage);
-
 
 
 class Speedometer:
