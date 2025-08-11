@@ -1,28 +1,13 @@
 class_name Player extends RigidBody2D
 
 
-const CAMERA_GIVE := 1e-5;
-const CAMERA_OFFSET_LIMIT := 150.0;
-const CAMERA_LLG = CAMERA_OFFSET_LIMIT * CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
-const CAMERA_LG = CAMERA_OFFSET_LIMIT * CAMERA_GIVE;
-
-const DEFAULT_CAMERA_OFFSET := Vector2(0.0, -200.0);
-const DEFAULT_CAMERA_OFFSET_SCALED := DEFAULT_CAMERA_OFFSET / CAMERA_LLG
-
 ## speed at which the player is considered stationary
 const SPEED_LOWER_LIMIT := 0.5; # in px/s
 const SAFE_SPEED_LIMIT := 750.0;
 
-## players running average velocity is calculated over VELOCITY_AVG_LIMIT amount of frames
-const VELOCITY_AVG_LIMIT := 120;
-var velocity_avg_array := PackedVector2Array();
-var velocity_avg := Vector2();
-var velocity_avg_idx : int = 0;
-
 # debug info
 var last_frame_delta : float = 0.0;
 var last_frame_delta_physics : float = 0.0;
-
 
 #region stats
 # torque applied, usually multiplied by inertia
@@ -41,7 +26,7 @@ var aeroshape := 10.0;
 
 # when "airborne" (this can happen a lot more often than expected in a physics simulation like ours)
 # pressing "jump" action will activate buffer and jump will be executed when the player touches the ground
-const JUMP_BUFFER_TIME = 0.1; 
+const JUMP_BUFFER_TIME = 0.1;
 var jump_buffer : float = 0.0; # in seconds
 
 # body needs to not have contacts with ground for this amount of seconds to be considered flying
@@ -55,12 +40,15 @@ var is_flying : bool :
 var hng_for : float = 0.0; # in seconds
 
 
+var speedometer := Speedometer.new();
+
+# camera node changes viewport coordinates to be in the center
+# camera tracks average player speed for camera offset
 @onready var camera = $Camera2D;
-@onready var sound_player = $AudioStreamPlayer2D;
+@onready var sound_controller = $AudioStreamPlayer2D;
 
 
 func _ready() -> void:
-	velocity_avg_array.resize(VELOCITY_AVG_LIMIT);
 	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
 	
 	if GameState.player != null and GameState.player != self:
@@ -94,16 +82,15 @@ func _physics_process(delta: float) -> void:
 	
 	var contact_count = get_contact_count();
 	
-	if is_flying and abs(linear_velocity.y) > SAFE_SPEED_LIMIT and contact_count > 0:
+	# manage fall damage
+	if is_flying and abs(speedometer.get_last_frame_speed().y) > SAFE_SPEED_LIMIT and contact_count > 0:
 		take_impact_damage();
 	
+	# manage contact timer
 	if contact_count == 0:
 		no_contact_time += delta;
 	else:
 		no_contact_time = 0.0;
-	
-	if is_flying and (abs(linear_velocity.y) > SAFE_SPEED_LIMIT or abs(linear_velocity.x) > SAFE_SPEED_LIMIT ** 2):
-		play_sound(Sounds.ID.SFX_AAGH);
 	
 	# jump logic
 	if contact_count > 0 and (Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0):
@@ -124,13 +111,12 @@ func _physics_process(delta: float) -> void:
 	apply_central_force(-linear_velocity * mass / aeroshape);
 	
 	last_frame_delta_physics = delta;
+	sound_controller.update_player_state(self);
+	speedometer.update_speed(self.linear_velocity);
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed(&'nudge_camera_down'):
-		calc_camera_offset(linear_velocity + Vector2(0.0, 400.0));
-	else:
-		calc_camera_offset(linear_velocity);
+	camera.update_offset(self, rotation);
 	
 	if hng_for > 0:
 		if GameState.juice > jump_cost:
@@ -190,29 +176,41 @@ func is_stationary() -> bool:
 	return SPEED_LOWER_LIMIT > self.linear_velocity.length();
 
 
-func calc_camera_offset(velocity: Vector2) -> void:
-	# update average velocity
-	if velocity_avg_idx == VELOCITY_AVG_LIMIT:
-		velocity_avg_idx = 0;
-	
-	velocity_avg += (velocity - velocity_avg_array[velocity_avg_idx]) / VELOCITY_AVG_LIMIT;
-	velocity_avg_array[velocity_avg_idx] = velocity;
-	velocity_avg_idx += 1;
-	
-	# calculate new camera offset
-	var vel_len := velocity_avg.length();
-	camera.position = (DEFAULT_CAMERA_OFFSET_SCALED + velocity_avg).rotated(-rotation) * CAMERA_LLG / (1 + vel_len * CAMERA_LG);
-
-
 func take_impact_damage() -> void:
-	var speed_diff = abs(linear_velocity.y) - SAFE_SPEED_LIMIT;
+	var speed_diff = abs(speedometer.get_last_frame_speed().y) - SAFE_SPEED_LIMIT;
 	var damage = 0.1 * sqrt(speed_diff);
-	GameState.juice = move_toward(GameState.juice, 0.0, damage);
-	if damage > 0.1:
-		play_sound(Sounds.ID.SFX_AAGH, true);
+	
+	if damage > 0.0:
+		GameState.juice = move_toward(GameState.juice, 0.0, damage);
+		print("taken %s damage", damage);
+		sound_controller.record_taken_damage(damage);
 
 
-func play_sound(id: Sounds.ID, force: bool = false) -> void:
-	if not sound_player.playing or force:
-		sound_player.stream = Sounds.get_stream_by_id(id);
-		sound_player.play();
+
+class Speedometer:
+	## players running average velocity is calculated over VELOCITY_AVG_LIMIT amount of frames
+	const VELOCITY_AVG_LIMIT := 120;
+	var velocity_array := PackedVector2Array();
+	var velocity_idx : int = 0;
+	var velocity_avg := Vector2();
+	
+	
+	func _init() -> void:
+		velocity_array.resize(VELOCITY_AVG_LIMIT);
+	
+	
+	func update_speed(player_velocity) -> void:
+		# update average velocity
+		if velocity_idx == VELOCITY_AVG_LIMIT:
+			velocity_idx = 0;
+		
+		velocity_avg += (player_velocity - velocity_array[velocity_idx]) / VELOCITY_AVG_LIMIT;
+		velocity_array[velocity_idx] = player_velocity;
+		velocity_idx += 1;
+	
+	
+	func get_last_frame_speed() -> Vector2:
+		if velocity_idx == 0:
+			return velocity_array[VELOCITY_AVG_LIMIT - 1];
+		else:
+			return velocity_array[velocity_idx - 1];

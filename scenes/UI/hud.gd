@@ -16,7 +16,7 @@ var player : Player;
 
 func _process(delta: float) -> void:
 	if player != null:
-		$DataContainer/Speed.text = SPEED_TEMPLATE % player.velocity_avg.length();
+		$DataContainer/Speed.text = SPEED_TEMPLATE % player.speedometer.velocity_avg.length();
 		$DataContainer/AngularSpeed.text = ANGULAR_SPEED_TEMPLATE % player.angular_velocity;
 		$DataContainer/Coordinates.text = COORDS_TEMPLATE % [player.position.x, player.position.y];
 		var upward = Vector2(0, -1).rotated(player.rotation);

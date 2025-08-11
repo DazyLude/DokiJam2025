@@ -23,7 +23,7 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.MUSIC_ESCAPE_FROM_TARKOV: "res://assets/music/Escaping the Tomato Farm pt1.ogg",
 	ID.MUSIC_UPGRADE_SHOP_THEME: "res://assets/music/Last cup of coffee - lofi bossa.ogg",
 	ID.MUSIC_UPGRADE_SHOP_THEME_COOL: "res://assets/music/Last cup of coffee - lofi bossa with quotes.ogg",
-	ID.MUSIC_MELANCHOLY_TOMATO: "res://assets/music/Tomato Farm.ogg",
+	ID.MUSIC_MELANCHOLY_TOMATO: "res://assets/music/Tomato Farm v2.ogg",
 	
 	ID.SFX_FUCK: "res://assets/sfx/fuck.wav",
 	ID.SFX_AAGH: "res://assets/sfx/Scream 1.wav",
