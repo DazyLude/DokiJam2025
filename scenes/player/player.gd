@@ -28,6 +28,8 @@ var aeroshape := 10.0;
 # pressing "jump" action will activate buffer and jump will be executed when the player touches the ground
 const JUMP_BUFFER_TIME = 0.1;
 var jump_buffer : float = 0.0; # in seconds
+var flap_amount = 0
+var is_grounded = false
 
 # body needs to not have contacts with ground for this amount of seconds to be considered flying
 const FLIGHT_TIME_REQUIREMENT = 0.2;
@@ -91,17 +93,32 @@ func _physics_process(delta: float) -> void:
 	# manage contact timer
 	if contact_count == 0:
 		no_contact_time += delta;
+		if is_flying:
+			is_grounded = false
 	else:
 		no_contact_time = 0.0;
+		flap_amount = 0;
+		is_grounded = true
 	
-	# jump logic
-	if contact_count > 0 and (Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0):
-		try_jump();
-		jump_buffer = 0.0;
+	# jump logic v1
+	#if contact_count > 0 and (Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0):eee
+	#	try_jump();
+	#	jump_buffer = 0.0;
+	#	is_flapping = true
 	
-	if contact_count == 0 and Input.is_action_just_pressed(&"jump"):
-		try_flap();
-		jump_buffer = JUMP_BUFFER_TIME;
+	#if contact_count == 0 aneeeeed Input.is_action_just_pressed(&"jump"):
+	#	try_flap();
+	#	jump_buffer = JUMP_BUFFER_TIME;
+	# jump logic v2
+	if is_grounded:
+		if Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0:
+			try_jump();
+			jump_buffer = 0.0;
+			is_grounded = false
+	else:
+		if Input.is_action_just_pressed(&"jump"):
+			try_flap();
+			jump_buffer = JUMP_BUFFER_TIME;
 	
 	if jump_buffer > 0.0:
 		jump_buffer -= delta;
@@ -171,12 +188,17 @@ func try_jump() -> void:
 	hng_for = 0.2;
 	
 	if GameState.juice > jump_cost:
-		apply_central_impulse(upward_impulse);
+		#apply_central_impulse(upward_impulse);
 		GameState.juice -= jump_cost;
+	else:
+		upward_impulse *= GameState.juice / jump_cost
+		GameState.juice = 0
+	apply_central_impulse(upward_impulse);
 
 
 func try_flap() -> void:
-	if GameState.upgrades.get_upgrade_level(Upgrade.WINGS) < 1:
+	var flap_stat = GameState.upgrades.get_upgrade_level(Upgrade.WINGS)
+	if flap_stat < 1 or flap_amount >= flap_stat:
 		return;
 	
 	var upward_unit_vector := Vector2(0, -1);
@@ -185,9 +207,17 @@ func try_flap() -> void:
 	hng_for = 0.2;
 	
 	if GameState.juice > jump_cost:
-		apply_central_impulse(upward_impulse);
+		#apply_central_impulse(upward_impulse);
 		GameState.juice -= jump_cost;
-		wings.flap();
+		#flap_amount += 1;
+		#wings.flap();
+	else:
+		upward_impulse *= GameState.juice / jump_cost
+		GameState.juice = 0
+	
+	flap_amount += 1;
+	apply_central_impulse(upward_impulse);
+	wings.flap();
 
 
 func is_stationary() -> bool:
@@ -196,7 +226,9 @@ func is_stationary() -> bool:
 
 func take_impact_damage() -> void:
 	var speed_diff = abs(speedometer.get_last_frame_speed().y) - SAFE_SPEED_LIMIT;
-	var damage = 0.1 * sqrt(speed_diff);
+	#var damage = 0.1 * sqrt(speed_diff);
+	#var damage = (0.1 - (0.01 * (hardness - 5))) * sqrt(speed_diff)
+	var damage = sqrt(speed_diff)/(5.0 + hardness)
 	
 	if damage > 0.0:
 		GameState.juice = move_toward(GameState.juice, 0.0, damage);

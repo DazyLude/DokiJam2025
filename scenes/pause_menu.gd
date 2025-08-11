@@ -35,6 +35,7 @@ func _ready() -> void:
 	update_slider_value(SFX)
 	# Update Ketchup Meter
 	get_node("KetchupMeter").value = GameState.juice/GameState.juice_cap * 100
+	print("Stamina: %d/%d = %d" % [GameState.juice, GameState.juice_cap, get_node("KetchupMeter").value])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
