@@ -65,7 +65,7 @@ func load_stage() -> void:
 func place_node_at(node: Node2D, x: float, y_offset: float = 0.0) -> void:
 	node.position = Vector2(
 		x,
-		GameState.current_stage.generator.generator_function(x) + y_offset
+		GameState.current_stage.generator.get_height(x) + y_offset
 	);
 
 

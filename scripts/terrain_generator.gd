@@ -23,6 +23,15 @@ func prepare_coordinates(sample_count: int, offset: float) -> void:
 		coordinates[i] = offset + SAMPLE_DELTA * i;
 
 
+func get_height(x: float) -> float:
+	var sample_idx = floorf(x / SAMPLE_DELTA);
+	var progress = fmod(x, SAMPLE_DELTA) / SAMPLE_DELTA;
+	var left := generator_function(sample_idx * SAMPLE_DELTA);
+	var right := generator_function((sample_idx + 1.0) * SAMPLE_DELTA);
+	
+	return lerpf(left, right, progress);
+
+
 func generator_function(x: float) -> float:
 	var x_scaled = x * scale.x;
 	var result : float = 0;
