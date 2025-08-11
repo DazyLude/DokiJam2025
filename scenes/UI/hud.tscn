@@ -18,6 +18,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Noise" type="TextureRect" parent="DataContainer"]
+visible = false
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 0

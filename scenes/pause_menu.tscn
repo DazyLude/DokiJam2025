@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgjo1po0h36q2"]
+[gd_scene load_steps=20 format=3 uid="uid://bgjo1po0h36q2"]
 
 [ext_resource type="Script" uid="uid://wgacgqeny5sv" path="res://scenes/pause_menu.gd" id="1_myx47"]
 [ext_resource type="StyleBox" uid="uid://y37slv7s5r4k" path="res://styles/Menu_Background.tres" id="2_kukqi"]
@@ -10,6 +10,30 @@
 [ext_resource type="Texture2D" uid="uid://fqn2kgf1d1yu" path="res://assets/icons/dokicoin.png" id="6_knqa7"]
 [ext_resource type="Texture2D" uid="uid://ql4ksu2c1ebu" path="res://assets/icons/UI_ketchup_empty.png" id="9_71k7c"]
 [ext_resource type="Texture2D" uid="uid://cf8uudqbdo34r" path="res://assets/icons/UI_ketchup_full.png" id="10_cmnsq"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_71k7c"]
+color = Color(0.188235, 0.188235, 0.188235, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmnsq"]
+bg_color = Color(0.74902, 0.74902, 0.74902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ofnjo"]
+bg_color = Color(0.843137, 0.843137, 0.843137, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cmnsq"]
+color = Color(0.188235, 0.188235, 0.188235, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rgno"]
+bg_color = Color(0.74902, 0.74902, 0.74902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hnlu"]
+bg_color = Color(0.843137, 0.843137, 0.843137, 1)
 
 [sub_resource type="Texture2D" id="Texture2D_71k7c"]
 resource_local_to_scene = false
@@ -58,9 +82,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -400.0
+offset_left = -300.0
 offset_top = -400.0
-offset_right = 400.0
+offset_right = 300.0
 offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -102,20 +126,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -360.0
+offset_left = -250.0
 offset_top = -360.0
-offset_right = 360.0
+offset_right = 250.0
 offset_bottom = -280.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MusicLabel" type="Label" parent="MusicContainer"]
+[node name="VolumeLabel" type="Label" parent="MusicContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Music:"
 
-[node name="MusicSlider" type="HSlider" parent="MusicContainer"]
+[node name="VolumeSlider" type="HSlider" parent="MusicContainer"]
+custom_minimum_size = Vector2(500, 16)
 layout_mode = 2
+tooltip_text = "Volume of the in-game music."
+theme_override_styles/slider = SubResource("StyleBoxLine_71k7c")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_cmnsq")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ofnjo")
 scrollable = false
 tick_count = 5
 
@@ -126,28 +155,33 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -360.0
+offset_left = -250.0
 offset_top = -240.0
-offset_right = 360.0
+offset_right = 250.0
 offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SFXLabel" type="Label" parent="SFXContainer"]
+[node name="VolumeLabel" type="Label" parent="SFXContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "SFX:"
 
-[node name="SFXSlider" type="HSlider" parent="SFXContainer"]
+[node name="VolumeSlider" type="HSlider" parent="SFXContainer"]
+custom_minimum_size = Vector2(500, 16)
 layout_mode = 2
+tooltip_text = "Volume of Doki's sound effects."
+theme_override_styles/slider = SubResource("StyleBoxLine_cmnsq")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_1rgno")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4hnlu")
 scrollable = false
 tick_count = 5
 
 [node name="ControlLabel" type="Label" parent="."]
 layout_mode = 2
-offset_left = -355.0
+offset_left = -160.0
 offset_top = -120.0
-offset_right = -80.0
+offset_right = 115.0
 offset_bottom = -75.0
 theme_override_font_sizes/font_size = 32
 text = "Controls:"
@@ -159,9 +193,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -310.0
+offset_left = -115.0
 offset_top = -80.0
-offset_right = -2.0
+offset_right = 193.0
 offset_bottom = 173.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -280,3 +314,10 @@ value = 50.0
 fill_mode = 3
 texture_under = ExtResource("9_71k7c")
 texture_progress = ExtResource("10_cmnsq")
+
+[connection signal="drag_ended" from="MusicContainer/VolumeSlider" to="." method="_on_music_volume_drag_ended"]
+[connection signal="value_changed" from="MusicContainer/VolumeSlider" to="." method="_on_music_volume_changed"]
+[connection signal="drag_ended" from="SFXContainer/VolumeSlider" to="." method="_on_sfx_volume_drag_ended"]
+[connection signal="value_changed" from="SFXContainer/VolumeSlider" to="." method="_on_sfx_volume_changed"]
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_pressed"]
