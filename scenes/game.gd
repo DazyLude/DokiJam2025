@@ -94,13 +94,11 @@ func spawn_obstacles() -> void:
 func spawn_collectibles() -> void:
 	var stage := GameState.current_stage;
 	
-	for i in range(1, 10):
-		var x = stage.stage_length * i / 11.0;
-		place_collectible_at(x, PickupItemData.get_by_name("ketchup"));
+	var item_coords := stage.generate_items(stage.item_placement_properties, stage.safe_zone_end, stage.stage_length);
 	
-	for i in range(1, 6):
-		var x = stage.stage_length * i / 7.0;
-		place_collectible_at(x, PickupItemData.get_by_name("coin"));
+	for item in item_coords:
+		for coord in item_coords[item]:
+			place_collectible_at(coord, PickupItemData.get_by_name(item));
 
 
 func place_player() -> void:

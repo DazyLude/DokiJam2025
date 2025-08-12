@@ -147,7 +147,7 @@ static func from_array(obstacles: PackedStringArray) -> ObstacleManager:
 func get_specific_obstacle(obstacle_name: String) -> Node2D:
 	var obstacle_data := obstacle_metadata[obstacle_name];
 	var obstacle_path := obstacle_data["scene"] as String;
-	var obstacle_scene := load(obstacle_path).instantiate() as GenericObstacle;
+	var obstacle_scene = load(obstacle_path).instantiate();
 	
 	if obstacle_scene == null:
 		push_error("obstacle is not a GenericObstacle: %s" % obstacle_name);
@@ -158,18 +158,26 @@ func get_specific_obstacle(obstacle_name: String) -> Node2D:
 	var pos_idx = rng.randi_range(0, positions.size() - 1);
 	var preset : PositionPreset = positions[pos_idx];
 	
-	# select an angle
-	var angle = rng.randf_range(preset.angle_range.x, preset.angle_range.y);
-	obstacle_scene.rotation_degrees = angle;
+	if obstacle_scene is GenericObstacle:
+		# select an angle
+		var angle = rng.randf_range(preset.angle_range.x, preset.angle_range.y);
+		obstacle_scene.rotation_degrees = angle;
+		# select an offset
+		var y_offset = rng.randf_range(preset.y_offset_range.x, preset.y_offset_range.y);
+		obstacle_scene.offset = Vector2(0.0, y_offset);
+		
+		# set scale
+		obstacle_scene.scale = obstacle_data.get("scale", Vector2(1.0, 1.0));
+		if obstacle_data.get("flippable", false) and rng.randf() > 0.5:
+			obstacle_scene.flip()
 	
-	# select an offset
-	var y_offset = rng.randf_range(preset.y_offset_range.x, preset.y_offset_range.y);
-	obstacle_scene.offset = Vector2(0.0, y_offset);
-	
-	# set scale
-	obstacle_scene.scale = obstacle_data.get("scale", Vector2(1.0, 1.0));
-	if obstacle_data.get("flippable", false) and rng.randf() > 0.5:
-		obstacle_scene.flip()
+	if obstacle_scene is RigidBodyObstacle:
+		var y_offset = rng.randf_range(preset.y_offset_range.x, preset.y_offset_range.y);
+		obstacle_scene.offset = Vector2(0.0, y_offset);
+		
+		obstacle_scene.set_custom_scale(obstacle_data.get("scale", Vector2(1.0, 1.0)));
+		if obstacle_data.get("flippable", false) and rng.randf() > 0.5:
+			obstacle_scene.flip()
 	
 	return obstacle_scene;
 
