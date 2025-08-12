@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://daikwosr13pnv"]
+[gd_scene load_steps=74 format=3 uid="uid://daikwosr13pnv"]
 
 [ext_resource type="Script" uid="uid://cpobfagrfa2vw" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://ca57mpnq70puo" path="res://assets/stages/farm/tomato_farm.png" id="1_yqjtg"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bb3q6mj02qh6c" path="res://scenes/UI/hud.tscn" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://bmgnl023mtogs" path="res://addons/rmsmartshape/normal_range.gd" id="11_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://dftdfph41cnpv" path="res://assets/stages/farm/dirt_tile.png" id="12_ca42v"]
+[ext_resource type="Script" uid="uid://b3pllkmyivqe8" path="res://scenes/ui_layer.gd" id="15_ca42v"]
 
 [sub_resource type="Resource" id="Resource_264po"]
 script = ExtResource("5_kvpfn")
@@ -491,6 +492,7 @@ polygon = PackedVector2Array(185.028, 156.389, 289.51, 167.627, 454.433, 71.5553
 [node name="DecorationsFront" type="Node" parent="."]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+script = ExtResource("15_ca42v")
 
 [node name="HUD" parent="UILayer" instance=ExtResource("11_kvpfn")]
 z_index = 1

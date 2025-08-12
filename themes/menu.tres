@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://umrlbh25q1rw"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://umrlbh25q1rw"]
 
 [ext_resource type="StyleBox" uid="uid://beybjwduq4v70" path="res://themes/button_hover.tres" id="1_6tgry"]
 [ext_resource type="FontFile" uid="uid://ctpda6706sqen" path="res://assets/fonts/Jua/Jua-Regular.ttf" id="1_pw0cd"]
@@ -9,6 +9,18 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_be6oh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rukvw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rukvw"]
+bg_color = Color(1, 0.967769, 0.833741, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176471, 0.141176, 0.490196, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [resource]
 Button/colors/font_color = Color(0.176471, 0.14902, 0.490196, 1)
@@ -39,4 +51,7 @@ Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_pw0cd")
 Label/styles/normal = SubResource("StyleBoxEmpty_rukvw")
-Panel/styles/panel = ExtResource("2_6tgry")
+Panel/styles/panel = SubResource("StyleBoxFlat_rukvw")
+TooltipLabel/colors/font_color = Color(0.832945, 0.851145, 0.985208, 1)
+TooltipLabel/font_sizes/font_size = 24
+TooltipLabel/fonts/font = ExtResource("1_pw0cd")

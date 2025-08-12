@@ -26,11 +26,11 @@ func _process(delta: float) -> void:
 		$DataContainer/ContactCounter.text = CONTACT_COUNTER_TEMPLATE % player.get_contact_count();
 		$DataContainer/FPSCounter.text = FPS_TEMPLATE % [player.last_frame_delta, 1.0 / player.last_frame_delta];
 		$DataContainer/PhysicsFPSCounter.text = PHYSICS_FPS_TEMPLATE % [player.last_frame_delta_physics, 1.0 / player.last_frame_delta_physics];
-		
 	
 	if GameState != null:
 		$DataContainer/Stamina.text = STAMINA_SPEED_TEMPLATE % GameState.juice;
 		$CoinCounter/Label.text = "%d" % GameState.dokicoins;
+		$KetchupMeter.value = GameState.juice / GameState.juice_cap * 100
 	
 	if noise_gen_cache != GameState.current_stage.generator.noise_generator:
 		noise_gen_cache = GameState.current_stage.generator.noise_generator;

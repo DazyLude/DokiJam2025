@@ -97,7 +97,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"next stage": "city2",
 		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
 	},
-	"city in ruins": {
+	"city2": {
 		"name": "city2",
 		"terrain fill": "res://assets/stages/city/conrete_tile.png",
 		"terrain edge": "res://assets/stages/city/concrete_edge.png",

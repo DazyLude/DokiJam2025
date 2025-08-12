@@ -10,9 +10,7 @@ static var containers: Dictionary = {
 	"supps": "SuppsContainer",
 }
 
-# Instantiate the upgrade class to access upgrade data
-#var upgrades = Upgrade.new()
-# Better idea, just reference the GameState instance
+# Reference the GameState upgrade data
 var upgrades = GameState.upgrades
 
 # Called when the node enters the scene tree for the first time.
@@ -45,21 +43,25 @@ func _process(delta) -> void:
 
 ## update the cost label of a specific upgrade.
 func update_upgrade_cost(container_name: String, upgrade_id: int) -> void:
+	var available_upgrades = upgrades.get_unlocked()
 	var container = get_node(containers[container_name] + "/UpgradeCost")
 	if upgrades.check_upgrade_maxed(upgrade_id):
 		get_node(containers[container_name] + "/UpgradeButton").disabled = true
 		container.text = "MAX"
 	else:
-		container.text = "x%d" % upgrades.get_upgrade_price(upgrade_id)
+		if upgrade_id in available_upgrades:
+			container.text = "x%d" % upgrades.get_upgrade_price(upgrade_id)
+		else:
+			get_node(containers[container_name] + "/UpgradeButton").disabled = true
+			#get_node(containers[container_name] + "/CoinIcon").visible = false
+			container.text = "N/A"
 
 func update_doki_coins() -> void:
-	#get_node("CoinContainer/CoinCount").text = "x%03d" % GameState.dokicoins
 	get_node("CoinContainer/CoinCount").text = "x%d" % GameState.dokicoins
 
 ## tries to buy an upgrade
 func button_buy_upgrade(container_name: String, upgrade_id: int) -> void:
-	#LMG Note: Placeholder test v
-	#if upgrades.check_upgrade_affordable(upgrades.COFFEE) or true:
+	#Make sure the player has enough coins
 	if upgrades.check_upgrade_affordable(upgrade_id):
 		upgrades.purchase_upgrade(upgrade_id)
 		update_upgrade_cost(container_name, upgrade_id)
@@ -68,7 +70,6 @@ func button_buy_upgrade(container_name: String, upgrade_id: int) -> void:
 
 ## resume the game
 func _on_continue_pressed() -> void:
-	print("Continue Pressed") #Debug, remove later
 	GameState.restart();
 	get_tree().change_scene_to_file("res://scenes/game.tscn");
 
@@ -100,20 +101,20 @@ func _on_supps_pressed() -> void:
 
 ## select tomato skinsuit
 func _on_skin_tomato_pressed() -> void:
-	print("Select Tomato Skinsuit")
+	#print("Select Tomato Skinsuit")
 	GameState.selected_skinsuit = upgrades.SKINSUIT_TOMATO
 
 ## select crowki skinsuit
 func _on_skin_crowki_pressed() -> void:
-	print("Select Crowki Skinsuit")
+	#print("Select Crowki Skinsuit")
 	GameState.selected_skinsuit = upgrades.SKINSUIT_CROWKI
 
 ## select retro skinsuit
 func _on_skin_retro_pressed() -> void:
-	print("Select Retro Skinsuit")
-	#GameState.selected_skinsuit = upgrades.SKINSUIT_RETRO
+	#print("Select Retro Skinsuit")
+	GameState.selected_skinsuit = upgrades.SKINSUIT_RETRO
 
 ## select bounty skinsuit
 func _on_skin_bounty_pressed() -> void:
-	print("Select Bounty Skinsuit")
-	#GameState.selected_skinsuit = upgrades.SKINSUIT_BOUNTY
+	#print("Select Bounty Skinsuit")
+	GameState.selected_skinsuit = upgrades.SKINSUIT_BOUNTY
