@@ -2,7 +2,7 @@
 extends Node2D
 
 
-const DEFAULT_X_OFFSET : float = 600.0;
+const DEFAULT_X_OFFSET : float = 750.0;
 const DEFAULT_SCALE := Vector2(0.1, 0.1);
 const DEFAULT_TEXTURE : Texture2D = preload("res://assets/skinsuits/wing.png");
 
@@ -71,12 +71,12 @@ func get_ith_pair(i: int) -> Array[Sprite2D]:
 func get_new_pair(ith: int) -> Array[Sprite2D]:
 	var left_wing = Sprite2D.new();
 	left_wing.texture = DEFAULT_TEXTURE;
-	left_wing.flip_h = true;
 	left_wing.offset = Vector2(-DEFAULT_X_OFFSET, 0.0);
 	left_wing.scale = DEFAULT_SCALE;
 	add_child(left_wing);
 	
 	var right_wing = Sprite2D.new();
+	right_wing.flip_h = true;
 	right_wing.texture = DEFAULT_TEXTURE;
 	right_wing.offset = Vector2(DEFAULT_X_OFFSET, 0.0);
 	right_wing.scale = DEFAULT_SCALE;
@@ -103,7 +103,7 @@ func remove_all() -> void:
 
 func get_pairs_default_angle(pair_n: int):
 	var alternating_minus := pair_n % 2 * 2 - 1;
-	return 0.1 * pair_n * alternating_minus
+	return 0.2 * pair_n * alternating_minus
 
 
 func set_pairs_angle(wings_angle: float, wings: Array) -> void:

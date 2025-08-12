@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dsipgdud5b38h"
+path="res://.godot/imported/1k mic.ogg-7461dee3d03b95b7ea5ff1bd663419b9.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/1k mic.ogg"
+dest_files=["res://.godot/imported/1k mic.ogg-7461dee3d03b95b7ea5ff1bd663419b9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

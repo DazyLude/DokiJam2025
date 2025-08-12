@@ -20,7 +20,6 @@ func _physics_process(delta: float) -> void:
 	if area.get_collision_mask_value(1): # this is xdd
 		if not area.get_overlapping_bodies().is_empty():
 			position -= Vector2(0.0, 50.0);
-			print("collision detected")
 		else:
 			area.set_collision_mask_value(1, false);
 	

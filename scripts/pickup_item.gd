@@ -1,6 +1,12 @@
 class_name PickupItemData extends RefCounted
 
 
+enum {
+	PLACEMENT_NON_RANDOM,
+	PLACEMENT_NORMAL,
+}
+
+
 var texture : Texture2D;
 var area_size : Vector2;
 var effect: Callable;

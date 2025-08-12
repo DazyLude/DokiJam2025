@@ -15,12 +15,13 @@ enum ID {
 	SFX_AGGH,
 	SFX_AGHH,
 	SFX_ARGH,
-	SFX_UUGH,
+	SFX_GRUNT,
+	SFX_1KMIC,
 }
 
 
 var sound_resources : Dictionary[ID, String] = {
-	ID.MUSIC_ESCAPE_FROM_TARKOV: "res://assets/music/Escaping the Tomato Farm pt1.ogg",
+	ID.MUSIC_ESCAPE_FROM_TARKOV: "res://assets/music/Menu - Escaping the Tomato Farm v2.ogg",
 	ID.MUSIC_UPGRADE_SHOP_THEME: "res://assets/music/Last cup of coffee - lofi bossa.ogg",
 	ID.MUSIC_UPGRADE_SHOP_THEME_COOL: "res://assets/music/Last cup of coffee - lofi bossa with quotes.ogg",
 	ID.MUSIC_MELANCHOLY_TOMATO: "res://assets/music/Tomato Farm v2.ogg",
@@ -30,7 +31,8 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.SFX_AGGH: "res://assets/sfx/Scream 2.wav",
 	ID.SFX_AGHH: "res://assets/sfx/Scream 3.wav",
 	ID.SFX_ARGH: "res://assets/sfx/Scream 4.wav",
-	ID.SFX_UUGH: "res://assets/sfx/grunt 1.wav",
+	ID.SFX_GRUNT: "res://assets/sfx/grunt 1.wav",
+	ID.SFX_1KMIC: "res://assets/sfx/1k mic.ogg",
 }
 
 
