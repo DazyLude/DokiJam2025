@@ -86,6 +86,7 @@ offset_left = 330.0
 offset_top = 160.0
 offset_right = 760.0
 offset_bottom = 220.0
+tooltip_text = "Increases Doki's speed."
 theme_override_constants/separation = 10
 
 [node name="UpgradeIcon" type="TextureRect" parent="SpeedContainer"]
@@ -137,6 +138,7 @@ offset_left = 840.0
 offset_top = 160.0
 offset_right = 1270.0
 offset_bottom = 220.0
+tooltip_text = "Reduces fall damage."
 theme_override_constants/separation = 10
 
 [node name="UpgradeIcon" type="TextureRect" parent="ArmorContainer"]
@@ -188,6 +190,7 @@ offset_left = 330.0
 offset_top = 240.0
 offset_right = 760.0
 offset_bottom = 300.0
+tooltip_text = "Increases Doki's stamina."
 theme_override_constants/separation = 10
 
 [node name="UpgradeIcon" type="TextureRect" parent="StaminaContainer"]
@@ -239,6 +242,7 @@ offset_left = 840.0
 offset_top = 240.0
 offset_right = 1270.0
 offset_bottom = 300.0
+tooltip_text = "Makes Doki yell louder."
 theme_override_constants/separation = 10
 
 [node name="UpgradeIcon" type="TextureRect" parent="LoudnessContainer"]
@@ -297,6 +301,7 @@ offset_right = -40.0
 offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Adds mid-air jumps."
 theme_override_constants/separation = 10
 
 [node name="UpgradeIcon" type="TextureRect" parent="BounceContainer"]
@@ -355,6 +360,7 @@ offset_right = 470.0
 offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Increases Doki's handling."
 theme_override_constants/separation = 10
 
 [node name="UpgradeIcon" type="TextureRect" parent="SuppsContainer"]
@@ -460,6 +466,7 @@ custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+tooltip_text = "Tomato"
 texture_normal = ExtResource("11_pps40")
 texture_pressed = ExtResource("12_l0m8u")
 texture_hover = ExtResource("13_snxbx")
@@ -472,6 +479,7 @@ custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+tooltip_text = "Crowki"
 texture_normal = ExtResource("14_3jasj")
 texture_pressed = ExtResource("15_c7ko0")
 texture_hover = ExtResource("16_u8xbe")
@@ -484,6 +492,7 @@ custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+tooltip_text = "Retro Doki"
 texture_normal = ExtResource("17_kxbdn")
 texture_pressed = ExtResource("18_rinqk")
 texture_hover = ExtResource("19_vujdr")
@@ -496,6 +505,7 @@ custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+tooltip_text = "Bounty Hunter Doki"
 texture_normal = ExtResource("20_nljfx")
 texture_pressed = ExtResource("21_2dljn")
 texture_hover = ExtResource("22_s005r")
@@ -517,6 +527,7 @@ offset_right = 90.0
 offset_bottom = 363.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Return to the game."
 texture_normal = ExtResource("23_g2il6")
 texture_pressed = ExtResource("24_j07sc")
 texture_hover = ExtResource("25_qd7s1")
