@@ -38,6 +38,7 @@ var is_flying : bool :
 
 # affects player's emotion
 var hng_for : float = 0.0; # in seconds
+var oof_for : float = 0.0;
 
 
 var speedometer := Speedometer.new();
@@ -51,6 +52,11 @@ var speedometer := Speedometer.new();
 
 func _ready() -> void:
 	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
+	
+	if Upgrade.upgrade_metadata[GameState.selected_skinsuit].has("rider"):
+		var rider = Upgrade.upgrade_metadata[GameState.selected_skinsuit]["rider"];
+		$StaticSprite.prepare_sprite(rider);
+	
 	wings.update_wings_count(GameState.upgrades.get_upgrade_level(Upgrade.WINGS));
 	
 	if GameState.player != null and GameState.player != self:
@@ -120,17 +126,24 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	camera.update_offset(self, rotation);
+	$StaticSprite.rotation = -rotation;
 	
-	if hng_for > 0:
+	if oof_for > 0:
+		$Sprite2D.display_emotion(1);
+		$StaticSprite.display_emotion(1);
+	elif hng_for > 0:
 		if GameState.juice > jump_cost:
-			$Sprite2D.display_emotion(1);
-		else:
 			$Sprite2D.display_emotion(2);
-		hng_for -= delta;
+			$StaticSprite.display_emotion(2);
 	elif GameState.juice <= 0:
 		$Sprite2D.display_emotion(2);
+		$StaticSprite.display_emotion(2);
 	else:
 		$Sprite2D.display_emotion(0);
+		$StaticSprite.display_emotion(0);
+	
+	oof_for = move_toward(oof_for, 0.0, delta);
+	hng_for = move_toward(hng_for, 0.0, delta);
 	
 	last_frame_delta = delta;
 
@@ -199,6 +212,7 @@ func take_impact_damage() -> void:
 	var damage = 0.1 * sqrt(speed_diff);
 	
 	if damage > 0.0:
+		oof_for = 0.4;
 		GameState.juice = move_toward(GameState.juice, 0.0, damage);
 		print("taken %s damage" % damage);
 		sound_controller.record_taken_damage(damage);

@@ -4,6 +4,7 @@ class_name Upgrade extends RefCounted
 enum {
 	TYPE_INCREMENTAL,
 	TYPE_ONE_OFF,
+	OTHER,
 }
 
 
@@ -20,6 +21,8 @@ enum {
 	SKINSUIT_CROWKI,
 	SKINSUIT_RETRO,
 	SKINSUIT_BOUNTY,
+	SKINSUIT_RETRO_RIDER,
+	SKINSUIT_BOUNTY_RIDER,
 }
 
 # once again, pretty JSONable way to hold data
@@ -96,23 +99,47 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	SKINSUIT_RETRO: {
 		"type": TYPE_ONE_OFF,
 		"autounlock": "tomato fields", # String (stage name)
-		"base": "res://assets/skinsuits/tomato/tomato_base.png",
+		"base": "res://assets/skinsuits/retro/retro_doki_ball_base.png",
 		"emotions": [
-			"res://assets/skinsuits/tomato/tomato_neutral.png",
-			"res://assets/skinsuits/tomato/tomato_tired.png",
-			"res://assets/skinsuits/tomato/tomato_hurt.png",
+			"res://assets/skinsuits/retro/retro_doki_ball_neutral.png",
+			"res://assets/skinsuits/retro/retro_doki_ball_hurt.png",
+			"res://assets/skinsuits/retro/retro_doki_ball_tired.png",
 		],
+		"rider": SKINSUIT_RETRO_RIDER,
+		"offset": Vector2(0.0, -600.0),
+	},
+	SKINSUIT_RETRO_RIDER: {
+		"type": OTHER,
+		"base": "res://assets/skinsuits/retro/retro_doki_base.png",
+		"emotions": [
+			"res://assets/skinsuits/retro/retro_doki_neutral.png",
+			"res://assets/skinsuits/retro/retro_doki_hurt.png",
+			"res://assets/skinsuits/retro/retro_doki_tired.png",
+		],
+		"offset": Vector2(0.0, -600.0),
 	},
 	SKINSUIT_BOUNTY: {
 		"type": TYPE_ONE_OFF,
 		"autounlock": "tomato fields", # String (stage name)
-		"base": "res://assets/skinsuits/tomato/tomato_base.png",
+		"base": "res://assets/skinsuits/bounty/bounty_hunter_ball_base.png",
 		"emotions": [
-			"res://assets/skinsuits/tomato/tomato_neutral.png",
-			"res://assets/skinsuits/tomato/tomato_tired.png",
-			"res://assets/skinsuits/tomato/tomato_hurt.png",
+			"res://assets/skinsuits/bounty/bounty_hunter_ball_neutral.png",
+			"res://assets/skinsuits/bounty/bounty_hunter_ball_hurt.png",
+			"res://assets/skinsuits/bounty/bounty_hunter_ball_tired.png",
 		],
-	}
+		"rider": SKINSUIT_BOUNTY_RIDER,
+		"offset": Vector2(0.0, -600.0),
+	},
+	SKINSUIT_BOUNTY_RIDER: {
+		"type": OTHER,
+		"base": "res://assets/skinsuits/bounty/bounty_hunter_base.png",
+		"emotions": [
+			"res://assets/skinsuits/bounty/bounty_hunter_neutral.png",
+			"res://assets/skinsuits/bounty/bounty_hunter_hurt.png",
+			"res://assets/skinsuits/bounty/bounty_hunter_tired.png",
+		],
+		"offset": Vector2(0.0, -600.0),
+	},
 }
 
 

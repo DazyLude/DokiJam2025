@@ -30,3 +30,6 @@ func prepare_sprite(character_idx) -> void:
 	
 	for emotion in skinsuit_data["emotions"]:
 		emotions.push_back(load(emotion));
+	
+	offset = skinsuit_data.get("offset", Vector2());
+	overlay_sprite.offset = offset;
