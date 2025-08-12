@@ -14,7 +14,7 @@ var rng := RandomNumberGenerator.new();
 
 
 # stamina
-const JUICE_DEFAULT_VALUE : float = 10.0; # in seconds of juice usage time
+const JUICE_DEFAULT_VALUE : float = 15.0; # in seconds of juice usage time
 var juice := JUICE_DEFAULT_VALUE;
 var juice_cap := JUICE_DEFAULT_VALUE;
 

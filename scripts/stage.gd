@@ -27,6 +27,7 @@ var next_stage_name : String;
 
 # gameplay data
 var stage_length : float;
+var safe_zone_end : float = 3000.0;
 
 
 static func get_stage_data_by_name(name: String) -> StageData:

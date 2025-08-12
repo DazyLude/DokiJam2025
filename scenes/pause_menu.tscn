@@ -1,39 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bgjo1po0h36q2"]
+[gd_scene load_steps=11 format=3 uid="uid://bgjo1po0h36q2"]
 
+[ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_1s2dm"]
 [ext_resource type="Script" uid="uid://wgacgqeny5sv" path="res://scenes/pause_menu.gd" id="1_myx47"]
-[ext_resource type="StyleBox" uid="uid://y37slv7s5r4k" path="res://styles/Menu_Background.tres" id="2_kukqi"]
 [ext_resource type="PackedScene" uid="uid://cywgm8te3676u" path="res://scenes/UI/mute_button.tscn" id="3_88e76"]
-[ext_resource type="Texture2D" uid="uid://dvv8faobs6bvp" path="res://assets/buttons/button_scaled.png" id="3_v4r4p"]
-[ext_resource type="Texture2D" uid="uid://0jejnaco75ut" path="res://assets/buttons/button_clicked_scaled.png" id="4_1s2dm"]
-[ext_resource type="Texture2D" uid="uid://cxi8iv31o2k57" path="res://assets/buttons/button_hover_scaled.png" id="5_88e76"]
 [ext_resource type="Script" uid="uid://duho7t435uxyj" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="5_knqa7"]
 [ext_resource type="Texture2D" uid="uid://fqn2kgf1d1yu" path="res://assets/icons/dokicoin.png" id="6_knqa7"]
 [ext_resource type="Texture2D" uid="uid://ql4ksu2c1ebu" path="res://assets/icons/UI_ketchup_empty.png" id="9_71k7c"]
 [ext_resource type="Texture2D" uid="uid://cf8uudqbdo34r" path="res://assets/icons/UI_ketchup_full.png" id="10_cmnsq"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_71k7c"]
-color = Color(0.188235, 0.188235, 0.188235, 1)
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmnsq"]
-bg_color = Color(0.74902, 0.74902, 0.74902, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ofnjo"]
-bg_color = Color(0.843137, 0.843137, 0.843137, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_cmnsq"]
-color = Color(0.188235, 0.188235, 0.188235, 1)
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rgno"]
-bg_color = Color(0.74902, 0.74902, 0.74902, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hnlu"]
-bg_color = Color(0.843137, 0.843137, 0.843137, 1)
 
 [sub_resource type="Texture2D" id="Texture2D_71k7c"]
 resource_local_to_scene = false
@@ -73,6 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_1s2dm")
 script = ExtResource("1_myx47")
 
 [node name="Panel" type="Panel" parent="."]
@@ -88,7 +62,6 @@ offset_right = 300.0
 offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("2_kukqi")
 
 [node name="MuteButton" parent="." instance=ExtResource("3_88e76")]
 layout_mode = 0
@@ -142,9 +115,6 @@ text = "Music:"
 custom_minimum_size = Vector2(500, 16)
 layout_mode = 2
 tooltip_text = "Volume of the in-game music."
-theme_override_styles/slider = SubResource("StyleBoxLine_71k7c")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_cmnsq")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ofnjo")
 scrollable = false
 tick_count = 5
 
@@ -171,9 +141,6 @@ text = "SFX:"
 custom_minimum_size = Vector2(500, 16)
 layout_mode = 2
 tooltip_text = "Volume of Doki's sound effects."
-theme_override_styles/slider = SubResource("StyleBoxLine_cmnsq")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_1rgno")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4hnlu")
 scrollable = false
 tick_count = 5
 
@@ -232,7 +199,7 @@ vertical_alignment = 1
 layout_mode = 2
 texture = SubResource("Texture2D_ofnjo")
 
-[node name="ResumeButton" type="TextureButton" parent="."]
+[node name="ResumeButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -246,29 +213,9 @@ offset_bottom = 243.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Return to the game."
-texture_normal = ExtResource("3_v4r4p")
-texture_pressed = ExtResource("4_1s2dm")
-texture_hover = ExtResource("5_88e76")
-
-[node name="ButtonLabel" type="Label" parent="ResumeButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.0
-offset_top = -11.5
-offset_right = 31.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 28
 text = "RESUME"
-vertical_alignment = 1
 
-[node name="MenuButton" type="TextureButton" parent="."]
+[node name="MenuButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -282,28 +229,7 @@ offset_bottom = 373.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Exit to the main menu."
-texture_normal = ExtResource("3_v4r4p")
-texture_pressed = ExtResource("4_1s2dm")
-texture_hover = ExtResource("5_88e76")
-
-[node name="ButtonLabel" type="Label" parent="MenuButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 28
 text = "MAIN MENU"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="KetchupMeter" type="TextureProgressBar" parent="."]
 layout_mode = 0

@@ -57,8 +57,8 @@ func load_stage() -> void:
 	setup_terrain_visuals(stage);
 	generate_terrain();
 	spawn_checkpoint();
-	spawn_collectibles();
 	spawn_obstacles();
+	spawn_collectibles();
 	place_player();
 
 
@@ -82,7 +82,7 @@ func spawn_obstacles() -> void:
 	place_node_at(sign, LEFT_APPENDIX);
 	$DecorationsBack.add_child(sign);
 	
-	var obstacle_start = 2000.0;
+	var obstacle_start = GameState.current_stage.safe_zone_end;
 	var obstacle_end = GameState.current_stage.stage_length;
 	
 	for x in GameState.current_stage.generator.get_obstacle_coords(obstacle_start, obstacle_end):
@@ -106,7 +106,7 @@ func spawn_collectibles() -> void:
 func place_player() -> void:
 	var generator = GameState.current_stage.generator;
 	
-	player.position = Vector2(0.0, generator.generator_function(0) - 200.0);
+	player.position = Vector2(0.0, generator.get_height(0) - 200.0);
 	# LMG Note: This causes a crash v
 	#$Parallax2D/Backdrop.motion_offset = $Parallax2D/Backdrop/Sprite2D.texture.get_size() * Vector2(-0.5, -0.25);
 
@@ -120,7 +120,7 @@ func spawn_checkpoint() -> void:
 	checkpoint.texture = stage.checkpoint;
 	checkpoint.position = Vector2(
 		stage.stage_length,
-		stage.generator.generator_function(stage.stage_length)
+		stage.generator.get_height(stage.stage_length)
 	);
 	checkpoint.offset = Vector2(0.0, -checkpoint.texture.get_height() / 2.0)
 	# TODO rotation

@@ -29,6 +29,6 @@ static var pickup_item_variants : Dictionary[String, Dictionary] = {
 	},
 	"ketchup": {
 		"texture": "res://assets/icons/stamina_ketchup.png",
-		"effect": func(): GameState.juice = move_toward(GameState.juice, GameState.juice_cap, 2.0),
+		"effect": func(): GameState.juice = move_toward(GameState.juice, GameState.juice_cap, GameState.juice_cap * 0.2),
 	}
 }

@@ -9,7 +9,7 @@ const CHAIR_SMOOTH_END := 0.6;
 
 const OBSTACLE_DENSITY = 0.05;
 const OBSTACLE_SAMPLE_RATE = 50.0;
-const OBSTACLE_NOISE_Y = 1000.0;
+const OBSTACLE_NOISE_Y = 100.0;
 
 
 var generator_params: PackedVector2Array;
