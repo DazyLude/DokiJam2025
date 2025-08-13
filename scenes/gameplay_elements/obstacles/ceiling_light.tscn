@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://3p7p7xke3bv6"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_2dnr4"]
+[ext_resource type="Texture2D" uid="uid://cac8sehkxgqff" path="res://assets/obstacles/ceiling_light.png" id="2_2dnr4"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2dnr4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_2dnr4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-206, -114, -177, 49, -85, 102, 135, -43, 82, -402, -114, -401, -116, -130)

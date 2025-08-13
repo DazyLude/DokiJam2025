@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxeq3vkqil44w"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_xx4w4"]
+[ext_resource type="Texture2D" uid="uid://dhv476hcf3700" path="res://assets/obstacles/giant_wisp.png" id="2_xx4w4"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_xx4w4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_xx4w4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-309, 236, -346, 110, -303, 7, -372, -89, -241, -144, -198, -207, -128, -158, 33, -264, 119, -159, 341, -186, 363, -130, 350, 8, 385, 129, 335, 250, 227, 306, -189, 301)

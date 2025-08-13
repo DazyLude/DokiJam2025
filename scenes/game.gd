@@ -3,6 +3,7 @@ extends Node
 
 const COLLECTIBLE_HOVER_OFFSET := -100.0;
 const LEFT_APPENDIX := -1000.0;
+const LOWER_BOUND := 5000.0;
 
 # this script should handle background switcheroos and terrain generation based on the players coordinate
 # for terrain generation, I think about doing it in chunks using a smooth-ish height(x) function and a samplerate
@@ -10,6 +11,8 @@ const LEFT_APPENDIX := -1000.0;
 @onready var hud = $UILayer/HUD;
 @onready var player : Player = $Player;
 @onready var ss2d_shape : SS2D_Shape = $Terrain/SS2D_Shape;
+@onready var ceiling_shape : SS2D_Shape = $Terrain/SS2D_Shape2;
+
 @onready var back_decor := $DecorationsBack;
 @onready var front_decor := $DecorationsFront;
 @onready var collectibles := $Collectibles;
@@ -18,6 +21,8 @@ const LEFT_APPENDIX := -1000.0;
 #var upgrade_scene = preload("res://scenes/upgrade_screen.tscn");
 var gameover_scene = preload("res://scenes/gameover.tscn");
 var is_gameover : bool = false;
+
+var player_tween : Tween;
 
 
 func _ready() -> void:
@@ -43,8 +48,12 @@ func _process(delta: float) -> void:
 		is_gameover = true;
 		ui_layer.add_child(gameover_scene.instantiate());
 	
+	if player.position.y >= LOWER_BOUND and player.process_mode != ProcessMode.PROCESS_MODE_DISABLED:
+		move_player_to(0.0);
+	
 	if player.position.x >= GameState.current_stage.stage_length:
 		is_gameover = true;
+		player.stop();
 		# TODO stop the player, drop them to the ground and make them enjoy tomato juice
 		# TODO stage cleared screen -> intermission scene -> new stage
 		await play_intermission(GameState.current_stage.intermission_name);
@@ -58,9 +67,16 @@ func load_stage() -> void:
 	var stage = GameState.current_stage;
 	
 	setup_terrain_visuals(stage);
+	
 	generate_terrain();
+	if stage.ceiling_generator != null:
+		generate_ceiling();
+	
 	spawn_checkpoint();
 	spawn_obstacles();
+	if stage.ceiling_generator != null:
+		spawn_ceiling_obstacles();
+	
 	spawn_collectibles();
 	place_player();
 
@@ -69,6 +85,13 @@ func place_node_at(node: Node2D, x: float, y_offset: float = 0.0) -> void:
 	node.position = Vector2(
 		x,
 		GameState.current_stage.generator.get_height(x) + y_offset
+	);
+
+
+func place_node_at_ceiling(node: Node2D, x: float, y_offset: float = 0.0) -> void:
+	node.position = Vector2(
+		x,
+		GameState.current_stage.ceiling_generator.get_height(x) + y_offset
 	);
 
 
@@ -94,6 +117,16 @@ func spawn_obstacles() -> void:
 		$DecorationsBack.add_child(obstacle);
 
 
+func spawn_ceiling_obstacles() -> void:
+	var obstacle_start = GameState.current_stage.safe_zone_end;
+	var obstacle_end = GameState.current_stage.stage_length;
+	
+	for x in GameState.current_stage.ceiling_generator.get_obstacle_coords(obstacle_start, obstacle_end):
+		var obstacle = GameState.current_stage.ceiling_obstacles.get_random_obstacle();
+		place_node_at_ceiling(obstacle, x);
+		$DecorationsBack.add_child(obstacle);
+
+
 func spawn_collectibles() -> void:
 	var stage := GameState.current_stage;
 	
@@ -106,10 +139,7 @@ func spawn_collectibles() -> void:
 
 func place_player() -> void:
 	var generator = GameState.current_stage.generator;
-	
 	player.position = Vector2(0.0, generator.get_height(0) - 200.0);
-	# LMG Note: This causes a crash v
-	#$Parallax2D/Backdrop.motion_offset = $Parallax2D/Backdrop/Sprite2D.texture.get_size() * Vector2(-0.5, -0.25);
 
 
 # checkpoint is just a visual that is placed at the end of a level
@@ -162,6 +192,32 @@ func generate_terrain() -> void:
 	ss2d_shape.get_point_array().begin_update();
 
 
+func generate_ceiling() -> void:
+	var stage := GameState.current_stage;
+	var generator = GameState.current_stage.ceiling_generator;
+	
+	var appendix_sample_count := -roundi(LEFT_APPENDIX / TerrainGenerator.SAMPLE_DELTA);
+	
+	var right_appendix := 1000.0;
+	appendix_sample_count += roundi(right_appendix / TerrainGenerator.SAMPLE_DELTA);
+	
+	var sample_count = roundi(stage.stage_length / TerrainGenerator.SAMPLE_DELTA);
+	generator.prepare_coordinates(sample_count + appendix_sample_count, LEFT_APPENDIX);
+	var points := generator.sample();
+	
+	ceiling_shape.clear_points();
+	ceiling_shape.add_points(points);
+	
+	# two additional points needed to enclose the shape
+	var bottom_right = Vector2(points[points.size() - 1].x, points[points.size() - 1].y - 1000.0);
+	var bottom_left = Vector2(points[0].x, points[0].y - 1000.0);
+	ceiling_shape.add_point(bottom_right);
+	ceiling_shape.add_point(bottom_left);
+	ceiling_shape.close_shape(points.size() - 1);
+	
+	ceiling_shape.get_point_array().begin_update();
+
+
 func play_intermission(intermission: String) -> void:
 	var intermission_player = load("res://scenes/intermission_player.tscn").instantiate();
 	intermission_player.set_intermission(intermission);
@@ -173,3 +229,37 @@ func play_intermission(intermission: String) -> void:
 	
 	# cleanup
 	intermission_player.queue_free();
+
+
+func move_player_to(where: float) -> void:
+	# disable player processing to move them withougt worrying about forces
+	player.process_mode = Node.PROCESS_MODE_DISABLED;
+	# set the stop flag, so that they don't fly away when released
+	player.stop();
+	player.set_emotion(2);
+	player.z_index = 1;
+	
+	var destination = Vector2(where, GameState.current_stage.generator.get_height(where) - 200.0)
+	
+	if player_tween != null:
+		player_tween.kill();
+	
+	player_tween = create_tween();
+	
+	var the_hand : Sprite2D = preload("res://scenes/gameplay_elements/the_gods_hand.tscn").instantiate();
+	the_hand.position = player.position + Vector2(0.0, -900.0);
+	$DecorationsFront.add_child(the_hand);
+	
+	player_tween.tween_property(the_hand, ^"position", player.position, 2.0);
+	
+	player_tween.tween_property(the_hand, ^"position", destination, 2.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT);
+	player_tween.parallel().tween_property(player, ^"position", destination, 2.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT);
+	
+	player_tween.tween_property(the_hand, ^"position", destination + Vector2(0.0, -900.0), 2.0);
+	
+	await player_tween.finished;
+	
+	player.z_index = 0;
+	
+	the_hand.queue_free();
+	player.process_mode = Node.PROCESS_MODE_INHERIT;

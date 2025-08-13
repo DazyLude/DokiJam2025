@@ -106,6 +106,51 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 			PositionPreset.fixed(0.0, -175.0),
 		],
 	},
+	"ceiling light": {
+		"scene": "res://scenes/gameplay_elements/obstacles/ceiling_light.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["backstage_ceiling"],
+		"positions": [
+			PositionPreset.fixed(0.0, 400.0),
+		],
+	},
+	"giant wisp": {
+		"scene": "res://scenes/gameplay_elements/obstacles/giant_wisp.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["backstage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -300.0),
+		],
+	},
+	"light rack": {
+		"scene": "res://scenes/gameplay_elements/obstacles/light_rack.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["backstage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -500.0),
+		],
+	},
+	"mic stand": {
+		"scene": "res://scenes/gameplay_elements/obstacles/mic_stand.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["backstage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -475.0),
+		],
+	},
+	"stacked boxes": {
+		"scene": "res://scenes/gameplay_elements/obstacles/stacked_boxes.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["backstage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -420.0),
+		],
+	}
 }
 
 
@@ -184,5 +229,5 @@ func get_specific_obstacle(obstacle_name: String) -> Node2D:
 
 func get_random_obstacle() -> Node2D:
 	var obs_idx := rng.rand_weighted(_weights);
-	var obstacle_name :=_obstacles[obs_idx];
+	var obstacle_name := _obstacles[obs_idx];
 	return get_specific_obstacle(obstacle_name);

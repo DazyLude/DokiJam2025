@@ -22,7 +22,9 @@ var music : Sounds.ID;
 
 # associated generators / controllers / managers
 var generator : TerrainGenerator;
+var ceiling_generator : CeilingGenerator = null;
 var obstacles : ObstacleManager;
+var ceiling_obstacles : ObstacleManager = null;
 
 # intermission & next stage
 var intermission_name : String;
@@ -71,14 +73,20 @@ static func stage_exists(name: String) -> bool:
 	return stage_variants.has(name);
 
 
-static func get_stage_data_by_name(name: String) -> StageData:
-	return from_dict(stage_variants[name]);
+static func get_stage_data_by_name(name: String, forced_seed: int = 0, forced_state: int = 0) -> StageData:
+	return from_dict(stage_variants[name], forced_seed, forced_state);
 
 
-static func from_dict(params: Dictionary) -> StageData:
+static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: int = 0) -> StageData:
 	var data := StageData.new();
 	data.stage_name = params.get("name", "") as String;
 	data.rng = RandomNumberGenerator.new();
+	
+	if forced_seed != 0:
+		data.rng.seed = forced_seed;
+	if forced_state != 0:
+		data.rng.state = forced_state;
+	print("initial seed and state: %s, %s" % [data.rng.seed, data.rng.state]);
 	
 	# visuals setup
 	data.terrain_fill = load(params.get("terrain fill", "uid://dftdfph41cnpv"));
@@ -97,6 +105,16 @@ static func from_dict(params: Dictionary) -> StageData:
 	);
 	data.obstacles.rng = data.rng;
 	
+	# ceiling setup
+	if params.get("has ceiling", false):
+		data.ceiling_generator = CeilingGenerator.new();
+		data.generator.noise_generator.seed = data.rng.randi();
+		
+		data.ceiling_obstacles = ObstacleManager.from_array(
+			ObstacleManager.get_obstacles(data.stage_name + "_ceiling")
+		);
+		data.ceiling_obstacles.rng = data.rng;
+	
 	# other parameters
 	data.stage_length = params.get("stage length", 3e4);
 	data.next_stage_name = params.get("next stage", "tomato fields");
@@ -106,7 +124,6 @@ static func from_dict(params: Dictionary) -> StageData:
 	data.music = params.get("music", Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
 	
 	data.fresh_state = data.rng.state;
-	print("stage's fresh state: ", data.fresh_state)
 	return data;
 
 
@@ -198,7 +215,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "city2",
-		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
+		"music": Sounds.ID.MUSIC_CITY,
 	},
 	"city2": {
 		"name": "city2",
@@ -209,7 +226,19 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "tomato fields",
-		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
+		"music": Sounds.ID.MUSIC_METAL,
+	},
+	"backstage": {
+		"name": "backstage",
+		"terrain fill": "res://assets/stages/backstage/stagefloor_tile.png",
+		"terrain edge": "res://assets/stages/backstage/stagefloor_edge.png",
+		"background": "res://assets/stages/backstage/backstage.png",
+		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
+		"stage length": 3e4, # should be a float
+		"intermission name": "tomato field massacre",
+		"next stage": "tomato fields",
+		"music": Sounds.ID.MUSIC_GOOFY_AAH,
+		"has ceiling": true,
 	},
 }
 

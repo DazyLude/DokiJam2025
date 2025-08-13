@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgdd0wxfchyrj"]
+
+[ext_resource type="Texture2D" uid="uid://cwamu2dg0nfuy" path="res://assets/skinsuits/hand_of_god.png" id="1_j2n88"]
+
+[node name="TheGodsHand" type="Sprite2D"]
+texture = ExtResource("1_j2n88")
+offset = Vector2(0, -440)

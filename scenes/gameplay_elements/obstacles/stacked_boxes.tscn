@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://32yvet2p2f6g"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_unfn8"]
+[ext_resource type="Texture2D" uid="uid://ta4iqcxlgy4q" path="res://assets/obstacles/stacked_boxes.png" id="2_unfn8"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_unfn8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_unfn8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-387, 344, -389, -69, -325, -71, -331, -383, 271, -379, 271, -75, 376, -73, 376, 359, 295, 433, -292, 439)
