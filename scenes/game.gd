@@ -3,6 +3,7 @@ extends Node
 
 const COLLECTIBLE_HOVER_OFFSET := -100.0;
 const LEFT_APPENDIX := -1000.0;
+const LOWER_BOUND := 5000.0;
 
 # this script should handle background switcheroos and terrain generation based on the players coordinate
 # for terrain generation, I think about doing it in chunks using a smooth-ish height(x) function and a samplerate
@@ -18,6 +19,8 @@ const LEFT_APPENDIX := -1000.0;
 #var upgrade_scene = preload("res://scenes/upgrade_screen.tscn");
 var gameover_scene = preload("res://scenes/gameover.tscn");
 var is_gameover : bool = false;
+
+var player_tween : Tween;
 
 
 func _ready() -> void:
@@ -42,6 +45,9 @@ func _process(delta: float) -> void:
 	if GameState.juice <= 0.0 and player.is_stationary():
 		is_gameover = true;
 		ui_layer.add_child(gameover_scene.instantiate());
+	
+	if player.position.y >= LOWER_BOUND and player.process_mode != ProcessMode.PROCESS_MODE_DISABLED:
+		move_player_to(0.0);
 	
 	if player.position.x >= GameState.current_stage.stage_length:
 		is_gameover = true;
@@ -106,10 +112,7 @@ func spawn_collectibles() -> void:
 
 func place_player() -> void:
 	var generator = GameState.current_stage.generator;
-	
 	player.position = Vector2(0.0, generator.get_height(0) - 200.0);
-	# LMG Note: This causes a crash v
-	#$Parallax2D/Backdrop.motion_offset = $Parallax2D/Backdrop/Sprite2D.texture.get_size() * Vector2(-0.5, -0.25);
 
 
 # checkpoint is just a visual that is placed at the end of a level
@@ -173,3 +176,37 @@ func play_intermission(intermission: String) -> void:
 	
 	# cleanup
 	intermission_player.queue_free();
+
+
+func move_player_to(where: float) -> void:
+	# disable player processing to move them withougt worrying about forces
+	player.process_mode = Node.PROCESS_MODE_DISABLED;
+	# set the stop flag, so that they don't fly away when released
+	player.stop();
+	player.set_emotion(2);
+	player.z_index = 1;
+	
+	var destination = Vector2(where, GameState.current_stage.generator.get_height(where) - 200.0)
+	
+	if player_tween != null:
+		player_tween.kill();
+	
+	player_tween = create_tween();
+	
+	var the_hand : Sprite2D = preload("res://scenes/gameplay_elements/the_gods_hand.tscn").instantiate();
+	the_hand.position = player.position + Vector2(0.0, -900.0);
+	$DecorationsFront.add_child(the_hand);
+	
+	player_tween.tween_property(the_hand, ^"position", player.position, 2.0);
+	
+	player_tween.tween_property(the_hand, ^"position", destination, 2.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT);
+	player_tween.parallel().tween_property(player, ^"position", destination, 2.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT);
+	
+	player_tween.tween_property(the_hand, ^"position", destination + Vector2(0.0, -900.0), 2.0);
+	
+	await player_tween.finished;
+	
+	player.z_index = 0;
+	
+	the_hand.queue_free();
+	player.process_mode = Node.PROCESS_MODE_INHERIT;

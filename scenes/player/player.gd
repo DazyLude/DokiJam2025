@@ -42,6 +42,9 @@ var is_flying : bool :
 var hng_for : float = 0.0; # in seconds
 var oof_for : float = 0.0;
 
+# internal flags
+var _should_stop : bool = false;
+
 
 var speedometer := Speedometer.new();
 
@@ -66,19 +69,11 @@ func _ready() -> void:
 	GameState.player = self;
 
 
-func apply_player_stats(stats: PlayerStats) -> void:
-	player_torque = stats.player_torque;
-	player_fly_strength = stats.player_fly_strength;
-	jump_fly_scale = stats.jump_fly_scale;
-	jump_cost = stats.jump_cost;
-	hardness = stats.hardness;
-	aeroshape = stats.aeroshape;
-	physics_material_override.bounce = stats.bounce;
-	physics_material_override.friction = stats.friction;
-	mass = stats.mass;
-	inertia = stats.mass * 1500.0;
-	linear_damp = stats.linear_damp;
-	angular_damp = stats.angular_damp;
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	if _should_stop:
+		state.linear_velocity = Vector2();
+		state.angular_velocity = 0.0;
+		_should_stop = false;
 
 
 func _physics_process(delta: float) -> void:
@@ -146,23 +141,34 @@ func _process(delta: float) -> void:
 	$StaticSprite.rotation = -rotation;
 	
 	if oof_for > 0:
-		$Sprite2D.display_emotion(1);
-		$StaticSprite.display_emotion(1);
+		set_emotion(1);
 	elif hng_for > 0:
 		if GameState.juice > jump_cost:
-			$Sprite2D.display_emotion(2);
-			$StaticSprite.display_emotion(2);
+			set_emotion(2);
 	elif GameState.juice <= 0:
-		$Sprite2D.display_emotion(2);
-		$StaticSprite.display_emotion(2);
+		set_emotion(2);
 	else:
-		$Sprite2D.display_emotion(0);
-		$StaticSprite.display_emotion(0);
+		set_emotion(0);
 	
 	oof_for = move_toward(oof_for, 0.0, delta);
 	hng_for = move_toward(hng_for, 0.0, delta);
 	
 	last_frame_delta = delta;
+
+
+func apply_player_stats(stats: PlayerStats) -> void:
+	player_torque = stats.player_torque;
+	player_fly_strength = stats.player_fly_strength;
+	jump_fly_scale = stats.jump_fly_scale;
+	jump_cost = stats.jump_cost;
+	hardness = stats.hardness;
+	aeroshape = stats.aeroshape;
+	physics_material_override.bounce = stats.bounce;
+	physics_material_override.friction = stats.friction;
+	mass = stats.mass;
+	inertia = stats.mass * 1500.0;
+	linear_damp = stats.linear_damp;
+	angular_damp = stats.angular_damp;
 
 
 # tries to spend stamina
@@ -247,6 +253,15 @@ func take_impact_damage() -> void:
 		oof_for = 0.4;
 		GameState.juice = move_toward(GameState.juice, 0.0, damage);
 		sound_controller.record_taken_damage(damage);
+
+
+func stop() -> void:
+	_should_stop = true;
+
+
+func set_emotion(emote: int) -> void:
+	$Sprite2D.display_emotion(emote);
+	$StaticSprite.display_emotion(emote);
 
 
 class Speedometer:
