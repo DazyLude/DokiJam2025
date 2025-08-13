@@ -54,4 +54,5 @@ shape = SubResource("CircleShape2D_75vfm")
 script = ExtResource("7_0owmy")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 script = ExtResource("8_qek5x")
