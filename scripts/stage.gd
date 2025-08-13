@@ -55,14 +55,20 @@ static func stage_exists(name: String) -> bool:
 	return stage_variants.has(name);
 
 
-static func get_stage_data_by_name(name: String) -> StageData:
-	return from_dict(stage_variants[name]);
+static func get_stage_data_by_name(name: String, forced_seed: int = 0, forced_state: int = 0) -> StageData:
+	return from_dict(stage_variants[name], forced_seed, forced_state);
 
 
-static func from_dict(params: Dictionary) -> StageData:
+static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: int = 0) -> StageData:
 	var data := StageData.new();
 	data.stage_name = params.get("name", "") as String;
 	data.rng = RandomNumberGenerator.new();
+	
+	if forced_seed != 0:
+		data.rng.seed = forced_seed;
+	if forced_state != 0:
+		data.rng.state = forced_state;
+	print("%s, %s" % [data.rng.seed, data.rng.state]);
 	
 	# visuals setup
 	data.terrain_fill = load(params.get("terrain fill", "uid://dftdfph41cnpv"));
@@ -90,7 +96,6 @@ static func from_dict(params: Dictionary) -> StageData:
 	data.music = params.get("music", Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
 	
 	data.fresh_state = data.rng.state;
-	print("stage's fresh state: ", data.fresh_state)
 	return data;
 
 

@@ -51,6 +51,7 @@ func _process(delta: float) -> void:
 	
 	if player.position.x >= GameState.current_stage.stage_length:
 		is_gameover = true;
+		player.stop();
 		# TODO stop the player, drop them to the ground and make them enjoy tomato juice
 		# TODO stage cleared screen -> intermission scene -> new stage
 		await play_intermission(GameState.current_stage.intermission_name);
