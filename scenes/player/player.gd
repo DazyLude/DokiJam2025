@@ -111,16 +111,7 @@ func _physics_process(delta: float) -> void:
 		flap_amount = 0;
 		is_grounded = true
 	
-	# jump logic v1
-	#if contact_count > 0 and (Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0):eee
-	#	try_jump();
-	#	jump_buffer = 0.0;
-	#	is_flapping = true
-	
-	#if contact_count == 0 aneeeeed Input.is_action_just_pressed(&"jump"):
-	#	try_flap();
-	#	jump_buffer = JUMP_BUFFER_TIME;
-	# jump logic v2
+	# jump logic and flight controls
 	if is_grounded:
 		if Input.is_action_just_pressed(&"jump") or jump_buffer > 0.0:
 			try_jump();
@@ -130,6 +121,11 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed(&"jump"):
 			try_flap();
 			jump_buffer = JUMP_BUFFER_TIME;
+		# mid-air strafing
+		if Input.is_action_pressed(&"fly_left"):
+			try_strafe(-1, delta)
+		elif Input.is_action_pressed(&"fly_right"):
+			try_strafe(1, delta)
 	
 	if jump_buffer > 0.0:
 		jump_buffer -= delta;
@@ -192,6 +188,20 @@ func try_rotate(torque: float, delta: float) -> void:
 		apply_torque(torque_scaled);
 		GameState.juice = 0.0;
 
+func try_strafe(direction: float, delta: float) -> void:
+	var movement_direction = sign(linear_velocity.x)
+	var strafe_vector := Vector2(direction, 0)
+	var strafe_force := strafe_vector * player_fly_strength * mass * jump_fly_scale;
+	# Cannot strafe past the speed cap
+	if abs(linear_velocity.x) > 50 and sign(direction) == movement_direction:
+		return
+	if GameState.juice > delta:
+		GameState.juice -= delta;
+	else:
+		strafe_force /= 2
+		GameState.juice = 0.0;
+	apply_force(strafe_force)
+	
 
 # tries to spend stamina
 # if stamina is less than delta, reduces applied force by a fraction

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgjo1po0h36q2"]
+[gd_scene load_steps=13 format=3 uid="uid://bgjo1po0h36q2"]
 
 [ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_1s2dm"]
 [ext_resource type="Script" uid="uid://wgacgqeny5sv" path="res://scenes/pause_menu.gd" id="1_myx47"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ql4ksu2c1ebu" path="res://assets/icons/UI_ketchup_empty.png" id="9_71k7c"]
 [ext_resource type="Texture2D" uid="uid://cf8uudqbdo34r" path="res://assets/icons/UI_ketchup_full.png" id="10_cmnsq"]
 
-[sub_resource type="Texture2D" id="Texture2D_71k7c"]
+[sub_resource type="Texture2D" id="Texture2D_cmnsq"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("5_knqa7")
@@ -17,11 +17,29 @@ show_mode = 0
 force_type = 0
 metadata/_custom_type_script = "uid://duho7t435uxyj"
 
-[sub_resource type="Texture2D" id="Texture2D_cmnsq"]
+[sub_resource type="Texture2D" id="Texture2D_71k7c"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("5_knqa7")
 path = "roll_cw"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[sub_resource type="Texture2D" id="Texture2D_1s2dm"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_knqa7")
+path = "fly_left"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[sub_resource type="Texture2D" id="Texture2D_88e76"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_knqa7")
+path = "fly_right"
 show_mode = 0
 force_type = 0
 metadata/_custom_type_script = "uid://duho7t435uxyj"
@@ -145,6 +163,7 @@ scrollable = false
 tick_count = 5
 
 [node name="ControlLabel" type="Label" parent="."]
+visible = false
 layout_mode = 2
 offset_left = -160.0
 offset_top = -120.0
@@ -160,12 +179,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -115.0
-offset_top = -80.0
-offset_right = 193.0
-offset_bottom = 173.0
+offset_left = -154.0
+offset_top = -154.0
+offset_right = 154.0
+offset_bottom = 154.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="RollContainer" type="HBoxContainer" parent="ControlsContainer"]
 layout_mode = 2
@@ -177,13 +197,43 @@ theme_override_font_sizes/font_size = 32
 text = "Roll:"
 vertical_alignment = 1
 
-[node name="RollRightControl" type="TextureRect" parent="ControlsContainer/RollContainer"]
-layout_mode = 2
-texture = SubResource("Texture2D_71k7c")
-
 [node name="RollLeftControl" type="TextureRect" parent="ControlsContainer/RollContainer"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = SubResource("Texture2D_cmnsq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RollRightControl" type="TextureRect" parent="ControlsContainer/RollContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = SubResource("Texture2D_71k7c")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="StrafeContainer" type="HBoxContainer" parent="ControlsContainer"]
+layout_mode = 2
+
+[node name="StrafeLabel" type="Label" parent="ControlsContainer/StrafeContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Strafe:"
+vertical_alignment = 1
+
+[node name="FlyLeftControl" type="TextureRect" parent="ControlsContainer/StrafeContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = SubResource("Texture2D_1s2dm")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="FlyRightControl" type="TextureRect" parent="ControlsContainer/StrafeContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = SubResource("Texture2D_88e76")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="JumpContainer" type="HBoxContainer" parent="ControlsContainer"]
 layout_mode = 2
@@ -196,8 +246,11 @@ text = "Jump:"
 vertical_alignment = 1
 
 [node name="JumpControl" type="TextureRect" parent="ControlsContainer/JumpContainer"]
+custom_minimum_size = Vector2(120, 100)
 layout_mode = 2
 texture = SubResource("Texture2D_ofnjo")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="ResumeButton" type="Button" parent="."]
 layout_mode = 1

@@ -159,6 +159,7 @@ func generate_items(items_data: Dictionary, from: float, to: float) -> Dictionar
 			while occupied_coords.has(item_placement + variation) and max_loops > 0:
 				max_loops -= 1
 				variation = ITEM_PLACEMENT_RESOLUTION * (try_i / 2 + 1) * (try_i % 2 - 0.5) * 2.0;
+				try_i += 1
 			
 			item_placement += variation;
 			
