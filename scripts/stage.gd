@@ -130,7 +130,7 @@ func generate_items(items_data: Dictionary, from: float, to: float) -> Dictionar
 					variation = clampf(variation, distance / -3.0, distance / 3.0);
 					item_placement += variation;
 			
-			item_placement = roundi(item_placement / ITEM_PLACEMENT_RESOLUTION) * item_placement;
+			item_placement = roundi(item_placement / ITEM_PLACEMENT_RESOLUTION) * ITEM_PLACEMENT_RESOLUTION;
 			
 			var try_i : int = 0;
 			while occupied_coords.has(item_placement):
