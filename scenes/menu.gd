@@ -21,7 +21,7 @@ func _ready() -> void:
 			GameState.selected_skinsuit = Upgrade.SKINSUIT_CROWKI;
 			update_skinsuit();
 	);
-	
+	$StageSelect.pressed.connect(get_tree().change_scene_to_file.bind("res://scenes/stage_select.tscn"))
 	update_skinsuit();
 
 

@@ -69,11 +69,14 @@ func load_stage() -> void:
 	setup_terrain_visuals(stage);
 	
 	generate_terrain();
-	if stage.ceilng_generator != null:
+	if stage.ceiling_generator != null:
 		generate_ceiling();
 	
 	spawn_checkpoint();
 	spawn_obstacles();
+	if stage.ceiling_generator != null:
+		spawn_ceiling_obstacles();
+	
 	spawn_collectibles();
 	place_player();
 
@@ -82,6 +85,13 @@ func place_node_at(node: Node2D, x: float, y_offset: float = 0.0) -> void:
 	node.position = Vector2(
 		x,
 		GameState.current_stage.generator.get_height(x) + y_offset
+	);
+
+
+func place_node_at_ceiling(node: Node2D, x: float, y_offset: float = 0.0) -> void:
+	node.position = Vector2(
+		x,
+		GameState.current_stage.ceiling_generator.get_height(x) + y_offset
 	);
 
 
@@ -104,6 +114,16 @@ func spawn_obstacles() -> void:
 	for x in GameState.current_stage.generator.get_obstacle_coords(obstacle_start, obstacle_end):
 		var obstacle = GameState.current_stage.obstacles.get_random_obstacle();
 		place_node_at(obstacle, x);
+		$DecorationsBack.add_child(obstacle);
+
+
+func spawn_ceiling_obstacles() -> void:
+	var obstacle_start = GameState.current_stage.safe_zone_end;
+	var obstacle_end = GameState.current_stage.stage_length;
+	
+	for x in GameState.current_stage.ceiling_generator.get_obstacle_coords(obstacle_start, obstacle_end):
+		var obstacle = GameState.current_stage.ceiling_obstacles.get_random_obstacle();
+		place_node_at_ceiling(obstacle, x);
 		$DecorationsBack.add_child(obstacle);
 
 
@@ -174,7 +194,7 @@ func generate_terrain() -> void:
 
 func generate_ceiling() -> void:
 	var stage := GameState.current_stage;
-	var generator = GameState.current_stage.ceilng_generator;
+	var generator = GameState.current_stage.ceiling_generator;
 	
 	var appendix_sample_count := -roundi(LEFT_APPENDIX / TerrainGenerator.SAMPLE_DELTA);
 	

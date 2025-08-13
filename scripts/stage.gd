@@ -22,8 +22,9 @@ var music : Sounds.ID;
 
 # associated generators / controllers / managers
 var generator : TerrainGenerator;
-var ceilng_generator : CeilingGenerator = null;
+var ceiling_generator : CeilingGenerator = null;
 var obstacles : ObstacleManager;
+var ceiling_obstacles : ObstacleManager = null;
 
 # intermission & next stage
 var intermission_name : String;
@@ -82,15 +83,21 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	data.generator.scale = params.get("terrain scale", Vector2(1.0, 1.0));
 	data.generator.noise_generator.seed = data.rng.randi();
 	
-	if params.get("has ceiling", false):
-		data.ceilng_generator = CeilingGenerator.new();
-		data.generator.noise_generator.seed = data.rng.randi();
-	
 	# obstacle manager setup
 	data.obstacles = ObstacleManager.from_array(
 		ObstacleManager.get_obstacles(data.stage_name)
 	);
 	data.obstacles.rng = data.rng;
+	
+	# ceiling setup
+	if params.get("has ceiling", false):
+		data.ceiling_generator = CeilingGenerator.new();
+		data.generator.noise_generator.seed = data.rng.randi();
+		
+		data.ceiling_obstacles = ObstacleManager.from_array(
+			ObstacleManager.get_obstacles(data.stage_name + "_ceiling")
+		);
+		data.ceiling_obstacles.rng = data.rng;
 	
 	# other parameters
 	data.stage_length = params.get("stage length", 3e4);
