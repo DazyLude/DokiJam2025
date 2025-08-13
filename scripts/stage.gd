@@ -225,7 +225,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
-		"next stage": "tomato fields",
+		"next stage": "backstage",
 		"music": Sounds.ID.MUSIC_METAL,
 	},
 	"backstage": {
