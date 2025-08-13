@@ -1,42 +1,55 @@
 extends Control
 
 
-@onready var start_btn := $Start;
+@onready var start_btn := $Default/Start;
 
 
 func _ready() -> void:
+	show_main();
 	Sounds.play_looped(Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
 	
 	start_btn.pressed.connect(start_game);
-	$DiaTestButton.pressed.connect(test_dialogue);
-	$ComicTestButton.pressed.connect(test_intro);
+	$Default/DiaTestButton.pressed.connect(test_dialogue);
+	$Default/ComicTestButton.pressed.connect(test_intro);
 	
-	$TomatoSelect.pressed.connect(
+	$Default/TomatoSelect.pressed.connect(
 		func():
 			GameState.selected_skinsuit = Upgrade.SKINSUIT_TOMATO;
 			update_skinsuit();
 	);
-	$CrowkiSelect.pressed.connect(
+	$Default/CrowkiSelect.pressed.connect(
 		func():
 			GameState.selected_skinsuit = Upgrade.SKINSUIT_CROWKI;
 			update_skinsuit();
 	);
-	$StageSelect.pressed.connect(get_tree().change_scene_to_file.bind("res://scenes/stage_select.tscn"))
+	$Default/StageSelect.pressed.connect(show_stage_select);
+	$StageSelect2.exit_submenu.connect(show_main);
 	update_skinsuit();
 
 
+func show_stage_select() -> void:
+	$Default.hide();
+	$StageSelect2.show();
+
+
+func show_main() -> void:
+	$Default.show();
+	$StageSelect2.hide();
+	
+
+
 func update_skinsuit() -> void:
-	$TextureRect.prepare_sprite(GameState.selected_skinsuit);
-	$TextureRect.display_emotion(0);
+	$Default/TextureRect.prepare_sprite(GameState.selected_skinsuit);
+	$Default/TextureRect.display_emotion(0);
 
 
 func _process(delta: float) -> void:
 	const rot_speed = 0.05;
 	
 	var tomatocenter : Vector2 = get_viewport().size / 2;
-	var offset : Vector2 = $TextureRect.position - tomatocenter;
-	$TextureRect.position = offset.rotated(rot_speed * delta) + tomatocenter;
-	$TextureRect.rotation += rot_speed * delta;
+	var offset : Vector2 = $Default/TextureRect.position - tomatocenter;
+	$Default/TextureRect.position = offset.rotated(rot_speed * delta) + tomatocenter;
+	$Default/TextureRect.rotation += rot_speed * delta;
 
 
 func start_game() -> void:

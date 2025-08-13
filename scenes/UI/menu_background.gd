@@ -1,6 +1,9 @@
 extends Control
 
 
+static var progress : float = 0.0; 
+
+
 @onready var base : Sprite2D = $TomatoBase;
 var texture = CompressedTexture2D
 var tomato_diff := Vector2(150, 150);
@@ -12,18 +15,20 @@ var animation_track_ids : Dictionary[Vector2i, Vector2i] = {};
 func _ready() -> void:
 	item_rect_changed.connect(setup);
 	setup();
-	
-	$AnimationPlayer.play(&"tomato_fly");
+	$AnimationPlayer.seek(progress);
 
 
 func _exit_tree() -> void:
 	tomato_refs.clear();
 	animation_track_ids.clear();
+	progress = $AnimationPlayer.current_animation_position;
 	$AnimationPlayer.get_animation(&"tomato_fly").clear();
 
 
 func setup() -> void:
 	var animation : Animation = $AnimationPlayer.get_animation(&"tomato_fly");
+	animation.length = 4.0;
+	animation.loop_mode = Animation.LOOP_LINEAR;
 	
 	var x_tomato_count = size.x / tomato_diff.x + 1;
 	var y_tomato_count = size.y / tomato_diff.y + 1;
@@ -52,3 +57,5 @@ func setup() -> void:
 				
 				tomato_refs[clone_coords] = clone;
 				animation_track_ids[clone_coords] = Vector2i(idx, rot_idx);
+	
+	$AnimationPlayer.play(&"tomato_fly");

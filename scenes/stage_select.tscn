@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://csyi3rxr6vlot"]
+[gd_scene load_steps=3 format=3 uid="uid://csyi3rxr6vlot"]
 
 [ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_klos3"]
 [ext_resource type="Script" uid="uid://bxwgyir465oc" path="res://scenes/stage_select.gd" id="2_nbh0i"]
-[ext_resource type="PackedScene" uid="uid://cywgm8te3676u" path="res://scenes/UI/mute_button.tscn" id="3_8xntf"]
-[ext_resource type="PackedScene" uid="uid://4h637aknfddx" path="res://scenes/UI/menu_background.tscn" id="4_ng2yn"]
 
 [node name="StageSelect" type="Control"]
 layout_mode = 3
@@ -15,16 +13,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_klos3")
 script = ExtResource("2_nbh0i")
-
-[node name="MenuBackground" parent="." instance=ExtResource("4_ng2yn")]
-layout_mode = 1
-
-[node name="MuteButton" parent="." instance=ExtResource("3_8xntf")]
-layout_mode = 0
-offset_left = 1489.0
-offset_top = 38.0
-offset_right = 1566.0
-offset_bottom = 115.0
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 1

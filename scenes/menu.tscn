@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cj3qmqrdmpetp"]
+[gd_scene load_steps=12 format=3 uid="uid://cj3qmqrdmpetp"]
 
 [ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_con2f"]
 [ext_resource type="Script" uid="uid://l12ejtkng3vn" path="res://scenes/menu.gd" id="1_vjb58"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cywgm8te3676u" path="res://scenes/UI/mute_button.tscn" id="3_mhnvy"]
 [ext_resource type="Script" uid="uid://duho7t435uxyj" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="5_4ytvr"]
 [ext_resource type="Texture2D" uid="uid://dvo1yk4jb54l6" path="res://assets/logo.png" id="5_i6lef"]
+[ext_resource type="PackedScene" uid="uid://csyi3rxr6vlot" path="res://scenes/stage_select.tscn" id="8_13sgg"]
 
 [sub_resource type="Texture2D" id="Texture2D_g3eks"]
 resource_local_to_scene = false
@@ -49,33 +50,39 @@ script = ExtResource("1_vjb58")
 [node name="MenuBackground" parent="." instance=ExtResource("3_g3eks")]
 layout_mode = 1
 
-[node name="TextureRect" type="Sprite2D" parent="."]
+[node name="Default" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="Sprite2D" parent="Default"]
 visible = false
 position = Vector2(816, 456)
 script = ExtResource("3_con2f")
 metadata/_custom_type_script = "uid://b40woge2o40ty"
 
-[node name="Logo" type="TextureRect" parent="."]
+[node name="Logo" type="TextureRect" parent="Default"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -800.0
-offset_right = 799.0
-offset_bottom = 331.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 368.0
 grow_horizontal = 2
 texture = ExtResource("5_i6lef")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="MuteButton" parent="." instance=ExtResource("3_mhnvy")]
+[node name="MuteButton" parent="Default" instance=ExtResource("3_mhnvy")]
 layout_mode = 0
 offset_left = 1489.0
 offset_top = 38.0
 offset_right = 1566.0
 offset_bottom = 115.0
 
-[node name="Start" type="Button" parent="."]
+[node name="Start" type="Button" parent="Default"]
 layout_mode = 0
 offset_left = 654.0
 offset_top = 356.0
@@ -83,33 +90,35 @@ offset_right = 894.0
 offset_bottom = 493.0
 text = "start game"
 
-[node name="StageSelect" type="Button" parent="."]
+[node name="StageSelect" type="Button" parent="Default"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -240.0
-offset_top = -137.0
+offset_left = -253.0
+offset_top = -149.0
+offset_right = -13.0
+offset_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "stage select
 "
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="Default"]
 visible = false
 layout_mode = 0
 offset_left = 625.0
 offset_top = 512.0
 offset_right = 928.0
-offset_bottom = 587.0
+offset_bottom = 589.0
 text = "controls:
 q & e - rotation (counter and clockwise)
 f - fly
 space - jump"
 
-[node name="DiaTestButton" type="Button" parent="."]
+[node name="DiaTestButton" type="Button" parent="Default"]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 794.0
@@ -117,7 +126,7 @@ offset_right = 270.0
 offset_bottom = 894.0
 text = "test dialogue"
 
-[node name="ComicTestButton" type="Button" parent="."]
+[node name="ComicTestButton" type="Button" parent="Default"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 693.0
@@ -125,7 +134,7 @@ offset_right = 264.0
 offset_bottom = 793.0
 text = "test intro"
 
-[node name="TomatoSelect" type="Button" parent="."]
+[node name="TomatoSelect" type="Button" parent="Default"]
 layout_mode = 0
 offset_left = 275.0
 offset_top = 692.0
@@ -134,7 +143,7 @@ offset_bottom = 792.0
 text = "play as tomato
 "
 
-[node name="CrowkiSelect" type="Button" parent="."]
+[node name="CrowkiSelect" type="Button" parent="Default"]
 layout_mode = 0
 offset_left = 275.0
 offset_top = 790.0
@@ -142,24 +151,24 @@ offset_right = 536.0
 offset_bottom = 890.0
 text = "play as crowki"
 
-[node name="RollLabel" type="Label" parent="."]
+[node name="RollLabel" type="Label" parent="Default"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -116.0
-offset_top = 56.0
-offset_right = 24.0
-offset_bottom = 106.0
+offset_left = 664.0
+offset_top = 486.0
+offset_right = 804.0
+offset_bottom = 536.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Roll:"
 vertical_alignment = 1
 
-[node name="RollRightControl" type="TextureRect" parent="."]
+[node name="RollRightControl" type="TextureRect" parent="Default"]
 layout_mode = 0
 offset_left = 684.0
 offset_top = 566.0
@@ -167,7 +176,7 @@ offset_right = 784.0
 offset_bottom = 666.0
 texture = SubResource("Texture2D_g3eks")
 
-[node name="RollLeftControl" type="TextureRect" parent="."]
+[node name="RollLeftControl" type="TextureRect" parent="Default"]
 layout_mode = 0
 offset_left = 784.0
 offset_top = 566.0
@@ -175,7 +184,7 @@ offset_right = 884.0
 offset_bottom = 666.0
 texture = SubResource("Texture2D_v86rl")
 
-[node name="JumpLabel" type="Label" parent="."]
+[node name="JumpLabel" type="Label" parent="Default"]
 layout_mode = 0
 offset_left = 684.0
 offset_top = 696.0
@@ -185,10 +194,13 @@ theme_override_font_sizes/font_size = 32
 text = "Jump:"
 vertical_alignment = 1
 
-[node name="JumpControl" type="TextureRect" parent="."]
+[node name="JumpControl" type="TextureRect" parent="Default"]
 layout_mode = 0
 offset_left = 684.0
 offset_top = 756.0
 offset_right = 784.0
 offset_bottom = 856.0
 texture = SubResource("Texture2D_13sgg")
+
+[node name="StageSelect2" parent="." instance=ExtResource("8_13sgg")]
+layout_mode = 1
