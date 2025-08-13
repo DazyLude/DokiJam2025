@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsygnq6v144q2"]
+[gd_scene load_steps=17 format=3 uid="uid://dsygnq6v144q2"]
 
 [ext_resource type="Script" uid="uid://b4xgne00eu2bu" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://b40woge2o40ty" path="res://scripts/emotional_sprite.gd" id="3_0owmy"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://vxqeovyjrlad" path="res://scenes/player/player_camera.gd" id="7_0owmy"]
 [ext_resource type="Script" uid="uid://dt2ixcd0rkqdg" path="res://scenes/player/sound_controller.gd" id="8_qek5x"]
 [ext_resource type="Script" uid="uid://is8g47s77xuw" path="res://scenes/player/wings_manager.gd" id="9_5gtgg"]
+[ext_resource type="Texture2D" uid="uid://duxgl0yvmiiy0" path="res://assets/powerup.png" id="10_h17s1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dovo2"]
 friction = 0.75
@@ -17,6 +18,36 @@ bounce = 0.1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75vfm"]
 radius = 450.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je7p5"]
+atlas = ExtResource("10_h17s1")
+region = Rect2(0, 0, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm80t"]
+atlas = ExtResource("10_h17s1")
+region = Rect2(64, 0, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
+atlas = ExtResource("10_h17s1")
+region = Rect2(128, 0, 64, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_je7p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm80t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx1jg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
 
 [node name="Player" type="RigidBody2D"]
 collision_layer = 3
@@ -55,3 +86,11 @@ script = ExtResource("7_0owmy")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("8_qek5x")
+
+[node name="BuffAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ugbui")
+frame = 2
+frame_progress = 0.0125951
+offset = Vector2(0, -17)

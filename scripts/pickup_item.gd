@@ -36,5 +36,17 @@ static var pickup_item_variants : Dictionary[String, Dictionary] = {
 	"ketchup": {
 		"texture": "res://assets/icons/stamina_ketchup.png",
 		"effect": func(): GameState.juice = move_toward(GameState.juice, GameState.juice_cap, GameState.juice_cap * 0.2),
+	},
+	"wingbull": {
+		"texture": "res://assets/icons/wingbull.png",
+		"effect": func(): GameState.player.launch_upward()
+	},
+	"coffee": {
+		"texture": "res://assets/icons/coffee_upgrade.png",
+		"effect": func(): GameState.player.launch_forward()
+	},
+	"supps": {
+		"texture": "res://assets/icons/dadsupps.png",
+		"effect": func(): GameState.player.apply_supps_buff()
 	}
 }

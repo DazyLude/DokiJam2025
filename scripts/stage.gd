@@ -42,10 +42,26 @@ var item_placement_properties : Dictionary[String, Dictionary] = {
 		"group": "a", # this item belongs to a group
 		"weight": 100.0, # weight of this item within its group
 	},
+	"wingbull": {
+		"group": "b",
+		"weight": 30.0,
+	},
+	"coffee": {
+		"group": "b",
+		"weight": 60.0,
+	},
+	"supps": {
+		"group": "b",
+		"weight": 10.0,
+	},
 	"groups": {
 		"a": { # items from a group are placed like normal items, and the selected among (ඞ) items within a group
 			"distance": 2000.0,
 			"placement": PickupItemData.PLACEMENT_NORMAL,
+		},
+		"b": {
+			"distance": 4000.0,
+			"placement": PickupItemData.PLACEMENT_NORMAL
 		}
 	}
 }
@@ -139,7 +155,9 @@ func generate_items(items_data: Dictionary, from: float, to: float) -> Dictionar
 			
 			var try_i : int = 0;
 			var variation = 0.0;
-			while occupied_coords.has(item_placement + variation):
+			var max_loops = 1000;
+			while occupied_coords.has(item_placement + variation) and max_loops > 0:
+				max_loops -= 1
 				variation = ITEM_PLACEMENT_RESOLUTION * (try_i / 2 + 1) * (try_i % 2 - 0.5) * 2.0;
 			
 			item_placement += variation;

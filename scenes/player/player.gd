@@ -3,7 +3,8 @@ class_name Player extends RigidBody2D
 
 ## speed at which the player is considered stationary
 const SPEED_LOWER_LIMIT := 0.5; # in px/s
-const SAFE_SPEED_LIMIT := 750.0;
+#const SAFE_SPEED_LIMIT := 750.0; #LMG Note: original value
+const SAFE_SPEED_LIMIT := 650.0;
 
 # debug info
 var last_frame_delta : float = 0.0;
@@ -42,6 +43,9 @@ var is_flying : bool :
 var hng_for : float = 0.0; # in seconds
 var oof_for : float = 0.0;
 
+#buff counter
+var buff_active = false
+var buff_counter = 0
 
 var speedometer := Speedometer.new();
 
@@ -54,6 +58,7 @@ var speedometer := Speedometer.new();
 
 func _ready() -> void:
 	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
+	$BuffAnimation.pause()
 	
 	if Upgrade.upgrade_metadata[GameState.selected_skinsuit].has("rider"):
 		var rider = Upgrade.upgrade_metadata[GameState.selected_skinsuit]["rider"];
@@ -139,11 +144,22 @@ func _physics_process(delta: float) -> void:
 	last_frame_delta_physics = delta;
 	sound_controller.update_player_state(self);
 	speedometer.update_speed(self.linear_velocity);
+	
+	# buff reset
+	if buff_active:
+		if buff_counter > 0 and GameState.juice > 0.0:
+			buff_counter -= delta
+		else:
+			buff_active = false
+			$BuffAnimation.visible = false
+			$BuffAnimation.pause()
+			apply_player_stats(PlayerStats.get_latest())
 
 
 func _process(delta: float) -> void:
 	camera.update_offset(self, rotation);
 	$StaticSprite.rotation = -rotation;
+	$BuffAnimation.rotation = -rotation;
 	
 	if oof_for > 0:
 		$Sprite2D.display_emotion(1);
@@ -192,6 +208,39 @@ func try_propel_upward(delta: float) -> void:
 		apply_central_force(upward_force_scaled);
 		GameState.juice = 0.0;
 
+## launches the player upward when in contact with a wingbull item
+func launch_upward() -> void:
+	var upward_unit_vector := Vector2(0, -1);
+	var upward_impulse := upward_unit_vector * player_fly_strength * mass * jump_fly_scale;
+	hng_for = 0.2;
+	apply_central_impulse(upward_impulse * 2);
+
+## launches the player forward when in contact with a coffee item
+func launch_forward() -> void:
+	var direction = sign(linear_velocity.x)
+	if direction == 0:
+		direction = 1
+	var forward_unit_vector := Vector2(direction, 0);
+	var forward_impulse := forward_unit_vector * player_fly_strength * mass * jump_fly_scale;
+	apply_central_impulse(forward_impulse);
+	apply_torque(player_torque * direction)
+
+## buffs the player when in contact with a supps item
+func apply_supps_buff() -> void:
+	# Activate the buff counter
+	buff_active = true
+	buff_counter = 10 #seconds
+	# Activate buff visuals
+	$BuffAnimation.visible = true
+	$BuffAnimation.play()
+	# Increase player stats
+	mass *= 2
+	player_fly_strength *= 2
+	physics_material_override.friction = 1.0
+	hardness *= 5
+	# Refill juice meter
+	GameState.juice = GameState.juice_cap
+
 
 func try_jump() -> void:
 	#var upward_unit_vector := Vector2(0, -1).rotated(self.rotation);
@@ -238,9 +287,13 @@ func is_stationary() -> bool:
 
 
 func take_impact_damage() -> void:
-	var speed_diff = abs(speedometer.get_last_frame_speed().y) - SAFE_SPEED_LIMIT;
+	# version 1
+	#var speed_diff = abs(speedometer.get_last_frame_speed().y) - SAFE_SPEED_LIMIT;
 	#var damage = 0.1 * sqrt(speed_diff);
+	# version 2
 	#var damage = (0.1 - (0.01 * (hardness - 5))) * sqrt(speed_diff)
+	# version 3
+	var speed_diff = abs(speedometer.get_last_frame_speed().y) - (SAFE_SPEED_LIMIT + (hardness * 20));
 	var damage = sqrt(speed_diff)/(5.0 + hardness)
 	
 	if damage > 0.0:

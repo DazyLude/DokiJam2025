@@ -22,6 +22,7 @@ var slider_data: Dictionary[int, Dictionary] = {
 func _ready() -> void:
 	# pause here
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	get_parent().get_node("HUD").visible = false
 	get_tree().paused = true
 	# Initialize slider data dictionary
 	slider_data[MUSIC]["node"] = get_node("MusicContainer/VolumeSlider")
@@ -41,15 +42,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
+## pause button pressed
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"pause"):
 		# unpause here or in another place the menu is exited
 		close_pause_menu()
 
-
+## close the pause menu and remove from memory
 func close_pause_menu() -> void:
 	get_tree().paused = false
+	get_parent().get_node("HUD").visible = true
 	get_viewport().set_input_as_handled();
 	queue_free();
 
