@@ -2,6 +2,9 @@ extends RefCounted
 class_name StageData
 
 
+const ITEM_PLACEMENT_RESOLUTION := 100.0; # most items are 100x100 in size
+
+
 var stage_name : String;
 var rng : RandomNumberGenerator;
 var fresh_state : int;
@@ -110,7 +113,7 @@ func generate_items(items_data: Dictionary, from: float, to: float) -> Dictionar
 				items.push_back(GroupData.from_dict(item_data, item));
 	
 	var occupied_coords := PackedFloat32Array();
-	# step 1: place the non random items
+	
 	for group_data in items:
 		var distance = group_data.placement_distance;
 		var from_i = floori(from / distance);
@@ -127,9 +130,11 @@ func generate_items(items_data: Dictionary, from: float, to: float) -> Dictionar
 					variation = clampf(variation, distance / -3.0, distance / 3.0);
 					item_placement += variation;
 			
+			item_placement = roundi(item_placement / ITEM_PLACEMENT_RESOLUTION) * item_placement;
+			
 			var try_i : int = 0;
 			while occupied_coords.has(item_placement):
-				item_placement = 20.0 * (try_i / 2) * (try_i % 2 - 0.5);
+				item_placement = ITEM_PLACEMENT_RESOLUTION * (try_i / 2) * (try_i % 2 - 0.5);
 			
 			occupied_coords.push_back(item_placement);
 			
