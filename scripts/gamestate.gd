@@ -47,7 +47,7 @@ func restart() -> void:
 	current_stage.rng.state = current_stage.fresh_state;
 
 
-func load_stage(stage: String) -> void:
+func load_stage(stage: String = GameState.current_stage.next_stage_name) -> void:
 	restart();
 	upgrades.check_for_unlocks(stage);
 	current_stage = StageData.get_stage_data_by_name(stage);

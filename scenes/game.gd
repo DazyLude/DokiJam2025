@@ -48,7 +48,10 @@ func _process(delta: float) -> void:
 		# TODO stop the player, drop them to the ground and make them enjoy tomato juice
 		# TODO stage cleared screen -> intermission scene -> new stage
 		await play_intermission(GameState.current_stage.intermission_name);
-		GameState.load_stage(GameState.current_stage.next_stage_name);
+		
+		var shop_scene = preload("res://scenes/upgrade_screen.tscn").instantiate();
+		shop_scene.on_continue_override = GameState.load_stage;
+		$UILayer.add_child(shop_scene);
 
 
 func load_stage() -> void:

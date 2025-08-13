@@ -1,5 +1,8 @@
 extends Control
 
+
+var on_continue_override : Callable;
+
 # Dictionary of node names
 static var containers: Dictionary = {
 	"speed": "SpeedContainer",
@@ -70,8 +73,11 @@ func button_buy_upgrade(container_name: String, upgrade_id: int) -> void:
 
 ## resume the game
 func _on_continue_pressed() -> void:
-	GameState.restart();
-	get_tree().change_scene_to_file("res://scenes/game.tscn");
+	if on_continue_override.is_null():
+		GameState.restart();
+		get_tree().change_scene_to_file("res://scenes/game.tscn");
+	else:
+		on_continue_override.call();
 
 
 ## upgrade character speed
