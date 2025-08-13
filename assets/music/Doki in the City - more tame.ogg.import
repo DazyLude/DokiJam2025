@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dpvp17dinbha7"
+path="res://.godot/imported/Doki in the City - more tame.ogg-8a848e8c5a715bcae984caf34889cd6c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Doki in the City - more tame.ogg"
+dest_files=["res://.godot/imported/Doki in the City - more tame.ogg-8a848e8c5a715bcae984caf34889cd6c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -13,7 +13,8 @@ config_version=5
 config/name="DokiJam2025"
 run/main_scene="uid://cj3qmqrdmpetp"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="uid://clx80s5byfveg"
+config/icon="uid://cjmy3w20nnurt"
 
 [autoload]
 
@@ -25,7 +26,7 @@ ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

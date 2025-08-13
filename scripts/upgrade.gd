@@ -88,7 +88,7 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	},
 	SKINSUIT_CROWKI: {
 		"type": TYPE_ONE_OFF,
-		"autounlock": "tomato fields", # String (stage name)
+		"autounlock": "city", # String (stage name)
 		"base": "res://assets/skinsuits/crowki/crowki_base.png",
 		"emotions": [
 			"res://assets/skinsuits/crowki/crowki_neutral.png",
@@ -98,7 +98,7 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	},
 	SKINSUIT_RETRO: {
 		"type": TYPE_ONE_OFF,
-		"autounlock": "tomato fields", # String (stage name)
+		"autounlock": "city2", # String (stage name)
 		"base": "res://assets/skinsuits/retro/retro_doki_ball_base.png",
 		"emotions": [
 			"res://assets/skinsuits/retro/retro_doki_ball_neutral.png",

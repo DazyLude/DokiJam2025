@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ypo31sotg8jn"
+path="res://.godot/imported/A Metal Cup of Coffee.ogg-c9136a027116b9b2b2c6b81fa2b43d7d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/A Metal Cup of Coffee.ogg"
+dest_files=["res://.godot/imported/A Metal Cup of Coffee.ogg-c9136a027116b9b2b2c6b81fa2b43d7d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
