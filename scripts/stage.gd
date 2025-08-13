@@ -22,6 +22,7 @@ var music : Sounds.ID;
 
 # associated generators / controllers / managers
 var generator : TerrainGenerator;
+var ceilng_generator : CeilingGenerator = null;
 var obstacles : ObstacleManager;
 
 # intermission & next stage
@@ -68,7 +69,7 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 		data.rng.seed = forced_seed;
 	if forced_state != 0:
 		data.rng.state = forced_state;
-	print("%s, %s" % [data.rng.seed, data.rng.state]);
+	print("initial seed and state: %s, %s" % [data.rng.seed, data.rng.state]);
 	
 	# visuals setup
 	data.terrain_fill = load(params.get("terrain fill", "uid://dftdfph41cnpv"));
@@ -80,6 +81,10 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	data.generator = TerrainGenerator.new();
 	data.generator.scale = params.get("terrain scale", Vector2(1.0, 1.0));
 	data.generator.noise_generator.seed = data.rng.randi();
+	
+	if params.get("has ceiling", false):
+		data.ceilng_generator = CeilingGenerator.new();
+		data.generator.noise_generator.seed = data.rng.randi();
 	
 	# obstacle manager setup
 	data.obstacles = ObstacleManager.from_array(
@@ -184,7 +189,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "city2",
-		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
+		"music": Sounds.ID.MUSIC_CITY,
 	},
 	"city2": {
 		"name": "city2",
@@ -195,7 +200,19 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "tomato fields",
-		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
+		"music": Sounds.ID.MUSIC_METAL,
+	},
+	"backstage": {
+		"name": "backstage",
+		"terrain fill": "res://assets/stages/backstage/stagefloor_tile.png",
+		"terrain edge": "res://assets/stages/backstage/stagefloor_edge.png",
+		"background": "res://assets/stages/backstage/backstage.png",
+		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
+		"stage length": 3e4, # should be a float
+		"intermission name": "tomato field massacre",
+		"next stage": "tomato fields",
+		"music": Sounds.ID.MUSIC_GOOFY_AAH,
+		"has ceiling": true,
 	},
 }
 

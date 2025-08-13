@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://daikwosr13pnv"]
+[gd_scene load_steps=76 format=3 uid="uid://daikwosr13pnv"]
 
 [ext_resource type="Script" uid="uid://cpobfagrfa2vw" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://ca57mpnq70puo" path="res://assets/stages/farm/tomato_farm.png" id="1_yqjtg"]
@@ -442,6 +442,31 @@ fill_texture_angle_offset = 0.0
 fill_mesh_offset = 0.0
 render_offset = -0.7
 
+[sub_resource type="Resource" id="Resource_n8ral"]
+script = ExtResource("7_kvuet")
+_points = {}
+_point_order = PackedInt32Array()
+_constraints = {}
+_next_key = 0
+_material_overrides = {}
+tessellation_stages = 3
+tessellation_tolerance = 6.0
+curve_bake_interval = 20.0
+
+[sub_resource type="Resource" id="Resource_66xif"]
+script = ExtResource("9_ir15t")
+_edge_meta_materials = Array[ExtResource("8_trtic")]([SubResource("Resource_uxocx")])
+fill_textures = Array[Texture2D]([ExtResource("12_ca42v")])
+fill_texture_z_index = 0
+fill_texture_show_behind_parent = true
+fill_texture_scale = 0.6
+fill_texture_absolute_position = false
+fill_texture_absolute_rotation = false
+fill_texture_offset = Vector2(0, 0)
+fill_texture_angle_offset = 0.0
+fill_mesh_offset = 0.0
+render_offset = -0.7
+
 [node name="Game" type="Node"]
 script = ExtResource("1_lbhrr")
 
@@ -482,10 +507,23 @@ collision_size = 64.0
 collision_polygon_node_path = NodePath("../StaticBody2D/CollisionShape2D")
 metadata/_custom_type_script = "uid://bxh60lo5clvos"
 
+[node name="SS2D_Shape2" type="Node2D" parent="Terrain"]
+texture_repeat = 2
+script = ExtResource("4_vtaks")
+_points = SubResource("Resource_n8ral")
+shape_material = SubResource("Resource_66xif")
+collision_generation_method = 1
+collision_update_mode = 2
+collision_size = 64.0
+collision_polygon_node_path = NodePath("../StaticBody2D/CollisionShape2D2")
+metadata/_custom_type_script = "uid://bxh60lo5clvos"
+
 [node name="StaticBody2D" type="StaticBody2D" parent="Terrain"]
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Terrain/StaticBody2D"]
 polygon = PackedVector2Array(185.028, 156.389, 289.51, 167.627, 454.433, 71.5553, 702.413, 87.6873, 928.145, 47.1126, 1164.41, 90.6898, 1478.75, 199.179, 1720.62, 175.255, 1929.24, 65.9737, 3843.92, -54.9297, 5579.48, 129.675, 5859.89, 563.156, 2592.18, 529.499, 370.758, 539.838, -1458.74, 584.22, -1243.96, -267.038, -1035.96, -616.657, -623.843, -610.853, -598.567, -75.0946, -256.372, 40.6078, -167.965, 143.042, -83.2765, 205.971, 9.96653, 191.801, 35.9868, 130.949, 92.1774, 116.032)
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Terrain/StaticBody2D"]
 
 [node name="Collectibles" type="Node" parent="."]
 

@@ -11,6 +11,8 @@ const LOWER_BOUND := 5000.0;
 @onready var hud = $UILayer/HUD;
 @onready var player : Player = $Player;
 @onready var ss2d_shape : SS2D_Shape = $Terrain/SS2D_Shape;
+@onready var ceiling_shape : SS2D_Shape = $Terrain/SS2D_Shape2;
+
 @onready var back_decor := $DecorationsBack;
 @onready var front_decor := $DecorationsFront;
 @onready var collectibles := $Collectibles;
@@ -65,7 +67,11 @@ func load_stage() -> void:
 	var stage = GameState.current_stage;
 	
 	setup_terrain_visuals(stage);
+	
 	generate_terrain();
+	if stage.ceilng_generator != null:
+		generate_ceiling();
+	
 	spawn_checkpoint();
 	spawn_obstacles();
 	spawn_collectibles();
@@ -164,6 +170,32 @@ func generate_terrain() -> void:
 	ss2d_shape.close_shape(points.size() - 1);
 	
 	ss2d_shape.get_point_array().begin_update();
+
+
+func generate_ceiling() -> void:
+	var stage := GameState.current_stage;
+	var generator = GameState.current_stage.ceilng_generator;
+	
+	var appendix_sample_count := -roundi(LEFT_APPENDIX / TerrainGenerator.SAMPLE_DELTA);
+	
+	var right_appendix := 1000.0;
+	appendix_sample_count += roundi(right_appendix / TerrainGenerator.SAMPLE_DELTA);
+	
+	var sample_count = roundi(stage.stage_length / TerrainGenerator.SAMPLE_DELTA);
+	generator.prepare_coordinates(sample_count + appendix_sample_count, LEFT_APPENDIX);
+	var points := generator.sample();
+	
+	ceiling_shape.clear_points();
+	ceiling_shape.add_points(points);
+	
+	# two additional points needed to enclose the shape
+	var bottom_right = Vector2(points[points.size() - 1].x, points[points.size() - 1].y - 1000.0);
+	var bottom_left = Vector2(points[0].x, points[0].y - 1000.0);
+	ceiling_shape.add_point(bottom_right);
+	ceiling_shape.add_point(bottom_left);
+	ceiling_shape.close_shape(points.size() - 1);
+	
+	ceiling_shape.get_point_array().begin_update();
 
 
 func play_intermission(intermission: String) -> void:
