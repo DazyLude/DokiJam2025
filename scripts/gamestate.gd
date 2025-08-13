@@ -48,6 +48,9 @@ func restart() -> void:
 
 
 func load_stage(stage: String = GameState.current_stage.next_stage_name) -> void:
+	if not StageData.stage_exists(stage):
+		stage = "tomato fields";
+	
 	restart();
 	upgrades.check_for_unlocks(stage);
 	current_stage = StageData.get_stage_data_by_name(stage);

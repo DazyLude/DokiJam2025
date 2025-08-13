@@ -9,6 +9,7 @@ const STAMINA_SPEED_TEMPLATE := "tomato juice: %10.3f";
 const CONTACT_COUNTER_TEMPLATE := "contacts: %d";
 const FPS_TEMPLATE := "last frame delta: %1.2f (~%d FPS)"
 const PHYSICS_FPS_TEMPLATE := "last physics delta: %1.2f (~%d FPS)"
+const STATE_TEMPLATE := "fresh state: %s"
 
 
 var player : Player;
@@ -29,9 +30,16 @@ func _process(delta: float) -> void:
 	
 	if GameState != null:
 		$DataContainer/Stamina.text = STAMINA_SPEED_TEMPLATE % GameState.juice;
+		$DataContainer/FreshState.text = STATE_TEMPLATE % GameState.current_stage.fresh_state;
+		
 		$CoinCounter/Label.text = "%d" % GameState.dokicoins;
-		$KetchupMeter.value = GameState.juice / GameState.juice_cap * 100
+		$KetchupMeter.value = GameState.juice / GameState.juice_cap * 100;
 	
 	if noise_gen_cache != GameState.current_stage.generator.noise_generator:
 		noise_gen_cache = GameState.current_stage.generator.noise_generator;
 		$DataContainer/Noise.texture = ImageTexture.create_from_image(noise_gen_cache.get_image(1000, 1000));
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&'show_debug_info'):
+		$DataContainer.visible = not $DataContainer.visible;

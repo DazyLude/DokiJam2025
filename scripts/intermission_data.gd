@@ -52,6 +52,7 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 			"res://assets/intermissions/actual_intro/intro_4.png"
 		],
 		"background": "res://assets/intermissions/actual_intro/bg.png",
+		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
 	},
 	"tomato field massacre": {
 		"type": TYPE_DIALOGUE,
@@ -61,5 +62,6 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 			[CHARACTER_TOMATO, EMOTE_NORMAL, "hey"],
 			[CHARACTER_CROWKI, EMOTE_NORMAL, "caw!"],
 		],
+		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
 	}
 }

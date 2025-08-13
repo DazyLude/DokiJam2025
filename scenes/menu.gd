@@ -40,31 +40,22 @@ func _process(delta: float) -> void:
 
 
 func start_game() -> void:
+	get_viewport().gui_release_focus();
+	await play_intermission("intro");
 	GameState.load_stage("tomato fields");
 
 
 func test_intro() -> void:
-	get_viewport().gui_release_focus();
-	
-	# setup
-	var intermission_player = load("res://scenes/intermission_player.tscn").instantiate();
-	intermission_player.set_intermission("intro");
-	
-	# action
-	add_child(intermission_player);
-	intermission_player.play();
-	await intermission_player.finished;
-	
-	# cleanup
-	intermission_player.queue_free();
+	await play_intermission("intro");
 
 
 func test_dialogue() -> void:
-	get_viewport().gui_release_focus();
-	
-	# setup
+	await play_intermission("tomato field massacre");
+
+
+func play_intermission(intermission: String) -> void:
 	var intermission_player = load("res://scenes/intermission_player.tscn").instantiate();
-	intermission_player.set_intermission("tomato field massacre");
+	intermission_player.set_intermission(intermission);
 	
 	# action
 	add_child(intermission_player);

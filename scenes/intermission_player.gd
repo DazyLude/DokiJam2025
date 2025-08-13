@@ -24,6 +24,9 @@ func play() -> void:
 	if current_intermission.has("background"):
 		$Background.texture = load(current_intermission["background"])
 	
+	if current_intermission.has("bgm"):
+		Sounds.play_looped(current_intermission["bgm"])
+	
 	match current_intermission.get("type", -1):
 		IntermissionData.TYPE_DIALOGUE:
 			$DialogueBase.show();

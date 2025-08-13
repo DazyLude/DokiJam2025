@@ -246,7 +246,6 @@ func take_impact_damage() -> void:
 	if damage > 0.0:
 		oof_for = 0.4;
 		GameState.juice = move_toward(GameState.juice, 0.0, damage);
-		print("taken %s damage" % damage);
 		sound_controller.record_taken_damage(damage);
 
 

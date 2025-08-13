@@ -8,7 +8,10 @@ enum ID {
 	MUSIC_UPGRADE_SHOP_THEME,
 	MUSIC_UPGRADE_SHOP_THEME_COOL,
 	MUSIC_MELANCHOLY_TOMATO,
+	MUSIC_CITY,
+	MUSIC_METAL,
 	
+	MUSIC_GOOFY_AAH,
 	
 	SFX_FUCK,
 	SFX_AAGH,
@@ -25,6 +28,9 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.MUSIC_UPGRADE_SHOP_THEME: "res://assets/music/Last cup of coffee - lofi bossa.ogg",
 	ID.MUSIC_UPGRADE_SHOP_THEME_COOL: "res://assets/music/Last cup of coffee - lofi bossa with quotes.ogg",
 	ID.MUSIC_MELANCHOLY_TOMATO: "res://assets/music/Tomato Farm v2.ogg",
+	ID.MUSIC_CITY: "res://assets/music/Doki in the City - more tame.ogg",
+	ID.MUSIC_METAL: "res://assets/music/A Metal Cup of Coffee.ogg",
+	ID.MUSIC_GOOFY_AAH: "res://assets/music/Doki in the City.ogg",
 	
 	ID.SFX_FUCK: "res://assets/sfx/fuck.wav",
 	ID.SFX_AAGH: "res://assets/sfx/Scream 1.wav",

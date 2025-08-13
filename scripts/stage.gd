@@ -51,6 +51,10 @@ var item_placement_properties : Dictionary[String, Dictionary] = {
 }
 
 
+static func stage_exists(name: String) -> bool:
+	return stage_variants.has(name);
+
+
 static func get_stage_data_by_name(name: String) -> StageData:
 	return from_dict(stage_variants[name]);
 
@@ -86,6 +90,7 @@ static func from_dict(params: Dictionary) -> StageData:
 	data.music = params.get("music", Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
 	
 	data.fresh_state = data.rng.state;
+	print("stage's fresh state: ", data.fresh_state)
 	return data;
 
 
@@ -133,8 +138,11 @@ func generate_items(items_data: Dictionary, from: float, to: float) -> Dictionar
 			item_placement = roundi(item_placement / ITEM_PLACEMENT_RESOLUTION) * ITEM_PLACEMENT_RESOLUTION;
 			
 			var try_i : int = 0;
-			while occupied_coords.has(item_placement):
-				item_placement = ITEM_PLACEMENT_RESOLUTION * (try_i / 2) * (try_i % 2 - 0.5);
+			var variation = 0.0;
+			while occupied_coords.has(item_placement + variation):
+				variation = ITEM_PLACEMENT_RESOLUTION * (try_i / 2 + 1) * (try_i % 2 - 0.5) * 2.0;
+			
+			item_placement += variation;
 			
 			occupied_coords.push_back(item_placement);
 			
