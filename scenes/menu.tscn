@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cj3qmqrdmpetp"]
+[gd_scene load_steps=11 format=3 uid="uid://cj3qmqrdmpetp"]
 
 [ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_con2f"]
 [ext_resource type="Script" uid="uid://l12ejtkng3vn" path="res://scenes/menu.gd" id="1_vjb58"]
 [ext_resource type="Script" uid="uid://b40woge2o40ty" path="res://scripts/emotional_sprite.gd" id="3_con2f"]
+[ext_resource type="PackedScene" uid="uid://4h637aknfddx" path="res://scenes/UI/menu_background.tscn" id="3_g3eks"]
 [ext_resource type="PackedScene" uid="uid://cywgm8te3676u" path="res://scenes/UI/mute_button.tscn" id="3_mhnvy"]
 [ext_resource type="Script" uid="uid://duho7t435uxyj" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="5_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://dvo1yk4jb54l6" path="res://assets/logo.png" id="5_i6lef"]
 
 [sub_resource type="Texture2D" id="Texture2D_g3eks"]
 resource_local_to_scene = false
@@ -44,17 +46,34 @@ mouse_filter = 2
 theme = ExtResource("1_con2f")
 script = ExtResource("1_vjb58")
 
+[node name="MenuBackground" parent="." instance=ExtResource("3_g3eks")]
+layout_mode = 1
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(816, 456)
+script = ExtResource("3_con2f")
+metadata/_custom_type_script = "uid://b40woge2o40ty"
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -800.0
+offset_right = 799.0
+offset_bottom = 331.0
+grow_horizontal = 2
+texture = ExtResource("5_i6lef")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="MuteButton" parent="." instance=ExtResource("3_mhnvy")]
 layout_mode = 0
 offset_left = 1489.0
 offset_top = 38.0
 offset_right = 1566.0
 offset_bottom = 115.0
-
-[node name="TextureRect" type="Sprite2D" parent="."]
-position = Vector2(816, 456)
-script = ExtResource("3_con2f")
-metadata/_custom_type_script = "uid://b40woge2o40ty"
 
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
@@ -89,14 +108,6 @@ text = "controls:
 q & e - rotation (counter and clockwise)
 f - fly
 space - jump"
-
-[node name="Label2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 710.0
-offset_top = 233.0
-offset_right = 1013.0
-offset_bottom = 308.0
-text = "rotato potato the game"
 
 [node name="DiaTestButton" type="Button" parent="."]
 layout_mode = 0
