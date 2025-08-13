@@ -46,12 +46,12 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 	"intro": {
 		"type": TYPE_YONKOMA,
 		"images": [
-			"res://assets/intermissions/intro/loss_f1.tres",
-			"res://assets/intermissions/intro/loss_f2.tres",
-			"res://assets/intermissions/intro/loss_f3.tres",
-			"res://assets/intermissions/intro/loss_f4.tres"
+			"res://assets/intermissions/actual_intro/intro_1.png",
+			"res://assets/intermissions/actual_intro/intro_2.png",
+			"res://assets/intermissions/actual_intro/intro_3.png",
+			"res://assets/intermissions/actual_intro/intro_4.png"
 		],
-		"background": "res://assets/stages/farm/tomato_farm.png",
+		"background": "res://assets/intermissions/actual_intro/bg.png",
 	},
 	"tomato field massacre": {
 		"type": TYPE_DIALOGUE,

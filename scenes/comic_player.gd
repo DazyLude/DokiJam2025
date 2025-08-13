@@ -33,14 +33,14 @@ func next() -> void:
 	animate_panel(panel[current_panel]);
 
 
-func animate_panel(panel: Sprite2D) -> void:
+func animate_panel(panel: Node) -> void:
 	var tween = create_tween();
 	
 	tween.set_trans(Tween.TRANS_CUBIC);
 	tween.set_ease(Tween.EASE_OUT);
 	tween.set_parallel(true);
 	
-	panel.offset = Vector2(50.0, 0.0);
+	panel.position = Vector2(50.0, 0.0);
 	panel.material.set_shader_parameter(&"color_filter", Vector4(1.0, 1.0, 1.0, 0.0))
-	tween.tween_property(panel, ^"offset", Vector2(0.0, 0.0), 1.5);
+	tween.tween_property(panel, ^"position", Vector2(0.0, 0.0), 1.5);
 	tween.tween_property(panel.material, ^"shader_parameter/color_filter", Vector4(1.0, 1.0, 1.0, 1.0), 1.5);
