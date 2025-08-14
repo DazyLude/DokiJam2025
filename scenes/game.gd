@@ -32,25 +32,25 @@ func _ready() -> void:
 	Sounds.play_looped(GameState.current_stage.music);
 	hud.player = player;
 	
-	
 	var start = Time.get_ticks_msec();
 	load_stage();
 	var end = Time.get_ticks_msec();
 	print("loaded stage in %s msec" % (end - start));
 	
 	player.apply_player_stats(PlayerStats.get_latest());
+	$UILayer/PauseButton.pressed.connect(pause);
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"pause"):
-		var pause_screen := preload("res://scenes/pause_menu.tscn").instantiate();
-		$UILayer.add_child(pause_screen);
-		get_viewport().set_input_as_handled();
+		pause();
 
 
 func _process(delta: float) -> void:
 	if is_gameover:
 		return;
+	
+	$UILayer/PauseButton.show();
 	
 	if GameState.juice <= 0.0 and player.is_stationary():
 		if gameover_scene_instance == null:
@@ -72,9 +72,17 @@ func _process(delta: float) -> void:
 		# TODO stage cleared screen -> intermission scene -> new stage
 		await play_intermission(GameState.current_stage.intermission_name);
 		
+		GameState.upgrades.check_for_unlocks(GameState.current_stage.next_stage_name);
 		var shop_scene = preload("res://scenes/upgrade_screen.tscn").instantiate();
 		shop_scene.on_continue_override = GameState.load_stage;
 		$UILayer.add_child(shop_scene);
+
+
+func pause() -> void:
+	$UILayer/PauseButton.hide();
+	var pause_screen := preload("res://scenes/pause_menu.tscn").instantiate();
+	$UILayer.add_child(pause_screen);
+	get_viewport().set_input_as_handled();
 
 
 func load_stage() -> void:
@@ -179,8 +187,11 @@ func setup_terrain_visuals(stage: StageData) -> void:
 	
 	ceiling_shape.shape_material.fill_textures[0] = stage.terrain_fill;
 	ceiling_shape.shape_material.get_all_edge_materials()[0].textures[0] = stage.terrain_edge;
+	
 	$ParallaxBackground/BackdropParallax/BackdropSprite.texture = stage.background;
 	$ParallaxBackground/BackdropParallax/BackdropSprite.position = stage.background_offset;
+	
+	$ParallaxBackground/SkyboxParallax/SkyboxSprite.texture = stage.skybox;
 
 
 # this method should generate initital terrain

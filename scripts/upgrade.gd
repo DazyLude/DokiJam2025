@@ -120,7 +120,7 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	},
 	SKINSUIT_BOUNTY: {
 		"type": TYPE_ONE_OFF,
-		"autounlock": "tomato fields", # String (stage name)
+		"autounlock": "backstage", # String (stage name)
 		"base": "res://assets/skinsuits/bounty/bounty_hunter_ball_base.png",
 		"emotions": [
 			"res://assets/skinsuits/bounty/bounty_hunter_ball_neutral.png",

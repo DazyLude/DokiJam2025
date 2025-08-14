@@ -12,11 +12,11 @@ var last_frame_delta_physics : float = 0.0;
 
 #region stats
 # torque applied, usually multiplied by inertia
-var player_torque := 30.0; # in rad/s^2
+var player_torque := 25.0; # in rad/s^2
 # fly strength applied, usually multiplied by mass
-var player_fly_strength := 1800.0; # in px/s^2, g (980px/s2) + bonus
+var player_fly_strength := 1400.0; # in px/s^2, g (980px/s2) + bonus
 # when jumping, the impulse is defined as an impulse acquired by applying fly strength for this amount of seconds
-var jump_fly_scale := 0.35; # in s
+var jump_fly_scale := 0.33; # in s
 # stamina cost of jumps
 var jump_cost := 2.0;
 # rolling friction is reversely proportional to hardness

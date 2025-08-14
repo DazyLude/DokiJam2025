@@ -16,6 +16,7 @@ var terrain_edge : Texture2D;
 var checkpoint : Texture2D;
 var background : Texture2D;
 var background_offset : Vector2;
+var skybox : Texture2D;
 
 
 # sounds
@@ -45,6 +46,10 @@ var item_placement_properties : Dictionary[String, Dictionary] = {
 		"group": "a", # this item belongs to a group
 		"weight": 100.0, # weight of this item within its group
 	},
+	"coin_x5": {
+		"group": "a", # this item belongs to a group
+		"weight": 10.0, # weight of this item within its group
+	},
 	"wingbull": {
 		"group": "b",
 		"weight": 30.0,
@@ -59,11 +64,11 @@ var item_placement_properties : Dictionary[String, Dictionary] = {
 	},
 	"groups": {
 		"a": { # items from a group are placed like normal items, and the selected among (ඞ) items within a group
-			"distance": 2000.0,
+			"distance": 3000.0,
 			"placement": PickupItemData.PLACEMENT_NORMAL,
 		},
 		"b": {
-			"distance": 4000.0,
+			"distance": 6350.0,
 			"placement": PickupItemData.PLACEMENT_NORMAL
 		}
 	}
@@ -99,6 +104,7 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	data.checkpoint = load(params.get("checkpoint", "uid://d28lqabm420p3"));
 	data.background = load(params.get("background", "res://assets/stages/farm/tomato_farm.png"));
 	data.background_offset = params.get("background offset", Vector2(0.0, -1000.0));
+	data.skybox = load(params.get("skybox", "res://assets/stages/farm/skybox_dark.png"));
 	
 	# terrain generator setup
 	data.generator = TerrainGenerator.new();
@@ -232,6 +238,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain fill": "res://assets/stages/city/conrete_tile.png",
 		"terrain edge": "res://assets/stages/city/concrete_edge.png",
 		"background": "res://assets/stages/city/city_street.png",
+		"skybox": "res://assets/stages/city/city_street_skybox.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
@@ -243,6 +250,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain fill": "res://assets/stages/backstage/stagefloor_tile.png",
 		"terrain edge": "res://assets/stages/backstage/stagefloor_edge.png",
 		"background": "res://assets/stages/backstage/backstage.png",
+		"skybox": "res://assets/stages/backstage/backstage_skybox.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
@@ -255,6 +263,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain fill": "res://assets/stages/backstage/stagefloor_tile.png",
 		"terrain edge": "res://assets/stages/backstage/stagefloor_edge.png",
 		"background": "res://assets/stages/stage/stage.png",
+		"skybox": "res://assets/stages/stage/stage_skybox.png",
 		"background offset": Vector2(0.0, -1150.0),
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float

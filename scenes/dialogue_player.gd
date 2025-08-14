@@ -66,7 +66,7 @@ func setup_characters(characters: Array) -> void:
 		
 		for emotion_id in character_data["emotions"]:
 			var emotion_path = character_data["emotions"][emotion_id];
-			character_sprites[i].emotions.push_back(load(emotion_path));
+			character_sprites[i].emotions.push_back(load(emotion_path) if emotion_path != "" else null);
 			emote_idxs_per_character[character_id][emotion_id] = character_sprites[i].emotions.size() - 1;
 
 

@@ -33,6 +33,11 @@ static var pickup_item_variants : Dictionary[String, Dictionary] = {
 		"area size": Vector2(100.0, 100.0),
 		"effect": func(): GameState.dokicoins += 1.0,
 	},
+	"coin_x5": {
+		"texture": "res://assets/icons/dokicoin.png",
+		"area size": Vector2(150.0, 150.0),
+		"effect": func(): GameState.dokicoins += 5.0,
+	},
 	"ketchup": {
 		"texture": "res://assets/icons/stamina_ketchup.png",
 		"effect": func(): GameState.juice = move_toward(GameState.juice, GameState.juice_cap, GameState.juice_cap * 0.2),
