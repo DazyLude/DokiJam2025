@@ -289,21 +289,28 @@ tooltip_text = "Create a new map layout."
 text = "New Map"
 
 [node name="ButtonsBottom" type="HBoxContainer" parent="."]
-layout_mode = 2
-offset_left = -183.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.5
 offset_top = 302.0
-offset_right = 180.0
+offset_right = 181.5
 offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ResumeButton" type="Button" parent="ButtonsBottom"]
 layout_mode = 2
 tooltip_text = "Return to the game."
-text = "RESUME"
+text = "Resume"
 
 [node name="MenuButton" type="Button" parent="ButtonsBottom"]
 layout_mode = 2
 tooltip_text = "Exit to the main menu."
-text = "MAIN MENU"
+text = "Main Menu"
 
 [connection signal="drag_ended" from="MusicContainer/VolumeSlider" to="." method="_on_music_volume_drag_ended"]
 [connection signal="value_changed" from="MusicContainer/VolumeSlider" to="." method="_on_music_volume_changed"]

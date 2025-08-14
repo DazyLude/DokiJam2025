@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://csyi3rxr6vlot"]
+[gd_scene load_steps=18 format=3 uid="uid://csyi3rxr6vlot"]
 
 [ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_klos3"]
 [ext_resource type="Script" uid="uid://bxwgyir465oc" path="res://scenes/stage_select.gd" id="2_nbh0i"]
+[ext_resource type="Texture2D" uid="uid://bmhkc5f7708v7" path="res://assets/buttons/stage1_select.png" id="3_crcap"]
+[ext_resource type="Texture2D" uid="uid://cgn36uwgsgcka" path="res://assets/buttons/stage1_select_clicked.png" id="4_7hj7s"]
+[ext_resource type="Texture2D" uid="uid://ite5y73h05vg" path="res://assets/buttons/stage1_select_hover.png" id="5_5rsa8"]
+[ext_resource type="Texture2D" uid="uid://ck4hf5mq3owex" path="res://assets/buttons/stage2_select.png" id="6_wt7i0"]
+[ext_resource type="Texture2D" uid="uid://dcu7rkjtbgct4" path="res://assets/buttons/stage2_select_clicked.png" id="7_hlh6r"]
+[ext_resource type="Texture2D" uid="uid://lly5je7pbgd5" path="res://assets/buttons/stage2_select_hover.png" id="8_pha4k"]
+[ext_resource type="Texture2D" uid="uid://cykqdr0kya8hc" path="res://assets/buttons/stage3_select.png" id="9_owofi"]
+[ext_resource type="Texture2D" uid="uid://d3dylqpeua0mr" path="res://assets/buttons/stage3_select_clicked.png" id="10_ak7lf"]
+[ext_resource type="Texture2D" uid="uid://b52s13k1c0wcq" path="res://assets/buttons/stage3_select_hover.png" id="11_olgpm"]
+[ext_resource type="Texture2D" uid="uid://s31n85xs4hfu" path="res://assets/buttons/stage4_select.png" id="12_k8kc0"]
+[ext_resource type="Texture2D" uid="uid://dn7h88wgbt7li" path="res://assets/buttons/stage4_select_clicked.png" id="13_73yuf"]
+[ext_resource type="Texture2D" uid="uid://b4lbb07keixsq" path="res://assets/buttons/stage4_select_hover.png" id="14_pkn7t"]
+[ext_resource type="Texture2D" uid="uid://d0fgepg33aina" path="res://assets/buttons/stage5_select.png" id="15_y5f5n"]
+[ext_resource type="Texture2D" uid="uid://dbusllycv43fc" path="res://assets/buttons/stage5_select_clicked.png" id="16_x783w"]
+[ext_resource type="Texture2D" uid="uid://bfjup5brsp8td" path="res://assets/buttons/stage5_select_hover.png" id="17_30b53"]
 
 [node name="StageSelect" type="Control"]
 layout_mode = 3
@@ -21,13 +36,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -139.0
+offset_left = -120.0
 offset_top = -173.0
-offset_right = 133.0
+offset_right = 120.0
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "back to menu
+text = "Back
 "
 
 [node name="LineEdit" type="LineEdit" parent="."]
@@ -45,36 +60,77 @@ grow_horizontal = 0
 grow_vertical = 0
 placeholder_text = "enter seed here"
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="StageContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -119.0
-offset_top = -36.5
-offset_right = 119.0
-offset_bottom = 36.5
+offset_left = -640.0
+offset_top = -215.0
+offset_right = 640.0
+offset_bottom = 215.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="Stage1" type="Button" parent="GridContainer"]
+[node name="Stage1" type="TextureButton" parent="StageContainer"]
+custom_minimum_size = Vector2(256, 430)
 layout_mode = 2
-text = "tomato fields"
+size_flags_horizontal = 2
+size_flags_vertical = 4
+tooltip_text = "Tomato Farm"
+texture_normal = ExtResource("3_crcap")
+texture_pressed = ExtResource("4_7hj7s")
+texture_hover = ExtResource("5_5rsa8")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Stage2" type="Button" parent="GridContainer"]
+[node name="Stage2" type="TextureButton" parent="StageContainer"]
+custom_minimum_size = Vector2(256, 430)
 layout_mode = 2
-text = "city"
+size_flags_horizontal = 2
+size_flags_vertical = 4
+tooltip_text = "Streets"
+texture_normal = ExtResource("6_wt7i0")
+texture_pressed = ExtResource("7_hlh6r")
+texture_hover = ExtResource("8_pha4k")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Stage3" type="Button" parent="GridContainer"]
+[node name="Stage3" type="TextureButton" parent="StageContainer"]
+custom_minimum_size = Vector2(256, 430)
 layout_mode = 2
-text = "city, but..."
+size_flags_horizontal = 2
+size_flags_vertical = 4
+tooltip_text = "City"
+texture_normal = ExtResource("9_owofi")
+texture_pressed = ExtResource("10_ak7lf")
+texture_hover = ExtResource("11_olgpm")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Stage4" type="Button" parent="GridContainer"]
+[node name="Stage4" type="TextureButton" parent="StageContainer"]
+custom_minimum_size = Vector2(256, 430)
 layout_mode = 2
-text = "backstage"
+size_flags_horizontal = 2
+size_flags_vertical = 4
+tooltip_text = "Backstage"
+texture_normal = ExtResource("12_k8kc0")
+texture_pressed = ExtResource("13_73yuf")
+texture_hover = ExtResource("14_pkn7t")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Stage5" type="Button" parent="GridContainer"]
+[node name="Stage5" type="TextureButton" parent="StageContainer"]
+custom_minimum_size = Vector2(256, 430)
 layout_mode = 2
-text = "concert"
+size_flags_horizontal = 2
+size_flags_vertical = 4
+tooltip_text = "Concert Stage"
+texture_normal = ExtResource("15_y5f5n")
+texture_pressed = ExtResource("16_x783w")
+texture_hover = ExtResource("17_30b53")
+ignore_texture_size = true
+stretch_mode = 4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cj3qmqrdmpetp"]
+[gd_scene load_steps=16 format=3 uid="uid://cj3qmqrdmpetp"]
 
 [ext_resource type="Theme" uid="uid://umrlbh25q1rw" path="res://themes/menu.tres" id="1_con2f"]
 [ext_resource type="Script" uid="uid://l12ejtkng3vn" path="res://scenes/menu.gd" id="1_vjb58"]
@@ -7,9 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cywgm8te3676u" path="res://scenes/UI/mute_button.tscn" id="3_mhnvy"]
 [ext_resource type="Script" uid="uid://duho7t435uxyj" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="5_4ytvr"]
 [ext_resource type="Texture2D" uid="uid://dvo1yk4jb54l6" path="res://assets/logo.png" id="5_i6lef"]
+[ext_resource type="StyleBox" uid="uid://cfhnupojrvl6n" path="res://styles/Main_Menu_Background.tres" id="7_i6lef"]
 [ext_resource type="PackedScene" uid="uid://csyi3rxr6vlot" path="res://scenes/stage_select.tscn" id="8_13sgg"]
+[ext_resource type="PackedScene" uid="uid://b2k6b45wcj3l1" path="res://scenes/credits_menu.tscn" id="10_70i5f"]
 
-[sub_resource type="Texture2D" id="Texture2D_g3eks"]
+[sub_resource type="Texture2D" id="Texture2D_13sgg"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("5_4ytvr")
@@ -18,7 +20,7 @@ show_mode = 0
 force_type = 0
 metadata/_custom_type_script = "uid://duho7t435uxyj"
 
-[sub_resource type="Texture2D" id="Texture2D_v86rl"]
+[sub_resource type="Texture2D" id="Texture2D_i6lef"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("5_4ytvr")
@@ -27,7 +29,25 @@ show_mode = 0
 force_type = 0
 metadata/_custom_type_script = "uid://duho7t435uxyj"
 
-[sub_resource type="Texture2D" id="Texture2D_13sgg"]
+[sub_resource type="Texture2D" id="Texture2D_70i5f"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_4ytvr")
+path = "fly_left"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[sub_resource type="Texture2D" id="Texture2D_mj5lg"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_4ytvr")
+path = "fly_right"
+show_mode = 0
+force_type = 0
+metadata/_custom_type_script = "uid://duho7t435uxyj"
+
+[sub_resource type="Texture2D" id="Texture2D_ufwb2"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("5_4ytvr")
@@ -82,43 +102,185 @@ offset_top = 38.0
 offset_right = 1566.0
 offset_bottom = 115.0
 
-[node name="Start" type="Button" parent="Default"]
+[node name="MainMenu" type="VBoxContainer" parent="Default"]
 layout_mode = 0
-offset_left = 654.0
-offset_top = 356.0
-offset_right = 894.0
-offset_bottom = 493.0
-text = "start game"
+offset_left = 680.0
+offset_top = 381.5
+offset_right = 920.0
+offset_bottom = 821.5
+theme_override_constants/separation = 10
 
-[node name="StageSelect" type="Button" parent="Default"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -253.0
-offset_top = -149.0
-offset_right = -13.0
-offset_bottom = -12.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "stage select
+[node name="StartButton" type="Button" parent="Default/MainMenu"]
+custom_minimum_size = Vector2(240, 140)
+layout_mode = 2
+text = "Start Game"
+
+[node name="StageButton" type="Button" parent="Default/MainMenu"]
+custom_minimum_size = Vector2(240, 140)
+layout_mode = 2
+text = "Select Stage
 "
 
-[node name="Label" type="Label" parent="Default"]
+[node name="CreditsButton" type="Button" parent="Default/MainMenu"]
+custom_minimum_size = Vector2(240, 140)
+layout_mode = 2
+text = "Credits"
+
+[node name="ControlsPanel" type="Panel" parent="Default"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -677.0
+offset_top = -47.0
+offset_right = -369.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_i6lef")
+
+[node name="ControlsContainer" type="VBoxContainer" parent="Default/ControlsPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -137.0
+offset_right = 175.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="ControlsLabel" type="Label" parent="Default/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Controls:"
+
+[node name="RollContainer" type="HBoxContainer" parent="Default/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+
+[node name="RollLabel" type="Label" parent="Default/ControlsPanel/ControlsContainer/RollContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Roll:"
+vertical_alignment = 1
+
+[node name="RollLeftControl" type="TextureRect" parent="Default/ControlsPanel/ControlsContainer/RollContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = SubResource("Texture2D_13sgg")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RollRightControl" type="TextureRect" parent="Default/ControlsPanel/ControlsContainer/RollContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = SubResource("Texture2D_i6lef")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="StrafeContainer" type="HBoxContainer" parent="Default/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+
+[node name="StrafeLabel" type="Label" parent="Default/ControlsPanel/ControlsContainer/StrafeContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Strafe:"
+vertical_alignment = 1
+
+[node name="FlyLeftControl" type="TextureRect" parent="Default/ControlsPanel/ControlsContainer/StrafeContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = SubResource("Texture2D_70i5f")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="FlyRightControl" type="TextureRect" parent="Default/ControlsPanel/ControlsContainer/StrafeContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = SubResource("Texture2D_mj5lg")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="JumpContainer" type="HBoxContainer" parent="Default/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+
+[node name="JumpLabel" type="Label" parent="Default/ControlsPanel/ControlsContainer/JumpContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Jump:"
+vertical_alignment = 1
+
+[node name="JumpControl" type="TextureRect" parent="Default/ControlsPanel/ControlsContainer/JumpContainer"]
+custom_minimum_size = Vector2(120, 100)
+layout_mode = 2
+texture = SubResource("Texture2D_ufwb2")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AudioPanel" type="Panel" parent="Default"]
 visible = false
-layout_mode = 0
-offset_left = 625.0
-offset_top = 512.0
-offset_right = 928.0
-offset_bottom = 589.0
-text = "controls:
-q & e - rotation (counter and clockwise)
-f - fly
-space - jump"
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 217.0
+offset_top = -25.0
+offset_right = 757.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_i6lef")
+
+[node name="AudioContainer" type="VBoxContainer" parent="Default/AudioPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -100.0
+offset_right = 250.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="MusicContainer" type="VBoxContainer" parent="Default/AudioPanel/AudioContainer"]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="Default/AudioPanel/AudioContainer/MusicContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Music:"
+
+[node name="VolumeSlider" type="HSlider" parent="Default/AudioPanel/AudioContainer/MusicContainer"]
+layout_mode = 2
+
+[node name="SFXContainer" type="VBoxContainer" parent="Default/AudioPanel/AudioContainer"]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="Default/AudioPanel/AudioContainer/SFXContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "SFX:"
+
+[node name="VolumeSlider" type="HSlider" parent="Default/AudioPanel/AudioContainer/SFXContainer"]
+layout_mode = 2
 
 [node name="DiaTestButton" type="Button" parent="Default"]
+visible = false
 layout_mode = 0
 offset_left = 9.0
 offset_top = 794.0
@@ -127,6 +289,7 @@ offset_bottom = 894.0
 text = "test dialogue"
 
 [node name="ComicTestButton" type="Button" parent="Default"]
+visible = false
 layout_mode = 0
 offset_left = 3.0
 offset_top = 693.0
@@ -135,6 +298,7 @@ offset_bottom = 793.0
 text = "test intro"
 
 [node name="TomatoSelect" type="Button" parent="Default"]
+visible = false
 layout_mode = 0
 offset_left = 275.0
 offset_top = 692.0
@@ -144,6 +308,7 @@ text = "play as tomato
 "
 
 [node name="CrowkiSelect" type="Button" parent="Default"]
+visible = false
 layout_mode = 0
 offset_left = 275.0
 offset_top = 790.0
@@ -151,56 +316,13 @@ offset_right = 536.0
 offset_bottom = 890.0
 text = "play as crowki"
 
-[node name="RollLabel" type="Label" parent="Default"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 664.0
-offset_top = 486.0
-offset_right = 804.0
-offset_bottom = 536.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Roll:"
-vertical_alignment = 1
-
-[node name="RollRightControl" type="TextureRect" parent="Default"]
-layout_mode = 0
-offset_left = 684.0
-offset_top = 566.0
-offset_right = 784.0
-offset_bottom = 666.0
-texture = SubResource("Texture2D_g3eks")
-
-[node name="RollLeftControl" type="TextureRect" parent="Default"]
-layout_mode = 0
-offset_left = 784.0
-offset_top = 566.0
-offset_right = 884.0
-offset_bottom = 666.0
-texture = SubResource("Texture2D_v86rl")
-
-[node name="JumpLabel" type="Label" parent="Default"]
-layout_mode = 0
-offset_left = 684.0
-offset_top = 696.0
-offset_right = 824.0
-offset_bottom = 746.0
-theme_override_font_sizes/font_size = 32
-text = "Jump:"
-vertical_alignment = 1
-
-[node name="JumpControl" type="TextureRect" parent="Default"]
-layout_mode = 0
-offset_left = 684.0
-offset_top = 756.0
-offset_right = 784.0
-offset_bottom = 856.0
-texture = SubResource("Texture2D_13sgg")
-
 [node name="StageSelect2" parent="." instance=ExtResource("8_13sgg")]
+visible = false
 layout_mode = 1
+
+[node name="CreditsNode" parent="." instance=ExtResource("10_70i5f")]
+visible = false
+
+[connection signal="pressed" from="Default/MainMenu/StartButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Default/MainMenu/StageButton" to="." method="_on_stage_pressed"]
+[connection signal="pressed" from="Default/MainMenu/CreditsButton" to="." method="_on_credits_pressed"]

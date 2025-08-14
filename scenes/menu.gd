@@ -1,14 +1,13 @@
 extends Control
 
 
-@onready var start_btn := $Default/Start;
+@onready var start_btn := $Default/MainMenu/StartButton;
 
 
 func _ready() -> void:
 	show_main();
 	Sounds.play_looped(Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
 	
-	start_btn.pressed.connect(start_game);
 	$Default/DiaTestButton.pressed.connect(test_dialogue);
 	$Default/ComicTestButton.pressed.connect(test_intro);
 	
@@ -22,20 +21,15 @@ func _ready() -> void:
 			GameState.selected_skinsuit = Upgrade.SKINSUIT_CROWKI;
 			update_skinsuit();
 	);
-	$Default/StageSelect.pressed.connect(show_stage_select);
 	$StageSelect2.exit_submenu.connect(show_main);
+	$CreditsNode.exit_submenu.connect(show_main);
 	update_skinsuit();
-
-
-func show_stage_select() -> void:
-	$Default.hide();
-	$StageSelect2.show();
 
 
 func show_main() -> void:
 	$Default.show();
 	$StageSelect2.hide();
-	
+	$CreditsNode.hide();
 
 
 func update_skinsuit() -> void:
@@ -50,12 +44,6 @@ func _process(delta: float) -> void:
 	var offset : Vector2 = $Default/TextureRect.position - tomatocenter;
 	$Default/TextureRect.position = offset.rotated(rot_speed * delta) + tomatocenter;
 	$Default/TextureRect.rotation += rot_speed * delta;
-
-
-func start_game() -> void:
-	get_viewport().gui_release_focus();
-	await play_intermission("intro");
-	GameState.load_stage("tomato fields");
 
 
 func test_intro() -> void:
@@ -77,3 +65,19 @@ func play_intermission(intermission: String) -> void:
 	
 	# cleanup
 	intermission_player.queue_free();
+
+
+func _on_start_pressed() -> void:
+	get_viewport().gui_release_focus();
+	await play_intermission("intro");
+	GameState.load_stage("tomato fields");
+
+
+func _on_stage_pressed() -> void:
+	$Default.hide();
+	$StageSelect2.show();
+
+
+func _on_credits_pressed() -> void:
+	$Default.hide();
+	$CreditsNode.show();

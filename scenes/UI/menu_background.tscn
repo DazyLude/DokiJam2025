@@ -1,8 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://4h637aknfddx"]
 
 [ext_resource type="Script" uid="uid://dm7nkp3aar3bd" path="res://scenes/UI/menu_background.gd" id="1_8rnex"]
-[ext_resource type="Texture2D" uid="uid://dfaseecmxw4mx" path="res://assets/buttons/button.png" id="2_66hpp"]
 [ext_resource type="Texture2D" uid="uid://c8oyl5lcdqy6u" path="res://assets/skinsuits/tomato/tomato_base.png" id="2_x7y6s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7y6s"]
+bg_color = Color(1, 0.968627, 0.835294, 1)
 
 [sub_resource type="Animation" id="Animation_nu0s2"]
 length = 0.001
@@ -28,13 +30,11 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_8rnex")
 
-[node name="MonochromeBG" type="TextureRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = -240.0
-offset_top = -233.0
-offset_right = 1885.0
-offset_bottom = 1100.0
-texture = ExtResource("2_66hpp")
+offset_right = 1600.0
+offset_bottom = 900.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x7y6s")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
