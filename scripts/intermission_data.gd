@@ -9,6 +9,8 @@ enum {
 enum {
 	CHARACTER_TOMATO,
 	CHARACTER_CROWKI,
+	CHARACTER_RETRO,
+	CHARACTER_BOUNTY,
 }
 
 enum {
@@ -20,25 +22,34 @@ enum {
 
 static var character_data : Dictionary[int, Dictionary] = {
 	CHARACTER_TOMATO: {
-		"base": "res://assets/skinsuits/tomato/tomato_base.png",
-		"name": "Tomato",
+		"base": "res://assets/intermissions/tomato_sprite.png",
+		"name": "Doki",
 		"emotions": {
-			EMOTE_NORMAL: "res://assets/skinsuits/tomato/tomato_neutral.png",
-			EMOTE_TIRED: "res://assets/skinsuits/tomato/tomato_tired.png",
-			EMOTE_HURT: "res://assets/skinsuits/tomato/tomato_hurt.png",
+			EMOTE_NORMAL: "",
 		},
 		"speech": Sounds.ID.SFX_FUCK,
 	},
 	CHARACTER_CROWKI: {
-		"base": "res://assets/skinsuits/crowki/crowki_base.png",
-		"name": "Crowki",
+		"base": "res://assets/intermissions/crow_sprite.png",
+		"name": "Doki",
 		"emotions": {
-			EMOTE_NORMAL: "res://assets/skinsuits/crowki/crowki_neutral.png",
-			EMOTE_TIRED: "res://assets/skinsuits/crowki/crowki_tired.png",
-			EMOTE_HURT: "res://assets/skinsuits/crowki/crowki_hurt.png",
+			EMOTE_NORMAL: "",
 		},
-		"speech": [Sounds.ID.SFX_AAGH, Sounds.ID.SFX_AGGH, Sounds.ID.SFX_AGHH, Sounds.ID.SFX_ARGH, Sounds.ID.SFX_GRUNT],
-	}
+	},
+	CHARACTER_RETRO: {
+		"base": "res://assets/intermissions/retro_sprite.png",
+		"name": "Doki",
+		"emotions": {
+			EMOTE_NORMAL: "",
+		},
+	},
+	CHARACTER_BOUNTY: {
+		"base": "res://assets/intermissions/bounty_sprite.png",
+		"name": "Doki",
+		"emotions": {
+			EMOTE_NORMAL: "",
+		},
+	},
 }
 
 

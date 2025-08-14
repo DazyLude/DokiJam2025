@@ -74,9 +74,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
+offset_left = -355.0
 offset_top = -400.0
-offset_right = 300.0
+offset_right = 331.0
 offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -252,38 +252,6 @@ texture = SubResource("Texture2D_ofnjo")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ResumeButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = 124.0
-offset_right = 100.0
-offset_bottom = 243.0
-grow_horizontal = 2
-grow_vertical = 2
-tooltip_text = "Return to the game."
-text = "RESUME"
-
-[node name="MenuButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -115.0
-offset_top = 254.0
-offset_right = 115.0
-offset_bottom = 373.0
-grow_horizontal = 2
-grow_vertical = 2
-tooltip_text = "Exit to the main menu."
-text = "MAIN MENU"
-
 [node name="KetchupMeter" type="TextureProgressBar" parent="."]
 layout_mode = 0
 offset_left = -721.0
@@ -295,9 +263,51 @@ fill_mode = 3
 texture_under = ExtResource("9_71k7c")
 texture_progress = ExtResource("10_cmnsq")
 
+[node name="ButtonsBottom2" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = -335.0
+offset_top = 204.0
+offset_right = 323.0
+offset_bottom = 284.0
+
+[node name="TryAgain" type="Button" parent="ButtonsBottom2"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+tooltip_text = "You can do it!"
+text = "Try Again"
+
+[node name="Upgrades" type="Button" parent="ButtonsBottom2"]
+custom_minimum_size = Vector2(250, 80)
+layout_mode = 2
+tooltip_text = "Go to the upgrade shop."
+text = "Buy Upgrades"
+
+[node name="Reset_Map" type="Button" parent="ButtonsBottom2"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+tooltip_text = "Create a new map layout."
+text = "New Map"
+
+[node name="ButtonsBottom" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = -183.0
+offset_top = 302.0
+offset_right = 180.0
+offset_bottom = 375.0
+
+[node name="ResumeButton" type="Button" parent="ButtonsBottom"]
+layout_mode = 2
+tooltip_text = "Return to the game."
+text = "RESUME"
+
+[node name="MenuButton" type="Button" parent="ButtonsBottom"]
+layout_mode = 2
+tooltip_text = "Exit to the main menu."
+text = "MAIN MENU"
+
 [connection signal="drag_ended" from="MusicContainer/VolumeSlider" to="." method="_on_music_volume_drag_ended"]
 [connection signal="value_changed" from="MusicContainer/VolumeSlider" to="." method="_on_music_volume_changed"]
 [connection signal="drag_ended" from="SFXContainer/VolumeSlider" to="." method="_on_sfx_volume_drag_ended"]
 [connection signal="value_changed" from="SFXContainer/VolumeSlider" to="." method="_on_sfx_volume_changed"]
-[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="MenuButton" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="ButtonsBottom/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ButtonsBottom/MenuButton" to="." method="_on_menu_pressed"]

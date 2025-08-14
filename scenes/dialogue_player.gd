@@ -22,13 +22,20 @@ var name_per_character := {};
 var dialogue_array := [];
 var current_line := -1;
 
+const SPEAK_JUMP = Vector2(0, -50);
+
 
 
 func _ready() -> void:
+	$CharacterLeft.position = (get_viewport_rect().size - $CharacterLeft.get_rect().size * $CharacterLeft.scale ) * Vector2(0, 1.0) - SPEAK_JUMP;
+	$CharacterRight.position = (get_viewport_rect().size - $CharacterLeft.get_rect().size * $CharacterRight.scale) - SPEAK_JUMP;
+	
 	character_tweens.resize(character_sprites.size());
 	normal_positions.resize(character_sprites.size());
 	for i in character_sprites.size():
 		normal_positions[i] = character_sprites[i].position;
+	
+	
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -103,7 +110,7 @@ func nudge_character(idx: int) -> void:
 		tween.kill();
 	tween = create_tween();
 	
-	tween.tween_property(character_sprites[idx], ^"position", normal_positions[idx] + Vector2(0.0, -50.0), 0.1);
+	tween.tween_property(character_sprites[idx], ^"position", normal_positions[idx] + SPEAK_JUMP, 0.1);
 	tween.tween_property(character_sprites[idx], ^"position", normal_positions[idx], 0.1);
 	
 	character_tweens[idx] = tween;

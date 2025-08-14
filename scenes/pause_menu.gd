@@ -36,6 +36,10 @@ func _ready() -> void:
 	update_slider_value(SFX)
 	# Update Ketchup Meter
 	get_node("KetchupMeter").value = GameState.juice/GameState.juice_cap * 100
+	
+	$ButtonsBottom2/TryAgain.pressed.connect(_on_try_again_pressed)
+	$ButtonsBottom2/Upgrades.pressed.connect(_on_upgrades_pressed)
+	$ButtonsBottom2/Reset_Map.pressed.connect(_on_reset_pressed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -81,6 +85,24 @@ func save_volume_value(container_id: int) -> void:
 		save_file.store_string(json_string)
 		
 		print("Saved volume value")
+
+
+## restart from the begining of the current stage
+func _on_try_again_pressed() -> void:
+	get_tree().paused = false
+	GameState.restart();
+	get_tree().change_scene_to_file("res://scenes/game.tscn");
+
+## go to the upgrades shop, then restart
+func _on_upgrades_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/upgrade_screen.tscn");
+
+## generate a new stage layout, then restart
+func _on_reset_pressed() -> void:
+	get_tree().paused = false
+	GameState.load_stage(GameState.current_stage.stage_name)
+
 
 ## change the music volume slider
 func _on_music_volume_changed(value: float) -> void:
