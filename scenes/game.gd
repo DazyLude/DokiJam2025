@@ -29,7 +29,13 @@ func _ready() -> void:
 	# since hud displays player properties, such as speed and position, we need to pass a reference
 	Sounds.play_looped(GameState.current_stage.music);
 	hud.player = player;
+	
+	
+	var start = Time.get_ticks_msec();
 	load_stage();
+	var end = Time.get_ticks_msec();
+	print("loaded stage in %s msec" % (end - start));
+	
 	player.apply_player_stats(PlayerStats.get_latest());
 
 

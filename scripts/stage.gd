@@ -178,14 +178,17 @@ func generate_items(items_data: Dictionary, from: float, to: float) -> Dictionar
 			item_placement = roundi(item_placement / ITEM_PLACEMENT_RESOLUTION) * ITEM_PLACEMENT_RESOLUTION;
 			
 			var try_i : int = 0;
-			var variation = 0.0;
-			var max_loops = 1000;
-			while occupied_coords.has(item_placement + variation) and max_loops > 0:
-				max_loops -= 1
+			var variation := 0.0;
+			var max_loops := 1000;
+			
+			while occupied_coords.has(item_placement + variation) and try_i < max_loops:
 				variation = ITEM_PLACEMENT_RESOLUTION * (try_i / 2 + 1) * (try_i % 2 - 0.5) * 2.0;
 				try_i += 1
 			
 			item_placement += variation;
+			
+			if item_placement >= stage_length:
+				continue;
 			
 			occupied_coords.push_back(item_placement);
 			
