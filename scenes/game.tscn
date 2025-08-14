@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://daikwosr13pnv"]
+[gd_scene load_steps=75 format=3 uid="uid://daikwosr13pnv"]
 
 [ext_resource type="Script" uid="uid://cpobfagrfa2vw" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://ca57mpnq70puo" path="res://assets/stages/farm/tomato_farm.png" id="1_yqjtg"]
