@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bb3q6mj02qh6c"]
+[gd_scene load_steps=7 format=3 uid="uid://bb3q6mj02qh6c"]
 
 [ext_resource type="Script" uid="uid://8xnrnrif5mb0" path="res://scenes/UI/hud.gd" id="1_c4vmg"]
 [ext_resource type="Texture2D" uid="uid://fqn2kgf1d1yu" path="res://assets/icons/dokicoin.png" id="2_rd3kb"]
 [ext_resource type="FontFile" uid="uid://ctpda6706sqen" path="res://assets/fonts/Jua/Jua-Regular.ttf" id="3_y5tme"]
 [ext_resource type="Texture2D" uid="uid://ql4ksu2c1ebu" path="res://assets/icons/UI_ketchup_empty.png" id="4_0jeyp"]
 [ext_resource type="Texture2D" uid="uid://cf8uudqbdo34r" path="res://assets/icons/UI_ketchup_full.png" id="5_cg4gw"]
+[ext_resource type="PackedScene" uid="uid://crau0ayq0q6ym" path="res://scenes/UI/progress_bar.tscn" id="6_cg4gw"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -121,3 +122,14 @@ scale = Vector2(0.2, 0.2)
 fill_mode = 3
 texture_under = ExtResource("4_0jeyp")
 texture_progress = ExtResource("5_cg4gw")
+
+[node name="ProgressBar" parent="." instance=ExtResource("6_cg4gw")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -297.0
+offset_top = 50.0
+offset_right = 293.0
+offset_bottom = 90.0
+grow_horizontal = 2

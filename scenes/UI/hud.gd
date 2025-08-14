@@ -12,7 +12,11 @@ const PHYSICS_FPS_TEMPLATE := "last physics delta: %1.2f (~%d FPS)"
 const STATE_TEMPLATE := "fresh state: %s"
 
 
-var player : Player;
+var player : Player :
+	set(v):
+		player = v;
+		if $ProgressBar != null:
+			$ProgressBar.player = v;
 
 var noise_gen_cache : Noise;
 

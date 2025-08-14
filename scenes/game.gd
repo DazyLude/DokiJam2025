@@ -1,4 +1,5 @@
 extends Node
+class_name Game
 
 
 const COLLECTIBLE_HOVER_OFFSET := -100.0;
@@ -20,6 +21,7 @@ const LOWER_BOUND := 5000.0;
 
 #var upgrade_scene = preload("res://scenes/upgrade_screen.tscn");
 var gameover_scene = preload("res://scenes/gameover.tscn");
+var gameover_scene_instance : Node = null;
 var is_gameover : bool = false;
 
 var player_tween : Tween;
@@ -51,8 +53,14 @@ func _process(delta: float) -> void:
 		return;
 	
 	if GameState.juice <= 0.0 and player.is_stationary():
-		is_gameover = true;
-		ui_layer.add_child(gameover_scene.instantiate());
+		if gameover_scene_instance == null:
+			gameover_scene_instance = gameover_scene.instantiate()
+			ui_layer.add_child(gameover_scene_instance);
+		else:
+			gameover_scene_instance.show();
+	
+	if GameState.juice > 0.0 and gameover_scene_instance != null:
+		gameover_scene_instance.hide();
 	
 	if player.position.y >= LOWER_BOUND and player.process_mode != ProcessMode.PROCESS_MODE_DISABLED:
 		move_player_to(0.0);
