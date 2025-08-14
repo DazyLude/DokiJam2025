@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2ocjtx6rhe4n"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_2oysy"]
+[ext_resource type="Texture2D" uid="uid://dl7d8c63ru7lf" path="res://assets/obstacles/long_dragoon.png" id="2_2oysy"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2oysy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_2oysy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-157, 271, -99, 217, -137, 153, -131, 102, -146, 40, -101, 45, -94, -112, -167, -152, -170, -229, -107, -274, -60, -323, -32, -315, 52, -211, 54, -154, -1, -117, 20, 12, 113, 66, 159, 42, 176, 94, 141, 168, 73, 217, 104, 284, 52, 308, 25, 235, -47, 231, -102, 285)

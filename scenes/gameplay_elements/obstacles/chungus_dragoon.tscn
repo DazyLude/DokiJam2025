@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd5v3vglwh48v"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_pev3j"]
+[ext_resource type="Texture2D" uid="uid://bp6yjijca2nsa" path="res://assets/obstacles/chungus_dragoon.png" id="2_77od7"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_pev3j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_77od7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-383, 309, -402, 184, -319, 61, -310, -47, -258, -107, -288, -192, -209, -285, -216, -328, -147, -319, -9, -374, 113, -359, 156, -288, 197, -101, 272, -7, 318, 131, 390, 129, 398, 184, 387, 279, 310, 357, 62, 386, 1, 397, -46, 371, -255, 333, -316, 351)

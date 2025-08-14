@@ -409,16 +409,16 @@ use_taper_texture = false
 fit_mode = 0
 metadata/_custom_type_script = "uid://dscgsc3i8npqr"
 
-[sub_resource type="Resource" id="Resource_3x28f"]
+[sub_resource type="Resource" id="Resource_7ixpq"]
 script = ExtResource("11_ssvqc")
-begin = 275.0
-distance = 350.0
+begin = 315.0
+distance = 270.0
 edgeRendering = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_uxocx"]
 script = ExtResource("8_trtic")
 edge_material = SubResource("Resource_0rmfi")
-normal_range = SubResource("Resource_3x28f")
+normal_range = SubResource("Resource_7ixpq")
 weld = true
 taper_sharp_corners = false
 render = true

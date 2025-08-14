@@ -15,6 +15,7 @@ var terrain_fill : Texture2D;
 var terrain_edge : Texture2D;
 var checkpoint : Texture2D;
 var background : Texture2D;
+var background_offset : Vector2;
 
 
 # sounds
@@ -89,10 +90,15 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	print("initial seed and state: %s, %s" % [data.rng.seed, data.rng.state]);
 	
 	# visuals setup
-	data.terrain_fill = load(params.get("terrain fill", "uid://dftdfph41cnpv"));
+	if params.get("terrain fill", "uid://dftdfph41cnpv") == null:
+		data.terrain_fill = null;
+	else:
+		data.terrain_fill = load(params.get("terrain fill", "uid://dftdfph41cnpv"));
+	
 	data.terrain_edge = load(params.get("terrain edge", "uid://bad5ey7wkh63x"));
 	data.checkpoint = load(params.get("checkpoint", "uid://d28lqabm420p3"));
 	data.background = load(params.get("background", "res://assets/stages/farm/tomato_farm.png"));
+	data.background_offset = params.get("background offset", Vector2(0.0, -1000.0));
 	
 	# terrain generator setup
 	data.generator = TerrainGenerator.new();
@@ -108,6 +114,7 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	# ceiling setup
 	if params.get("has ceiling", false):
 		data.ceiling_generator = CeilingGenerator.new();
+		data.ceiling_generator.floor_generator = data.generator;
 		data.generator.noise_generator.seed = data.rng.randi();
 		
 		data.ceiling_obstacles = ObstacleManager.from_array(
@@ -236,10 +243,22 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
-		"next stage": "tomato fields",
+		"next stage": "frontstage",
 		"music": Sounds.ID.MUSIC_GOOFY_AAH,
 		"has ceiling": true,
 	},
+	"stage": {
+		"name": "stage",
+		"terrain fill": "res://assets/stages/backstage/stagefloor_tile.png",
+		"terrain edge": "res://assets/stages/backstage/stagefloor_edge.png",
+		"background": "res://assets/stages/stage/stage.png",
+		"background offset": Vector2(0.0, -1150.0),
+		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
+		"stage length": 3e4, # should be a float
+		"intermission name": "end",
+		"music": Sounds.ID.MUSIC_GOOFY_AAH,
+		"has ceiling": true,
+	}
 }
 
 

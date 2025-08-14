@@ -2,8 +2,9 @@ extends TerrainGenerator
 class_name CeilingGenerator
 
 
-const CEILING_HEIGHT := -3000.0;
+const CEILING_HEIGHT := 1000.0;
+var floor_generator : TerrainGenerator = null;
 
 
 func generator_function(x: float) -> float:
-	return CEILING_HEIGHT;
+	return floor_generator.generator_function(x) - CEILING_HEIGHT;

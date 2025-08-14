@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dikjgt1gu4wn6"]
+
+[ext_resource type="Script" uid="uid://boakfxq530iis" path="res://scenes/gameplay_elements/obstacles/rigid_body_obstacle.gd" id="1_lur83"]
+[ext_resource type="Texture2D" uid="uid://djt0t8j3uao11" path="res://assets/obstacles/chonk_dragoon.png" id="2_lur83"]
+
+[node name="Node2D" type="RigidBody2D"]
+script = ExtResource("1_lur83")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_lur83")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(88, 200, 3, 196, -53, 167, -150, 135, -193, 72, -240, 45, -249, 3, -226, -20, -186, -3, -136, -91, -145, -122, -112, -120, -72, -142, -34, -196, 6, -195, 22, -162, 42, -160, 51, -141, 128, -94, 175, 0, 220, -6, 233, 10, 208, 68, 169, 88, 166, 97, 228, 111, 242, 158, 208, 169, 102, 143, 91, 148, 106, 189)

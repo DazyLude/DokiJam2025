@@ -110,7 +110,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/ceiling_light.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["backstage_ceiling"],
+		"natural habitat": ["backstage_ceiling", "stage_ceiling"],
 		"positions": [
 			PositionPreset.fixed(0.0, 400.0),
 		],
@@ -119,7 +119,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/giant_wisp.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["backstage"],
+		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -300.0),
 		],
@@ -128,7 +128,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/light_rack.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["backstage"],
+		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -500.0),
 		],
@@ -137,7 +137,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/mic_stand.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["backstage"],
+		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -475.0),
 		],
@@ -146,11 +146,65 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/stacked_boxes.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["backstage"],
+		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -420.0),
 		],
-	}
+	},
+	"chungus dragoon": {
+		"scene": "res://scenes/gameplay_elements/obstacles/chungus_dragoon.tscn",
+		"scale": Vector2(0.5, 0.5),
+		"weight": 100.0,
+		"natural habitat": ["stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -375.0),
+		],
+	},
+	"chonk dragoon": {
+		"scene": "res://scenes/gameplay_elements/obstacles/chonk_dragoon.tscn",
+		"scale": Vector2(0.3, 0.3),
+		"weight": 100.0,
+		"natural habitat": ["stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -250.0),
+		],
+	},
+	"eggoon": {
+		"scene": "res://scenes/gameplay_elements/obstacles/eggoon.tscn",
+		"scale": Vector2(0.3, 0.3),
+		"weight": 100.0,
+		"natural habitat": ["stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -150.0),
+		],
+	},
+	"eggoon stack": {
+		"scene": "res://scenes/gameplay_elements/obstacles/eggoon_stack.tscn",
+		"scale": Vector2(0.3, 0.3),
+		"weight": 100.0,
+		"natural habitat": ["stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -320.0),
+		],
+	},
+	"long dragoon": {
+		"scene": "res://scenes/gameplay_elements/obstacles/long_dragoon.tscn",
+		"scale": Vector2(0.4, 0.4),
+		"weight": 100.0,
+		"natural habitat": ["stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -300.0),
+		],
+	},
+	"mini dragoon": {
+		"scene": "res://scenes/gameplay_elements/obstacles/mini_dragoon.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -110.0),
+		],
+	},
 }
 
 

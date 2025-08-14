@@ -47,13 +47,14 @@ func restart() -> void:
 	current_stage.rng.state = current_stage.fresh_state;
 
 
-func load_stage(stage: String = GameState.current_stage.next_stage_name) -> void:
+func load_stage(stage: String = GameState.current_stage.next_stage_name, custom_seed: int = 0) -> void:
 	if not StageData.stage_exists(stage):
 		stage = "tomato fields";
 	
 	restart();
 	upgrades.check_for_unlocks(stage);
-	current_stage = StageData.get_stage_data_by_name(stage);
+	
+	current_stage = StageData.get_stage_data_by_name(stage, custom_seed);
 	get_tree().change_scene_to_file("res://scenes/game.tscn");
 
 

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://u1ovdixgd3os"]
+
+[ext_resource type="Script" uid="uid://brqr8g15dpn4v" path="res://scenes/gameplay_elements/obstacles/generic_obstacle.gd" id="1_rlitb"]
+[ext_resource type="Texture2D" uid="uid://b7kxf708wfuht" path="res://assets/obstacles/eggoon_stack.png" id="2_rlitb"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_rlitb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_rlitb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-97, 159, -120, 108, -99, 53, -74, 35, -73, -27, -49, -54, -31, -55, -30, -134, 3, -159, 37, -146, 41, -50, 74, -39, 79, 51, 113, 66, 118, 118, 104, 163)
