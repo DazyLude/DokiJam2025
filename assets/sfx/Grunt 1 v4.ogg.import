@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://e4ssmv0tu53x"
+path="res://.godot/imported/Grunt 1 v4.ogg-d8e747a098a27828c94bc94ba40a584b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Grunt 1 v4.ogg"
+dest_files=["res://.godot/imported/Grunt 1 v4.ogg-d8e747a098a27828c94bc94ba40a584b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

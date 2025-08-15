@@ -280,10 +280,13 @@ func apply_supps_buff() -> void:
 
 func try_jump() -> void:
 	#var upward_unit_vector := Vector2(0, -1).rotated(self.rotation);
+	hng_for = 0.2;
+	
+	if GameState.juice == 0:
+		return;
+	
 	var upward_unit_vector := Vector2(0, -1);
 	var upward_impulse := upward_unit_vector * player_fly_strength * mass * jump_fly_scale;
-	
-	hng_for = 0.2;
 	
 	if GameState.juice > jump_cost:
 		#apply_central_impulse(upward_impulse);

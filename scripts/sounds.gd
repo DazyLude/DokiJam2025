@@ -46,10 +46,10 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.SFX_AGGH: "res://assets/sfx/Scream 2.wav",
 	ID.SFX_AGHH: "res://assets/sfx/Scream 3.wav",
 	ID.SFX_ARGH: "res://assets/sfx/Scream 4.wav",
-	ID.SFX_GRUNT: "res://assets/sfx/grunt 1.wav",
+	ID.SFX_GRUNT: "res://assets/sfx/Grunt 1 v4.ogg",
 	ID.SFX_1KMIC: "res://assets/sfx/1k mic.ogg",
 	
-	ID.SFX_JUMP: "res://assets/sfx/Jump 1.ogg",
+	ID.SFX_JUMP: "res://assets/sfx/Jump 1-3.ogg",
 	ID.SFX_FLAP: "res://assets/sfx/Jump 2.ogg",
 	ID.SFX_COIN: "res://assets/sfx/Coin 2.ogg",
 	ID.SFX_KETCHUP: "res://assets/sfx/Ketchup 1.ogg",

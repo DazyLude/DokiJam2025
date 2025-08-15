@@ -35,7 +35,6 @@ func _ready() -> void:
 	for i in character_sprites.size():
 		normal_positions[i] = character_sprites[i].position;
 	
-	
 
 
 func _unhandled_input(event: InputEvent) -> void:

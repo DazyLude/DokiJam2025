@@ -48,13 +48,11 @@ func generator_function(x: float) -> float:
 		result += CHAIR_HEIGHT - pow(x_scaled, 3.0);
 	elif x_scaled < CHAIR_HEIGHT_CBRT:
 		var smoothing = (1.0 - x_scaled / CHAIR_HEIGHT_CBRT) / (1.0 - CHAIR_SMOOTH_END);
-		result += (CHAIR_HEIGHT - pow(x_scaled, 3.0)) * smoothing;
-		
 		incremental_variation = 1e-4 * x * (sin(x_scaled) + 1)
+		
+		result += (CHAIR_HEIGHT - pow(x_scaled, 3.0)) * smoothing;
 		result += (incremental_variation + noise_generator.get_noise_1d(x) + 1) * (1 - smoothing);
 	else:
-		# Previous iteration:
-		#result += noise_generator.get_noise_1d(x) + 1;
 		incremental_variation = 1e-4 * x * (sin(x_scaled) + 1)
 		result += incremental_variation + noise_generator.get_noise_1d(x) + 1;
 	

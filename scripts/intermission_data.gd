@@ -11,6 +11,7 @@ enum {
 	CHARACTER_CROWKI,
 	CHARACTER_RETRO,
 	CHARACTER_BOUNTY,
+	CHARACTER_DRAGOON,
 }
 
 enum {
@@ -50,6 +51,13 @@ static var character_data : Dictionary[int, Dictionary] = {
 			EMOTE_NORMAL: "",
 		},
 	},
+	CHARACTER_DRAGOON: {
+		"base": "res://assets/intermissions/goons_sprite.png",
+		"name": "Dragoon",
+		"emotions": {
+			EMOTE_NORMAL: "",
+		},
+	}
 }
 
 
@@ -68,10 +76,10 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 	"tomato field massacre": {
 		"type": TYPE_DIALOGUE,
 		"background": "res://assets/stages/farm/tomato_farm.png",
-		"characters": [CHARACTER_TOMATO, CHARACTER_CROWKI],
+		"characters": [CHARACTER_TOMATO, CHARACTER_DRAGOON],
 		"dialogue": [
 			[CHARACTER_TOMATO, EMOTE_NORMAL, "hey"],
-			[CHARACTER_CROWKI, EMOTE_NORMAL, "caw!"],
+			[CHARACTER_DRAGOON, EMOTE_NORMAL, "caw!"],
 		],
 		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
 	}

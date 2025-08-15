@@ -29,6 +29,7 @@ func play() -> void:
 	
 	match current_intermission.get("type", -1):
 		IntermissionData.TYPE_DIALOGUE:
+			$Background.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED;
 			$DialogueBase.show();
 			$ComicBase.hide();
 			dialogue_player.dialogue_finished.connect(finished.emit);
