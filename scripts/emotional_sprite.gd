@@ -33,3 +33,5 @@ func prepare_sprite(character_idx) -> void:
 	
 	offset = skinsuit_data.get("offset", Vector2());
 	overlay_sprite.offset = offset;
+	
+	display_emotion(0);

@@ -61,9 +61,9 @@ var speedometer := Speedometer.new();
 
 
 func _ready() -> void:
-	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
 	$BuffAnimation.pause()
 	
+	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
 	if Upgrade.upgrade_metadata[GameState.selected_skinsuit].has("rider"):
 		var rider = Upgrade.upgrade_metadata[GameState.selected_skinsuit]["rider"];
 		$StaticSprite.prepare_sprite(rider);
