@@ -67,8 +67,8 @@ static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	},
 	WINGS: {
 		"type": TYPE_INCREMENTAL,
-		"max level": standard_upgrade_cost_array.size(),
-		"cost": standard_upgrade_cost_array,
+		"max level": 5,
+		"cost": [0.0, 2.0, 5.0, 10.0, 20.0],
 		"autounlock": "city",
 		"shop_unlock": "city",
 	},

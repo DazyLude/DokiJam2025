@@ -39,16 +39,12 @@ var safe_zone_end : float = 3000.0;
 
 var item_placement_properties : Dictionary[String, Dictionary] = {
 	"ketchup": {
-		"distance": 2500.0, # average distance between items of this type
+		"distance": 2300.0, # average distance between items of this type
 		"placement": PickupItemData.PLACEMENT_NON_RANDOM, # non random items are placed each "distance" amount of units with a resolution defined by the terrain generator
 	},
 	"coin": {
 		"group": "a", # this item belongs to a group
 		"weight": 100.0, # weight of this item within its group
-	},
-	"coin_x5": {
-		"group": "a", # this item belongs to a group
-		"weight": 10.0, # weight of this item within its group
 	},
 	"wingbull": {
 		"group": "b",
@@ -124,6 +120,13 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 		data.ceiling_obstacles = ObstacleManager.for_stage(data.stage_name, ObstacleManager.PLACEMENT_CEILING);
 		data.ceiling_obstacles.rng = data.rng;
 	
+	# items setup
+	if params.has("items"):
+		data.item_placement_properties.merge(params["items"], true);
+	
+	if params.has("groups"):
+		data.item_placement_properties["groups"].merge(params["groups"], true);
+	
 	# other parameters
 	data.stage_length = params.get("stage length", 3e4);
 	data.next_stage_name = params.get("next stage", "tomato fields");
@@ -149,6 +152,7 @@ func generate_items(
 		
 		var items : Array[GroupData] = [];
 		var grouped_items := {};
+		var groups : Array[String] = [];
 		
 		for item in items_data:
 			var item_data = items_data[item];
@@ -156,6 +160,7 @@ func generate_items(
 				"groups":
 					for group in item_data:
 						items.push_back(GroupData.from_dict(item_data[group], group));
+						groups.push_back(group);
 				_ when item_data.has("group"):
 					grouped_items.get_or_add(item_data["group"], PackedStringArray()).push_back(item);
 					grouped_items.get_or_add(item_data["group"] + "_w", PackedFloat32Array())\
@@ -164,6 +169,11 @@ func generate_items(
 					items.push_back(GroupData.from_dict(item_data, item));
 		
 		var occupied_coords := PackedFloat32Array();
+		
+		for group in groups:
+			if not grouped_items.has(group):
+				var group_idx = items.find_custom(func(g): return g.item == group);
+				items.remove_at(group_idx);
 		
 		for addition in additions:
 			var item = addition;
@@ -183,12 +193,12 @@ func generate_items(
 				var item_placement = distance * (from_i + i + 1);
 				
 				match group_data.placement_type:
-					PickupItemData.PLACEMENT_NON_RANDOM:
-						pass;
 					PickupItemData.PLACEMENT_NORMAL:
 						var variation = rng.randfn(0.0, distance / 4.0);
 						variation = clampf(variation, distance / -3.0, distance / 3.0);
 						item_placement += variation;
+					_, PickupItemData.PLACEMENT_NON_RANDOM:
+						pass;
 				
 				item_placement = roundi(item_placement / ITEM_PLACEMENT_RESOLUTION) * ITEM_PLACEMENT_RESOLUTION;
 				
@@ -237,10 +247,23 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain edge": "res://assets/stages/city/concrete_edge.png",
 		"background": "res://assets/stages/city/shopping_street.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
-		"stage length": 3e4, # should be a float
+		"stage length": 3.5e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "city2",
 		"music": Sounds.ID.MUSIC_CITY,
+		"items": { # items are merged, and old data is overwritten by the new one in case of collisions
+			"coin_x5": {
+				"group": "a", # this item belongs to a group
+				"weight": 10.0, # weight of this item within its group
+			},
+		},
+		# if you feel the need to add a group, it can be done:
+		#"groups": {
+			#"another": {
+				#"distance": 3000.0,
+				#"placement": PickupItemData.PLACEMENT_NORMAL,
+			#}
+		#}
 	},
 	"city2": {
 		"name": "city2",
@@ -249,10 +272,19 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"background": "res://assets/stages/city/city_street.png",
 		"skybox": "res://assets/stages/city/city_street_skybox.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
-		"stage length": 3e4, # should be a float
+		"stage length": 4.25e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "backstage",
 		"music": Sounds.ID.MUSIC_METAL,
+		"items": { # items are merged, and old data is overwritten by the new one in case of collisions
+			"ketchup": {
+				"distance": 2800.0,
+			},
+			"coin_x5": {
+				"group": "a", # this item belongs to a group
+				"weight": 20.0, # weight of this item within its group
+			},
+		},
 	},
 	"backstage": {
 		"name": "backstage",
@@ -261,11 +293,20 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"background": "res://assets/stages/backstage/backstage.png",
 		"skybox": "res://assets/stages/backstage/backstage_skybox.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
-		"stage length": 3e4, # should be a float
+		"stage length": 5e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "stage",
 		"music": Sounds.ID.MUSIC_BACKSTAGE,
 		"has ceiling": true,
+		"items": { # items are merged, and old data is overwritten by the new one in case of collisions
+			"coin_x5": {
+				"group": "a", # this item belongs to a group
+				"weight": 30.0, # weight of this item within its group
+			},
+			"ketchup": {
+				"distance": 3300.0,
+			},
+		},
 	},
 	"stage": {
 		"name": "stage",
@@ -275,10 +316,19 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"skybox": "res://assets/stages/stage/stage_skybox.png",
 		"background offset": Vector2(0.0, -1150.0),
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
-		"stage length": 3e4, # should be a float
+		"stage length": 5.5e4, # should be a float
 		"intermission name": "end",
 		"music": Sounds.ID.MUSIC_STAGE,
 		"has ceiling": true,
+		"items": { # items are merged, and old data is overwritten by the new one in case of collisions
+			"coin_x5": {
+				"group": "a", # this item belongs to a group
+				"weight": 40.0, # weight of this item within its group
+			},
+			"ketchup": {
+				"distance": 3750.0,
+			},
+		},
 	}
 }
 

@@ -96,11 +96,11 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	},
 	"news stand": {
 		"scene": "res://scenes/gameplay_elements/obstacles/news_stand.tscn",
-		"scale": Vector2(0.2, 0.2),
+		"scale": Vector2(0.35, 0.35),
 		"weight": 100.0,
 		"natural habitat": ["city"],
 		"positions": [
-			PositionPreset.fixed(0.0, -350.0),
+			PositionPreset.fixed(0.0, -340.0),
 		],
 	},
 	"sign": {
@@ -118,7 +118,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"weight": 50.0,
 		"natural habitat": ["city"],
 		"positions": [
-			PositionPreset.fixed(0.0, -200.0),
+			PositionPreset.fixed(0.0, -180.0),
 		],
 		"flippable": true,
 	},
@@ -245,7 +245,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	"eggoon": {
 		"scene": "res://scenes/gameplay_elements/obstacles/eggoon.tscn",
 		"scale": Vector2(0.3, 0.3),
-		"weight": 100.0,
+		"weight": 50.0,
 		"natural habitat": ["stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -150.0),
@@ -254,7 +254,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	"eggoon stack": {
 		"scene": "res://scenes/gameplay_elements/obstacles/eggoon_stack.tscn",
 		"scale": Vector2(0.3, 0.3),
-		"weight": 100.0,
+		"weight": 50.0,
 		"natural habitat": ["stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -320.0),
@@ -273,12 +273,28 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	"mini dragoon": {
 		"scene": "res://scenes/gameplay_elements/obstacles/mini_dragoon.tscn",
 		"scale": Vector2(0.2, 0.2),
-		"weight": 100.0,
+		"weight": 10.0,
 		"natural habitat": ["stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -110.0),
 		],
 		"flippable": true,
+	},
+	
+	"mini dragoon army": {
+		"scene": "res://scenes/gameplay_elements/obstacles/mini_dragoon.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 50.0,
+		"natural habitat": ["stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -110.0),
+		],
+		"flippable": true,
+		"flags": {
+			FLAG_SPAWN_ANOTHER: {
+				"mini dragoon": [Vector2(-40, 0), Vector2(-20, 0), Vector2(30, 0)]
+			}
+		}
 	},
 }
 

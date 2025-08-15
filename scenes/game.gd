@@ -251,7 +251,7 @@ func generate_terrain_generic(
 		var closing_offset = Vector2(0.0, -1000.0 if is_ceiling else 1000.0);
 		var bottom_right = points[points.size() - 1] + closing_offset;
 		var bottom_left = points[0] + closing_offset;
-		var bottom_y = min(bottom_right.y, bottom_left.y) if is_ceiling else max(bottom_right.y, bottom_left.y);
+		var bottom_y = min(bottom_right.y, bottom_left.y, -1000.0) if is_ceiling else max(bottom_right.y, bottom_left.y, 1000.0);
 		
 		bottom_right.y = bottom_y;
 		bottom_left.y = bottom_y;

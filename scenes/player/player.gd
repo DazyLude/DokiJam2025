@@ -242,17 +242,17 @@ func launch_forward() -> void:
 	apply_central_impulse(forward_impulse);
 	apply_torque(player_torque * direction)
 
+
 ## buffs the player when in contact with a supps item
 func apply_supps_buff() -> void:
 	# Activate the buff counter
 	buff_active = true
-	buff_counter = 10 #seconds
+	buff_counter = 5.0 #seconds
 	# Activate buff visuals
 	$BuffAnimation.visible = true
 	$BuffAnimation.play()
 	# Increase player stats
-	mass *= 2
-	player_fly_strength *= 2
+	player_fly_strength *= 1.5
 	physics_material_override.friction = 1.0
 	hardness *= 5
 	# Refill juice meter
@@ -276,7 +276,7 @@ func try_jump() -> void:
 
 
 func try_flap() -> void:
-	var flap_stat = ceili(GameState.upgrades.get_upgrade_level(Upgrade.WINGS) / 2.0)
+	var flap_stat = GameState.upgrades.get_upgrade_level(Upgrade.WINGS)
 	if flap_stat < 1 or flap_amount >= flap_stat:
 		return;
 	
