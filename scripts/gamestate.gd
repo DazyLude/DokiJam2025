@@ -41,7 +41,7 @@ func _init() -> void:
 
 
 func restart() -> void:
-	juice_cap = JUICE_DEFAULT_VALUE + 3.0 * upgrades.get_upgrade_level(Upgrade.KETCHUP_TANK);
+	juice_cap = JUICE_DEFAULT_VALUE + 5.0 * upgrades.get_upgrade_level(Upgrade.KETCHUP_TANK);
 	juice = juice_cap;
 	current_stage.rng.state = current_stage.fresh_state;
 

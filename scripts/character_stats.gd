@@ -92,8 +92,8 @@ static func supps_buff(lvl: int) -> Dictionary:
 
 static func wings_buff(lvl: int) -> Dictionary:
 	return {
-		"aeroshape": 1.0 * lvl,
-		"jump_cost" : -0.05 * lvl,
+		"aeroshape": 1.75 * lvl,
+		"jump_cost" : -0.1 * lvl,
 	}
 
 
