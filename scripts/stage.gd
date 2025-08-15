@@ -52,15 +52,15 @@ var item_placement_properties : Dictionary[String, Dictionary] = {
 	},
 	"wingbull": {
 		"group": "b",
-		"weight": 30.0,
+		"weight": 20.0,
 	},
 	"coffee": {
 		"group": "b",
-		"weight": 60.0,
+		"weight": 75.0,
 	},
 	"supps": {
 		"group": "b",
-		"weight": 10.0,
+		"weight": 5.0,
 	},
 	"groups": {
 		"a": { # items from a group are placed like normal items, and the selected among (ඞ) items within a group
@@ -263,7 +263,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
-		"next stage": "frontstage",
+		"next stage": "stage",
 		"music": Sounds.ID.MUSIC_BACKSTAGE,
 		"has ceiling": true,
 	},

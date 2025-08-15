@@ -146,10 +146,10 @@ func spawn_obstacles_generic(generator: TerrainGenerator, manager: ObstacleManag
 		var obstacle_scene = manager.get_specific_obstacle(obstacle);
 		
 		var obstacle_flags = ObstacleManager.get_obstacle_flags(obstacle);
-		process_obstacle_flags(obstacle_flags, x, generator, manager);
-		
 		place_node_at(obstacle_scene, x, generator);
 		$DecorationsBack.add_child(obstacle_scene);
+		
+		process_obstacle_flags(obstacle_flags, x, generator, manager);
 
 
 func process_obstacle_flags(flags: Dictionary, x: float, generator: TerrainGenerator, manager: ObstacleManager) -> void:

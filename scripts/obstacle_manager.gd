@@ -63,6 +63,12 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, -350.0),
 		],
+		"flippable": true,
+		"flags": {
+			FLAG_SPAWN_ANOTHER: {
+				"garbage": [Vector2(-120.0, -50.0), Vector2(-120.0, -100.0), Vector2(120.0, -50.0)],
+			}
+		}
 	},
 	"garbage": {
 		"scene": "res://scenes/gameplay_elements/obstacles/garbage.tscn",
@@ -72,10 +78,16 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, -150.0),
 		],
+		"flippable": true,
+		"flags": {
+			FLAG_SPAWN_ANOTHER: {
+				"garbage": [Vector2(-20.0, -50.0), Vector2(20.0, -50.0), Vector2(0.0, -100.0)],
+			},
+		}
 	},
 	"lamp": {
 		"scene": "res://scenes/gameplay_elements/obstacles/lamp.tscn",
-		"scale": Vector2(0.2, 0.2),
+		"scale": Vector2(0.3, 0.3),
 		"weight": 100.0,
 		"natural habitat": ["city", "city2"],
 		"positions": [
@@ -103,11 +115,12 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	"table": {
 		"scene": "res://scenes/gameplay_elements/obstacles/table.tscn",
 		"scale": Vector2(0.4, 0.4),
-		"weight": 100.0,
+		"weight": 50.0,
 		"natural habitat": ["city"],
 		"positions": [
 			PositionPreset.fixed(0.0, -200.0),
 		],
+		"flippable": true,
 	},
 	"trash can": {
 		"scene": "res://scenes/gameplay_elements/obstacles/trash_can.tscn",
@@ -142,6 +155,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, 400.0),
 		],
+		"flippable": true,
 	},
 	"giant wisp": {
 		"scene": "res://scenes/gameplay_elements/obstacles/giant_wisp.tscn",
@@ -151,11 +165,27 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, -300.0),
 		],
+		"flippable": true,
+	},
+	"giant wisp stack": {
+		"scene": "res://scenes/gameplay_elements/obstacles/giant_wisp.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 20.0,
+		"natural habitat": ["backstage", "stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -300.0),
+		],
+		"flags": {
+			FLAG_SPAWN_ANOTHER: {
+				"giant wisp": [Vector2(0.0, -80.0), Vector2(0.0, -160.0)]
+			},
+		},
+		"flippable": true,
 	},
 	"light rack": {
 		"scene": "res://scenes/gameplay_elements/obstacles/light_rack.tscn",
 		"scale": Vector2(0.4, 0.4),
-		"weight": 40.0,
+		"weight": 35.0,
 		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -500.0),
@@ -164,7 +194,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	"light rack troll": {
 		"scene": "res://scenes/gameplay_elements/obstacles/light_rack_troll.tscn",
 		"scale": Vector2(0.4, 0.4),
-		"weight": 10.0,
+		"weight": 7.0,
 		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -500.0),
@@ -176,16 +206,17 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	"mic stand": {
 		"scene": "res://scenes/gameplay_elements/obstacles/mic_stand.tscn",
 		"scale": Vector2(0.2, 0.2),
-		"weight": 100.0,
+		"weight": 70.0,
 		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -475.0),
 		],
+		"flippable": true,
 	},
 	"stacked boxes": {
 		"scene": "res://scenes/gameplay_elements/obstacles/stacked_boxes.tscn",
 		"scale": Vector2(0.2, 0.2),
-		"weight": 100.0,
+		"weight": 70.0,
 		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -420.0),
@@ -199,6 +230,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, -375.0),
 		],
+		"flippable": true,
 	},
 	"chonk dragoon": {
 		"scene": "res://scenes/gameplay_elements/obstacles/chonk_dragoon.tscn",
@@ -208,6 +240,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, -250.0),
 		],
+		"flippable": true,
 	},
 	"eggoon": {
 		"scene": "res://scenes/gameplay_elements/obstacles/eggoon.tscn",
@@ -235,6 +268,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, -300.0),
 		],
+		"flippable": true,
 	},
 	"mini dragoon": {
 		"scene": "res://scenes/gameplay_elements/obstacles/mini_dragoon.tscn",
@@ -244,6 +278,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"positions": [
 			PositionPreset.fixed(0.0, -110.0),
 		],
+		"flippable": true,
 	},
 }
 
