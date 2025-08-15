@@ -13,11 +13,45 @@ static var containers: Dictionary = {
 	"supps": "SuppsContainer",
 }
 
+static var backgrounds: Dictionary[String, Dictionary] = {
+	"tomato fields": {
+		"path": "res://assets/stages/farm/tomato_farm_clouds.png",
+		"offset_x": 0,
+		"offset_y": -90
+	},
+	"city": {
+		"path": "res://assets/stages/city/shopping_street.png",
+		"offset_x": 660,
+		"offset_y": 90
+	},
+	"city2": {
+		"path": "res://assets/stages/city/city_street.png",
+		"offset_x": 100,
+		"offset_y": 90
+	},
+	"backstage": {
+		"path": "res://assets/stages/backstage/backstage.png",
+		"offset_x": -550,
+		"offset_y": 90
+	},
+	"stage": {
+		"path": "res://assets/stages/stage/stage.png",
+		"offset_x": -50,
+		"offset_y": 90
+	}
+}
+
 # Reference the GameState upgrade data
 var upgrades = GameState.upgrades
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var background_data = backgrounds[GameState.current_stage.stage_name]
+	# Change background texture
+	$ShopBackground.texture = load(background_data["path"])
+	$ShopBackground.offset.x = background_data["offset_x"]
+	$ShopBackground.offset.y = background_data["offset_y"]
+	
 	if randf() > 0.33: # play the track with quotes only once in a while to spook players with sudden doki
 		Sounds.play_looped(Sounds.ID.MUSIC_UPGRADE_SHOP_THEME);
 	else:

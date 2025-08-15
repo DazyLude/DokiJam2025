@@ -217,7 +217,7 @@ func setup_terrain_visuals(stage: StageData) -> void:
 	
 	$ParallaxBackground/BackdropParallax/BackdropSprite.texture = stage.background;
 	$ParallaxBackground/BackdropParallax/BackdropSprite.position = stage.background_offset;
-	
+	$ParallaxBackground/CloudParallax.visible = stage.has_clouds;
 	$ParallaxBackground/SkyboxParallax/SkyboxSprite.texture = stage.skybox;
 
 

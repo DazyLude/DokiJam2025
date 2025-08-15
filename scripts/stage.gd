@@ -17,6 +17,7 @@ var checkpoint : Texture2D;
 var background : Texture2D;
 var background_offset : Vector2;
 var skybox : Texture2D;
+var has_clouds : bool;
 
 
 # sounds
@@ -105,6 +106,7 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	data.background = load(params.get("background", "res://assets/stages/farm/tomato_farm.png"));
 	data.background_offset = params.get("background offset", Vector2(0.0, -1000.0));
 	data.skybox = load(params.get("skybox", "res://assets/stages/farm/skybox_dark.png"));
+	data.has_clouds = params.get("has clouds");
 	
 	# terrain generator setup
 	data.generator = TerrainGenerator.new();
@@ -224,35 +226,38 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain fill": "uid://dftdfph41cnpv", # can be a relative path to the texture, but a string nevertheless
 		"terrain edge": "uid://bad5ey7wkh63x", # same as "terrain fill"
 		"checkpoint": "res://assets/stages/farm/checkpoint_juicestand.png", # same as "terrain fill"
-		"background": "res://assets/stages/farm/tomato_farm_clouds.png",
+		"background": "res://assets/stages/farm/tomato_farm_nosky.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "city",
 		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
+		"has clouds": true,
 	},
 	"city": {
 		"name": "city",
 		"terrain fill": "res://assets/stages/city/conrete_tile.png",
 		"terrain edge": "res://assets/stages/city/concrete_edge.png",
-		"background": "res://assets/stages/city/shopping_street.png",
+		"background": "res://assets/stages/city/shopping_street_nosky.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "city2",
 		"music": Sounds.ID.MUSIC_CITY,
+		"has clouds": true,
 	},
 	"city2": {
 		"name": "city2",
 		"terrain fill": "res://assets/stages/city/conrete_tile.png",
 		"terrain edge": "res://assets/stages/city/concrete_edge.png",
-		"background": "res://assets/stages/city/city_street.png",
+		"background": "res://assets/stages/city/city_street_nosky.png",
 		"skybox": "res://assets/stages/city/city_street_skybox.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "backstage",
 		"music": Sounds.ID.MUSIC_METAL,
+		"has clouds": true,
 	},
 	"backstage": {
 		"name": "backstage",
@@ -266,6 +271,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"next stage": "stage",
 		"music": Sounds.ID.MUSIC_BACKSTAGE,
 		"has ceiling": true,
+		"has clouds": false,
 	},
 	"stage": {
 		"name": "stage",
@@ -279,6 +285,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"intermission name": "end",
 		"music": Sounds.ID.MUSIC_STAGE,
 		"has ceiling": true,
+		"has clouds": false,
 	}
 }
 

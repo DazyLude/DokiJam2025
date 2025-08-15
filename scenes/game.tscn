@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://daikwosr13pnv"]
+[gd_scene load_steps=25 format=3 uid="uid://daikwosr13pnv"]
 
 [ext_resource type="Script" uid="uid://cpobfagrfa2vw" path="res://scenes/game.gd" id="1_lbhrr"]
-[ext_resource type="Texture2D" uid="uid://ca57mpnq70puo" path="res://assets/stages/farm/tomato_farm.png" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://digpfibcn5t4o" path="res://assets/stages/farm/skybox_dark.png" id="2_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dsygnq6v144q2" path="res://scenes/player/player.tscn" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://cbtf66k6pthwt" path="res://assets/stages/cloud_overlay.png" id="3_rysoc"]
+[ext_resource type="Texture2D" uid="uid://b4s0q6kri7hya" path="res://assets/stages/farm/tomato_farm_nosky.png" id="4_rysoc"]
 [ext_resource type="Script" uid="uid://bxh60lo5clvos" path="res://addons/rmsmartshape/shapes/shape.gd" id="4_vtaks"]
 [ext_resource type="Script" uid="uid://iui5xsr0lcv6" path="res://addons/rmsmartshape/shapes/point_array.gd" id="7_kvuet"]
 [ext_resource type="Script" uid="uid://cg2cweddrk5r5" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="8_trtic"]
@@ -112,13 +113,22 @@ motion_scale = Vector2(0, 0)
 texture = ExtResource("2_ir15t")
 centered = false
 
+[node name="CloudParallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(2920, 1080)
+
+[node name="CloudSprite" type="Sprite2D" parent="ParallaxBackground/CloudParallax"]
+texture_repeat = 2
+texture = ExtResource("3_rysoc")
+centered = false
+
 [node name="BackdropParallax" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.9, 0.9)
 motion_mirroring = Vector2(2920, 0)
 
 [node name="BackdropSprite" type="Sprite2D" parent="ParallaxBackground/BackdropParallax"]
 position = Vector2(0, -1000)
-texture = ExtResource("1_yqjtg")
+texture = ExtResource("4_rysoc")
 centered = false
 
 [node name="DecorationsBack" type="Node" parent="."]

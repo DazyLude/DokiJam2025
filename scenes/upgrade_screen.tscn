@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://ctpda6706sqen" path="res://assets/fonts/Jua/Jua-Regular.ttf" id="1_c7ko0"]
 [ext_resource type="Script" uid="uid://bq48lg7fnvhv6" path="res://scenes/upgrade_screen.gd" id="1_pfdwi"]
 [ext_resource type="Texture2D" uid="uid://dyc1cw7e07t0f" path="res://assets/icons/coffee_upgrade.png" id="2_a57ks"]
-[ext_resource type="Texture2D" uid="uid://digpfibcn5t4o" path="res://assets/stages/farm/skybox_dark.png" id="2_rnmk4"]
+[ext_resource type="Texture2D" uid="uid://d1q3bla3tsoaf" path="res://assets/stages/farm/skybox_gradient.png" id="3_c7ko0"]
 [ext_resource type="Texture2D" uid="uid://cul2xptu0fki8" path="res://assets/buttons/upgrade.png" id="3_rnmk4"]
 [ext_resource type="Texture2D" uid="uid://dq4qoabawpvwl" path="res://assets/buttons/upgrade_clicked.png" id="4_waouo"]
 [ext_resource type="Texture2D" uid="uid://da10h0aq658k8" path="res://assets/buttons/upgrade_hover.png" id="5_6005o"]
@@ -67,10 +67,9 @@ grow_vertical = 2
 theme = SubResource("Theme_kxbdn")
 script = ExtResource("1_pfdwi")
 
-[node name="CanvasLayer" type="Sprite2D" parent="."]
+[node name="ShopBackground" type="Sprite2D" parent="."]
 position = Vector2(800, 450)
-texture = ExtResource("2_rnmk4")
-region_enabled = true
+texture = ExtResource("3_c7ko0")
 region_rect = Rect2(0, 0, 1600, 900)
 
 [node name="Panel" type="Panel" parent="."]

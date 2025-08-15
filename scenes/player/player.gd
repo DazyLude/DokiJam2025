@@ -47,6 +47,9 @@ var oof_for : float = 0.0;
 var buff_active = false
 var buff_counter = 0
 
+#trail control
+var current_trail: Trail
+
 # internal flags
 var _should_stop : bool = false;
 
@@ -73,6 +76,7 @@ func _ready() -> void:
 	if GameState.player != null and GameState.player != self:
 		print("unlinking old Player instance from game state");
 	GameState.player = self;
+	make_player_trail()
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
@@ -160,8 +164,15 @@ func _process(delta: float) -> void:
 			set_emotion(2);
 	elif GameState.juice <= 0:
 		set_emotion(2);
+		if current_trail:
+			current_trail.stop_trail()
+			current_trail = null
+			print("stop trail")
 	else:
 		set_emotion(0);
+		if not current_trail:
+			make_player_trail()
+			print("new trail")
 	
 	oof_for = move_toward(oof_for, 0.0, delta);
 	hng_for = move_toward(hng_for, 0.0, delta);
@@ -182,6 +193,13 @@ func apply_player_stats(stats: PlayerStats) -> void:
 	inertia = stats.mass * 1500.0;
 	linear_damp = stats.linear_damp;
 	angular_damp = stats.angular_damp;
+
+
+func make_player_trail() -> void:
+	if current_trail:
+		current_trail.stop_trail()
+	current_trail = Trail.create_trail()
+	add_child(current_trail)
 
 
 # tries to spend stamina
@@ -208,7 +226,7 @@ func try_strafe(direction: float, delta: float) -> void:
 		strafe_force /= 2
 		GameState.juice = 0.0;
 	apply_force(strafe_force)
-	
+
 
 # tries to spend stamina
 # if stamina is less than delta, reduces applied force by a fraction
