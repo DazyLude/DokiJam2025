@@ -296,6 +296,15 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 			}
 		}
 	},
+	"trash can spawner": {
+		"scene": "res://scenes/gameplay_elements/obstacles/trash_can_spawner.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city, city2, stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -175.0),
+		],
+	},
 }
 
 

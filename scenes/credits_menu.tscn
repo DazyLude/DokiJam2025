@@ -48,40 +48,14 @@ text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Name1" type="Label" parent="CreditsPanel/CreditsContainer"]
+[node name="DeveloperTeam" type="Label" parent="CreditsPanel/CreditsContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Name 1: Role1, Role2, Role3"
-horizontal_alignment = 1
-
-[node name="Name2" type="Label" parent="CreditsPanel/CreditsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Name 2: Role1, Role2, Role3"
-horizontal_alignment = 1
-
-[node name="Name3" type="Label" parent="CreditsPanel/CreditsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Name 3: Role1, Role2, Role3"
-horizontal_alignment = 1
-
-[node name="Name4" type="Label" parent="CreditsPanel/CreditsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Name 4: Role1, Role2, Role3"
-horizontal_alignment = 1
-
-[node name="Name5" type="Label" parent="CreditsPanel/CreditsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Name 5: Role1, Role2, Role3"
-horizontal_alignment = 1
-
-[node name="Name6" type="Label" parent="CreditsPanel/CreditsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Name 6: Role1, Role2, Role3"
+text = "Jonathan Shim: Audio
+DazyLude: Programming
+Gin: Art
+Uezu: Writing
+LMG3864: Programming"
 horizontal_alignment = 1
 
 [node name="AssetsTitle" type="Label" parent="CreditsPanel/CreditsContainer"]
@@ -92,19 +66,24 @@ Other Assets:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Asset1" type="Label" parent="CreditsPanel/CreditsContainer"]
+[node name="Libraries" type="Label" parent="CreditsPanel/CreditsContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Controller Icons - rsubtil"
+text = "Controller Icons - rsubtil
+SmartShape2D - SirRamESQ and others
+Jua font - Woowahan Brothers
+"
 horizontal_alignment = 1
 
 [node name="Asset2" type="Label" parent="CreditsPanel/CreditsContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "SmartShape2D - SirRamESQ and others"
 horizontal_alignment = 1
 
 [node name="Asset3" type="Label" parent="CreditsPanel/CreditsContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Jua font - Woowahan Brothers"
