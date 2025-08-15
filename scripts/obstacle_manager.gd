@@ -1,6 +1,18 @@
 class_name ObstacleManager
 extends RefCounted
 
+
+enum {
+	PLACEMENT_FLOOR,
+	PLACEMENT_CEILING,
+}
+
+
+enum {
+	FLAG_SPAWN_PICKUP_ON_ME,
+	FLAG_SPAWN_ANOTHER,
+}
+
 # we can reuse most of this classes code for DecorationManager
 
 static var obstacle_metadata : Dictionary[String, Dictionary] = {
@@ -46,7 +58,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	"dumpster": {
 		"scene": "res://scenes/gameplay_elements/obstacles/dumpster.tscn",
 		"scale": Vector2(0.2, 0.2),
-		"weight": 100.0,
+		"weight": 50.0,
 		"natural habitat": ["city2"],
 		"positions": [
 			PositionPreset.fixed(0.0, -350.0),
@@ -101,16 +113,32 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/trash_can.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["city", "city2"],
+		"natural habitat": ["city"],
 		"positions": [
 			PositionPreset.fixed(0.0, -175.0),
 		],
+	},
+	"trash can garbage": {
+		"scene": "res://scenes/gameplay_elements/obstacles/trash_can.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 100.0,
+		"natural habitat": ["city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -175.0),
+		],
+		"flags": {
+			FLAG_SPAWN_ANOTHER: {
+				#list of other obstacles to spawn near this one and their offsets
+				"garbage": [Vector2(-20.0, -50.0), Vector2(20.0, -50.0)],
+			}
+		},
 	},
 	"ceiling light": {
 		"scene": "res://scenes/gameplay_elements/obstacles/ceiling_light.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["backstage_ceiling", "stage_ceiling"],
+		"natural habitat": ["backstage", "stage"],
+		"placement": PLACEMENT_CEILING,
 		"positions": [
 			PositionPreset.fixed(0.0, 400.0),
 		],
@@ -126,12 +154,24 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	},
 	"light rack": {
 		"scene": "res://scenes/gameplay_elements/obstacles/light_rack.tscn",
-		"scale": Vector2(0.2, 0.2),
-		"weight": 100.0,
+		"scale": Vector2(0.4, 0.4),
+		"weight": 40.0,
 		"natural habitat": ["backstage", "stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -500.0),
 		],
+	},
+	"light rack troll": {
+		"scene": "res://scenes/gameplay_elements/obstacles/light_rack_troll.tscn",
+		"scale": Vector2(0.4, 0.4),
+		"weight": 10.0,
+		"natural habitat": ["backstage", "stage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -500.0),
+		],
+		"flags": {
+			FLAG_SPAWN_PICKUP_ON_ME: "coin_x5"
+		}
 	},
 	"mic stand": {
 		"scene": "res://scenes/gameplay_elements/obstacles/mic_stand.tscn",
@@ -213,17 +253,20 @@ var _obstacles : PackedStringArray;
 var _weights : PackedFloat32Array;
 
 
-static func for_stage(stage: String) -> ObstacleManager:
-	return from_array(get_obstacles(stage));
+static func for_stage(stage: String, placement: int = PLACEMENT_FLOOR) -> ObstacleManager:
+	return from_array(get_obstacles(stage, placement));
 
 
 # returns a list of obstacles encountered at stage
-static func get_obstacles(stage: String) -> PackedStringArray:
+static func get_obstacles(stage: String, placement: int = PLACEMENT_FLOOR) -> PackedStringArray:
 	var result := PackedStringArray();
 	
 	for obstacle in obstacle_metadata:
 		var data = obstacle_metadata[obstacle];
-		if stage in data.get("natural habitat", []):
+		var obstacle_placement = data.get("placement", PLACEMENT_FLOOR);
+		var obstacle_habitats = data.get("natural habitat", []);
+		
+		if stage in obstacle_habitats and placement == obstacle_placement:
 			result.push_back(obstacle);
 	
 	return result;
@@ -243,13 +286,14 @@ static func from_array(obstacles: PackedStringArray) -> ObstacleManager:
 
 
 # can access obstacles not native to the current stage
+# isn't static to access rng
 func get_specific_obstacle(obstacle_name: String) -> Node2D:
 	var obstacle_data := obstacle_metadata[obstacle_name];
 	var obstacle_path := obstacle_data["scene"] as String;
 	var obstacle_scene = load(obstacle_path).instantiate();
 	
 	if obstacle_scene == null:
-		push_error("obstacle is not a GenericObstacle: %s" % obstacle_name);
+		push_error("obstacle is null: %s" % obstacle_name);
 		return null;
 	
 	# select a random position preset
@@ -281,7 +325,11 @@ func get_specific_obstacle(obstacle_name: String) -> Node2D:
 	return obstacle_scene;
 
 
-func get_random_obstacle() -> Node2D:
+static func get_obstacle_flags(obstacle: String) -> Dictionary:
+	return obstacle_metadata.get(obstacle, {}).get("flags", {});
+
+
+func get_random_obstacle() -> String:
 	var obs_idx := rng.rand_weighted(_weights);
 	var obstacle_name := _obstacles[obs_idx];
-	return get_specific_obstacle(obstacle_name);
+	return obstacle_name;

@@ -19,6 +19,10 @@ const LOWER_BOUND := 5000.0;
 @onready var collectibles := $Collectibles;
 
 
+# level generation related variables
+var scripted_collectibles : Dictionary[String, PackedFloat32Array] = {};
+
+
 #var upgrade_scene = preload("res://scenes/upgrade_screen.tscn");
 var gameover_scene = preload("res://scenes/gameover.tscn");
 var gameover_scene_instance : Node = null;
@@ -29,7 +33,6 @@ var player_tween : Tween;
 
 func _ready() -> void:
 	# since hud displays player properties, such as speed and position, we need to pass a reference
-	Sounds.play_looped(GameState.current_stage.music);
 	hud.player = player;
 	
 	var start = Time.get_ticks_msec();
@@ -68,8 +71,6 @@ func _process(delta: float) -> void:
 	if player.position.x >= GameState.current_stage.stage_length:
 		is_gameover = true;
 		player.stop();
-		# TODO stop the player, drop them to the ground and make them enjoy tomato juice
-		# TODO stage cleared screen -> intermission scene -> new stage
 		await play_intermission(GameState.current_stage.intermission_name);
 		
 		GameState.upgrades.check_for_unlocks(GameState.current_stage.next_stage_name);
@@ -87,6 +88,9 @@ func pause() -> void:
 
 func load_stage() -> void:
 	var stage = GameState.current_stage;
+	scripted_collectibles.clear();
+	
+	Sounds.play_looped(stage.music);
 	
 	setup_terrain_visuals(stage);
 	
@@ -95,7 +99,7 @@ func load_stage() -> void:
 		generate_ceiling();
 	
 	spawn_checkpoint();
-	spawn_obstacles();
+	spawn_ground_obstacles();
 	if stage.ceiling_generator != null:
 		spawn_ceiling_obstacles();
 	
@@ -103,56 +107,79 @@ func load_stage() -> void:
 	place_player();
 
 
-func place_node_at(node: Node2D, x: float, y_offset: float = 0.0) -> void:
-	node.position = Vector2(
-		x,
-		GameState.current_stage.generator.get_height(x) + y_offset
-	);
-
-
-func place_node_at_ceiling(node: Node2D, x: float, y_offset: float = 0.0) -> void:
-	node.position = Vector2(
-		x,
-		GameState.current_stage.ceiling_generator.get_height(x) + y_offset
-	);
+func place_node_at(node: Node2D, x: float, generator: TerrainGenerator, y_offset: float = 0.0) -> void:
+	node.position = Vector2(x, generator.get_height(x) + y_offset);
 
 
 func place_collectible_at(x: float, collectible_data: PickupItemData) -> PickupItem:
 	var collectible := preload("res://scenes/gameplay_elements/pickup_item.tscn").instantiate();
-	place_node_at(collectible, x, COLLECTIBLE_HOVER_OFFSET);
+	place_node_at(collectible, x, GameState.current_stage.generator, COLLECTIBLE_HOVER_OFFSET);
 	collectible.data = collectible_data;
 	collectibles.add_child(collectible);
 	return collectible;
 
 
-func spawn_obstacles() -> void:
+func spawn_ground_obstacles() -> void:
 	var sign = GameState.current_stage.obstacles.get_specific_obstacle("sign");
-	place_node_at(sign, LEFT_APPENDIX);
+	place_node_at(sign, LEFT_APPENDIX, GameState.current_stage.generator);
 	$DecorationsBack.add_child(sign);
 	
-	var obstacle_start = GameState.current_stage.safe_zone_end;
-	var obstacle_end = GameState.current_stage.stage_length;
-	
-	for x in GameState.current_stage.generator.get_obstacle_coords(obstacle_start, obstacle_end):
-		var obstacle = GameState.current_stage.obstacles.get_random_obstacle();
-		place_node_at(obstacle, x);
-		$DecorationsBack.add_child(obstacle);
+	spawn_obstacles_generic(
+		GameState.current_stage.generator,
+		GameState.current_stage.obstacles
+	);
 
 
 func spawn_ceiling_obstacles() -> void:
+	spawn_obstacles_generic(
+		GameState.current_stage.ceiling_generator,
+		GameState.current_stage.ceiling_obstacles
+	);
+
+
+func spawn_obstacles_generic(generator: TerrainGenerator, manager: ObstacleManager) -> void:
 	var obstacle_start = GameState.current_stage.safe_zone_end;
 	var obstacle_end = GameState.current_stage.stage_length;
 	
-	for x in GameState.current_stage.ceiling_generator.get_obstacle_coords(obstacle_start, obstacle_end):
-		var obstacle = GameState.current_stage.ceiling_obstacles.get_random_obstacle();
-		place_node_at_ceiling(obstacle, x);
-		$DecorationsBack.add_child(obstacle);
+	for x in generator.get_obstacle_coords(obstacle_start, obstacle_end):
+		var obstacle := manager.get_random_obstacle();
+		var obstacle_scene = manager.get_specific_obstacle(obstacle);
+		
+		var obstacle_flags = ObstacleManager.get_obstacle_flags(obstacle);
+		process_obstacle_flags(obstacle_flags, x, generator, manager);
+		
+		place_node_at(obstacle_scene, x, generator);
+		$DecorationsBack.add_child(obstacle_scene);
+
+
+func process_obstacle_flags(flags: Dictionary, x: float, generator: TerrainGenerator, manager: ObstacleManager) -> void:
+	for flag in flags:
+		var flag_data = flags[flag];
+		
+		match flag:
+			ObstacleManager.FLAG_SPAWN_ANOTHER:
+				# flag data is a dictionary obstacle name (string): offset (vector2)
+				for obstacle in flag_data:
+					var offsets = flag_data[obstacle];
+					for offset in offsets:
+						var obstacle_scene = manager.get_specific_obstacle(obstacle);
+						place_node_at(obstacle_scene, x + offset.x, generator, offset.y);
+						$DecorationsBack.add_child(obstacle_scene);
+			
+			ObstacleManager.FLAG_SPAWN_PICKUP_ON_ME:
+				# flag data is a string with a pickup name
+				scripted_collectibles.get_or_add(flag_data, PackedFloat32Array()).push_back(x)
 
 
 func spawn_collectibles() -> void:
 	var stage := GameState.current_stage;
 	
-	var item_coords := stage.generate_items(stage.item_placement_properties, stage.safe_zone_end, stage.stage_length);
+	var item_coords := stage.generate_items(
+		stage.item_placement_properties,
+		stage.safe_zone_end,
+		stage.stage_length,
+		scripted_collectibles
+	);
 	
 	for item in item_coords:
 		for coord in item_coords[item]:
@@ -171,12 +198,12 @@ func spawn_checkpoint() -> void:
 	
 	var checkpoint := Sprite2D.new();
 	checkpoint.texture = stage.checkpoint;
-	checkpoint.position = Vector2(
+	place_node_at(
+		checkpoint,
 		stage.stage_length,
-		stage.generator.get_height(stage.stage_length)
+		stage.generator,
+		-checkpoint.texture.get_height() / 2.0 + 50.0
 	);
-	checkpoint.offset = Vector2(0.0, -checkpoint.texture.get_height() / 2.0)
-	# TODO rotation
 	
 	back_decor.add_child(checkpoint);
 
@@ -196,55 +223,44 @@ func setup_terrain_visuals(stage: StageData) -> void:
 
 # this method should generate initital terrain
 func generate_terrain() -> void:
-	var stage := GameState.current_stage;
-	var generator = GameState.current_stage.generator;
-	
-	var appendix_sample_count := -roundi(LEFT_APPENDIX / TerrainGenerator.SAMPLE_DELTA);
-	
-	var right_appendix := 1000.0;
-	appendix_sample_count += roundi(right_appendix / TerrainGenerator.SAMPLE_DELTA);
-	
-	var sample_count = roundi(stage.stage_length / TerrainGenerator.SAMPLE_DELTA);
-	generator.prepare_coordinates(sample_count + appendix_sample_count, LEFT_APPENDIX);
-	var points := generator.sample();
-	
-	ss2d_shape.clear_points();
-	ss2d_shape.add_points(points);
-	
-	# two additional points needed to enclose the shape
-	var bottom_right = Vector2(points[points.size() - 1].x, 1000.0);
-	var bottom_left = Vector2(points[0].x, 1000.0);
-	ss2d_shape.add_point(bottom_right);
-	ss2d_shape.add_point(bottom_left);
-	ss2d_shape.close_shape(points.size() - 1);
-	
-	ss2d_shape.get_point_array().begin_update();
+	generate_terrain_generic(GameState.current_stage.generator, ss2d_shape);
 
 
 func generate_ceiling() -> void:
-	var stage := GameState.current_stage;
-	var generator = GameState.current_stage.ceiling_generator;
-	
-	var appendix_sample_count := -roundi(LEFT_APPENDIX / TerrainGenerator.SAMPLE_DELTA);
-	
-	var right_appendix := 1000.0;
-	appendix_sample_count += roundi(right_appendix / TerrainGenerator.SAMPLE_DELTA);
-	
-	var sample_count = roundi(stage.stage_length / TerrainGenerator.SAMPLE_DELTA);
-	generator.prepare_coordinates(sample_count + appendix_sample_count, LEFT_APPENDIX);
-	var points := generator.sample();
-	
-	ceiling_shape.clear_points();
-	ceiling_shape.add_points(points);
-	
-	# two additional points needed to enclose the shape
-	var bottom_right = Vector2(points[points.size() - 1].x, points[points.size() - 1].y - 1000.0);
-	var bottom_left = Vector2(points[0].x, points[0].y - 1000.0);
-	ceiling_shape.add_point(bottom_right);
-	ceiling_shape.add_point(bottom_left);
-	ceiling_shape.close_shape(points.size() - 1);
-	
-	ceiling_shape.get_point_array().begin_update();
+	generate_terrain_generic(GameState.current_stage.ceiling_generator, ceiling_shape, true);
+
+
+func generate_terrain_generic(
+		generator: TerrainGenerator,
+		shape: SS2D_Shape,
+		is_ceiling: bool = false
+	) -> void:
+		var appendix_sample_count := -roundi(LEFT_APPENDIX / generator.SAMPLE_DELTA);
+		
+		var right_appendix := 1000.0;
+		appendix_sample_count += roundi(right_appendix / generator.SAMPLE_DELTA);
+		
+		var sample_count = roundi(GameState.current_stage.stage_length / generator.SAMPLE_DELTA);
+		generator.prepare_coordinates(sample_count + appendix_sample_count, LEFT_APPENDIX);
+		var points := generator.sample();
+		
+		shape.clear_points();
+		shape.add_points(points);
+		
+		# two additional points needed to enclose the shape
+		var closing_offset = Vector2(0.0, -1000.0 if is_ceiling else 1000.0);
+		var bottom_right = points[points.size() - 1] + closing_offset;
+		var bottom_left = points[0] + closing_offset;
+		var bottom_y = min(bottom_right.y, bottom_left.y) if is_ceiling else max(bottom_right.y, bottom_left.y);
+		
+		bottom_right.y = bottom_y;
+		bottom_left.y = bottom_y;
+		
+		shape.add_point(bottom_right);
+		shape.add_point(bottom_left);
+		shape.close_shape(points.size() - 1);
+		
+		shape.get_point_array().begin_update();
 
 
 func play_intermission(intermission: String) -> void:

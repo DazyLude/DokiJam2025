@@ -112,9 +112,7 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	data.generator.noise_generator.seed = data.rng.randi();
 	
 	# obstacle manager setup
-	data.obstacles = ObstacleManager.from_array(
-		ObstacleManager.get_obstacles(data.stage_name)
-	);
+	data.obstacles = ObstacleManager.for_stage(data.stage_name);
 	data.obstacles.rng = data.rng;
 	
 	# ceiling setup
@@ -123,9 +121,7 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 		data.ceiling_generator.floor_generator = data.generator;
 		data.generator.noise_generator.seed = data.rng.randi();
 		
-		data.ceiling_obstacles = ObstacleManager.from_array(
-			ObstacleManager.get_obstacles(data.stage_name + "_ceiling")
-		);
+		data.ceiling_obstacles = ObstacleManager.for_stage(data.stage_name, ObstacleManager.PLACEMENT_CEILING);
 		data.ceiling_obstacles.rng = data.rng;
 	
 	# other parameters
@@ -144,68 +140,81 @@ func restore_state() -> void:
 	rng.state = fresh_state;
 
 
-func generate_items(items_data: Dictionary, from: float, to: float) -> Dictionary[String, PackedFloat32Array]:
-	var result : Dictionary[String, PackedFloat32Array] = {};
-	
-	var items : Array[GroupData] = [];
-	var grouped_items := {};
-	
-	for item in items_data:
-		var item_data = items_data[item];
-		match item:
-			"groups":
-				for group in item_data:
-					items.push_back(GroupData.from_dict(item_data[group], group));
-			_ when item_data.has("group"):
-				grouped_items.get_or_add(item_data["group"], PackedStringArray()).push_back(item);
-				grouped_items.get_or_add(item_data["group"] + "_w", PackedFloat32Array())\
-					.push_back(item_data.get("weight", 100.0));
-			_:
-				items.push_back(GroupData.from_dict(item_data, item));
-	
-	var occupied_coords := PackedFloat32Array();
-	
-	for group_data in items:
-		var distance = group_data.placement_distance;
-		var from_i = floori(from / distance);
-		var to_i = floori(to / distance);
-		var items_count = to_i - from_i;
-		for i in items_count:
-			var item_placement = distance * (from_i + i + 1);
+func generate_items(
+		items_data: Dictionary,
+		from: float, to: float,
+		additions: Dictionary = {}
+	) -> Dictionary[String, PackedFloat32Array]:
+		var result : Dictionary[String, PackedFloat32Array] = {};
+		
+		var items : Array[GroupData] = [];
+		var grouped_items := {};
+		
+		for item in items_data:
+			var item_data = items_data[item];
+			match item:
+				"groups":
+					for group in item_data:
+						items.push_back(GroupData.from_dict(item_data[group], group));
+				_ when item_data.has("group"):
+					grouped_items.get_or_add(item_data["group"], PackedStringArray()).push_back(item);
+					grouped_items.get_or_add(item_data["group"] + "_w", PackedFloat32Array())\
+						.push_back(item_data.get("weight", 100.0));
+				_:
+					items.push_back(GroupData.from_dict(item_data, item));
+		
+		var occupied_coords := PackedFloat32Array();
+		
+		for addition in additions:
+			var item = addition;
+			var positions = additions[addition];
 			
-			match group_data.placement_type:
-				PickupItemData.PLACEMENT_NON_RANDOM:
-					pass;
-				PickupItemData.PLACEMENT_NORMAL:
-					var variation = rng.randfn(0.0, distance / 4.0);
-					variation = clampf(variation, distance / -3.0, distance / 3.0);
-					item_placement += variation;
-			
-			item_placement = roundi(item_placement / ITEM_PLACEMENT_RESOLUTION) * ITEM_PLACEMENT_RESOLUTION;
-			
-			var try_i : int = 0;
-			var variation := 0.0;
-			var max_loops := 1000;
-			
-			while occupied_coords.has(item_placement + variation) and try_i < max_loops:
-				variation = ITEM_PLACEMENT_RESOLUTION * (try_i / 2 + 1) * (try_i % 2 - 0.5) * 2.0;
-				try_i += 1
-			
-			item_placement += variation;
-			
-			if item_placement >= stage_length:
-				continue;
-			
-			occupied_coords.push_back(item_placement);
-			
-			var item : String = group_data.item;
-			if item in grouped_items:
-				var idx = rng.rand_weighted(grouped_items[item + "_w"])
-				item = grouped_items[item][idx];
-			
-			result.get_or_add(item, PackedFloat32Array()).push_back(item_placement);
-	
-	return result;
+			for position in positions:
+				occupied_coords.push_back(position);
+				position = roundi(position / ITEM_PLACEMENT_RESOLUTION) * ITEM_PLACEMENT_RESOLUTION;
+				result.get_or_add(item, PackedFloat32Array()).push_back(position);
+		
+		for group_data in items:
+			var distance = group_data.placement_distance;
+			var from_i = floori(from / distance);
+			var to_i = floori(to / distance);
+			var items_count = to_i - from_i;
+			for i in items_count:
+				var item_placement = distance * (from_i + i + 1);
+				
+				match group_data.placement_type:
+					PickupItemData.PLACEMENT_NON_RANDOM:
+						pass;
+					PickupItemData.PLACEMENT_NORMAL:
+						var variation = rng.randfn(0.0, distance / 4.0);
+						variation = clampf(variation, distance / -3.0, distance / 3.0);
+						item_placement += variation;
+				
+				item_placement = roundi(item_placement / ITEM_PLACEMENT_RESOLUTION) * ITEM_PLACEMENT_RESOLUTION;
+				
+				var try_i : int = 0;
+				var variation := 0.0;
+				var max_loops := 1000;
+				
+				while occupied_coords.has(item_placement + variation) and try_i < max_loops:
+					variation = ITEM_PLACEMENT_RESOLUTION * (try_i / 2 + 1) * (try_i % 2 - 0.5) * 2.0;
+					try_i += 1
+				
+				item_placement += variation;
+				
+				if item_placement >= stage_length:
+					continue;
+				
+				occupied_coords.push_back(item_placement);
+				
+				var item : String = group_data.item;
+				if item in grouped_items:
+					var idx = rng.rand_weighted(grouped_items[item + "_w"])
+					item = grouped_items[item][idx];
+				
+				result.get_or_add(item, PackedFloat32Array()).push_back(item_placement);
+		
+		return result;
 
 
 # it is possible to setup stages in JSON format this way
@@ -255,7 +264,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"stage length": 3e4, # should be a float
 		"intermission name": "tomato field massacre",
 		"next stage": "frontstage",
-		"music": Sounds.ID.MUSIC_GOOFY_AAH,
+		"music": Sounds.ID.MUSIC_BACKSTAGE,
 		"has ceiling": true,
 	},
 	"stage": {
@@ -268,7 +277,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
 		"intermission name": "end",
-		"music": Sounds.ID.MUSIC_GOOFY_AAH,
+		"music": Sounds.ID.MUSIC_STAGE,
 		"has ceiling": true,
 	}
 }

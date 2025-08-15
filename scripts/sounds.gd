@@ -10,6 +10,8 @@ enum ID {
 	MUSIC_MELANCHOLY_TOMATO,
 	MUSIC_CITY,
 	MUSIC_METAL,
+	MUSIC_BACKSTAGE,
+	MUSIC_STAGE,
 	
 	MUSIC_GOOFY_AAH,
 	
@@ -31,6 +33,8 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.MUSIC_CITY: "res://assets/music/Doki in the City - more tame.ogg",
 	ID.MUSIC_METAL: "res://assets/music/A Metal Cup of Coffee.ogg",
 	ID.MUSIC_GOOFY_AAH: "res://assets/music/Doki in the City.ogg",
+	ID.MUSIC_BACKSTAGE: "res://assets/music/Backstage.ogg",
+	ID.MUSIC_STAGE: "res://assets/music/On the Stage - Dokibird Ending Theme Remake.ogg",
 	
 	ID.SFX_FUCK: "res://assets/sfx/fuck.wav",
 	ID.SFX_AAGH: "res://assets/sfx/Scream 1.wav",
