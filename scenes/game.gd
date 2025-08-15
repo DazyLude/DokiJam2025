@@ -70,8 +70,12 @@ func _process(delta: float) -> void:
 	
 	if player.position.x >= GameState.current_stage.stage_length:
 		is_gameover = true;
-		player.stop();
+		move_player_to(GameState.current_stage.stage_length);
 		await play_intermission(GameState.current_stage.intermission_name);
+		
+		if GameState.current_stage.is_the_last:
+			get_tree().change_scene_to_file("res://scenes/menu.tscn");
+			return;
 		
 		GameState.upgrades.check_for_unlocks(GameState.current_stage.next_stage_name);
 		var shop_scene = preload("res://scenes/upgrade_screen.tscn").instantiate();
@@ -268,9 +272,11 @@ func play_intermission(intermission: String) -> void:
 	intermission_player.set_intermission(intermission);
 	
 	# action
+	$UILayer/HUD.hide()
 	$UILayer.add_child(intermission_player);
 	intermission_player.play();
 	await intermission_player.finished;
+	$UILayer/HUD.show()
 	
 	# cleanup
 	intermission_player.queue_free();

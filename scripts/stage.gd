@@ -32,6 +32,7 @@ var ceiling_obstacles : ObstacleManager = null;
 # intermission & next stage
 var intermission_name : String;
 var next_stage_name : String;
+var is_the_last : bool = false;
 
 # gameplay data
 var stage_length : float;
@@ -133,6 +134,9 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	data.stage_length = params.get("stage length", 3e4);
 	data.next_stage_name = params.get("next stage", "tomato fields");
 	data.intermission_name = params.get("intermission name", "tomato fields massacre");
+	
+	if params.get("is the last", false):
+		data.is_the_last = true;
 	
 	# sounds setup
 	data.music = params.get("music", Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
@@ -323,8 +327,9 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"background offset": Vector2(0.0, -1150.0),
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 5.5e4, # should be a float
-		"intermission name": "end",
+		"intermission name": "outro",
 		"music": Sounds.ID.MUSIC_STAGE,
+		"is the last": true,
 		"has ceiling": true,
 		"has clouds": false,
 		"items": { # items are merged, and old data is overwritten by the new one in case of collisions

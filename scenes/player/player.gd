@@ -67,6 +67,8 @@ var speedometer := Speedometer.new();
 func _ready() -> void:
 	$BuffAnimation.pause()
 	
+	$ScreamsPlayer.volume_linear = lerp(0.5, 0.9, GameState.upgrades.get_upgrade_level(Upgrade.VOCAL) / 8.0);
+	
 	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
 	if Upgrade.upgrade_metadata[GameState.selected_skinsuit].has("rider"):
 		var rider = Upgrade.upgrade_metadata[GameState.selected_skinsuit]["rider"];
@@ -342,6 +344,9 @@ func take_impact_damage() -> void:
 		oof_for = 0.4;
 		GameState.juice = move_toward(GameState.juice, 0.0, damage);
 		sound_controller.record_taken_damage(damage);
+		
+		var impact_sounds = [Sounds.ID.SFX_IMPACT, Sounds.ID.SFX_IMPACT2]
+		play_sfx(impact_sounds.pick_random());
 
 
 func stop() -> void:

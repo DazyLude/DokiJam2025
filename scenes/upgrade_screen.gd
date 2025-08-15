@@ -129,6 +129,8 @@ func _on_stamina_pressed() -> void:
 ## upgrade character loudness
 func _on_loudness_pressed() -> void:
 	button_buy_upgrade("loudness", upgrades.VOCAL)
+	$AudioStreamPlayer.stream = Sounds.get_stream_by_id(Sounds.ID.SFX_1KMIC);
+	$AudioStreamPlayer.play();
 
 ## upgrade character bounce
 func _on_bounce_pressed() -> void:

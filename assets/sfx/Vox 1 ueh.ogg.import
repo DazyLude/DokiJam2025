@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4wu62rabqi4l"
+path="res://.godot/imported/Vox 1 ueh.ogg-d85ae57aad727e2895bc62563a2432fd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Vox 1 ueh.ogg"
+dest_files=["res://.godot/imported/Vox 1 ueh.ogg-d85ae57aad727e2895bc62563a2432fd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

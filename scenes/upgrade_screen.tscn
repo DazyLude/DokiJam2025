@@ -580,6 +580,9 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "CONTINUE"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+
 [connection signal="pressed" from="SpeedContainer/UpgradeButton" to="." method="_on_speed_pressed"]
 [connection signal="pressed" from="ArmorContainer/UpgradeButton" to="." method="_on_armor_pressed"]
 [connection signal="pressed" from="StaminaContainer/UpgradeButton" to="." method="_on_stamina_pressed"]

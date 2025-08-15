@@ -27,6 +27,10 @@ enum ID {
 	SFX_FLAP,
 	SFX_COIN,
 	SFX_KETCHUP,
+	SFX_IMPACT,
+	SFX_IMPACT2,
+	
+	SFX_UEH,
 }
 
 
@@ -53,6 +57,10 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.SFX_FLAP: "res://assets/sfx/Jump 2.ogg",
 	ID.SFX_COIN: "res://assets/sfx/Coin 2.ogg",
 	ID.SFX_KETCHUP: "res://assets/sfx/Ketchup 1.ogg",
+	ID.SFX_IMPACT: "res://assets/sfx/Impact 1.ogg",
+	ID.SFX_IMPACT2: "res://assets/sfx/Impact 2.ogg",
+	
+	ID.SFX_UEH: "res://assets/sfx/Vox 1 ueh.ogg",
 }
 
 

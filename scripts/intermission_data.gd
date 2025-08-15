@@ -57,7 +57,8 @@ static var character_data : Dictionary[int, Dictionary] = {
 		"emotions": {
 			EMOTE_NORMAL: "",
 		},
-	}
+		"speech": Sounds.ID.SFX_UEH,
+	},
 }
 
 
@@ -72,6 +73,17 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 		],
 		"background": "res://assets/intermissions/actual_intro/bg.png",
 		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
+	},
+	"outro": {
+		"type": TYPE_YONKOMA,
+		"images": [
+			"res://assets/intermissions/outro/end_1.png",
+			"res://assets/intermissions/outro/end_2.png",
+			"res://assets/intermissions/outro/end_3.png",
+			"res://assets/intermissions/outro/end_4.png"
+		],
+		"background": "res://assets/intermissions/actual_intro/bg.png",
+		"bgm": Sounds.ID.MUSIC_STAGE,
 	},
 	"tomato field massacre": {
 		"type": TYPE_DIALOGUE,
