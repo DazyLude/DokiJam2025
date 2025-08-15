@@ -80,7 +80,6 @@ position = Vector2(1250, 499)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("7_5pqa6")
 centered = false
-flip_h = true
 script = ExtResource("5_0uwa6")
 metadata/_custom_type_script = "uid://b40woge2o40ty"
 

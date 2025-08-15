@@ -5,6 +5,7 @@ const SPEED_LIMIT := Player.SAFE_SPEED_LIMIT;
 
 var flying_too_fast : bool = false;
 var taken_damage : bool = false;
+var on_scream_cd : bool = false;
 
 
 func record_taken_damage(damage_value: float) -> void:
@@ -35,13 +36,14 @@ func reset_state() -> void:
 
 
 func play_non_forced() -> void:
-	if flying_too_fast:
-		play_sound(Sounds.ID.SFX_AGGH);
+	if flying_too_fast and not on_scream_cd:
+		var screams = [Sounds.ID.SFX_AAGH, Sounds.ID.SFX_AGGH, Sounds.ID.SFX_AGHH, Sounds.ID.SFX_ARGH]
+		play_sound(screams.pick_random());
 
 
 func play_forced() -> void:
 	if taken_damage:
-		play_sound(Sounds.ID.SFX_AAGH, true);
+		play_sound(Sounds.ID.SFX_GRUNT, true);
 
 
 func play_sound(id: Sounds.ID, force: bool = false) -> void:

@@ -9,4 +9,4 @@ var offset : Vector2 :
 
 
 func flip() -> void:
-	scale *= Vector2(-1.0, 1.0)
+	scale *= Vector2(-1.0, 1.0);
