@@ -276,7 +276,7 @@ func try_jump() -> void:
 
 
 func try_flap() -> void:
-	var flap_stat = GameState.upgrades.get_upgrade_level(Upgrade.WINGS)
+	var flap_stat = ceili(GameState.upgrades.get_upgrade_level(Upgrade.WINGS) / 2.0)
 	if flap_stat < 1 or flap_amount >= flap_stat:
 		return;
 	

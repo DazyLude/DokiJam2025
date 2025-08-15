@@ -76,38 +76,38 @@ static var upgrade_stats : Dictionary[int, Variant] = {
 
 static func coffee_buff(lvl: int) -> Dictionary:
 	return {
-		"player_torque": 5.0 * lvl,
-		"friction": 0.05 * lvl,
-		"mass": 0.5 * lvl,
+		"player_torque": 2.5 * lvl,
+		"friction": 0.025 * lvl,
+		"mass": 0.25 * lvl,
 	}
 
 
 static func supps_buff(lvl: int) -> Dictionary:
 	return {
-		"friction": 0.05 * lvl,
-		"jump_fly_scale": 0.01 * lvl,
-		"mass": 0.5 * lvl, 
+		"friction": 0.025 * lvl,
+		"jump_fly_scale": 0.005 * lvl,
+		"mass": 0.25 * lvl, 
 	};
 
 
 static func wings_buff(lvl: int) -> Dictionary:
 	return {
-		"aeroshape": 2.0 * lvl,
-		"jump_cost" : -0.1 * lvl,
+		"aeroshape": 1.0 * lvl,
+		"jump_cost" : -0.05 * lvl,
 	}
 
 
 static func armor_buff(lvl: int) -> Dictionary:
 	return {
-		"hardness": 2.0 * lvl,
-		"aeroshape": 1.0 * lvl,
-		"bounce": 0.025 * lvl,
+		"hardness": 1.0 * lvl,
+		"aeroshape": 0.5 * lvl,
+		"bounce": 0.01 * lvl,
 	}
 
 
 static func vocal_buff(lvl: int) -> Dictionary:
 	return {
-		"bounce": 0.05 * lvl,
+		"bounce": 0.025 * lvl,
 	} 
 
 

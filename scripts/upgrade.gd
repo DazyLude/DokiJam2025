@@ -25,55 +25,58 @@ enum {
 	SKINSUIT_BOUNTY_RIDER,
 }
 
+
+const standard_upgrade_cost_array : Array[int] = [1.0, 2.0, 4.0, 6.0, 8.0, 12.0, 16.0, 20.0]
+
 # once again, pretty JSONable way to hold data
 static var upgrade_metadata : Dictionary[int, Dictionary] = {
 	COFFEE: {
 		"type": TYPE_INCREMENTAL,
-		"max level": 4,
-		"cost": [1.0, 4.0, 15.0, 40.0],
+		"max level": standard_upgrade_cost_array.size(),
+		"cost": standard_upgrade_cost_array,
 		"autounlock": "",
 		"shop_unlock": "",
 	},
 	ARMOR: {
 		"type": TYPE_INCREMENTAL,
-		"max level": 4,
-		"cost": [1.0, 4.0, 15.0, 40.0],
+		"max level": standard_upgrade_cost_array.size(),
+		"cost": standard_upgrade_cost_array,
 		"autounlock": "",
 		"shop_unlock": "",
 	},
 	KETCHUP_TANK: {
 		"type": TYPE_INCREMENTAL,
-		"max level": 4,
-		"cost": [1.0, 4.0, 15.0, 40.0],
+		"max level": standard_upgrade_cost_array.size(),
+		"cost": standard_upgrade_cost_array,
 		"autounlock": "",
 		"shop_unlock": "",
 	},
 	VOCAL: {
 		"type": TYPE_INCREMENTAL,
-		"max level": 4,
-		"cost": [1.0, 4.0, 15.0, 40.0],
+		"max level": standard_upgrade_cost_array.size(),
+		"cost": standard_upgrade_cost_array,
 		"autounlock": "",
 		"shop_unlock": "",
 	},
 	BOUNCE: {
 		"type": TYPE_INCREMENTAL,
-		"max level": 4,
-		"cost": [1.0, 4.0, 15.0, 40.0],
+		"max level": standard_upgrade_cost_array.size(),
+		"cost": standard_upgrade_cost_array,
 		"autounlock": "",
 		"shop_unlock": "",
 	},
 	WINGS: {
 		"type": TYPE_INCREMENTAL,
-		"max level": 4,
-		"cost": [1.0, 4.0, 15.0, 40.0],
+		"max level": standard_upgrade_cost_array.size(),
+		"cost": standard_upgrade_cost_array,
 		"autounlock": "city",
 		"shop_unlock": "city",
 	},
 	SUPPS: {
 		"type": TYPE_INCREMENTAL,
-		"max level": 4,
-		"cost": [1.0, 4.0, 15.0, 40.0],
-		"autounlock": "city2",
+		"max level": standard_upgrade_cost_array.size(),
+		"cost": standard_upgrade_cost_array,
+		"autounlock": "",
 		"shop_unlock": "city2",
 	},
 	SKINSUIT_TOMATO: {
@@ -233,3 +236,7 @@ func check_for_unlocks(stage_name: String) -> void:
 		var data = upgrade_metadata[upgrade];
 		if data.get("autounlock", "") == stage_name:
 			increase_level(upgrade);
+			
+			if data["type"] == TYPE_ONE_OFF:
+				GameState.selected_skinsuit = upgrade;
+			
