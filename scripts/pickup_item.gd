@@ -46,7 +46,10 @@ static var pickup_item_variants : Dictionary[String, Dictionary] = {
 	},
 	"ketchup": {
 		"texture": "res://assets/icons/stamina_ketchup.png",
-		"effect": func(): GameState.juice = move_toward(GameState.juice, GameState.juice_cap, GameState.juice_cap * 0.2),
+		"effect":
+			func():
+				GameState.player.play_sfx(Sounds.ID.SFX_KETCHUP);
+				GameState.juice = move_toward(GameState.juice, GameState.juice_cap, GameState.juice_cap * 0.2),
 	},
 	"wingbull": {
 		"texture": "res://assets/icons/wingbull.png",
