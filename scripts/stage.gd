@@ -196,9 +196,9 @@ func generate_items(
 				
 				match group_data.placement_type:
 					PickupItemData.PLACEMENT_NORMAL:
-						var variation = rng.randfn(0.0, distance / 4.0);
-						variation = clampf(variation, distance / -3.0, distance / 3.0);
-						item_placement += variation;
+						var p_variation = rng.randfn(0.0, distance / 4.0);
+						p_variation = clampf(p_variation, distance / -3.0, distance / 3.0);
+						item_placement += p_variation;
 					_, PickupItemData.PLACEMENT_NON_RANDOM:
 						pass;
 				

@@ -59,7 +59,8 @@ var speedometer := Speedometer.new();
 # camera node changes viewport coordinates to be in the center
 # camera tracks average player speed for camera offset
 @onready var camera = $Camera2D;
-@onready var sound_controller = $AudioStreamPlayer2D;
+@onready var sound_controller = $ScreamsPlayer;
+@onready var normal_sfx_player = $SFXPlayer;
 @onready var wings = $Wings;
 
 
@@ -290,6 +291,8 @@ func try_jump() -> void:
 	else:
 		upward_impulse *= GameState.juice / jump_cost
 		GameState.juice = 0
+	
+	play_sfx(Sounds.ID.SFX_JUMP);
 	apply_central_impulse(upward_impulse);
 
 
@@ -313,6 +316,7 @@ func try_flap() -> void:
 		GameState.juice = 0
 	
 	flap_amount += 1;
+	play_sfx(Sounds.ID.SFX_FLAP);
 	apply_central_impulse(upward_impulse);
 	wings.flap();
 
@@ -344,6 +348,12 @@ func stop() -> void:
 func set_emotion(emote: int) -> void:
 	$Sprite2D.display_emotion(emote);
 	$StaticSprite.display_emotion(emote);
+
+
+func play_sfx(id: Sounds.ID) -> void:
+	$SFXPlayer.get_stream_playback().play_stream(
+		Sounds.get_stream_by_id(id)
+	);
 
 
 class Speedometer:

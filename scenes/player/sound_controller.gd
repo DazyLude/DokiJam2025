@@ -44,7 +44,6 @@ func play_forced() -> void:
 		play_sound(Sounds.ID.SFX_AAGH, true);
 
 
-
 func play_sound(id: Sounds.ID, force: bool = false) -> void:
 	if not playing or force:
 		stream = Sounds.get_stream_by_id(id);

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://baqph5g04e6pn"
+path="res://.godot/imported/Coin 2.ogg-bbc353ce74c78850222d207c1049f671.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Coin 2.ogg"
+dest_files=["res://.godot/imported/Coin 2.ogg-bbc353ce74c78850222d207c1049f671.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

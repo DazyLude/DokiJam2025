@@ -26,7 +26,7 @@ enum {
 }
 
 
-const standard_upgrade_cost_array : Array[int] = [1.0, 2.0, 4.0, 6.0, 8.0, 12.0, 16.0, 20.0]
+const standard_upgrade_cost_array : Array[float] = [1.0, 2.0, 4.0, 6.0, 8.0, 12.0, 16.0, 20.0]
 
 # once again, pretty JSONable way to hold data
 static var upgrade_metadata : Dictionary[int, Dictionary] = {

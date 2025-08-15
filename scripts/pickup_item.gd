@@ -31,12 +31,18 @@ static var pickup_item_variants : Dictionary[String, Dictionary] = {
 	"coin": {
 		"texture": "res://assets/icons/dokicoin.png",
 		"area size": Vector2(100.0, 100.0),
-		"effect": func(): GameState.dokicoins += 1.0,
+		"effect":
+			func():
+				GameState.player.play_sfx(Sounds.ID.SFX_COIN);
+				GameState.dokicoins += 1.0,
 	},
 	"coin_x5": {
 		"texture": "res://assets/icons/dokicoin.png",
 		"area size": Vector2(150.0, 150.0),
-		"effect": func(): GameState.dokicoins += 5.0,
+		"effect":
+			func():
+				GameState.player.play_sfx(Sounds.ID.SFX_COIN);
+				GameState.dokicoins += 5.0,
 	},
 	"ketchup": {
 		"texture": "res://assets/icons/stamina_ketchup.png",

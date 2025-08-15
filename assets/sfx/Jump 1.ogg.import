@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cwlepvmegtkd4"
+path="res://.godot/imported/Jump 1.ogg-5fb25c8a0c5ff3acb75da362a15119de.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Jump 1.ogg"
+dest_files=["res://.godot/imported/Jump 1.ogg-5fb25c8a0c5ff3acb75da362a15119de.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

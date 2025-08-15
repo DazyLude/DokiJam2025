@@ -22,6 +22,10 @@ enum ID {
 	SFX_ARGH,
 	SFX_GRUNT,
 	SFX_1KMIC,
+	
+	SFX_JUMP,
+	SFX_FLAP,
+	SFX_COIN,
 }
 
 
@@ -43,10 +47,14 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.SFX_ARGH: "res://assets/sfx/Scream 4.wav",
 	ID.SFX_GRUNT: "res://assets/sfx/grunt 1.wav",
 	ID.SFX_1KMIC: "res://assets/sfx/1k mic.ogg",
+	
+	ID.SFX_JUMP: "res://assets/sfx/Jump 1.ogg",
+	ID.SFX_FLAP: "res://assets/sfx/Jump 2.ogg",
+	ID.SFX_COIN: "res://assets/sfx/Coin 2.ogg",
 }
 
 
-var current_track : ID = -1;
+var current_track : ID = ID.NONE;
 
 
 func _init() -> void:

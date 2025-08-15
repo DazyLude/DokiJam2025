@@ -86,10 +86,10 @@ func get_obstacle_coords(from: float, to: float) -> PackedFloat32Array:
 	samples_sorted.resize(count);
 	
 	for i in count:
-		var coord = from + OBSTACLE_SAMPLE_RATE * i;
-		var sample = noise_generator.get_noise_2d(coord, OBSTACLE_NOISE_Y);
-		samples[i] = sample;
-		samples_sorted[i] = sample;
+		var coord : float = from + OBSTACLE_SAMPLE_RATE * i;
+		var l_sample := noise_generator.get_noise_2d(coord, OBSTACLE_NOISE_Y);
+		samples[i] = l_sample;
+		samples_sorted[i] = l_sample;
 		sample_coords[i] = coord;
 	
 	samples_sorted.sort()
