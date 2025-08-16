@@ -1,6 +1,11 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://btke7arcvyxss"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://btke7arcvyxss"]
 
 [ext_resource type="FontFile" uid="uid://ctpda6706sqen" path="res://assets/fonts/Jua/Jua-Regular.ttf" id="1_2kqna"]
+[ext_resource type="FontFile" uid="uid://c1o0m856ml8kl" path="res://assets/fonts/McLaren/McLaren-Regular.ttf" id="2_wqkf5"]
+
+[sub_resource type="FontVariation" id="FontVariation_a6spd"]
+base_font = ExtResource("2_wqkf5")
+baseline_offset = -0.2
 
 [sub_resource type="FontVariation" id="FontVariation_2kqna"]
 base_font = ExtResource("1_2kqna")
@@ -17,5 +22,6 @@ RichTextLabel/font_sizes/bold_italics_font_size = 30
 RichTextLabel/font_sizes/italics_font_size = 30
 RichTextLabel/font_sizes/mono_font_size = 30
 RichTextLabel/font_sizes/normal_font_size = 30
+RichTextLabel/fonts/bold_italics_font = SubResource("FontVariation_a6spd")
 RichTextLabel/fonts/italics_font = SubResource("FontVariation_2kqna")
 RichTextLabel/fonts/normal_font = ExtResource("1_2kqna")

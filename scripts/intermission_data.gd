@@ -138,7 +138,7 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 			],
 			[
 				CHARACTER_DRAGOON,
-				"If you’re just looking for caffeine, there’s a DokiSupps™ dispensary in town you could try.",
+				"If you’re just looking for caffeine, there’s a DokiSupps[font_size=24][b][i]™[/i][/b][/font_size] dispensary in town you could try.",
 				{"sfx": Sounds.ID.VOX_AAAH}
 			],
 			[
@@ -148,7 +148,7 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 			],
 			[
 				CHARACTER_TOMATO,
-				"This must be a sign. DokiSupps™ here I come!",
+				"This must be a sign. DokiSupps[font_size=24][b][i]™[/i][/b][/font_size] here I come!",
 				{"sfx": Sounds.ID.VOX_AAH}
 			],
 			[
@@ -170,7 +170,7 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 	},
 	"vn2-3": {
 		"type": TYPE_DIALOGUE,
-		"background": "res://assets/stages/farm/tomato_farm.png",
+		"background": "res://assets/stages/city/shopping_street.png",
 		"characters": [CHARACTER_CROWKI, CHARACTER_DRAGOON],
 		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
 		"dialogue": [
