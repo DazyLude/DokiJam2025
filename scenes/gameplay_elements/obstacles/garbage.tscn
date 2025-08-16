@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dxusjl76eh2xm" path="res://assets/obstacles/garbage.png" id="2_eyp3y"]
 
 [node name="Node2D" type="RigidBody2D"]
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_eyp3y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
