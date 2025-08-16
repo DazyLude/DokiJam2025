@@ -581,6 +581,7 @@ theme_override_font_sizes/font_size = 32
 text = "CONTINUE"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 24.0
 bus = &"sfx"
 
 [connection signal="pressed" from="SpeedContainer/UpgradeButton" to="." method="_on_speed_pressed"]

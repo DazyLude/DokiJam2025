@@ -13,6 +13,10 @@ var animation_track_ids : Dictionary[Vector2i, Vector2i] = {};
 
 
 func _ready() -> void:
+	if GameState.game_finished:
+		base.texture = preload("res://assets/obstacles/mini_dragoon.png");
+		base.scale = Vector2(0.3, 0.3);
+	
 	item_rect_changed.connect(setup);
 	setup();
 	$AnimationPlayer.seek(progress);

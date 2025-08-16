@@ -9,6 +9,7 @@ var jump_fly_scale := 0.0;
 var jump_cost := 0.0;
 var hardness := 0.0;
 var aeroshape := 0.0;
+var strafe_speed_cap := 0.0;
 
 # physics body properties
 var friction := 0.0;
@@ -79,6 +80,7 @@ static func coffee_buff(lvl: int) -> Dictionary:
 		"player_torque": 2.5 * lvl,
 		"friction": 0.035 * lvl,
 		"mass": 0.15 * lvl,
+		"strafe_speed_cap": 4.0 * lvl,
 	}
 
 
@@ -87,6 +89,7 @@ static func supps_buff(lvl: int) -> Dictionary:
 		"friction": 0.035 * lvl,
 		"jump_fly_scale": 0.005 * lvl,
 		"mass": -0.15 * lvl, 
+		"strafe_speed_cap": 5.0 * lvl,
 	};
 
 
@@ -94,6 +97,7 @@ static func wings_buff(lvl: int) -> Dictionary:
 	return {
 		"aeroshape": 1.75 * lvl,
 		"jump_cost" : -0.1 * lvl,
+		"strafe_speed_cap": 3.5 * lvl,
 	}
 
 
@@ -124,5 +128,6 @@ const stat_dicts : Dictionary[String, Dictionary] = {
 		"mass" : 10.0,
 		"linear_damp" : 0.0,
 		"angular_damp" : 0.0,
+		"strafe_speed_cap" : 50.0,
 	},
 }

@@ -6,7 +6,10 @@ extends Control
 
 func _ready() -> void:
 	show_main();
-	Sounds.play_looped(Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
+	if GameState.game_finished:
+		Sounds.play_looped(Sounds.ID.MUSIC_STAGE);
+	else:
+		Sounds.play_looped(Sounds.ID.MUSIC_ESCAPE_FROM_TARKOV);
 	
 	$Default/DiaTestButton.pressed.connect(test_dialogue);
 	$Default/ComicTestButton.pressed.connect(test_intro);

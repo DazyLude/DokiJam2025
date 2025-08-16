@@ -30,6 +30,7 @@ var selected_skinsuit : int = Upgrade.SKINSUIT_TOMATO;
 
 # player
 var player : Player;
+var game_finished = false;
 
 
 # stage management

@@ -46,6 +46,7 @@ var upgrades = GameState.upgrades
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AudioStreamPlayer.volume_linear = lerp(0.6, 2.0, GameState.upgrades.get_upgrade_level(Upgrade.VOCAL) / 8.0);
 	var background_data = backgrounds[GameState.current_stage.stage_name]
 	# Change background texture
 	$ShopBackground.texture = load(background_data["path"])
@@ -129,6 +130,7 @@ func _on_stamina_pressed() -> void:
 ## upgrade character loudness
 func _on_loudness_pressed() -> void:
 	button_buy_upgrade("loudness", upgrades.VOCAL)
+	$AudioStreamPlayer.volume_linear = lerp(0.6, 2.0, GameState.upgrades.get_upgrade_level(Upgrade.VOCAL) / 8.0);
 	$AudioStreamPlayer.stream = Sounds.get_stream_by_id(Sounds.ID.SFX_1KMIC);
 	$AudioStreamPlayer.play();
 

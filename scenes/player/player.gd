@@ -23,6 +23,7 @@ var jump_cost := 2.0;
 var hardness := 10.0;
 # air friction is reversely proportional to hardness
 var aeroshape := 10.0;
+var strafe_speed_cap = 50.0;
 #endregion
 
 # when "airborne" (this can happen a lot more often than expected in a physics simulation like ours)
@@ -67,7 +68,7 @@ var speedometer := Speedometer.new();
 func _ready() -> void:
 	$BuffAnimation.pause()
 	
-	$ScreamsPlayer.volume_linear = lerp(0.5, 0.9, GameState.upgrades.get_upgrade_level(Upgrade.VOCAL) / 8.0);
+	$ScreamsPlayer.volume_linear = lerp(0.6, 2.0, GameState.upgrades.get_upgrade_level(Upgrade.VOCAL) / 8.0);
 	
 	$Sprite2D.prepare_sprite(GameState.selected_skinsuit);
 	if Upgrade.upgrade_metadata[GameState.selected_skinsuit].has("rider"):
@@ -196,6 +197,7 @@ func apply_player_stats(stats: PlayerStats) -> void:
 	inertia = stats.mass * 1500.0;
 	linear_damp = stats.linear_damp;
 	angular_damp = stats.angular_damp;
+	strafe_speed_cap = stats.strafe_speed_cap;
 
 
 func make_player_trail() -> void:
@@ -221,7 +223,7 @@ func try_strafe(direction: float, delta: float) -> void:
 	var strafe_vector := Vector2(direction, 0)
 	var strafe_force := strafe_vector * player_fly_strength * mass * jump_fly_scale;
 	# Cannot strafe past the speed cap
-	if abs(linear_velocity.x) > 50 and sign(direction) == movement_direction:
+	if abs(linear_velocity.x) > strafe_speed_cap and sign(direction) == movement_direction:
 		return
 	if GameState.juice > delta:
 		GameState.juice -= delta;
