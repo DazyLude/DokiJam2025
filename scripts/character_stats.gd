@@ -77,16 +77,16 @@ static var upgrade_stats : Dictionary[int, Variant] = {
 static func coffee_buff(lvl: int) -> Dictionary:
 	return {
 		"player_torque": 2.5 * lvl,
-		"friction": 0.025 * lvl,
-		"mass": 0.25 * lvl,
+		"friction": 0.035 * lvl,
+		"mass": 0.15 * lvl,
 	}
 
 
 static func supps_buff(lvl: int) -> Dictionary:
 	return {
-		"friction": 0.025 * lvl,
+		"friction": 0.035 * lvl,
 		"jump_fly_scale": 0.005 * lvl,
-		"mass": 0.25 * lvl, 
+		"mass": -0.15 * lvl, 
 	};
 
 

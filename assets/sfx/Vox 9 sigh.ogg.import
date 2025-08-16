@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://coxeyshs2aaf"
+path="res://.godot/imported/Vox 9 sigh.ogg-94ab9e4370b25d356fba54d9c85ff14d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Vox 9 sigh.ogg"
+dest_files=["res://.godot/imported/Vox 9 sigh.ogg-94ab9e4370b25d356fba54d9c85ff14d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

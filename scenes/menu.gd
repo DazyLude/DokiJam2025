@@ -51,7 +51,7 @@ func test_intro() -> void:
 
 
 func test_dialogue() -> void:
-	await play_intermission("tomato field massacre");
+	await play_intermission("vn1-2");
 
 
 func play_intermission(intermission: String) -> void:

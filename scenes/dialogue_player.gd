@@ -7,7 +7,7 @@ signal dialogue_finished;
 @onready var character_sprites : Array[SpriteEmotional] = [$CharacterLeft, $CharacterRight];
 @onready var dialogue_text = $TextBox/Text;
 @onready var speaker = $TextBox/Speaker;
-@onready var audio_player = $AudioStreamPlayer;
+@onready var audio = [$AudioStreamPlayer, $AudioStreamPlayerDragoon];
 
 var text_animation : Tween;
 var character_tweens : Array[Tween] = [];
@@ -50,6 +50,8 @@ func play_dialogue(data: Dictionary) -> void:
 
 
 func setup_characters(characters: Array) -> void:
+	$Explosion.hide();
+	
 	for i in 2:
 		var character_id = characters[i];
 		
@@ -81,25 +83,36 @@ func next() -> void:
 	
 	var dialogue_line = dialogue_array[current_line];
 	var cur_char = dialogue_line[0];
-	var cur_emote_idx = emote_idxs_per_character[cur_char][dialogue_line[1]];
+	var char_idx = idx_per_character[cur_char];
 	
-	node_per_character[cur_char].display_emotion(cur_emote_idx);
 	speaker.text = name_per_character[cur_char];
-	dialogue_text.text = dialogue_line[2];
+	dialogue_text.text = dialogue_line[1];
 	
 	var stream : AudioStream;
-	match typeof(voices_per_character[cur_char]):
-		TYPE_ARRAY:
-			stream = Sounds.get_stream_by_id(voices_per_character[cur_char].pick_random())
-		TYPE_INT:
-			stream = Sounds.get_stream_by_id(voices_per_character[cur_char])
-		_:
-			stream = null;
+	var meta = dialogue_line[2] if dialogue_line.size() == 3 else {};
 	
-	audio_player.stream = stream;
-	audio_player.play();
+	if meta.has("sfx"):
+		stream = Sounds.get_stream_by_id(meta["sfx"]);
+	else:
+		match typeof(voices_per_character[cur_char]):
+			TYPE_ARRAY:
+				stream = Sounds.get_stream_by_id(voices_per_character[cur_char].pick_random())
+			TYPE_INT:
+				stream = Sounds.get_stream_by_id(voices_per_character[cur_char])
+			_:
+				stream = null;
 	
-	nudge_character(idx_per_character[cur_char]);
+	if meta.has("swap"):
+		await play_explosion_animation_start()
+		var new_character = meta["swap"];
+		var character_data = IntermissionData.character_data[new_character];
+		character_sprites[char_idx].texture = load(character_data["base"]);
+		play_expolosion_animation_end()
+	
+	audio[char_idx].stream = stream;
+	audio[char_idx].play();
+	
+	nudge_character(char_idx);
 	play_text_animation();
 
 
@@ -129,4 +142,36 @@ func play_text_animation() -> void:
 	
 	var char_count = dialogue_text.text.length();
 	
+	dialogue_text.visible_characters = 0;
 	text_animation.tween_property(dialogue_text, ^"visible_characters", char_count, 0.05 * char_count);
+
+
+func play_explosion_animation_start() -> void:
+	var tween = create_tween();
+	
+	tween.set_parallel();
+	tween.set_ease(Tween.EASE_OUT);
+	tween.set_trans(Tween.TRANS_EXPO);
+	
+	$Explosion.scale = Vector2(0.1, 0.1)
+	$Explosion.rotation = 0;
+	$Explosion.show();
+	
+	tween.tween_property($Explosion, ^"scale", Vector2(0.6, 0.6), 0.1);
+	tween.tween_property($Explosion, ^"rotation", 0.2, 0.1);
+	
+	await tween.finished;
+
+
+func play_expolosion_animation_end() -> void:
+	var tween = create_tween();
+	
+	tween.set_parallel();
+	tween.set_ease(Tween.EASE_OUT);
+	tween.set_trans(Tween.TRANS_EXPO);
+	
+	tween.tween_property($Explosion, ^"rotation", 0.4, 1.5).set_trans(Tween.TRANS_LINEAR);
+	tween.tween_property($Explosion.material, ^"shader_parameter/color_filter", Vector4(1.0, 1.0, 1.0, 0.0), 1.5);
+	
+	await tween.finished;
+	$Explosion.hide();

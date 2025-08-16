@@ -20,6 +20,8 @@ enum ID {
 	SFX_AGGH,
 	SFX_AGHH,
 	SFX_ARGH,
+	SFX_AAAAH,
+	
 	SFX_GRUNT,
 	SFX_1KMIC,
 	
@@ -31,6 +33,8 @@ enum ID {
 	SFX_IMPACT2,
 	
 	SFX_UEH,
+	SFX_OOH,
+	SFX_LAUGH,
 }
 
 
@@ -45,11 +49,13 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.MUSIC_BACKSTAGE: "res://assets/music/Backstage.ogg",
 	ID.MUSIC_STAGE: "res://assets/music/On the Stage - Dokibird Ending Theme Remake.ogg",
 	
-	ID.SFX_FUCK: "res://assets/sfx/fuck.wav",
-	ID.SFX_AAGH: "res://assets/sfx/Scream 1.wav",
-	ID.SFX_AGGH: "res://assets/sfx/Scream 2.wav",
-	ID.SFX_AGHH: "res://assets/sfx/Scream 3.wav",
-	ID.SFX_ARGH: "res://assets/sfx/Scream 4.wav",
+	ID.SFX_FUCK: "res://assets/sfx/fuck.ogg",
+	ID.SFX_AAGH: "res://assets/sfx/Scream 1.ogg",
+	ID.SFX_AGGH: "res://assets/sfx/Scream 2.ogg",
+	ID.SFX_AGHH: "res://assets/sfx/Scream 3.ogg",
+	ID.SFX_ARGH: "res://assets/sfx/Scream 4.ogg",
+	ID.SFX_AAAAH: "res://assets/sfx/Scream 5 (long).ogg",
+	
 	ID.SFX_GRUNT: "res://assets/sfx/Grunt 1 v4.ogg",
 	ID.SFX_1KMIC: "res://assets/sfx/1k mic.ogg",
 	
@@ -61,6 +67,9 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.SFX_IMPACT2: "res://assets/sfx/Impact 2.ogg",
 	
 	ID.SFX_UEH: "res://assets/sfx/Vox 1 ueh.ogg",
+	ID.SFX_OOH: "res://assets/sfx/Vox 2.ogg",
+	ID.SFX_LAUGH: "res://assets/sfx/Laugh 1.ogg",
+	
 }
 
 

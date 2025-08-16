@@ -28,7 +28,7 @@ static var character_data : Dictionary[int, Dictionary] = {
 		"emotions": {
 			EMOTE_NORMAL: "",
 		},
-		"speech": Sounds.ID.SFX_FUCK,
+		"speech": Sounds.ID.SFX_OOH,
 	},
 	CHARACTER_CROWKI: {
 		"base": "res://assets/intermissions/crow_sprite.png",
@@ -85,14 +85,46 @@ static var intermission_data : Dictionary[String, Dictionary] = {
 		"background": "res://assets/intermissions/actual_intro/bg.png",
 		"bgm": Sounds.ID.MUSIC_STAGE,
 	},
-	"tomato field massacre": {
+	"vn1-2": {
 		"type": TYPE_DIALOGUE,
 		"background": "res://assets/stages/farm/tomato_farm.png",
 		"characters": [CHARACTER_TOMATO, CHARACTER_DRAGOON],
-		"dialogue": [
-			[CHARACTER_TOMATO, EMOTE_NORMAL, "hey"],
-			[CHARACTER_DRAGOON, EMOTE_NORMAL, "caw!"],
-		],
 		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
-	}
+		"dialogue": [
+			[CHARACTER_TOMATO, "hey", {"sfx": Sounds.ID.SFX_OOH}],
+			[CHARACTER_DRAGOON, "caw!", {"sfx": Sounds.ID.SFX_OOH}],
+			[CHARACTER_TOMATO, "hey", {"swap": CHARACTER_CROWKI, "sfx": Sounds.ID.SFX_LAUGH}],
+			[CHARACTER_DRAGOON, "hey", {"sfx": Sounds.ID.SFX_LAUGH}],
+		],
+	},
+	"vn2-3": {
+		"type": TYPE_DIALOGUE,
+		"background": "res://assets/stages/farm/tomato_farm.png",
+		"characters": [CHARACTER_TOMATO, CHARACTER_DRAGOON],
+		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
+		"dialogue": [
+			[CHARACTER_TOMATO, "hey"],
+			[CHARACTER_DRAGOON, "caw!"],
+		],
+	},
+	"vn3-4": {
+		"type": TYPE_DIALOGUE,
+		"background": "res://assets/stages/farm/tomato_farm.png",
+		"characters": [CHARACTER_TOMATO, CHARACTER_DRAGOON],
+		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
+		"dialogue": [
+			[CHARACTER_TOMATO, "hey"],
+			[CHARACTER_DRAGOON, "caw!"],
+		],
+	},
+	"vn4-5": {
+		"type": TYPE_DIALOGUE,
+		"background": "res://assets/stages/farm/tomato_farm.png",
+		"characters": [CHARACTER_TOMATO, CHARACTER_DRAGOON],
+		"bgm": Sounds.ID.MUSIC_GOOFY_AAH,
+		"dialogue": [
+			[CHARACTER_TOMATO, "hey"],
+			[CHARACTER_DRAGOON, "caw!"],
+		],
+	},
 }

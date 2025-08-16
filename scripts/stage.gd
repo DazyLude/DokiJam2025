@@ -133,7 +133,7 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	# other parameters
 	data.stage_length = params.get("stage length", 3e4);
 	data.next_stage_name = params.get("next stage", "tomato fields");
-	data.intermission_name = params.get("intermission name", "tomato fields massacre");
+	data.intermission_name = params.get("intermission name", "");
 	
 	if params.get("is the last", false):
 		data.is_the_last = true;
@@ -243,7 +243,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"background": "res://assets/stages/farm/tomato_farm_nosky.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3e4, # should be a float
-		"intermission name": "tomato field massacre",
+		"intermission name": "vn1-2",
 		"next stage": "city",
 		"music": Sounds.ID.MUSIC_MELANCHOLY_TOMATO,
 		"has clouds": true,
@@ -255,7 +255,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"background": "res://assets/stages/city/shopping_street_nosky.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 3.5e4, # should be a float
-		"intermission name": "tomato field massacre",
+		"intermission name": "vn2-3",
 		"next stage": "city2",
 		"music": Sounds.ID.MUSIC_CITY,
 		"has clouds": true,
@@ -281,7 +281,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"skybox": "res://assets/stages/city/city_street_skybox.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 4.25e4, # should be a float
-		"intermission name": "tomato field massacre",
+		"intermission name": "vn3-4",
 		"next stage": "backstage",
 		"music": Sounds.ID.MUSIC_METAL,
 		"has clouds": true,
@@ -303,9 +303,9 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"skybox": "res://assets/stages/backstage/backstage_skybox.png",
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
 		"stage length": 5e4, # should be a float
-		"intermission name": "tomato field massacre",
 		"next stage": "stage",
 		"music": Sounds.ID.MUSIC_BACKSTAGE,
+		"intermission name": "vn4-5",
 		"has ceiling": true,
 		"has clouds": false,
 		"items": { # items are merged, and old data is overwritten by the new one in case of collisions

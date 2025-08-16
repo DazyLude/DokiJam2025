@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3t0ga6at7px1"]
+[gd_scene load_steps=17 format=3 uid="uid://c3t0ga6at7px1"]
 
 [ext_resource type="Script" uid="uid://b165rsamniss7" path="res://scenes/intermission_player.gd" id="1_dnknu"]
 [ext_resource type="Theme" uid="uid://btke7arcvyxss" path="res://themes/dialogue.tres" id="1_nfl2d"]
@@ -6,10 +6,15 @@
 [ext_resource type="Script" uid="uid://3d7xwd4mputh" path="res://scenes/dialogue_player.gd" id="4_ck27o"]
 [ext_resource type="Script" uid="uid://b40woge2o40ty" path="res://scripts/emotional_sprite.gd" id="5_0uwa6"]
 [ext_resource type="Texture2D" uid="uid://bb0y38axdt23t" path="res://assets/intermissions/tomato_sprite.png" id="5_ck27o"]
+[ext_resource type="Texture2D" uid="uid://br5dcjjkr1cgs" path="res://assets/intermissions/explosion.png" id="7_0uwa6"]
 [ext_resource type="Texture2D" uid="uid://c3ntjb3gbavu6" path="res://assets/intermissions/crow_sprite.png" id="7_5pqa6"]
 [ext_resource type="Texture2D" uid="uid://dfaseecmxw4mx" path="res://assets/buttons/button.png" id="9_2y2nw"]
 [ext_resource type="Script" uid="uid://wlpl40wf8kka" path="res://scenes/comic_player.gd" id="11_5pqa6"]
 [ext_resource type="Shader" uid="uid://m507xcsv25n" path="res://shaders/comic_panel.gdshader" id="12_2y2nw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5pqa6"]
+shader = ExtResource("12_2y2nw")
+shader_parameter/color_filter = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7od07"]
 resource_local_to_scene = true
@@ -65,6 +70,12 @@ mouse_filter = 2
 script = ExtResource("4_ck27o")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogueBase"]
+volume_db = 3.0
+bus = &"sfx"
+
+[node name="AudioStreamPlayerDragoon" type="AudioStreamPlayer" parent="DialogueBase"]
+volume_db = 3.0
+pitch_scale = 0.75
 bus = &"sfx"
 
 [node name="CharacterLeft" type="Sprite2D" parent="DialogueBase"]
@@ -74,6 +85,11 @@ texture = ExtResource("5_ck27o")
 centered = false
 script = ExtResource("5_0uwa6")
 metadata/_custom_type_script = "uid://b40woge2o40ty"
+
+[node name="Explosion" type="Sprite2D" parent="DialogueBase"]
+material = SubResource("ShaderMaterial_5pqa6")
+position = Vector2(245, 608)
+texture = ExtResource("7_0uwa6")
 
 [node name="CharacterRight" type="Sprite2D" parent="DialogueBase"]
 position = Vector2(1250, 499)

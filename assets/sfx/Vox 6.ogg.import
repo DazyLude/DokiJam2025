@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cf3ygf024iqhy"
+path="res://.godot/imported/Vox 6.ogg-4340686a986f0c41883afec3f560af67.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Vox 6.ogg"
+dest_files=["res://.godot/imported/Vox 6.ogg-4340686a986f0c41883afec3f560af67.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

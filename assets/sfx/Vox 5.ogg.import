@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dvfu71dig46jy"
+path="res://.godot/imported/Vox 5.ogg-bd2773048c98a120fdac89ca4161f5ca.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Vox 5.ogg"
+dest_files=["res://.godot/imported/Vox 5.ogg-bd2773048c98a120fdac89ca4161f5ca.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

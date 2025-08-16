@@ -71,7 +71,9 @@ func _process(delta: float) -> void:
 	if player.position.x >= GameState.current_stage.stage_length:
 		is_gameover = true;
 		move_player_to(GameState.current_stage.stage_length);
-		await play_intermission(GameState.current_stage.intermission_name);
+		
+		if GameState.current_stage.intermission_name != "":
+			await play_intermission(GameState.current_stage.intermission_name);
 		
 		if GameState.current_stage.is_the_last:
 			get_tree().change_scene_to_file("res://scenes/menu.tscn");
