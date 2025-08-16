@@ -127,8 +127,3 @@ func play_looped(new_track: ID) -> void:
 	
 	stream = new_stream;
 	play()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"music_ff"):
-		seek(stream.get_length() - 5.0);

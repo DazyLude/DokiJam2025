@@ -16,6 +16,7 @@ var terrain_edge : Texture2D;
 var checkpoint : Texture2D;
 var background : Texture2D;
 var background_offset : Vector2;
+var background_scale : Vector2;
 var skybox : Texture2D;
 var has_clouds : bool;
 
@@ -102,6 +103,7 @@ static func from_dict(params: Dictionary, forced_seed: int = 0, forced_state: in
 	data.checkpoint = load(params.get("checkpoint", "uid://d28lqabm420p3"));
 	data.background = load(params.get("background", "res://assets/stages/farm/tomato_farm.png"));
 	data.background_offset = params.get("background offset", Vector2(0.0, -1000.0));
+	data.background_scale = params.get("background scale", Vector2(1.0, 1.0));
 	data.skybox = load(params.get("skybox", "res://assets/stages/farm/skybox_dark.png"));
 	data.has_clouds = params.get("has clouds");
 	
@@ -324,9 +326,10 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 		"terrain edge": "res://assets/stages/backstage/stagefloor_edge.png",
 		"background": "res://assets/stages/stage/stage.png",
 		"skybox": "res://assets/stages/stage/stage_skybox.png",
-		"background offset": Vector2(0.0, -1150.0),
+		"background offset": Vector2(0.0, -950.0),
+		"background scale": Vector2(0.8, 0.8),
 		"terrain scale": Vector2(1e-3, 1e2), # should be a Vector2
-		"stage length": 5.5e4, # should be a float
+		"stage length": 4e4, # should be a float
 		"intermission name": "outro",
 		"music": Sounds.ID.MUSIC_STAGE,
 		"is the last": true,
@@ -338,7 +341,7 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 				"weight": 40.0, # weight of this item within its group
 			},
 			"ketchup": {
-				"distance": 3750.0,
+				"distance": 3250.0,
 			},
 		},
 	}
