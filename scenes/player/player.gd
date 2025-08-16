@@ -359,9 +359,8 @@ func set_emotion(emote: int) -> void:
 
 
 func play_sfx(id: Sounds.ID) -> void:
-	$SFXPlayer.get_stream_playback().play_stream(
-		Sounds.get_stream_by_id(id)
-	);
+	$SFXPlayer.stream = Sounds.get_stream_by_id(id);
+	$SFXPlayer.play()
 
 
 class Speedometer:
