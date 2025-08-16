@@ -118,7 +118,7 @@ patch_margin_top = 125
 patch_margin_right = 130
 patch_margin_bottom = 111
 
-[node name="Text" type="Label" parent="DialogueBase/TextBox"]
+[node name="Text" type="RichTextLabel" parent="DialogueBase/TextBox"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -127,9 +127,12 @@ offset_top = 81.0
 offset_right = -75.0
 offset_bottom = 248.0
 grow_horizontal = 2
+theme_override_constants/line_separation = 4
+bbcode_enabled = true
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim, tortor ut bibendum cursus, nunc sapien viverra ex, a eleifend sem massa eget sapien. Aenean convallis interdum tortor id pharetra. Mauris facilisis augue ut nibh semper condimentum. Vivamus nec enim tincidunt, condimentum lacus sit amet, facilisis nibh. Pellentesque habitant morbi. "
-autowrap_mode = 3
-text_overrun_behavior = 3
+scroll_active = false
+shortcut_keys_enabled = false
+visible_characters_behavior = 1
 
 [node name="Speaker" type="Label" parent="DialogueBase/TextBox"]
 layout_mode = 1

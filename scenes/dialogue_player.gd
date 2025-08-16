@@ -86,6 +86,7 @@ func next() -> void:
 	var char_idx = idx_per_character[cur_char];
 	
 	speaker.text = name_per_character[cur_char];
+	dialogue_text.visible_characters = 0;
 	dialogue_text.text = dialogue_line[1];
 	
 	var stream : AudioStream;
@@ -142,8 +143,7 @@ func play_text_animation() -> void:
 	
 	var char_count = dialogue_text.text.length();
 	
-	dialogue_text.visible_characters = 0;
-	text_animation.tween_property(dialogue_text, ^"visible_characters", char_count, 0.05 * char_count);
+	text_animation.tween_property(dialogue_text, ^"visible_characters", char_count, 0.02 * char_count);
 
 
 func play_explosion_animation_start() -> void:

@@ -32,9 +32,18 @@ enum ID {
 	SFX_IMPACT,
 	SFX_IMPACT2,
 	
-	SFX_UEH,
-	SFX_OOH,
-	SFX_LAUGH,
+	VOX_UEH,
+	VOX_OOH,
+	VOX_LAUGH,
+	VOX_EH,
+	VOX_UGHH,
+	VOX_OUF,
+	VOX_AAH,
+	VOX_AAAH,
+	VOX_NYOO,
+	VOX_SIGH,
+	VOX_WHAT,
+	VOX_AIGHT,
 }
 
 
@@ -66,10 +75,18 @@ var sound_resources : Dictionary[ID, String] = {
 	ID.SFX_IMPACT: "res://assets/sfx/Impact 1.ogg",
 	ID.SFX_IMPACT2: "res://assets/sfx/Impact 2.ogg",
 	
-	ID.SFX_UEH: "res://assets/sfx/Vox 1 ueh.ogg",
-	ID.SFX_OOH: "res://assets/sfx/Vox 2.ogg",
-	ID.SFX_LAUGH: "res://assets/sfx/Laugh 1.ogg",
-	
+	ID.VOX_LAUGH: "res://assets/sfx/Laugh 1.ogg",
+	ID.VOX_UEH: "res://assets/sfx/Vox 1 ueh.ogg",
+	ID.VOX_OOH: "res://assets/sfx/Vox 2.ogg",
+	ID.VOX_EH: "res://assets/sfx/Vox 3.ogg",
+	ID.VOX_UGHH: "res://assets/sfx/Vox 4.ogg",
+	ID.VOX_OUF: "res://assets/sfx/Vox 5.ogg",
+	ID.VOX_AAH: "res://assets/sfx/Vox 6.ogg",
+	ID.VOX_AAAH: "res://assets/sfx/Vox 7.ogg",
+	ID.VOX_NYOO: "res://assets/sfx/Vox 8 noo.ogg",
+	ID.VOX_SIGH: "res://assets/sfx/Vox 9 sigh.ogg",
+	ID.VOX_WHAT: "res://assets/sfx/Vox 10 what.ogg",
+	ID.VOX_AIGHT: "res://assets/sfx/Vox 11 um alright.ogg",
 }
 
 
