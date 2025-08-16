@@ -41,7 +41,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/tomato_box.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["tomato fields"],
+		"natural habitat": ["tomato fields", "city"],
 		"positions": [
 			PositionPreset.fixed(0.0, -250.0),
 		],
@@ -50,7 +50,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/cone.tscn",
 		"scale": Vector2(0.2, 0.2),
 		"weight": 100.0,
-		"natural habitat": ["city2"],
+		"natural habitat": ["city", "city2"],
 		"positions": [
 			PositionPreset.fixed(0.0, -150.0),
 		],
@@ -89,16 +89,25 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/lamp.tscn",
 		"scale": Vector2(0.3, 0.3),
 		"weight": 100.0,
-		"natural habitat": ["city", "city2"],
+		"natural habitat": ["city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -500.0),
+		],
+	},
+	"smaller lamp": {
+		"scene": "res://scenes/gameplay_elements/obstacles/lamp.tscn",
+		"scale": Vector2(0.23, 0.23),
+		"weight": 100.0,
+		"natural habitat": ["city"],
 		"positions": [
 			PositionPreset.fixed(0.0, -500.0),
 		],
 	},
 	"news stand": {
 		"scene": "res://scenes/gameplay_elements/obstacles/news_stand.tscn",
-		"scale": Vector2(0.35, 0.35),
+		"scale": Vector2(0.32, 0.32),
 		"weight": 100.0,
-		"natural habitat": ["city"],
+		"natural habitat": ["city", "city2"],
 		"positions": [
 			PositionPreset.fixed(0.0, -340.0),
 		],
@@ -114,7 +123,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 	},
 	"table": {
 		"scene": "res://scenes/gameplay_elements/obstacles/table.tscn",
-		"scale": Vector2(0.4, 0.4),
+		"scale": Vector2(0.35, 0.35),
 		"weight": 50.0,
 		"natural habitat": ["city"],
 		"positions": [
@@ -157,6 +166,16 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		],
 		"flippable": true,
 	},
+	"giant wisp city": {
+		"scene": "res://scenes/gameplay_elements/obstacles/giant_wisp.tscn",
+		"scale": Vector2(0.2, 0.2),
+		"weight": 1.0,
+		"natural habitat": ["city", "city2"],
+		"positions": [
+			PositionPreset.fixed(0.0, -300.0),
+		],
+		"flippable": true,
+	},
 	"giant wisp": {
 		"scene": "res://scenes/gameplay_elements/obstacles/giant_wisp.tscn",
 		"scale": Vector2(0.2, 0.2),
@@ -182,11 +201,32 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		},
 		"flippable": true,
 	},
+	"light rack backstage": {
+		"scene": "res://scenes/gameplay_elements/obstacles/light_rack.tscn",
+		"scale": Vector2(0.35, 0.35),
+		"weight": 15.0,
+		"natural habitat": ["backstage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -500.0),
+		],
+	},
+	"light rack troll backstage": {
+		"scene": "res://scenes/gameplay_elements/obstacles/light_rack_troll.tscn",
+		"scale": Vector2(0.35, 0.35),
+		"weight": 4.0,
+		"natural habitat": ["backstage"],
+		"positions": [
+			PositionPreset.fixed(0.0, -500.0),
+		],
+		"flags": {
+			FLAG_SPAWN_PICKUP_ON_ME: "coin_x5"
+		}
+	},
 	"light rack": {
 		"scene": "res://scenes/gameplay_elements/obstacles/light_rack.tscn",
 		"scale": Vector2(0.4, 0.4),
 		"weight": 35.0,
-		"natural habitat": ["backstage", "stage"],
+		"natural habitat": ["stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -500.0),
 		],
@@ -195,7 +235,7 @@ static var obstacle_metadata : Dictionary[String, Dictionary] = {
 		"scene": "res://scenes/gameplay_elements/obstacles/light_rack_troll.tscn",
 		"scale": Vector2(0.4, 0.4),
 		"weight": 7.0,
-		"natural habitat": ["backstage", "stage"],
+		"natural habitat": ["stage"],
 		"positions": [
 			PositionPreset.fixed(0.0, -500.0),
 		],

@@ -266,6 +266,9 @@ static var stage_variants: Dictionary[String, Dictionary] = {
 				"group": "a", # this item belongs to a group
 				"weight": 10.0, # weight of this item within its group
 			},
+			"ketchup": {
+				"distance": 2100.0,
+			},
 		},
 		# if you feel the need to add a group, it can be done:
 		#"groups": {
