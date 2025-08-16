@@ -359,8 +359,15 @@ func set_emotion(emote: int) -> void:
 
 
 func play_sfx(id: Sounds.ID) -> void:
-	$SFXPlayer.stream = Sounds.get_stream_by_id(id);
-	$SFXPlayer.play()
+	if not $SFXPlayer.playing:
+		$SFXPlayer.stream = Sounds.get_stream_by_id(id);
+		$SFXPlayer.play()
+	else:
+		var player : AudioStreamPlayer = $SFXPlayer.duplicate();
+		player.stream = Sounds.get_stream_by_id(id);
+		player.autoplay = true;
+		add_child(player);
+		player.finished.connect(player.queue_free);
 
 
 class Speedometer:

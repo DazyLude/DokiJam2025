@@ -96,6 +96,8 @@ var current_track : ID = ID.NONE;
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS;
 	bus = &"music";
+	autoplay = true;
+	finished.connect(play)
 
 
 func get_stream_by_id(id: ID) -> AudioStream:
@@ -115,6 +117,7 @@ func play_looped(new_track: ID) -> void:
 			new_stream.loop_end = new_stream.get_length() * new_stream.mix_rate;
 		_ when new_stream is AudioStreamMP3 or new_stream is AudioStreamOggVorbis:
 			new_stream.loop = true;
+			new_stream.loop_offset = 0.0;
 		_:
 			# other cases not implemented
 			push_warning(
@@ -123,4 +126,9 @@ func play_looped(new_track: ID) -> void:
 			);
 	
 	stream = new_stream;
-	play();
+	play()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"music_ff"):
+		seek(stream.get_length() - 5.0);
